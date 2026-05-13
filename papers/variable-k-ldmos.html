@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A TCAD Study on High-Voltage Superjunction LDMOS with Variable-K Dielectric Trench | 孙琦 Qi Sun</title>
+  <meta name="description" content="提出 variable-K 高介电常数沟槽调制 SJ-LDMOS 体电场，提高击穿电压并保持导通和散热特性。">
+  <meta property="og:image" content="../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="zh">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>孙琦 Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="菜单">菜单</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">首页</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">论文成果</a></li>
+        <li><a href="../index.html#research" data-page="research">研究方向</a></li>
+        <li><a href="../blog.html" data-page="blog">博客</a></li>
+        <li><a href="../about.html" data-page="about">关于</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../en/papers/variable-k-ldmos.html">EN</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="暗">暗</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">返回论文列表</a>
+      <p class="eyebrow">论文导读 · 2022</p>
+      <h1>A TCAD Study on High-Voltage Superjunction LDMOS with Variable-K Dielectric Trench</h1>
+      <p class="paper-authors"><span class="highlight">Sun, Qi</span>, Cao, Zhen, <span class="highlight">Sun, Qi</span>, Zhang, Hongwei, Wang, Qian, Ma, Chuanfeng, Jiao, Licheng</p>
+      <p class="paper-lead">提出 variable-K 高介电常数沟槽调制 SJ-LDMOS 体电场，提高击穿电压并保持导通和散热特性。</p>
+      <div class="tags paper-tags">
+          <span class="tag">SJ-LDMOS</span>
+          <span class="tag">Variable-K dielectric</span>
+          <span class="tag">Electric-field modulation</span>
+          <span class="tag">Breakdown voltage</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.3390/mi13060843" class="btn btn-primary" target="_blank" rel="noopener">查看 DOI</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../assets/images/paper-figures/variable-k-ldmos-device-structure.png" alt="Variable-K LDMOS 结构" loading="eager">
+        </div>
+        <figcaption>
+          <span>核心图表 · Variable-K LDMOS 结构</span>
+          <p>结构图展示高介电常数沟槽在 SJ-LDMOS 中的空间位置和关键几何参数。</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>3 分钟读懂</span>
+        <h2>提出 variable-K 高介电常数沟槽调制 SJ-LDMOS 体电场，提高击穿电压并保持导通和散热特性。</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>核心结论</span>
+          <p>沿沟槽深度改变介电常数可以重新塑造 SJ-LDMOS 纵向体电场，从而提高 BV。</p>
+        </div>
+        <div class="quick-read-item">
+          <span>方法概览</span>
+          <p>在 N+ drain 下引入上下介电常数不同的 VHK dielectric trench，上部高 K 区通过 dielectric RESURF 抑制漏端高场峰值，下部较低 K 区扩展衬底耗尽并重新分布纵向体电场。</p>
+        </div>
+        <div class="quick-read-item">
+          <span>为什么重要</span>
+          <p>这项工作展示了通过介质工程调控体电场的器件设计思路，为高压功率器件结构优化提供了可解释路径。</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>核心结论</span>
+        <p>沿沟槽深度改变介电常数可以重新塑造 SJ-LDMOS 纵向体电场，从而提高 BV。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>研究问题</span>
+        <p>传统 SJ-LDMOS 在长漂移区下受漏端曲率效应和体电场不均匀限制，击穿电压容易饱和，难以接近理论电压承受能力。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>方法概览</span>
+        <p>在 N+ drain 下引入上下介电常数不同的 VHK dielectric trench，上部高 K 区通过 dielectric RESURF 抑制漏端高场峰值，下部较低 K 区扩展衬底耗尽并重新分布纵向体电场。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>为什么重要</span>
+        <p>这项工作展示了通过介质工程调控体电场的器件设计思路，为高压功率器件结构优化提供了可解释路径。</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>更多图表速览</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../assets/images/paper-figures/variable-k-ldmos-efield-mechanism.png" alt="体电场调制机制" loading="eager">
+        </div>
+        <figcaption>
+          <span>体电场调制机制</span>
+          <p>图中比较不同结构下的电场分布，展示高介电常数区域对峰值电场的调制作用。</p>
+          <strong>这是论文的物理核心：通过电场再分布提升击穿能力，而不是只做经验参数扫描。</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../assets/images/paper-figures/variable-k-ldmos-bv-field-tradeoff.png" alt="击穿电压与电场权衡" loading="eager">
+        </div>
+        <figcaption>
+          <span>击穿电压与电场权衡</span>
+          <p>结果图表总结结构参数变化对击穿电压、电场分布和器件性能的影响。</p>
+          <strong>这部分帮助读者看到结构优化如何在击穿、电阻和热特性之间寻找平衡。</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>技术路线</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>E-field bottleneck</h3>
+        <p>识别漏端和体区电场峰值导致的 BV 饱和问题。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>VHK trench</h3>
+        <p>在漏端下方设计上下不同 K 值的介质沟槽。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>Field modulation</h3>
+        <p>利用 dielectric RESURF 和纵向电场重分布提高 BV。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>Device check</h3>
+        <p>同时评估导通、热特性和工艺可行性。</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>证据与结果</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>BV gain</span>
+        <strong>+41.2%</strong>
+        <p>相对 conventional SJ-LDMOS 的单位漂移区长度阻断电压提升。</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Uniform-K 对比</span>
+        <strong>+9.5%</strong>
+        <p>相对 uniform-K SJ-LDMOS 的 BV 提升。</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>设计对象</span>
+        <strong>VHK trench</strong>
+        <p>用 variable-K 介质沟槽调控纵向体电场。</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>主要贡献</span>
+        <ul class="paper-list">
+        <li>用 variable-K 介质沟槽调制 SJ-LDMOS 的纵向体电场分布。</li>
+        <li>相比 conventional SJ-LDMOS，单位漂移区长度阻断电压提升 41.2%；相比 uniform-K 结构，BV 提升约 9.5%。</li>
+        <li>同时讨论最佳介电常数范围、导通特性、热特性和可行工艺流程。</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>阅读提示</span>
+        <p>这篇论文是器件物理线的基础工作，适合用来理解后续机器学习辅助器件建模中的结构参数和性能指标。</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation | Qi Sun</title>
+  <meta name="description" content="A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.">
+  <meta property="og:image" content="../../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="en">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="Menu">Menu</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">Home</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">Publications</a></li>
+        <li><a href="../index.html#research" data-page="research">Research</a></li>
+        <li><a href="../blog.html" data-page="blog">Blog</a></li>
+        <li><a href="../about.html" data-page="about">About</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../../papers/dual-model-snn-remote-sensing.html">中文</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Dark">Dark</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">Back to Publications</a>
+      <p class="eyebrow">Paper Brief · 2025 Oct</p>
+      <h1>Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation</h1>
+      <p class="paper-authors">Cao, Zhen, Liu, Ju, <span class="highlight">Sun, Qi</span>, Hou, Biao, Zhu, Hao, Guo, Lei, Ge, Yifan, Wang, Yulong, Jiao, Licheng</p>
+      <p class="paper-lead">A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.</p>
+      <div class="tags paper-tags">
+          <span class="tag">Remote sensing</span>
+          <span class="tag">Knowledge distillation</span>
+          <span class="tag">Spiking neural network</span>
+          <span class="tag">Low latency</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.1016/j.neucom.2025.130721" class="btn btn-primary" target="_blank" rel="noopener">View DOI</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../../assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png" alt="Long-Short Time-Step Mutual Distillation" loading="eager">
+        </div>
+        <figcaption>
+          <span>Core Figure · Long-Short Time-Step Mutual Distillation</span>
+          <p>The framework illustrates bidirectional knowledge transfer between long-step and short-step SNN models.</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>Three-Minute Brief</span>
+        <h2>A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>Core Claim</span>
+          <p>Low-latency SNNs should not be trained in isolation; short-step models can preserve information through knowledge transfer from long-step models.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Method Overview</span>
+          <p>The framework trains long-step and short-step SNNs collaboratively with mutual distillation, while a smooth random timestep mechanism gradually reduces the short-step model&#x27;s timesteps.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Why It Matters</span>
+          <p>Edge remote sensing requires energy, latency, and accuracy trade-offs. This training strategy maintains performance while reducing SNN timesteps.</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>Core Claim</span>
+        <p>Low-latency SNNs should not be trained in isolation; short-step models can preserve information through knowledge transfer from long-step models.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Research Problem</span>
+        <p>Remote sensing classification needs low power and real-time inference, but SNNs often require longer timesteps for sufficient information representation.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Method Overview</span>
+        <p>The framework trains long-step and short-step SNNs collaboratively with mutual distillation, while a smooth random timestep mechanism gradually reduces the short-step model&#x27;s timesteps.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Why It Matters</span>
+        <p>Edge remote sensing requires energy, latency, and accuracy trade-offs. This training strategy maintains performance while reducing SNN timesteps.</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Additional Figure Highlights</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/dual-model-snn-remote-sensing-training-overview.png" alt="Training Overview" loading="eager">
+        </div>
+        <figcaption>
+          <span>Training Overview</span>
+          <p>The training diagram shows how the two models share supervision, feature constraints and prediction distributions.</p>
+          <strong>The short-step model becomes an active co-learner instead of a passively compressed model.</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/dual-model-snn-remote-sensing-performance-table.png" alt="Remote-Sensing Classification Comparison" loading="eager">
+        </div>
+        <figcaption>
+          <span>Remote-Sensing Classification Comparison</span>
+          <p>The table summarizes methods, architectures, time steps and accuracy across multiple remote-sensing datasets.</p>
+          <strong>The important signal is accuracy retention under low-latency inference.</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Technical Route</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>Long-step SNN</h3>
+        <p>Maintains richer temporal information.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>Short-step SNN</h3>
+        <p>Targets low-latency inference.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>Mutual distillation</h3>
+        <p>Shares knowledge and discriminative information during training.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>Smooth timestep</h3>
+        <p>Gradually reduces short-model timesteps to avoid abrupt training loss.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Evidence and Results</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>Scene</span>
+        <strong>Remote sensing</strong>
+        <p>Low-power image classification.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Timesteps</span>
+        <strong>Long-short</strong>
+        <p>Covers accuracy and latency needs.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Accuracy loss</span>
+        <strong>≈3% lower</strong>
+        <p>Nearly 3% reduction compared with a single model under the same timestep.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>Key Contributions</span>
+        <ul class="paper-list">
+        <li>Uses mutual distillation so short-step SNNs learn stable representations from long-step models.</li>
+        <li>Introduces smooth random timestep reduction.</li>
+        <li>Evaluates on MSTAR, UCM, and SIRI-WHU.</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Reading Note</span>
+        <p>A case study in low-latency SNN training: reduce timestep dependency through training design, not only architecture.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

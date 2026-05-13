@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Device modeling icon">
+  <rect x="7" y="7" width="50" height="50" rx="12" fill="#101816" stroke="#f2b84b" stroke-width="2"/>
+  <rect x="16" y="35" width="32" height="12" rx="2" fill="#4fc3a1"/>
+  <rect x="21" y="25" width="12" height="10" rx="2" fill="#f2b84b"/>
+  <rect x="34" y="19" width="10" height="16" rx="2" fill="#e6734e"/>
+  <path d="M14 47h36M20 17h24" stroke="#eef2ed" stroke-opacity="0.65" stroke-width="3" stroke-linecap="round"/>
+</svg>

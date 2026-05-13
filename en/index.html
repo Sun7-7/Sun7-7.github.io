@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qi Sun | Neuromorphic Computing, Signal Processing, and Device Modeling</title>
+  <meta name="description" content="Qi Sun&#x27;s academic homepage and research blog on neuromorphic computing, signal-processing applications, and ML-assisted semiconductor device modeling.">
+  <meta property="og:image" content="../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="home" data-lang="en">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="Menu">Menu</button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="home" class="active">Home</a></li>
+        <li><a href="publications.html" data-page="publications">Publications</a></li>
+        <li><a href="index.html#research" data-page="research">Research</a></li>
+        <li><a href="blog.html" data-page="blog">Blog</a></li>
+        <li><a href="about.html" data-page="about">About</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../index.html">中文</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Dark">Dark</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero hero-professional">
+    <canvas id="neural-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner hero-layout">
+      <div class="hero-copy">
+        <div class="hero-tag">
+          <span class="pulse-dot"></span>
+          Research Portfolio · Neuromorphic Intelligence
+        </div>
+        <h1>Qi Sun</h1>
+        <p class="hero-subtitle">Neuromorphic Computing · Signal Processing Applications · Device-aware Modeling</p>
+        <p class="hero-desc">My research is centered on neuromorphic computing: I study SNN training mechanisms and temporal representations, apply them to radar and remote-sensing signal tasks, and extend ML-assisted modeling to semiconductor devices.</p>
+        <div class="hero-actions">
+        <a href="publications.html" class="btn btn-primary">Read Paper Briefs</a>
+        <a href="index.html#research" class="btn btn-secondary">Research Themes</a>
+        <a href="about.html" class="btn btn-ghost">Research Profile</a>
+        </div>
+        <div class="hero-stats" aria-label="research overview">
+        <div><strong>8</strong><span>Peer-reviewed papers</span></div>
+        <div><strong>AAAI · ICASSP · IEEE</strong><span>Recent venues</span></div>
+        <div><strong>Neuromorphic × Signals × Devices</strong><span>Research architecture</span></div>
+        </div>
+        <div class="spike-viz" aria-hidden="true"></div>
+      </div>
+      <aside class="hero-snapshot" aria-label="Research Snapshot">
+        <p>Research Snapshot</p>
+        <img class="hero-map-image" src="../assets/images/home-research-map.svg?v=20260513-light" alt="Neuromorphic signal intelligence research map" loading="eager">
+        <a class="snapshot-item" href="#research">
+          <span>Neuromorphic</span>
+          <strong>SNN training mechanisms and event-driven representation</strong>
+        </a>
+        <a class="snapshot-item" href="#research">
+          <span>Signal applications</span>
+          <strong>Radar and remote sensing as real task settings</strong>
+        </a>
+        <a class="snapshot-item" href="#research">
+          <span>Device modeling</span>
+          <strong>TCAD data and ML surrogate models</strong>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section reader-section">
+    <div class="section-header fade-in">
+      <h2>Choose a Reading Path</h2>
+      <p>The homepage is designed for collaborators, new students, and quick readers. Start from the path that matches your goal instead of jumping straight into PDFs.</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="reader-grid">
+      <article class="reader-card fade-in">
+        <span>Collaborators</span>
+        <h3>Start with themes and papers</h3>
+        <p>Assess the research questions, method family, and recent evidence at a glance.</p>
+        <a href="index.html#research">View Themes</a>
+      </article>
+      <article class="reader-card fade-in">
+        <span>New students</span>
+        <h3>Build the problem map first</h3>
+        <p>Understand what I study, why it matters, and how the papers connect before reading details.</p>
+        <a href="index.html#featured-publications">Read Briefs</a>
+      </article>
+      <article class="reader-card fade-in">
+        <span>Quick readers</span>
+        <h3>Use the three-minute briefs</h3>
+        <p>Each paper is summarized through question, method, key figures, and takeaway without opening the PDF first.</p>
+        <a href="publications.html">Browse Papers</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="research" class="section research-mainline">
+    <div class="section-header fade-in">
+      <h2>Research Mainlines</h2>
+      <p>Neuromorphic computing is the methodological core, connected to signal-processing applications and semiconductor device modeling.</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="research-lens">
+      <div class="research-lens-intro fade-in">
+        <span>Research Position</span>
+        <p>Neuromorphic computing is my methodological core: understand the mechanism, validate it in real signal applications, and extend the modeling mindset to physically constrained devices.</p>
+      </div>
+      <div class="research-lens-grid">
+      <article class="research-lens-card fade-in">
+        <span>Line 1</span>
+        <h3>Neuromorphic mechanisms</h3>
+        <p>SNN training stability, surrogate gradients, membrane-potential distributions, temporal coding, and low-step inference.</p>
+      </article>
+      <article class="research-lens-card fade-in">
+        <span>Line 2</span>
+        <h3>Signal-processing applications</h3>
+        <p>Radar pulse sequences and remote-sensing images serve as realistic testbeds for robust event-driven models.</p>
+      </article>
+      <article class="research-lens-card fade-in">
+        <span>Line 3</span>
+        <h3>Device-aware modeling</h3>
+        <p>TCAD data, physical priors, and ML surrogates support optimization of LDMOS, U-MOSFET, and related devices.</p>
+      </article>
+      </div>
+    </div>
+    <div class="interests-grid">
+      <article class="interest-card fade-in">
+        <div class="interest-top"><img class="interest-icon" src="../assets/images/icons/snn.svg" alt="" loading="lazy"><h3>Neuromorphic Computing and SNN Mechanisms</h3></div>
+        <p>SNN training stability, surrogate gradients, membrane-potential distributions, temporal coding, and low-step inference as the methodological foundation.</p>
+        <div class="tags">
+          <span class="tag">SNN</span>
+          <span class="tag">Surrogate Gradient</span>
+          <span class="tag">Temporal Encoding</span>
+        </div>
+      </article>
+      <article class="interest-card fade-in">
+        <div class="interest-top"><img class="interest-icon" src="../assets/images/icons/radar.svg" alt="" loading="lazy"><h3>Signal-Processing Applications of Neuromorphic Models</h3></div>
+        <p>Event-driven representations and similarity learning for radar pulse deinterleaving, denoising, emitter recognition, and remote-sensing classification.</p>
+        <div class="tags">
+          <span class="tag">Radar</span>
+          <span class="tag">Remote Sensing</span>
+          <span class="tag">Event-driven AI</span>
+        </div>
+      </article>
+      <article class="interest-card fade-in">
+        <div class="interest-top"><img class="interest-icon" src="../assets/images/icons/device.svg" alt="" loading="lazy"><h3>Intelligent Semiconductor Device Modeling</h3></div>
+        <p>TCAD, ML surrogate models, and device physics for performance prediction and structure optimization of power devices.</p>
+        <div class="tags">
+          <span class="tag">TCAD</span>
+          <span class="tag">LDMOS</span>
+          <span class="tag">Device Modeling</span>
+        </div>
+      </article>
+    </div>
+    <div class="workflow-strip">
+      <div class="mini-section-title fade-in">Research Workflow</div>
+      <div class="workflow-grid">
+      <div class="workflow-step workflow-step-compact fade-in">
+        <span>01</span>
+        <h3>Core</h3>
+        <p>Start from neuromorphic mechanisms: SNN training, temporal coding, and event-driven inference.</p>
+      </div>
+      <div class="workflow-step workflow-step-compact fade-in">
+        <span>02</span>
+        <h3>Application</h3>
+        <p>Validate these models on radar, remote sensing, and other signal-processing tasks.</p>
+      </div>
+      <div class="workflow-step workflow-step-compact fade-in">
+        <span>03</span>
+        <h3>Modeling</h3>
+        <p>Combine ML with TCAD and device physics for semiconductor performance prediction and optimization.</p>
+      </div>
+      <div class="workflow-step workflow-step-compact fade-in">
+        <span>04</span>
+        <h3>Evidence</h3>
+        <p>Evaluate through ablations, robustness, efficiency, cross-scenario experiments, and physical verification.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="selected-publications" class="section featured-section">
+    <div class="section-header fade-in">
+      <h2>Featured Publications</h2>
+      <p>Each paper is organized as a presentation-style brief covering question, method, evidence, and reading entry points.</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="featured-paper-grid">
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png" alt="SGTE Processing Framework" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>
+            <span class="pub-year">2026 May</span>
+          </div>
+          <h3>SGTE-SNN: Similarity-Guided Temporal Encoding for Radar Emitter Denoising and Recognition</h3>
+          <p>SGTE converts pulse-to-reference similarities into structured temporal spike inputs for joint radar pulse denoising and emitter recognition.</p>
+          <div class="featured-paper-insight">
+            <span>SGTE Processing Framework</span>
+            <strong>The central idea is to convert relations between radar pulses and reference samples into structured temporal inputs for noise-robust SNN processing.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/sgte-snn-radar-emitter-denoising-recognition.html">Paper Brief</a>
+            <a href="https://doi.org/10.1109/icassp55912.2026.11464155" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png" alt="Spiking SOM Deinterleaving Framework" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>
+            <span class="pub-year">2026 May</span>
+          </div>
+          <h3>Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving</h3>
+          <p>Spiking-SOM moves self-organizing-map clustering into the spike domain and uses BMU firing rates for unsupervised radar pulse deinterleaving.</p>
+          <div class="featured-paper-insight">
+            <span>Spiking SOM Deinterleaving Framework</span>
+            <strong>It transfers SOM-style neighborhood competition into the spiking domain for event-driven sequence separation.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/spiking-som-radar-deinterleaving.html">Paper Brief</a>
+            <a href="https://doi.org/10.1109/icassp55912.2026.11464997" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png" alt="Surrogate Gradient Width Mismatch" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Proceedings of the AAAI Conference on Artificial Intelligence</span>
+            <span class="pub-year">2026 Mar</span>
+          </div>
+          <h3>Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution</h3>
+          <p>MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.</p>
+          <div class="featured-paper-insight">
+            <span>Surrogate Gradient Width Mismatch</span>
+            <strong>The paper starts from the observation that fixed surrogate widths can misalign with membrane-potential distributions.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/mpo-surrogate-function-snn.html">Paper Brief</a>
+            <a href="https://doi.org/10.1609/aaai.v40i30.39769" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png" alt="Long-Short Time-Step Mutual Distillation" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Neurocomputing</span>
+            <span class="pub-year">2025 Oct</span>
+          </div>
+          <h3>Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation</h3>
+          <p>A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.</p>
+          <div class="featured-paper-insight">
+            <span>Long-Short Time-Step Mutual Distillation</span>
+            <strong>The goal is to preserve discriminative knowledge while reducing inference time steps.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/dual-model-snn-remote-sensing.html">Paper Brief</a>
+            <a href="https://doi.org/10.1016/j.neucom.2025.130721" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="section-actions fade-in">
+      <a href="publications.html" class="btn btn-secondary">View All Publications</a>
+    </div>
+  </section>
+
+  <section class="section closing-section">
+    <div class="closing-grid">
+      <article class="closing-card fade-in">
+        <span>Profile</span>
+        <h2>About the Researcher</h2>
+        <p>My research centers on neuromorphic computing and extends to radar/remote-sensing signal applications and semiconductor device modeling, emphasizing mechanism, evidence, and transferable engineering value.</p>
+        <a href="about.html" class="btn btn-secondary">Read Profile</a>
+      </article>
+      <article class="closing-card closing-card-accent fade-in">
+        <span>Notes</span>
+        <h2>Research Notes and Methods</h2>
+        <p>Notes on SNN training, neuromorphic signal processing, paper reading, experiment reproduction, and research tooling.</p>
+        <a href="blog.html" class="btn btn-secondary">Open Blog</a>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution | Qi Sun</title>
+  <meta name="description" content="MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.">
+  <meta property="og:image" content="../../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="en">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="Menu">Menu</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">Home</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">Publications</a></li>
+        <li><a href="../index.html#research" data-page="research">Research</a></li>
+        <li><a href="../blog.html" data-page="blog">Blog</a></li>
+        <li><a href="../about.html" data-page="about">About</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../../papers/mpo-surrogate-function-snn.html">中文</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Dark">Dark</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">Back to Publications</a>
+      <p class="eyebrow">Paper Brief · 2026 Mar</p>
+      <h1>Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution</h1>
+      <p class="paper-authors"><span class="highlight">Sun, Qi</span>, Cao, Zhen, Geng, Kaige, Zhang, Ziyi, Hou, Biao</p>
+      <p class="paper-lead">MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.</p>
+      <div class="tags paper-tags">
+          <span class="tag">SNN training</span>
+          <span class="tag">Surrogate gradient</span>
+          <span class="tag">Membrane potential</span>
+          <span class="tag">Neuromorphic intelligence</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.1609/aaai.v40i30.39769" class="btn btn-primary" target="_blank" rel="noopener">View DOI</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../../assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png" alt="Surrogate Gradient Width Mismatch" loading="eager">
+        </div>
+        <figcaption>
+          <span>Core Figure · Surrogate Gradient Width Mismatch</span>
+          <p>The schematic compares effective optimization regions for surrogate functions and gradients.</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>Three-Minute Brief</span>
+        <h2>MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>Core Claim</span>
+          <p>The effective width of surrogate gradients should match membrane potential statistics dynamically instead of being fixed globally.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Method Overview</span>
+          <p>MPO regularizes membrane potential distributions with KL divergence, aligns surrogate width with membrane statistics, and introduces a discretization-error metric with correction to improve temporal gradient propagation.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Why It Matters</span>
+          <p>It reframes surrogate-function design from empirical hyperparameter tuning to a dynamics-aware optimization problem.</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>Core Claim</span>
+        <p>The effective width of surrogate gradients should match membrane potential statistics dynamically instead of being fixed globally.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Research Problem</span>
+        <p>Direct SNN training is affected by non-differentiable spikes, membrane potential drift, and temporal discretization errors. Fixed surrogate functions can easily mismatch neural activity distributions.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Method Overview</span>
+        <p>MPO regularizes membrane potential distributions with KL divergence, aligns surrogate width with membrane statistics, and introduces a discretization-error metric with correction to improve temporal gradient propagation.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Why It Matters</span>
+        <p>It reframes surrogate-function design from empirical hyperparameter tuning to a dynamics-aware optimization problem.</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Additional Figure Highlights</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/mpo-surrogate-function-snn-framework.png" alt="MPO Framework Overview" loading="eager">
+        </div>
+        <figcaption>
+          <span>MPO Framework Overview</span>
+          <p>The overview organizes motivation, methodology and verification around width alignment, distribution alignment and dynamic scaling.</p>
+          <strong>This figure is the fastest way to understand how MPO uses membrane statistics to tune SNN training.</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/mpo-surrogate-function-snn-stability-robustness.png" alt="Stability and Robustness Verification" loading="eager">
+        </div>
+        <figcaption>
+          <span>Stability and Robustness Verification</span>
+          <p>The results show training curves, hyperparameter sensitivity and membrane-potential distribution changes.</p>
+          <strong>The emphasis is not only higher accuracy, but more stable training and lower sensitivity to surrogate-width choices.</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Technical Route</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>Membrane statistics</h3>
+        <p>Track membrane potential distributions and drift during training.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>Distribution loss</h3>
+        <p>Use KL divergence to stabilize membrane dynamics.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>Adaptive width</h3>
+        <p>Match surrogate-gradient width with membrane variance.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>Error correction</h3>
+        <p>Measure and correct spike discretization errors.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Evidence and Results</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>CIFAR-10</span>
+        <strong>94.76%</strong>
+        <p>Top-1 accuracy reported in the paper.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>CIFAR-100</span>
+        <strong>74.20%</strong>
+        <p>Direct SNN training under MPO.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>ImageNet</span>
+        <strong>65.70%</strong>
+        <p>Scalable result with improved stability and efficiency.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>Key Contributions</span>
+        <ul class="paper-list">
+        <li>Analyzes how surrogate-width and membrane-distribution mismatch shrinks effective optimization regions.</li>
+        <li>Introduces membrane-potential-guided surrogate optimization for stable dynamics and gradient coverage.</li>
+        <li>Reports strong results on CIFAR-10, CIFAR-100, and ImageNet.</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Reading Note</span>
+        <p>A useful reading line is: membrane distributions determine gradient effectiveness; therefore surrogate functions should adapt to those distributions.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "slug": "snn-surrogate-function-notes",
+      "title": "脉冲神经网络中的替代函数优化笔记",
+      "date": "2026-03-20",
+      "category": "论文笔记",
+      "excerpt": "围绕膜电位分布与替代梯度函数设计，整理 SNN 训练稳定性和梯度传播中的关键问题。"
+    },
+    {
+      "slug": "radar-temporal-encoding",
+      "title": "雷达辐射源识别中的相似性引导时间编码",
+      "date": "2026-03-15",
+      "category": "研究记录",
+      "excerpt": "记录 SGTE-SNN 思路中时间编码、相似性约束与雷达信号去噪识别之间的关系。"
+    },
+    {
+      "slug": "spiking-som-deinterleaving",
+      "title": "脉冲自组织映射与雷达信号去交织",
+      "date": "2026-03-08",
+      "category": "技术笔记",
+      "excerpt": "梳理 Spiking Self-Organizing Maps 在无监督雷达脉冲序列聚类和去交织任务中的使用方式。"
+    },
+    {
+      "slug": "ml-device-modeling",
+      "title": "机器学习辅助半导体器件建模的研究线索",
+      "date": "2026-03-01",
+      "category": "方向整理",
+      "excerpt": "从 LDMOS、U-MOSFET 与 TCAD 研究出发，整理机器学习建模器件性能指标的基本路径。"
+    }
+  ]
+}
