@@ -1,0 +1,716 @@
+{
+  "site": {
+    "language": "zh-CN",
+    "name": "孙琦 Qi Sun",
+    "brand": "孙琦 Qi Sun",
+    "brandInitials": "QS",
+    "defaultTitle": "孙琦 Qi Sun | 类脑计算、智能信号处理与器件智能建模",
+    "defaultDescription": "孙琦的个人学术主页与研究博客，聚焦类脑计算、智能信号处理应用与机器学习辅助的半导体器件建模。",
+    "copyright": "© 2026 Qi Sun. Academic homepage and research blog.",
+    "selectedPublicationCount": 4
+  },
+  "assets": {
+    "faviconText": "QS",
+    "avatarImage": "assets/images/profile.jpeg",
+    "avatarAlt": "孙琦 Qi Sun portrait",
+    "heroBackgroundImage": "",
+    "heroBackgroundAlt": "",
+    "openGraphImage": "assets/images/profile.jpeg",
+    "researchMapImage": "assets/images/home-research-map.svg",
+    "researchMapAlt": "类脑信号智能研究路线图"
+  },
+  "navigation": [
+    {
+      "label": "首页",
+      "href": "index.html",
+      "key": "home"
+    },
+    {
+      "label": "论文成果",
+      "href": "publications.html",
+      "key": "publications"
+    },
+    {
+      "label": "研究方向",
+      "href": "index.html#research",
+      "key": "research"
+    },
+    {
+      "label": "博客",
+      "href": "blog.html",
+      "key": "blog"
+    },
+    {
+      "label": "关于",
+      "href": "about.html",
+      "key": "about"
+    }
+  ],
+  "home": {
+    "eyebrow": "Research Portfolio · Neuromorphic Intelligence",
+    "headline": "孙琦 Qi Sun",
+    "subtitle": "Neuromorphic Computing · Signal Processing Applications · Device-aware Modeling",
+    "description": "我的研究以类脑计算为主线：从脉冲神经网络的训练机制与时序表示出发，将其用于雷达、遥感等智能信号处理任务，并进一步探索机器学习辅助的半导体器件建模与优化。",
+    "actions": [
+      {
+        "label": "浏览论文导读",
+        "href": "publications.html",
+        "style": "primary"
+      },
+      {
+        "label": "研究主线",
+        "href": "index.html#research",
+        "style": "secondary"
+      },
+      {
+        "label": "研究者简介",
+        "href": "about.html",
+        "style": "ghost"
+      }
+    ],
+    "stats": [
+      {
+        "value": "{{publication_count}}",
+        "label": "Peer-reviewed papers"
+      },
+      {
+        "value": "AAAI · ICASSP · IEEE",
+        "label": "Recent venues"
+      },
+      {
+        "value": "Neuromorphic × Signals × Devices",
+        "label": "Research architecture"
+      }
+    ],
+    "profileHighlights": [
+      {
+        "label": "研究主轴",
+        "value": "类脑计算机制、SNN 训练与事件驱动表示"
+      },
+      {
+        "label": "应用场景",
+        "value": "雷达与遥感等智能信号处理任务"
+      },
+      {
+        "label": "交叉拓展",
+        "value": "半导体器件建模、TCAD 数据与机器学习代理模型"
+      }
+    ],
+    "researchSection": {
+      "id": "research",
+      "title": "研究主线",
+      "description": "以类脑计算为方法核心，连接智能信号处理应用与半导体器件智能建模。"
+    },
+    "agenda": {
+      "title": "当前关注的问题",
+      "description": "三条主线并不是并列堆叠：类脑计算提供模型机制，信号处理提供真实应用场景，半导体器件建模提供面向物理系统的智能优化问题。",
+      "items": [
+        {
+          "title": "类脑计算如何稳定训练",
+          "summary": "从膜电位分布、替代梯度有效区域和时间离散误差入手，理解 SNN 直接训练与低时间步推理的稳定性。"
+        },
+        {
+          "title": "类脑模型如何服务信号处理",
+          "summary": "将脉冲描述字、相似性分布和事件编码用于雷达与遥感等任务，把真实信号转化为可学习的时序表示。"
+        },
+        {
+          "title": "器件建模如何引入机器学习",
+          "summary": "结合 TCAD 数据、物理先验和代理模型，在复杂器件结构参数空间中进行快速预测与优化。"
+        }
+      ]
+    },
+    "workflow": {
+      "title": "研究方法工具链",
+      "steps": [
+        {
+          "label": "Core",
+          "text": "从类脑计算机制出发，分析 SNN 训练、时序编码和事件驱动推理的基本问题。"
+        },
+        {
+          "label": "Application",
+          "text": "把类脑模型落到雷达、遥感等智能信号处理任务，验证其鲁棒性、低功耗和低时延价值。"
+        },
+        {
+          "label": "Modeling",
+          "text": "将机器学习与 TCAD/器件物理结合，建立半导体器件性能预测和结构优化流程。"
+        },
+        {
+          "label": "Evidence",
+          "text": "通过消融、鲁棒性、能效、跨场景实验和物理回验评估方法边界。"
+        }
+      ]
+    },
+    "selectedPublications": {
+      "id": "selected-publications",
+      "title": "代表性论文",
+      "description": "每篇论文都整理为汇报式导读页，强调问题、方法、证据和可继续阅读的切入点。",
+      "actionLabel": "查看全部论文",
+      "actionHref": "publications.html"
+    },
+    "blogBrief": {
+      "title": "研究笔记与方法记录",
+      "description": "这里会继续整理 SNN 训练、类脑信号处理、论文阅读、实验复现和科研工具链中的关键理解。",
+      "actionLabel": "进入博客",
+      "actionHref": "blog.html"
+    },
+    "heroAnchors": [
+      {
+        "label": "类脑计算",
+        "value": "SNN 训练机制与事件驱动表示"
+      },
+      {
+        "label": "信号处理应用",
+        "value": "雷达、遥感等真实任务验证"
+      },
+      {
+        "label": "器件智能建模",
+        "value": "TCAD 数据与机器学习代理模型"
+      }
+    ],
+    "readerPaths": {
+      "title": "从不同角度进入这份研究",
+      "description": "这个主页同时服务学术合作、研究入门和快速了解。你可以按自己的阅读目的进入，而不必从论文列表开始。",
+      "items": [
+        {
+          "audience": "学术合作方",
+          "title": "先看研究主线与代表论文",
+          "text": "快速判断问题意识、方法谱系和近期成果是否与你的研究方向相接。",
+          "href": "index.html#research",
+          "action": "查看研究主线"
+        },
+        {
+          "audience": "新加入的学生",
+          "title": "先建立问题地图",
+          "text": "从“我研究什么、为什么重要、适合谁读”理解各论文之间的关系，再进入图文导读。",
+          "href": "index.html#featured-publications",
+          "action": "进入论文导读"
+        },
+        {
+          "audience": "普通读者",
+          "title": "先读 3 分钟摘要",
+          "text": "每篇论文都压缩成问题、方法、关键图表和结论，不需要先打开 PDF。",
+          "href": "publications.html",
+          "action": "浏览全部论文"
+        }
+      ]
+    },
+    "researchNarrative": {
+      "title": "研究主张",
+      "description": "我把类脑计算作为方法主轴：先理解模型机制，再进入真实信号应用，最后扩展到半导体器件这一类物理约束更强的建模问题。",
+      "items": [
+        {
+          "label": "主线一",
+          "title": "类脑计算机制",
+          "text": "研究 SNN 训练稳定性、替代梯度、膜电位分布、时间编码和低时间步推理。"
+        },
+        {
+          "label": "主线二",
+          "title": "智能信号处理应用",
+          "text": "将类脑模型用于雷达脉冲序列、遥感图像等任务，关注噪声、密集脉冲和低功耗约束。"
+        },
+        {
+          "label": "主线三",
+          "title": "半导体器件智能建模",
+          "text": "用 TCAD 数据、物理先验和机器学习代理模型优化 LDMOS、U-MOSFET 等功率器件。"
+        }
+      ]
+    },
+    "aboutBrief": {
+      "title": "关于研究者",
+      "description": "我的研究以类脑计算为核心，向雷达/遥感等信号处理应用和半导体器件智能建模延展，关注机制解释、实验可信度和可迁移的工程价值。",
+      "actionLabel": "阅读完整简介",
+      "actionHref": "about.html"
+    }
+  },
+  "researchAreas": [
+    {
+      "title": "类脑计算与 SNN 机制",
+      "summary": "研究脉冲神经网络的训练稳定性、替代梯度、膜电位分布、时间编码和低时间步推理，形成支撑后续应用的模型基础。",
+      "tags": [
+        "SNN",
+        "Surrogate Gradient",
+        "Temporal Encoding"
+      ],
+      "icon": "assets/images/icons/snn.svg"
+    },
+    {
+      "title": "类脑计算的信号处理应用",
+      "summary": "将事件驱动表示与相似性学习用于雷达脉冲分选、去噪、辐射源识别以及遥感图像分类，验证类脑模型在真实信号任务中的价值。",
+      "tags": [
+        "Radar",
+        "Remote Sensing",
+        "Event-driven AI"
+      ],
+      "icon": "assets/images/icons/radar.svg"
+    },
+    {
+      "title": "半导体器件智能建模",
+      "summary": "结合 TCAD、机器学习代理模型和器件物理，面向 LDMOS、U-MOSFET 等功率器件开展性能预测与结构优化。",
+      "tags": [
+        "TCAD",
+        "LDMOS",
+        "Device Modeling"
+      ],
+      "icon": "assets/images/icons/device.svg"
+    }
+  ],
+  "pages": {
+    "publications": {
+      "title": "论文成果 | 孙琦 Qi Sun",
+      "description": "孙琦的论文成果列表，涵盖类脑计算、智能信号处理应用与半导体器件智能建模等方向。",
+      "eyebrow": "Publications",
+      "heading": "论文成果",
+      "intro": "按时间倒序整理已发表论文。每篇论文提供汇报式导读与 DOI 链接。"
+    },
+    "blog": {
+      "title": "研究博客 | 孙琦 Qi Sun",
+      "description": "类脑计算、智能信号处理与器件智能建模相关研究笔记。",
+      "eyebrow": "Research Notes",
+      "heading": "研究博客",
+      "intro": "按时间倒序整理研究笔记、论文阅读和技术实践。"
+    },
+    "post": {
+      "title": "文章 | 孙琦 Qi Sun",
+      "description": "孙琦的研究博客文章。",
+      "backLabel": "返回博客"
+    },
+    "publicationDetail": {
+      "backLabel": "返回论文列表",
+      "doiLabel": "查看 DOI"
+    }
+  },
+  "about": {
+    "title": "关于 | 孙琦 Qi Sun",
+    "description": "孙琦的研究者简介、研究方向、学术训练、论文成果与联系方式。",
+    "eyebrow": "About",
+    "heading": "孙琦 Qi Sun",
+    "subtitle": "类脑计算、智能信号处理与半导体器件智能建模研究者 · 西安电子科技大学人工智能学院",
+    "bio": "我的研究以类脑计算为核心，关注脉冲神经网络如何在噪声、低功耗和复杂时序约束下稳定工作。雷达信号处理与遥感图像理解是类脑方法的重要应用场景；半导体器件建模则是面向物理系统优化的交叉延展。",
+    "sections": [
+      {
+        "title": "研究定位",
+        "paragraphs": [
+          "我将自己的研究定位在“类脑计算方法 → 智能信号处理应用 → 半导体器件智能建模”的连续谱上。核心问题不是单纯追求模型精度，而是理解模型如何在噪声、稀疏时序、低时延和物理约束下可靠工作。",
+          "雷达和遥感在这里更准确地说是类脑计算的应用场景：它们提供复杂信号、真实噪声和低功耗需求，用来检验 SNN 与事件驱动表示的有效性。"
+        ]
+      },
+      {
+        "title": "学术训练",
+        "items": [
+          "西安电子科技大学人工智能学院，计算机科学与技术方向；系统接受模式识别、神经网络、深度学习、智能目标识别与 AI 芯片设计训练。",
+          "本科阶段为智能科学与技术专业，形成从算法、机器学习到电子电路和器件基础的交叉背景。"
+        ]
+      },
+      {
+        "title": "方法能力",
+        "items": [
+          "围绕 SNN 直接训练、替代梯度、时间编码、知识蒸馏和事件驱动计算开展方法设计与实验验证。",
+          "面向雷达 PDW 序列和遥感图像，构建类脑信号处理流程，包括分选、去噪、识别、去交织和低时间步推理。",
+          "使用 TCAD 数据、物理先验和机器学习模型优化 LDMOS、U-MOSFET 等功率器件结构。"
+        ]
+      },
+      {
+        "title": "成果谱系",
+        "paragraphs": [
+          "当前主页收录 {{publication_count}} 篇论文，覆盖 AAAI、ICASSP、IEEE Signal Processing Letters、Neurocomputing、IEEE Transactions on Electron Devices 与 Micromachines 等会议和期刊。",
+          "这些成果分别落在三条主线中：SNN 训练与类脑机制、类脑模型在雷达/遥感信号任务中的应用，以及机器学习辅助的器件建模与优化。"
+        ]
+      },
+      {
+        "title": "关键词",
+        "paragraphs": [
+          "Spiking Neural Networks, Neuromorphic Computing, Temporal Encoding, Radar Signal Processing, Remote Sensing SNNs, Signal Deinterleaving, Surrogate Function Optimization, TCAD, LDMOS."
+        ]
+      }
+    ],
+    "heroTags": [
+      "类脑计算",
+      "智能信号处理应用",
+      "器件智能建模"
+    ],
+    "focusCards": [
+      {
+        "label": "Research Core",
+        "title": "类脑计算机制",
+        "text": "围绕 SNN 训练稳定性、替代梯度、膜电位分布和时间编码建立方法基础。"
+      },
+      {
+        "label": "Applications",
+        "title": "信号处理应用",
+        "text": "将类脑模型用于雷达脉冲序列、遥感图像等真实信号任务，而不是把应用场景误写成主线本身。"
+      },
+      {
+        "label": "Extension",
+        "title": "器件智能建模",
+        "text": "结合 TCAD 数据、物理先验和机器学习代理模型，面向功率器件结构优化。"
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "label": "Email",
+      "href": "mailto:qisun@stu.xidian.edu.cn",
+      "text": "qisun@stu.xidian.edu.cn"
+    }
+  ],
+  "footerLinks": [
+    {
+      "label": "Publications",
+      "href": "publications.html"
+    },
+    {
+      "label": "Blog",
+      "href": "blog.html"
+    },
+    {
+      "label": "About",
+      "href": "about.html"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:qisun@stu.xidian.edu.cn"
+    }
+  ],
+  "i18n": {
+    "en": {
+      "site": {
+        "language": "en",
+        "name": "Qi Sun",
+        "brand": "Qi Sun",
+        "defaultTitle": "Qi Sun | Neuromorphic Computing, Signal Processing, and Device Modeling",
+        "defaultDescription": "Qi Sun's academic homepage and research blog on neuromorphic computing, signal-processing applications, and ML-assisted semiconductor device modeling."
+      },
+      "assets": {
+        "avatarAlt": "Qi Sun portrait",
+        "researchMapAlt": "Neuromorphic signal intelligence research map"
+      },
+      "navigation": [
+        {
+          "label": "Home",
+          "href": "index.html",
+          "key": "home"
+        },
+        {
+          "label": "Publications",
+          "href": "publications.html",
+          "key": "publications"
+        },
+        {
+          "label": "Research",
+          "href": "index.html#research",
+          "key": "research"
+        },
+        {
+          "label": "Blog",
+          "href": "blog.html",
+          "key": "blog"
+        },
+        {
+          "label": "About",
+          "href": "about.html",
+          "key": "about"
+        }
+      ],
+      "home": {
+        "eyebrow": "Research Portfolio · Neuromorphic Intelligence",
+        "headline": "Qi Sun",
+        "subtitle": "Neuromorphic Computing · Signal Processing Applications · Device-aware Modeling",
+        "description": "My research is centered on neuromorphic computing: I study SNN training mechanisms and temporal representations, apply them to radar and remote-sensing signal tasks, and extend ML-assisted modeling to semiconductor devices.",
+        "actions": [
+          {
+            "label": "Read Paper Briefs",
+            "href": "publications.html",
+            "style": "primary"
+          },
+          {
+            "label": "Research Themes",
+            "href": "index.html#research",
+            "style": "secondary"
+          },
+          {
+            "label": "Research Profile",
+            "href": "about.html",
+            "style": "ghost"
+          }
+        ],
+        "profileHighlights": [
+          {
+            "label": "Core",
+            "value": "Neuromorphic mechanisms, SNN training, and event-driven representations"
+          },
+          {
+            "label": "Applications",
+            "value": "Radar and remote sensing as signal-processing testbeds"
+          },
+          {
+            "label": "Extension",
+            "value": "Semiconductor device modeling with TCAD data and ML surrogates"
+          }
+        ],
+        "researchSection": {
+          "id": "research",
+          "title": "Research Mainlines",
+          "description": "Neuromorphic computing is the methodological core, connected to signal-processing applications and semiconductor device modeling."
+        },
+        "agenda": {
+          "title": "Current Questions",
+          "description": "The three lines are not a flat list: neuromorphic computing provides the mechanism, signal processing provides real applications, and device modeling provides physically constrained optimization problems.",
+          "items": [
+            {
+              "title": "How can SNNs train stably?",
+              "summary": "I study membrane-potential distributions, surrogate-gradient coverage, temporal discretization errors, and low-step inference."
+            },
+            {
+              "title": "How can neuromorphic models serve signal processing?",
+              "summary": "I turn pulse descriptors, similarity distributions, and event codes into learnable representations for radar and remote-sensing tasks."
+            },
+            {
+              "title": "How can ML support device modeling?",
+              "summary": "I combine TCAD data, physical priors, and surrogate models for rapid prediction and structure optimization."
+            }
+          ]
+        },
+        "workflow": {
+          "title": "Research Workflow",
+          "steps": [
+            {
+              "label": "Core",
+              "text": "Start from neuromorphic mechanisms: SNN training, temporal coding, and event-driven inference."
+            },
+            {
+              "label": "Application",
+              "text": "Validate these models on radar, remote sensing, and other signal-processing tasks."
+            },
+            {
+              "label": "Modeling",
+              "text": "Combine ML with TCAD and device physics for semiconductor performance prediction and optimization."
+            },
+            {
+              "label": "Evidence",
+              "text": "Evaluate through ablations, robustness, efficiency, cross-scenario experiments, and physical verification."
+            }
+          ]
+        },
+        "selectedPublications": {
+          "id": "selected-publications",
+          "title": "Featured Publications",
+          "description": "Each paper is organized as a presentation-style brief covering question, method, evidence, and reading entry points.",
+          "actionLabel": "View All Publications",
+          "actionHref": "publications.html"
+        },
+        "blogBrief": {
+          "title": "Research Notes and Methods",
+          "description": "Notes on SNN training, neuromorphic signal processing, paper reading, experiment reproduction, and research tooling.",
+          "actionLabel": "Open Blog",
+          "actionHref": "blog.html"
+        },
+        "heroAnchors": [
+          {
+            "label": "Neuromorphic",
+            "value": "SNN training mechanisms and event-driven representation"
+          },
+          {
+            "label": "Signal applications",
+            "value": "Radar and remote sensing as real task settings"
+          },
+          {
+            "label": "Device modeling",
+            "value": "TCAD data and ML surrogate models"
+          }
+        ],
+        "readerPaths": {
+          "title": "Choose a Reading Path",
+          "description": "The homepage is designed for collaborators, new students, and quick readers. Start from the path that matches your goal instead of jumping straight into PDFs.",
+          "items": [
+            {
+              "audience": "Collaborators",
+              "title": "Start with themes and papers",
+              "text": "Assess the research questions, method family, and recent evidence at a glance.",
+              "href": "index.html#research",
+              "action": "View Themes"
+            },
+            {
+              "audience": "New students",
+              "title": "Build the problem map first",
+              "text": "Understand what I study, why it matters, and how the papers connect before reading details.",
+              "href": "index.html#featured-publications",
+              "action": "Read Briefs"
+            },
+            {
+              "audience": "Quick readers",
+              "title": "Use the three-minute briefs",
+              "text": "Each paper is summarized through question, method, key figures, and takeaway without opening the PDF first.",
+              "href": "publications.html",
+              "action": "Browse Papers"
+            }
+          ]
+        },
+        "researchNarrative": {
+          "title": "Research Position",
+          "description": "Neuromorphic computing is my methodological core: understand the mechanism, validate it in real signal applications, and extend the modeling mindset to physically constrained devices.",
+          "items": [
+            {
+              "label": "Line 1",
+              "title": "Neuromorphic mechanisms",
+              "text": "SNN training stability, surrogate gradients, membrane-potential distributions, temporal coding, and low-step inference."
+            },
+            {
+              "label": "Line 2",
+              "title": "Signal-processing applications",
+              "text": "Radar pulse sequences and remote-sensing images serve as realistic testbeds for robust event-driven models."
+            },
+            {
+              "label": "Line 3",
+              "title": "Device-aware modeling",
+              "text": "TCAD data, physical priors, and ML surrogates support optimization of LDMOS, U-MOSFET, and related devices."
+            }
+          ]
+        },
+        "aboutBrief": {
+          "title": "About the Researcher",
+          "description": "My research centers on neuromorphic computing and extends to radar/remote-sensing signal applications and semiconductor device modeling, emphasizing mechanism, evidence, and transferable engineering value.",
+          "actionLabel": "Read Profile",
+          "actionHref": "about.html"
+        },
+        "stats": [
+          {
+            "value": "{{publication_count}}",
+            "label": "Peer-reviewed papers"
+          },
+          {
+            "value": "AAAI · ICASSP · IEEE",
+            "label": "Recent venues"
+          },
+          {
+            "value": "Neuromorphic × Signals × Devices",
+            "label": "Research architecture"
+          }
+        ]
+      },
+      "researchAreas": [
+        {
+          "title": "Neuromorphic Computing and SNN Mechanisms",
+          "summary": "SNN training stability, surrogate gradients, membrane-potential distributions, temporal coding, and low-step inference as the methodological foundation.",
+          "tags": [
+            "SNN",
+            "Surrogate Gradient",
+            "Temporal Encoding"
+          ],
+          "icon": "assets/images/icons/snn.svg"
+        },
+        {
+          "title": "Signal-Processing Applications of Neuromorphic Models",
+          "summary": "Event-driven representations and similarity learning for radar pulse deinterleaving, denoising, emitter recognition, and remote-sensing classification.",
+          "tags": [
+            "Radar",
+            "Remote Sensing",
+            "Event-driven AI"
+          ],
+          "icon": "assets/images/icons/radar.svg"
+        },
+        {
+          "title": "Intelligent Semiconductor Device Modeling",
+          "summary": "TCAD, ML surrogate models, and device physics for performance prediction and structure optimization of power devices.",
+          "tags": [
+            "TCAD",
+            "LDMOS",
+            "Device Modeling"
+          ],
+          "icon": "assets/images/icons/device.svg"
+        }
+      ],
+      "pages": {
+        "publications": {
+          "title": "Publications | Qi Sun",
+          "description": "Qi Sun's publications on neuromorphic computing, signal-processing applications, and semiconductor device modeling.",
+          "eyebrow": "Publications",
+          "heading": "Publications",
+          "intro": "Papers are ordered by time. Each paper includes a presentation-style brief and DOI link."
+        },
+        "blog": {
+          "title": "Research Blog | Qi Sun",
+          "description": "Research notes on neuromorphic computing, signal processing, and device-aware modeling.",
+          "eyebrow": "Research Notes",
+          "heading": "Research Blog",
+          "intro": "Research notes, paper reading, and technical practice organized by time."
+        },
+        "post": {
+          "title": "Post | Qi Sun",
+          "description": "Research blog post by Qi Sun.",
+          "backLabel": "Back to Blog"
+        },
+        "publicationDetail": {
+          "backLabel": "Back to Publications",
+          "doiLabel": "View DOI"
+        }
+      },
+      "about": {
+        "title": "About | Qi Sun",
+        "description": "Qi Sun's research profile, academic training, publications, and contact information.",
+        "eyebrow": "About",
+        "heading": "Qi Sun",
+        "subtitle": "Researcher in Neuromorphic Computing, Signal Processing, and Semiconductor Device Modeling · School of Artificial Intelligence, Xidian University",
+        "bio": "My research centers on neuromorphic computing and asks how spiking neural networks can remain stable under noise, low-power constraints, and complex temporal structure. Radar and remote sensing are application settings for neuromorphic signal processing, while semiconductor device modeling is a physically constrained extension of data-driven modeling.",
+        "heroTags": [
+          "Neuromorphic Computing",
+          "Signal Applications",
+          "Device Modeling"
+        ],
+        "focusCards": [
+          {
+            "label": "Research Core",
+            "title": "Neuromorphic mechanisms",
+            "text": "SNN training stability, surrogate gradients, membrane-potential distributions, and temporal coding."
+          },
+          {
+            "label": "Applications",
+            "title": "Signal-processing tasks",
+            "text": "Radar pulse sequences and remote-sensing images are application testbeds for neuromorphic models."
+          },
+          {
+            "label": "Extension",
+            "title": "Device-aware modeling",
+            "text": "TCAD data, physical priors, and ML surrogates for power-device optimization."
+          }
+        ],
+        "sections": [
+          {
+            "title": "Research Identity",
+            "paragraphs": [
+              "I position my work along a continuum: neuromorphic computing methods, signal-processing applications, and intelligent semiconductor device modeling. The central question is not only accuracy, but reliability under noise, sparse temporal representations, low latency, and physical constraints.",
+              "Radar and remote sensing are best understood here as application domains of neuromorphic computing: they provide complex signals, real noise, and low-power requirements for evaluating SNNs and event-driven representations."
+            ]
+          },
+          {
+            "title": "Academic Training",
+            "items": [
+              "School of Artificial Intelligence, Xidian University, with systematic training in pattern recognition, neural networks, deep learning, intelligent target recognition, and AI chip design.",
+              "Undergraduate background in intelligent science and technology, connecting algorithms, machine learning, electronic circuits, and device fundamentals."
+            ]
+          },
+          {
+            "title": "Method Capabilities",
+            "items": [
+              "Method design and experimental validation for SNN direct training, surrogate gradients, temporal encoding, knowledge distillation, and event-driven computing.",
+              "Neuromorphic signal-processing pipelines for radar PDW sequences and remote-sensing images, including sorting, denoising, recognition, deinterleaving, and low-step inference.",
+              "ML-assisted optimization of LDMOS, U-MOSFET, and related power device structures using TCAD data and physical priors."
+            ]
+          },
+          {
+            "title": "Publication Footprint",
+            "paragraphs": [
+              "This site currently includes {{publication_count}} papers across AAAI, ICASSP, IEEE Signal Processing Letters, Neurocomputing, IEEE Transactions on Electron Devices, and Micromachines.",
+              "These works map onto three lines: SNN and neuromorphic mechanisms, neuromorphic applications in radar/remote-sensing signal tasks, and ML-assisted device modeling and optimization."
+            ]
+          },
+          {
+            "title": "Keywords",
+            "paragraphs": [
+              "Spiking Neural Networks, Neuromorphic Computing, Temporal Encoding, Radar Signal Processing, Remote Sensing SNNs, Signal Deinterleaving, Surrogate Function Optimization, TCAD, LDMOS."
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

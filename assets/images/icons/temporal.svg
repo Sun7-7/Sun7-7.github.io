@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Temporal encoding icon">
+  <rect x="7" y="7" width="50" height="50" rx="12" fill="#101816" stroke="#4fc3a1" stroke-width="2"/>
+  <path d="M15 44h34" stroke="#eef2ed" stroke-width="3" stroke-linecap="round"/>
+  <path d="M20 44V22M29 44V31M39 44V18M47 44V28" stroke="#f2b84b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="20" cy="22" r="3" fill="#4fc3a1"/>
+  <circle cx="39" cy="18" r="3" fill="#e6734e"/>
+</svg>

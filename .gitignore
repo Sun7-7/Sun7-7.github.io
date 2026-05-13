@@ -1,0 +1,6 @@
+个人简历.docx
+*.md
+paperpdf/
+__pycache__/
+.DS_Store
+Thumbs.db

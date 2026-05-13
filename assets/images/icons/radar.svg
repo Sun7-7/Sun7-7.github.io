@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Radar icon">
+  <rect x="7" y="7" width="50" height="50" rx="12" fill="#101816" stroke="#f2b84b" stroke-width="2"/>
+  <path d="M16 42c8-8 24-8 32 0M22 36c5-5 15-5 20 0M29 30c2-2 4-2 6 0" fill="none" stroke="#4fc3a1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 44V21" stroke="#eef2ed" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="44" r="5" fill="#e6734e"/>
+</svg>

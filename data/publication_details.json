@@ -1,0 +1,1204 @@
+[
+  {
+    "slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "doi": "10.1109/icassp55912.2026.11464155",
+    "oneLine": "将雷达脉冲与参考样本的相似性转化为结构化脉冲时序输入，在噪声干扰下同时服务去噪与辐射源识别。",
+    "coreClaim": "相似性分布比单个脉冲特征更能表达真实脉冲与噪声脉冲之间的结构差异。",
+    "problem": "高密度多源雷达环境中，PDW 序列常被噪声和干扰污染，单脉冲特征在时频域高度重叠，传统阈值或规则方法难以兼顾鲁棒性、实时性与边缘部署。",
+    "method": "SGTE 将 pulse-to-reference similarity 离散为直方图向量，并通过概率编码或可学习嵌入生成脉冲时序；理论上利用真实脉冲与噪声脉冲相似性分布的差异保持可分性，再由 SNN 完成去噪与识别。",
+    "whyItMatters": "这项工作把雷达信号处理中的相似性结构转化为 SNN 擅长处理的时间事件序列，为边缘端低功耗雷达智能提供了更自然的输入形式。",
+    "pipeline": [
+      {
+        "label": "PDW sequence",
+        "text": "从复杂雷达场景中接收带噪脉冲描述字序列。"
+      },
+      {
+        "label": "Similarity histogram",
+        "text": "计算脉冲与参考样本的相似性并形成分布化表示。"
+      },
+      {
+        "label": "Temporal encoding",
+        "text": "用概率编码或可学习嵌入生成结构化 spike train。"
+      },
+      {
+        "label": "SNN inference",
+        "text": "完成脉冲去噪和辐射源识别，并保留事件驱动效率。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "任务",
+        "value": "去噪 + 识别",
+        "note": "同一编码框架同时服务两个雷达处理环节。"
+      },
+      {
+        "metric": "理论支撑",
+        "value": "Bayes separability",
+        "note": "用相似性分布距离说明真实/噪声脉冲的可分性。"
+      },
+      {
+        "metric": "部署动机",
+        "value": "Sparse SNN",
+        "note": "面向低功耗事件驱动计算平台。"
+      }
+    ],
+    "highlights": [
+      "提出相似性引导的时间编码，将连续相似性结构映射为 SNN 可处理的 spike train。",
+      "从连续域分布距离出发分析真实脉冲与噪声脉冲的可分性，并连接到离散脉冲表示。",
+      "在多源雷达数据和不同骨干网络上验证去噪与识别效果，强调低功耗事件驱动部署潜力。"
+    ],
+    "discussion": "适合作为“雷达信号如何进入 SNN”的入口论文阅读：先看相似性分布，再看编码方式，最后看去噪与识别性能。",
+    "keywords": [
+      "Radar emitter recognition",
+      "Temporal encoding",
+      "Spiking neural network",
+      "Denoising"
+    ],
+    "en": {
+      "oneLine": "SGTE converts pulse-to-reference similarities into structured temporal spike inputs for joint radar pulse denoising and emitter recognition.",
+      "coreClaim": "Similarity distributions capture structural differences between genuine and noisy pulses better than isolated pulse features.",
+      "problem": "In dense multi-source radar environments, PDW sequences are corrupted by noise and interference. Single-pulse features overlap in time-frequency domains, making threshold or rule-based methods fragile under real-time and edge constraints.",
+      "method": "SGTE discretizes pulse-to-reference similarities into histogram representations and generates spike trains through probabilistic coding or learnable embeddings. Theoretical analysis connects distributional separability to effective SNN discrimination.",
+      "whyItMatters": "The work transforms radar similarity structure into the temporal event representation that SNNs naturally process, offering an input pathway for low-power radar intelligence.",
+      "pipeline": [
+        {
+          "label": "PDW sequence",
+          "text": "Receive noisy pulse descriptor words from complex radar scenes."
+        },
+        {
+          "label": "Similarity histogram",
+          "text": "Compare pulses with references and build distributional representations."
+        },
+        {
+          "label": "Temporal encoding",
+          "text": "Generate structured spike trains via probabilistic coding or learned embeddings."
+        },
+        {
+          "label": "SNN inference",
+          "text": "Perform denoising and emitter recognition with event-driven efficiency."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Task",
+          "value": "Denoising + recognition",
+          "note": "One encoding framework supports two radar processing stages."
+        },
+        {
+          "metric": "Theory",
+          "value": "Bayes separability",
+          "note": "Distributional distance explains genuine/noise pulse separability."
+        },
+        {
+          "metric": "Deployment",
+          "value": "Sparse SNN",
+          "note": "Designed for low-power event-driven platforms."
+        }
+      ],
+      "highlights": [
+        "Proposes similarity-guided temporal encoding from continuous similarity structure to spike trains.",
+        "Analyzes separability from distributional distance and connects it to discrete spike representations.",
+        "Evaluates denoising and recognition across multi-source radar data and different backbones."
+      ],
+      "discussion": "A good entry point for understanding how radar signals can be represented for SNNs: read similarity distributions first, then encoding, then denoising and recognition results.",
+      "keywords": [
+        "Radar emitter recognition",
+        "Temporal encoding",
+        "Spiking neural network",
+        "Denoising"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png",
+          "title": "SGTE Processing Framework",
+          "caption": "The figure connects similarity encoding, 1D U-Net denoising and PRI-STFT-based identification into a complete PDW-to-label pipeline.",
+          "insight": "The central idea is to convert relations between radar pulses and reference samples into structured temporal inputs for noise-robust SNN processing."
+        },
+        {
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-denoising-table.png",
+          "title": "Denoising Performance Comparison",
+          "caption": "The table compares ACC and F1 across denoising methods, backbones, scenarios and noise levels.",
+          "insight": "The evidence highlights the stability of SGTE-SNN under high-noise and multi-scenario settings."
+        },
+        {
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-ablation-recognition.png",
+          "title": "Ablation and Identification Results",
+          "caption": "These plots summarize how reference-set size, histogram bins and encoding choices influence identification accuracy.",
+          "insight": "The ablation clarifies how similarity encoding parameters affect the downstream recognition task."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png",
+        "title": "SGTE 处理框架",
+        "caption": "图中把相似性编码、1D U-Net 去噪和 PRI-STFT 识别串成完整链路，展示从 PDW 序列到辐射源标签的处理过程。",
+        "insight": "关键思想是先把雷达脉冲与参考样本的关系转成结构化时序输入，再让 SNN 处理噪声场景下的稀疏事件。"
+      },
+      {
+        "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-denoising-table.png",
+        "title": "去噪性能对比",
+        "caption": "表格集中比较不同去噪方法、网络骨干、场景和噪声水平下的 ACC 与 F1。",
+        "insight": "结果用横向对比说明 SGTE-SNN 在高噪声和多场景条件下保持了更稳的去噪表现。"
+      },
+      {
+        "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-ablation-recognition.png",
+        "title": "消融与识别结果",
+        "caption": "该图表展示参考集大小、直方图 bins 等编码参数对识别性能的影响。",
+        "insight": "消融分析把“相似性编码如何影响最终识别”这一点讲清楚，避免只停留在端到端指标。"
+      }
+    ]
+  },
+  {
+    "slug": "spiking-som-radar-deinterleaving",
+    "doi": "10.1109/icassp55912.2026.11464997",
+    "oneLine": "把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。",
+    "coreClaim": "SOM 的拓扑保持能力可以与 SNN 的事件驱动稀疏计算结合，形成低功耗无监督去交织框架。",
+    "problem": "复杂电磁环境下的雷达信号去交织需要在未知标签、高密度脉冲和边缘算力受限之间取得平衡，传统 SOM 又依赖连续域距离计算。",
+    "method": "Spiking-SOM 用 LIF 神经元表示 SOM 节点，输入 PDW 被编码为稀疏脉冲张量，BMU 由神经元平均放电率选择；权重更新在脉冲域完成，并用 Robbins-Monro 条件讨论收敛与拓扑稳定性。",
+    "whyItMatters": "该方法让无监督雷达分选不再完全依赖密集浮点距离计算，更适合部署在 FPGA 或类脑硬件等边缘平台。",
+    "pipeline": [
+      {
+        "label": "Spike encoding",
+        "text": "将 PDW 特征编码为稀疏时间脉冲张量。"
+      },
+      {
+        "label": "Neuron response",
+        "text": "LIF 节点对输入脉冲进行膜电位累积和放电。"
+      },
+      {
+        "label": "BMU selection",
+        "text": "用平均放电率选择最佳匹配单元。"
+      },
+      {
+        "label": "Topology update",
+        "text": "在 BMU 及邻域中完成脉冲域权重更新。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "学习范式",
+        "value": "Unsupervised",
+        "note": "不依赖人工标签完成雷达脉冲去交织。"
+      },
+      {
+        "metric": "理论保证",
+        "value": "Convergence",
+        "note": "BMU 放电率单调性与 Robbins-Monro 条件。"
+      },
+      {
+        "metric": "计算特征",
+        "value": "Sparse update",
+        "note": "计算与访存随输入稀疏度下降。"
+      }
+    ],
+    "highlights": [
+      "将 SOM 的 BMU 选择和邻域更新迁移到 spike domain，减少显式浮点距离计算。",
+      "给出 BMU 放电率单调性和权重更新收敛条件，为无监督 SNN 聚类提供理论支撑。",
+      "面向 FPGA 等边缘硬件，利用事件驱动累积和稀疏更新降低计算与访存。"
+    ],
+    "discussion": "这篇论文适合和 SGTE-SNN 对照阅读：前者关注有监督/任务驱动编码，本文关注无监督拓扑组织。",
+    "keywords": [
+      "Signal deinterleaving",
+      "Spiking SOM",
+      "Unsupervised learning",
+      "Edge computing"
+    ],
+    "en": {
+      "oneLine": "Spiking-SOM moves self-organizing-map clustering into the spike domain and uses BMU firing rates for unsupervised radar pulse deinterleaving.",
+      "coreClaim": "SOM topology preservation can be combined with event-driven sparse SNN computation to support low-power unsupervised deinterleaving.",
+      "problem": "Radar deinterleaving must handle unknown labels, dense pulses, and limited edge computation, while conventional SOMs rely on continuous-domain distance computation.",
+      "method": "Spiking-SOM represents SOM units with LIF neurons, encodes PDW inputs as sparse spike tensors, selects BMUs by average firing rate, and updates weights in the spike domain with convergence analysis based on Robbins-Monro conditions.",
+      "whyItMatters": "The method reduces reliance on dense floating-point distance computation and is more compatible with FPGA or neuromorphic edge platforms.",
+      "pipeline": [
+        {
+          "label": "Spike encoding",
+          "text": "Encode PDW features into sparse temporal spike tensors."
+        },
+        {
+          "label": "Neuron response",
+          "text": "Accumulate membrane potential and firing responses in LIF units."
+        },
+        {
+          "label": "BMU selection",
+          "text": "Select the best matching unit by average firing rate."
+        },
+        {
+          "label": "Topology update",
+          "text": "Update BMU and neighborhood weights in the spike domain."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Learning",
+          "value": "Unsupervised",
+          "note": "Deinterleaves radar pulses without manual labels."
+        },
+        {
+          "metric": "Theory",
+          "value": "Convergence",
+          "note": "BMU monotonicity and Robbins-Monro conditions."
+        },
+        {
+          "metric": "Computation",
+          "value": "Sparse update",
+          "note": "Arithmetic and memory access decrease with input sparsity."
+        }
+      ],
+      "highlights": [
+        "Moves BMU selection and neighborhood update from SOM to the spike domain.",
+        "Provides monotonic firing-rate and convergence analysis for unsupervised SNN clustering.",
+        "Targets edge radar processing through event-driven accumulation and sparse updates."
+      ],
+      "discussion": "Read it together with SGTE-SNN: SGTE focuses on task-driven encoding, while this paper focuses on unsupervised topological organization.",
+      "keywords": [
+        "Signal deinterleaving",
+        "Spiking SOM",
+        "Unsupervised learning",
+        "Edge computing"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png",
+          "title": "Spiking SOM Deinterleaving Framework",
+          "caption": "The framework shows how BMU competition, spike responses and cluster updates form an unsupervised radar-pulse deinterleaving process.",
+          "insight": "It transfers SOM-style neighborhood competition into the spiking domain for event-driven sequence separation."
+        },
+        {
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-performance-table.png",
+          "title": "Multi-Scenario Performance Table",
+          "caption": "The table compares deinterleaving metrics under different pulse densities, distributions and overlap conditions.",
+          "insight": "The key result is that the model preserves useful clustering quality without supervised labels."
+        },
+        {
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-bmu-energy.png",
+          "title": "BMU Firing and Energy Analysis",
+          "caption": "The figure visualizes BMU responses and energy distributions across clusters.",
+          "insight": "It explains why firing activity can support self-organized separation of radar pulse sequences."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png",
+        "title": "脉冲 SOM 去交织框架",
+        "caption": "框架图说明 BMU 竞争、脉冲响应和簇更新如何组成无监督雷达脉冲去交织流程。",
+        "insight": "方法把传统 SOM 的邻域竞争机制迁移到脉冲域，使模型更贴近事件驱动处理。"
+      },
+      {
+        "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-performance-table.png",
+        "title": "多场景性能表",
+        "caption": "表格对比不同雷达脉冲密度、分布和重叠条件下的去交织指标。",
+        "insight": "关键看点是模型在无监督条件下仍能维持较好的簇划分质量。"
+      },
+      {
+        "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-bmu-energy.png",
+        "title": "BMU 放电与能量分析",
+        "caption": "图中通过 BMU 响应和能量分布展示不同簇在脉冲域的竞争关系。",
+        "insight": "它解释了模型为什么可以用放电活动完成雷达脉冲序列的自组织分离。"
+      }
+    ]
+  },
+  {
+    "slug": "mpo-surrogate-function-snn",
+    "doi": "10.1609/aaai.v40i30.39769",
+    "oneLine": "根据膜电位分布动态调节替代梯度函数，让 SNN 训练中的梯度传播更稳定、更高效。",
+    "coreClaim": "替代梯度函数的有效宽度应当和膜电位统计动态匹配，而不是使用固定的全局形状。",
+    "problem": "SNN 直接训练常受非可微放电函数、膜电位漂移和时间离散误差影响，固定形状的替代梯度容易与真实神经活动分布错配。",
+    "method": "MPO 用 KL 散度约束膜电位分布，引入自适应宽度约束使替代梯度作用范围与膜电位统计同步，并设计离散化误差度量与校正策略来改善长时序梯度传播。",
+    "whyItMatters": "这项工作把替代函数设计从经验超参数推进到和神经动力学统计耦合的优化问题，提升了 SNN 训练可解释性。",
+    "pipeline": [
+      {
+        "label": "Membrane statistics",
+        "text": "跟踪训练过程中的膜电位分布及其漂移。"
+      },
+      {
+        "label": "Distribution loss",
+        "text": "用 KL 散度稳定膜电位动力学。"
+      },
+      {
+        "label": "Adaptive width",
+        "text": "让替代梯度宽度与膜电位方差同步。"
+      },
+      {
+        "label": "Error correction",
+        "text": "度量并修正 spike 时间离散化误差。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "CIFAR-10",
+        "value": "94.76%",
+        "note": "Top-1 accuracy reported in the paper."
+      },
+      {
+        "metric": "CIFAR-100",
+        "value": "74.20%",
+        "note": "Direct SNN training under MPO."
+      },
+      {
+        "metric": "ImageNet",
+        "value": "65.70%",
+        "note": "Scalable result with improved stability and efficiency."
+      }
+    ],
+    "highlights": [
+      "从理论上分析替代梯度宽度和膜电位分布错配如何压缩有效优化区域。",
+      "提出膜电位引导的替代函数优化框架，联合稳定神经动力学与梯度范围。",
+      "在 CIFAR-10、CIFAR-100 与 ImageNet 上分别达到 94.76%、74.20% 和 65.70% top-1 accuracy。"
+    ],
+    "discussion": "阅读时可以抓住一条线：膜电位分布决定梯度是否有效，替代函数需要跟着分布变化，而不是静态固定。",
+    "keywords": [
+      "SNN training",
+      "Surrogate gradient",
+      "Membrane potential",
+      "Neuromorphic intelligence"
+    ],
+    "en": {
+      "oneLine": "MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.",
+      "coreClaim": "The effective width of surrogate gradients should match membrane potential statistics dynamically instead of being fixed globally.",
+      "problem": "Direct SNN training is affected by non-differentiable spikes, membrane potential drift, and temporal discretization errors. Fixed surrogate functions can easily mismatch neural activity distributions.",
+      "method": "MPO regularizes membrane potential distributions with KL divergence, aligns surrogate width with membrane statistics, and introduces a discretization-error metric with correction to improve temporal gradient propagation.",
+      "whyItMatters": "It reframes surrogate-function design from empirical hyperparameter tuning to a dynamics-aware optimization problem.",
+      "pipeline": [
+        {
+          "label": "Membrane statistics",
+          "text": "Track membrane potential distributions and drift during training."
+        },
+        {
+          "label": "Distribution loss",
+          "text": "Use KL divergence to stabilize membrane dynamics."
+        },
+        {
+          "label": "Adaptive width",
+          "text": "Match surrogate-gradient width with membrane variance."
+        },
+        {
+          "label": "Error correction",
+          "text": "Measure and correct spike discretization errors."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "CIFAR-10",
+          "value": "94.76%",
+          "note": "Top-1 accuracy reported in the paper."
+        },
+        {
+          "metric": "CIFAR-100",
+          "value": "74.20%",
+          "note": "Direct SNN training under MPO."
+        },
+        {
+          "metric": "ImageNet",
+          "value": "65.70%",
+          "note": "Scalable result with improved stability and efficiency."
+        }
+      ],
+      "highlights": [
+        "Analyzes how surrogate-width and membrane-distribution mismatch shrinks effective optimization regions.",
+        "Introduces membrane-potential-guided surrogate optimization for stable dynamics and gradient coverage.",
+        "Reports strong results on CIFAR-10, CIFAR-100, and ImageNet."
+      ],
+      "discussion": "A useful reading line is: membrane distributions determine gradient effectiveness; therefore surrogate functions should adapt to those distributions.",
+      "keywords": [
+        "SNN training",
+        "Surrogate gradient",
+        "Membrane potential",
+        "Neuromorphic intelligence"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png",
+          "title": "Surrogate Gradient Width Mismatch",
+          "caption": "The schematic compares effective optimization regions for surrogate functions and gradients.",
+          "insight": "The paper starts from the observation that fixed surrogate widths can misalign with membrane-potential distributions."
+        },
+        {
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png",
+          "title": "MPO Framework Overview",
+          "caption": "The overview organizes motivation, methodology and verification around width alignment, distribution alignment and dynamic scaling.",
+          "insight": "This figure is the fastest way to understand how MPO uses membrane statistics to tune SNN training."
+        },
+        {
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-stability-robustness.png",
+          "title": "Stability and Robustness Verification",
+          "caption": "The results show training curves, hyperparameter sensitivity and membrane-potential distribution changes.",
+          "insight": "The emphasis is not only higher accuracy, but more stable training and lower sensitivity to surrogate-width choices."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png",
+        "title": "替代梯度宽度失配",
+        "caption": "示意图对比替代函数和替代梯度的有效优化区域，强调宽度选择对训练效率的影响。",
+        "insight": "论文的切入点是：固定宽度替代梯度可能与膜电位分布不匹配，导致有效梯度区域偏移。"
+      },
+      {
+        "src": "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png",
+        "title": "MPO 方法总览",
+        "caption": "框架图把动机、方法和验证放在一张图中，展示宽度对齐、分布对齐和动态缩放三类策略。",
+        "insight": "这张图适合快速把握 MPO 如何从膜电位统计量出发调节 SNN 的训练过程。"
+      },
+      {
+        "src": "assets/images/paper-figures/mpo-surrogate-function-snn-stability-robustness.png",
+        "title": "稳定性与鲁棒性验证",
+        "caption": "结果图展示不同设置下的训练曲线、超参数敏感性和膜电位分布变化。",
+        "insight": "验证重点不是单一精度提升，而是训练过程是否更稳定、对宽度选择是否更不敏感。"
+      }
+    ]
+  },
+  {
+    "slug": "adaptive-clustering-radar-signal-processing",
+    "doi": "10.1109/lsp.2025.3556782",
+    "oneLine": "用自适应聚类生成伪标签，再用相似性学习判断簇间关系，提升复杂场景雷达信号分选鲁棒性。",
+    "coreClaim": "雷达信号分选可以先用聚类形成弱标签，再用相似性网络修正簇级关系，从而降低标注依赖。",
+    "problem": "雷达信号分选在高密度、强交织和多场景数据分布变化下容易退化，完全监督深度模型又依赖大量标注数据。",
+    "method": "ACSL 先在 RF、PW、DOA 等特征空间中进行动态分区与自适应缩放，生成并优化伪标签；随后用双分支相似性学习网络结合 PRI 与特征差异判断不同簇是否来自同一雷达。",
+    "whyItMatters": "这套流程把无监督聚类、PRI 信息和深度相似性判别组合起来，更贴近真实电子侦察中标签稀缺和场景变化的问题。",
+    "pipeline": [
+      {
+        "label": "Feature partition",
+        "text": "按 RF、PW、DOA 对 PDW 流进行动态分区。"
+      },
+      {
+        "label": "Pseudo labels",
+        "text": "通过自适应聚类和缩放因子生成初始簇。"
+      },
+      {
+        "label": "PRI relation",
+        "text": "计算簇间 PRI 与特征差异。"
+      },
+      {
+        "label": "Similarity network",
+        "text": "判断簇是否应合并为同一雷达源。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "监督需求",
+        "value": "Pseudo-label",
+        "note": "减少对大规模标注数据的依赖。"
+      },
+      {
+        "metric": "鲁棒性",
+        "value": "Multi-scenario",
+        "note": "关注跨场景分布变化下的分选效果。"
+      },
+      {
+        "metric": "任务输出",
+        "value": "RSS clusters",
+        "note": "输出雷达脉冲分选后的簇关系。"
+      }
+    ],
+    "highlights": [
+      "用自适应缩放因子降低不同场景和子块间数据分布差异。",
+      "将伪标签优化与 similarity learning 结合，减少对大规模标注数据的依赖。",
+      "面向电子侦察中的 RSS 任务，兼顾分选准确率、纯度、鲁棒性与计算时间。"
+    ],
+    "discussion": "这篇论文可作为雷达信号分选中“弱监督 + 相似性判断”的方法模板，适合从伪标签质量和簇合并策略两个角度阅读。",
+    "keywords": [
+      "Radar signal sorting",
+      "Pseudo-labeling",
+      "Similarity learning",
+      "Adaptive clustering"
+    ],
+    "en": {
+      "oneLine": "ACSL combines adaptive clustering for pseudo-label generation with similarity learning to improve radar signal sorting in complex scenes.",
+      "coreClaim": "Radar signal sorting can use clustering to form weak labels and a similarity network to refine cluster-level relationships.",
+      "problem": "Radar signal sorting degrades under high density, strong interleaving, and multi-scenario distribution shifts, while fully supervised deep models require large labeled datasets.",
+      "method": "ACSL partitions RF, PW, and DOA feature spaces with adaptive scaling to generate pseudo-labels, then uses a dual-branch similarity network with PRI and feature differences to decide whether clusters originate from the same radar.",
+      "whyItMatters": "The pipeline combines unsupervised clustering, PRI knowledge, and deep similarity judgment, matching label scarcity and scenario variation in real reconnaissance tasks.",
+      "pipeline": [
+        {
+          "label": "Feature partition",
+          "text": "Dynamically partition PDW streams by RF, PW, and DOA."
+        },
+        {
+          "label": "Pseudo labels",
+          "text": "Generate initial clusters through adaptive clustering and scaling."
+        },
+        {
+          "label": "PRI relation",
+          "text": "Compute PRI and feature differences between clusters."
+        },
+        {
+          "label": "Similarity network",
+          "text": "Decide whether clusters should be merged as the same radar source."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Supervision",
+          "value": "Pseudo-label",
+          "note": "Reduces reliance on large labeled datasets."
+        },
+        {
+          "metric": "Robustness",
+          "value": "Multi-scenario",
+          "note": "Targets distribution shifts across radar scenes."
+        },
+        {
+          "metric": "Output",
+          "value": "RSS clusters",
+          "note": "Produces deinterleaved radar pulse clusters."
+        }
+      ],
+      "highlights": [
+        "Uses adaptive scaling to reduce distribution differences across sub-blocks and scenes.",
+        "Combines pseudo-label optimization with similarity learning.",
+        "Addresses accuracy, purity, robustness, and computation time in radar signal sorting."
+      ],
+      "discussion": "A useful template for weakly supervised radar sorting: read it through pseudo-label quality and cluster-merge decisions.",
+      "keywords": [
+        "Radar signal sorting",
+        "Pseudo-labeling",
+        "Similarity learning",
+        "Adaptive clustering"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-architecture.png",
+          "title": "Adaptive Clustering Architecture",
+          "caption": "The architecture combines initial clustering, pseudo-label construction, similarity learning and cluster-relation decisions.",
+          "insight": "The method separately models intra-cluster structure and inter-cluster relations to reduce pseudo-label noise."
+        },
+        {
+          "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-multi-scenario.png",
+          "title": "Multi-Scenario Deinterleaving Results",
+          "caption": "The figure group covers different scene complexities to assess stability on realistic radar signals.",
+          "insight": "It shows that the method is intended for diverse electromagnetic scenarios rather than one narrow simulation case."
+        },
+        {
+          "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-pseudo-label-ablation.png",
+          "title": "Pseudo-Label and Ablation Analysis",
+          "caption": "The ablation results isolate the contribution of pseudo-labeling and similarity-learning components.",
+          "insight": "This helps identify which module drives the improvement."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-architecture.png",
+        "title": "自适应聚类分选架构",
+        "caption": "架构图展示由初始聚类、伪标签构造、相似性学习和簇关系判别组成的处理流程。",
+        "insight": "方法把“簇内结构”和“簇间关系”分开建模，减少弱监督场景下伪标签噪声的影响。"
+      },
+      {
+        "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-multi-scenario.png",
+        "title": "多场景分选表现",
+        "caption": "该组图表覆盖不同场景复杂度下的分选结果，用于观察方法在实际雷达信号中的稳定性。",
+        "insight": "图表强调该方法不是只对单一仿真条件有效，而是面向多类复杂电磁环境。"
+      },
+      {
+        "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-pseudo-label-ablation.png",
+        "title": "伪标签与消融分析",
+        "caption": "消融图表说明伪标签策略、相似性学习模块等组件对最终分选指标的贡献。",
+        "insight": "这部分帮助读者判断改进来自哪一环，而不是来自整体模型规模。"
+      }
+    ]
+  },
+  {
+    "slug": "dual-model-snn-remote-sensing",
+    "doi": "10.1016/j.neucom.2025.130721",
+    "oneLine": "用长短时间步双模型互蒸馏缓解 SNN 降低推理时间步时的精度损失。",
+    "coreClaim": "低延迟 SNN 不应孤立训练，短时间步模型可以通过长时间步模型的知识迁移保持信息表达。",
+    "problem": "遥感图像分类对边缘端低功耗和实时性要求很高，但 SNN 往往需要较长时间步才能保持充分信息表达，短时间步会带来精度下降。",
+    "method": "Long-Short Step Dual-Model Mutual Distillation 让长步模型与短步模型协同训练并相互蒸馏，同时用平滑随机时间步机制逐步降低短步模型时间步，减轻低延迟训练的信息损失。",
+    "whyItMatters": "遥感边缘部署需要同时考虑能耗、延迟和精度，该框架给出了降低 SNN 时间步时保持性能的一种训练策略。",
+    "pipeline": [
+      {
+        "label": "Long-step SNN",
+        "text": "保持更充分的时序信息表达。"
+      },
+      {
+        "label": "Short-step SNN",
+        "text": "面向低延迟推理约束。"
+      },
+      {
+        "label": "Mutual distillation",
+        "text": "长短模型在训练中共享知识和判别信息。"
+      },
+      {
+        "label": "Smooth timestep",
+        "text": "平滑降低短步模型时间步，避免训练突变。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "场景",
+        "value": "Remote sensing",
+        "note": "面向遥感图像低功耗分类。"
+      },
+      {
+        "metric": "时间步",
+        "value": "Long-short",
+        "note": "双模型覆盖精度与低延迟需求。"
+      },
+      {
+        "metric": "精度损失",
+        "value": "≈3% lower",
+        "note": "相同时间步下相比单模型减少约 3% 精度损失。"
+      }
+    ],
+    "highlights": [
+      "用双模型互蒸馏让短时间步 SNN 从长时间步模型中获得更稳定的表示。",
+      "提出 smooth random time step 机制，平滑缩短时间步而不是突然压缩时序信息。",
+      "在 MSTAR、UCM、SIRI-WHU 等遥感数据集上，相同时间步下相比单模型减少约 3% 的精度损失。"
+    ],
+    "discussion": "可把这篇论文作为 SNN 低延迟训练的案例：不是只改网络结构，而是通过训练机制降低时间步依赖。",
+    "keywords": [
+      "Remote sensing",
+      "Knowledge distillation",
+      "Spiking neural network",
+      "Low latency"
+    ],
+    "en": {
+      "oneLine": "A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.",
+      "coreClaim": "Low-latency SNNs should not be trained in isolation; short-step models can preserve information through knowledge transfer from long-step models.",
+      "problem": "Remote sensing classification needs low power and real-time inference, but SNNs often require longer timesteps for sufficient information representation.",
+      "method": "The framework trains long-step and short-step SNNs collaboratively with mutual distillation, while a smooth random timestep mechanism gradually reduces the short-step model's timesteps.",
+      "whyItMatters": "Edge remote sensing requires energy, latency, and accuracy trade-offs. This training strategy maintains performance while reducing SNN timesteps.",
+      "pipeline": [
+        {
+          "label": "Long-step SNN",
+          "text": "Maintains richer temporal information."
+        },
+        {
+          "label": "Short-step SNN",
+          "text": "Targets low-latency inference."
+        },
+        {
+          "label": "Mutual distillation",
+          "text": "Shares knowledge and discriminative information during training."
+        },
+        {
+          "label": "Smooth timestep",
+          "text": "Gradually reduces short-model timesteps to avoid abrupt training loss."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Scene",
+          "value": "Remote sensing",
+          "note": "Low-power image classification."
+        },
+        {
+          "metric": "Timesteps",
+          "value": "Long-short",
+          "note": "Covers accuracy and latency needs."
+        },
+        {
+          "metric": "Accuracy loss",
+          "value": "≈3% lower",
+          "note": "Nearly 3% reduction compared with a single model under the same timestep."
+        }
+      ],
+      "highlights": [
+        "Uses mutual distillation so short-step SNNs learn stable representations from long-step models.",
+        "Introduces smooth random timestep reduction.",
+        "Evaluates on MSTAR, UCM, and SIRI-WHU."
+      ],
+      "discussion": "A case study in low-latency SNN training: reduce timestep dependency through training design, not only architecture.",
+      "keywords": [
+        "Remote sensing",
+        "Knowledge distillation",
+        "Spiking neural network",
+        "Low latency"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png",
+          "title": "Long-Short Time-Step Mutual Distillation",
+          "caption": "The framework illustrates bidirectional knowledge transfer between long-step and short-step SNN models.",
+          "insight": "The goal is to preserve discriminative knowledge while reducing inference time steps."
+        },
+        {
+          "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-training-overview.png",
+          "title": "Training Overview",
+          "caption": "The training diagram shows how the two models share supervision, feature constraints and prediction distributions.",
+          "insight": "The short-step model becomes an active co-learner instead of a passively compressed model."
+        },
+        {
+          "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-performance-table.png",
+          "title": "Remote-Sensing Classification Comparison",
+          "caption": "The table summarizes methods, architectures, time steps and accuracy across multiple remote-sensing datasets.",
+          "insight": "The important signal is accuracy retention under low-latency inference."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png",
+        "title": "长短时间步互蒸馏",
+        "caption": "框架图展示长时间步模型和短时间步模型之间的双向知识传递关系。",
+        "insight": "核心目标是在降低推理时间步时保留长时间步模型的判别知识。"
+      },
+      {
+        "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-training-overview.png",
+        "title": "训练流程总览",
+        "caption": "流程图描述双模型如何在训练阶段共享监督信息、特征约束和预测分布。",
+        "insight": "该设计让低延迟 SNN 不再只是被动压缩，而是参与互补学习。"
+      },
+      {
+        "src": "assets/images/paper-figures/dual-model-snn-remote-sensing-performance-table.png",
+        "title": "遥感分类性能对比",
+        "caption": "表格汇总多个遥感数据集上的方法、网络结构、时间步和准确率。",
+        "insight": "重点展示短时间步推理下的精度保持能力，以及和已有 SNN 方法的差异。"
+      }
+    ]
+  },
+  {
+    "slug": "ml-ldmos-bv-optimization",
+    "doi": "10.1109/ted.2024.3517578",
+    "oneLine": "将 CNN 预测模型与遗传算法结合，用 TCAD 数据驱动多浮空埋层 LDMOS 的击穿电压优化。",
+    "coreClaim": "复杂功率器件结构的参数搜索可以由 TCAD 数据和机器学习代理模型显著加速。",
+    "problem": "多浮空埋层 LDMOS 参数耦合强、结构复杂，传统物理推导与手工扫描难以高效探索最优击穿电压设计空间。",
+    "method": "研究先用 TCAD 生成结构参数与 BV 数据集，再训练 CNN 预测模型；随后把预测模型作为遗传算法适应度评估器，自适应搜索最优结构参数，并用 TCAD 回验。",
+    "whyItMatters": "该路线展示了器件物理与 AI 优化结合的范式：用仿真数据建立代理模型，再把搜索成本从大量 TCAD 仿真转移到快速预测。",
+    "pipeline": [
+      {
+        "label": "Parameter space",
+        "text": "确定 MFBL LDMOS 关键结构参数及合理范围。"
+      },
+      {
+        "label": "TCAD dataset",
+        "text": "通过仿真生成参数-BV 数据集。"
+      },
+      {
+        "label": "CNN surrogate",
+        "text": "训练快速预测 BV 的机器学习模型。"
+      },
+      {
+        "label": "GA search",
+        "text": "用遗传算法搜索高 BV 结构并回到 TCAD 验证。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "代理模型",
+        "value": "CNN",
+        "note": "从 TCAD 数据学习 BV 映射。"
+      },
+      {
+        "metric": "优化器",
+        "value": "Genetic algorithm",
+        "note": "在预测模型上快速搜索结构参数。"
+      },
+      {
+        "metric": "预测误差",
+        "value": "≈1.2%",
+        "note": "论文报告的平均预测误差。"
+      }
+    ],
+    "highlights": [
+      "把半导体器件物理分析、TCAD 仿真数据和机器学习优化流程连接起来。",
+      "CNN 模型用于快速预测 MFBL LDMOS 的 BV，降低反复仿真的搜索成本。",
+      "论文报告平均预测误差约 1.2%，并通过 TCAD 验证优化结构的可行性。"
+    ],
+    "discussion": "阅读重点是“代理模型 + 全局搜索 + 仿真回验”的闭环，而不是单一模型结构。",
+    "keywords": [
+      "LDMOS",
+      "TCAD",
+      "CNN",
+      "Genetic algorithm",
+      "Breakdown voltage"
+    ],
+    "en": {
+      "oneLine": "This work combines a CNN surrogate and genetic algorithm to optimize breakdown voltage for MFBL LDMOS using TCAD data.",
+      "coreClaim": "Parameter search for complex power device structures can be accelerated by TCAD data and ML surrogate models.",
+      "problem": "MFBL LDMOS has strongly coupled parameters and complex structures, making traditional derivation or manual sweeps inefficient for BV optimization.",
+      "method": "The work generates a TCAD dataset of structural parameters and BV, trains a CNN predictor, uses it as the fitness evaluator in a genetic algorithm, and validates optimized structures with TCAD.",
+      "whyItMatters": "It demonstrates a device-physics + AI optimization workflow: train a surrogate with simulation data and shift search cost from TCAD sweeps to fast prediction.",
+      "pipeline": [
+        {
+          "label": "Parameter space",
+          "text": "Identify key MFBL LDMOS structural parameters and ranges."
+        },
+        {
+          "label": "TCAD dataset",
+          "text": "Generate parameter-BV data through simulation."
+        },
+        {
+          "label": "CNN surrogate",
+          "text": "Train a fast predictor for BV."
+        },
+        {
+          "label": "GA search",
+          "text": "Search high-BV structures and verify them with TCAD."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Surrogate",
+          "value": "CNN",
+          "note": "Learns BV mapping from TCAD data."
+        },
+        {
+          "metric": "Optimizer",
+          "value": "Genetic algorithm",
+          "note": "Searches structural parameters on the predictor."
+        },
+        {
+          "metric": "Error",
+          "value": "≈1.2%",
+          "note": "Average prediction error reported in the paper."
+        }
+      ],
+      "highlights": [
+        "Connects device physics, TCAD simulation data, and ML optimization.",
+        "Uses a CNN to rapidly predict BV and reduce simulation sweeps.",
+        "Reports about 1.2% average prediction error and validates optimized structures with TCAD."
+      ],
+      "discussion": "The key is the closed loop of surrogate modeling, global search, and simulation verification.",
+      "keywords": [
+        "LDMOS",
+        "TCAD",
+        "CNN",
+        "Genetic algorithm",
+        "Breakdown voltage"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-ml-flow-device.png",
+          "title": "Device Structure and ML Workflow",
+          "caption": "The figure pairs the multiple floating buried-layer LDMOS structure with a TCAD-driven prediction and optimization workflow.",
+          "insight": "It shows a data loop built around a specific device structure rather than a generic model application."
+        },
+        {
+          "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-prediction-results.png",
+          "title": "Breakdown-Voltage Prediction",
+          "caption": "The plots compare model predictions against TCAD or simulation results.",
+          "insight": "This validates whether the surrogate model is reliable enough for fast design-space evaluation."
+        },
+        {
+          "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-ga-optimization.png",
+          "title": "Genetic-Algorithm Optimization",
+          "caption": "The charts show convergence and optimized structural parameters during the GA search.",
+          "insight": "The CNN surrogate accelerates evaluation while the GA explores the design space."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-ml-flow-device.png",
+        "title": "器件结构与机器学习流程",
+        "caption": "图中同时给出多浮空埋层 LDMOS 结构和由 TCAD 数据驱动的预测优化流程。",
+        "insight": "它说明论文并非单纯套用模型，而是围绕具体器件结构建立数据闭环。"
+      },
+      {
+        "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-prediction-results.png",
+        "title": "击穿电压预测结果",
+        "caption": "预测图展示模型输出与 TCAD 或仿真结果之间的拟合关系。",
+        "insight": "这一部分验证机器学习代理模型能否承担后续参数搜索的快速评估器。"
+      },
+      {
+        "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-ga-optimization.png",
+        "title": "遗传算法优化过程",
+        "caption": "图表展示遗传算法搜索结构参数时的收敛趋势和优化结果。",
+        "insight": "CNN 代理模型负责快速预测，GA 负责探索设计空间，两者共同降低 TCAD 试错成本。"
+      }
+    ]
+  },
+  {
+    "slug": "sipos-umofet-fom",
+    "doi": "10.3390/mi15030411",
+    "oneLine": "面向 SIPOS 调制漂移区 U-MOSFET，建立结合物理解析与 GPR 的 FOM 预测模型。",
+    "coreClaim": "物理解析模型和高斯过程回归可以共同刻画 BV-RON,sp 折中，并保留可解释的器件参数关系。",
+    "problem": "超结 U-MOSFET 的 BV-RON,sp 折中受电场调制、charge coupling 和结构参数共同影响，单纯解析模型难以兼顾可解释性和预测精度。",
+    "method": "论文先基于 Poisson 方程构建物理解析表达，再使用 Gaussian Process Regression 预测 FOM = BV²/RON,sp 并优化超参数，最后结合 TCAD 验证结构参数和性能边界。",
+    "whyItMatters": "相比纯黑箱建模，这类 physics-informed ML 更适合器件研究，因为它同时给出性能预测和结构参数解释。",
+    "pipeline": [
+      {
+        "label": "Device physics",
+        "text": "分析 SIPOS 柱对漂移区电场和电荷耦合的影响。"
+      },
+      {
+        "label": "Analytical model",
+        "text": "从 Poisson 解出发建立 FOM 相关表达。"
+      },
+      {
+        "label": "GPR correction",
+        "text": "用高斯过程回归预测并优化模型参数。"
+      },
+      {
+        "label": "TCAD check",
+        "text": "用 TCAD 验证 BV-RON,sp 折中与参数趋势。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "目标",
+        "value": "FOM = BV²/RON,sp",
+        "note": "统一衡量击穿电压和导通电阻折中。"
+      },
+      {
+        "metric": "方法",
+        "value": "Physics + GPR",
+        "note": "解析模型与机器学习校准结合。"
+      },
+      {
+        "metric": "验证",
+        "value": "TCAD",
+        "note": "用仿真验证模型趋势和参数选择。"
+      }
+    ],
+    "highlights": [
+      "把 SIPOS 柱引入超结 U-MOSFET 漂移区调制，讨论突破 SJ silicon limit 的 BV-RON,sp 折中。",
+      "用 GPR 校准解析模型参数，兼顾物理含义、预测精度和可解释优化。",
+      "系统讨论漂移区、氧化层厚度和电场调制系数等关键参数对 FOM 的影响。"
+    ],
+    "discussion": "这篇适合关注 physics-informed ML 的读者：它不是只用数据拟合，而是用数据修正具有物理结构的模型。",
+    "keywords": [
+      "U-MOSFET",
+      "SIPOS",
+      "Gaussian process regression",
+      "Figure of merit"
+    ],
+    "en": {
+      "oneLine": "A physics-informed FOM model for SIPOS-modulated U-MOSFET combines analytical device modeling with Gaussian process regression.",
+      "coreClaim": "Analytical physics and GPR can jointly model BV-RON,sp trade-offs while preserving interpretable device-parameter relationships.",
+      "problem": "The BV-RON,sp trade-off in SJ U-MOSFETs is influenced by electric-field modulation, charge coupling, and structural parameters; pure analytical models struggle to balance interpretability and accuracy.",
+      "method": "The paper builds analytical expressions from Poisson's equation, uses GPR to predict FOM = BV²/RON,sp and tune parameters, and validates trends with TCAD.",
+      "whyItMatters": "Physics-informed ML is useful for device research because it provides both performance prediction and interpretable parameter relationships.",
+      "pipeline": [
+        {
+          "label": "Device physics",
+          "text": "Analyze how SIPOS pillars affect drift-region electric fields and charge coupling."
+        },
+        {
+          "label": "Analytical model",
+          "text": "Derive FOM-related expressions from Poisson solutions."
+        },
+        {
+          "label": "GPR correction",
+          "text": "Use Gaussian process regression for prediction and parameter optimization."
+        },
+        {
+          "label": "TCAD check",
+          "text": "Validate BV-RON,sp trade-offs and parameter trends."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Target",
+          "value": "FOM = BV²/RON,sp",
+          "note": "Combines breakdown voltage and on-resistance trade-off."
+        },
+        {
+          "metric": "Method",
+          "value": "Physics + GPR",
+          "note": "Analytical model calibrated with ML."
+        },
+        {
+          "metric": "Validation",
+          "value": "TCAD",
+          "note": "Simulation verifies trends and parameter choices."
+        }
+      ],
+      "highlights": [
+        "Introduces SIPOS pillars for drift-region modulation in SJ U-MOSFET.",
+        "Uses GPR to calibrate analytical model parameters.",
+        "Studies drift region, oxide thickness, and electric-field modulation coefficients."
+      ],
+      "discussion": "Useful for readers interested in physics-informed ML: data is used to refine a physically structured model, not replace it.",
+      "keywords": [
+        "U-MOSFET",
+        "SIPOS",
+        "Gaussian process regression",
+        "Figure of merit"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/sipos-umofet-fom-device-and-model.png",
+          "title": "SIPOS U-MOSFET Structure and Modeling Target",
+          "caption": "The figure introduces the SIPOS-modulated drift-region structure and the key device parameters.",
+          "insight": "The structure view helps readers connect FOM variation to the underlying device physics."
+        },
+        {
+          "src": "assets/images/paper-figures/sipos-umofet-fom-gpr-model.png",
+          "title": "GPR Prediction Model",
+          "caption": "The diagram shows how Gaussian process regression maps structural parameters to performance metrics.",
+          "insight": "GPR is useful in limited-sample TCAD settings because it can provide interpretable predictions and uncertainty cues."
+        },
+        {
+          "src": "assets/images/paper-figures/sipos-umofet-fom-fom-fitting.png",
+          "title": "FOM Fitting and Comparison",
+          "caption": "The fitting plots compare predicted FOM values with simulation or calculated results.",
+          "insight": "This evidence determines whether the model can support rapid device screening."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/sipos-umofet-fom-device-and-model.png",
+        "title": "SIPOS U-MOSFET 结构与建模对象",
+        "caption": "图中展示 SIPOS 调制漂移区结构和论文关注的关键器件参数。",
+        "insight": "页面读者可以先从结构图理解 FOM 变化的物理来源。"
+      },
+      {
+        "src": "assets/images/paper-figures/sipos-umofet-fom-gpr-model.png",
+        "title": "GPR 预测模型",
+        "caption": "该图说明高斯过程回归如何连接结构参数和器件性能指标。",
+        "insight": "GPR 的价值在于能在样本有限的 TCAD 场景下提供可解释的预测和不确定性线索。"
+      },
+      {
+        "src": "assets/images/paper-figures/sipos-umofet-fom-fom-fitting.png",
+        "title": "FOM 拟合与对比",
+        "caption": "拟合图展示预测 FOM 与仿真或计算结果之间的一致性。",
+        "insight": "这部分是判断模型能否用于器件快速筛选的关键证据。"
+      }
+    ]
+  },
+  {
+    "slug": "variable-k-ldmos",
+    "doi": "10.3390/mi13060843",
+    "oneLine": "提出 variable-K 高介电常数沟槽调制 SJ-LDMOS 体电场，提高击穿电压并保持导通和散热特性。",
+    "coreClaim": "沿沟槽深度改变介电常数可以重新塑造 SJ-LDMOS 纵向体电场，从而提高 BV。",
+    "problem": "传统 SJ-LDMOS 在长漂移区下受漏端曲率效应和体电场不均匀限制，击穿电压容易饱和，难以接近理论电压承受能力。",
+    "method": "在 N+ drain 下引入上下介电常数不同的 VHK dielectric trench，上部高 K 区通过 dielectric RESURF 抑制漏端高场峰值，下部较低 K 区扩展衬底耗尽并重新分布纵向体电场。",
+    "whyItMatters": "这项工作展示了通过介质工程调控体电场的器件设计思路，为高压功率器件结构优化提供了可解释路径。",
+    "pipeline": [
+      {
+        "label": "E-field bottleneck",
+        "text": "识别漏端和体区电场峰值导致的 BV 饱和问题。"
+      },
+      {
+        "label": "VHK trench",
+        "text": "在漏端下方设计上下不同 K 值的介质沟槽。"
+      },
+      {
+        "label": "Field modulation",
+        "text": "利用 dielectric RESURF 和纵向电场重分布提高 BV。"
+      },
+      {
+        "label": "Device check",
+        "text": "同时评估导通、热特性和工艺可行性。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "BV gain",
+        "value": "+41.2%",
+        "note": "相对 conventional SJ-LDMOS 的单位漂移区长度阻断电压提升。"
+      },
+      {
+        "metric": "Uniform-K 对比",
+        "value": "+9.5%",
+        "note": "相对 uniform-K SJ-LDMOS 的 BV 提升。"
+      },
+      {
+        "metric": "设计对象",
+        "value": "VHK trench",
+        "note": "用 variable-K 介质沟槽调控纵向体电场。"
+      }
+    ],
+    "highlights": [
+      "用 variable-K 介质沟槽调制 SJ-LDMOS 的纵向体电场分布。",
+      "相比 conventional SJ-LDMOS，单位漂移区长度阻断电压提升 41.2%；相比 uniform-K 结构，BV 提升约 9.5%。",
+      "同时讨论最佳介电常数范围、导通特性、热特性和可行工艺流程。"
+    ],
+    "discussion": "这篇论文是器件物理线的基础工作，适合用来理解后续机器学习辅助器件建模中的结构参数和性能指标。",
+    "keywords": [
+      "SJ-LDMOS",
+      "Variable-K dielectric",
+      "Electric-field modulation",
+      "Breakdown voltage"
+    ],
+    "en": {
+      "oneLine": "A variable-K dielectric trench modulates the bulk electric field of SJ-LDMOS to improve breakdown voltage while maintaining conduction and thermal behavior.",
+      "coreClaim": "Varying dielectric permittivity along trench depth reshapes the vertical bulk electric field and improves BV.",
+      "problem": "Conventional SJ-LDMOS suffers from drain curvature effects and non-uniform bulk electric fields, causing BV saturation in long drift regions.",
+      "method": "The device introduces a VHK dielectric trench under the N+ drain. The upper high-K region suppresses drain-side E-field peaks through dielectric RESURF, while the lower-K region expands substrate depletion and redistributes vertical bulk fields.",
+      "whyItMatters": "It shows an interpretable device-design route: modulate electric fields through dielectric engineering to optimize high-voltage power devices.",
+      "pipeline": [
+        {
+          "label": "E-field bottleneck",
+          "text": "Identify BV saturation caused by drain and bulk field peaks."
+        },
+        {
+          "label": "VHK trench",
+          "text": "Design a drain-side trench with different K values along depth."
+        },
+        {
+          "label": "Field modulation",
+          "text": "Use dielectric RESURF and vertical field redistribution to increase BV."
+        },
+        {
+          "label": "Device check",
+          "text": "Evaluate conduction, thermal behavior, and fabrication feasibility."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "BV gain",
+          "value": "+41.2%",
+          "note": "Blocking voltage per drift length compared with conventional SJ-LDMOS."
+        },
+        {
+          "metric": "Uniform-K comparison",
+          "value": "+9.5%",
+          "note": "BV improvement over uniform-K SJ-LDMOS."
+        },
+        {
+          "metric": "Design object",
+          "value": "VHK trench",
+          "note": "Variable-K trench modulates vertical bulk E-field."
+        }
+      ],
+      "highlights": [
+        "Uses a variable-K trench to modulate the vertical bulk E-field of SJ-LDMOS.",
+        "Improves blocking voltage per drift length by 41.2% and BV over uniform-K by about 9.5%.",
+        "Discusses dielectric range, conduction, thermal behavior, and process feasibility."
+      ],
+      "discussion": "This is a foundational device-physics paper for understanding later ML-assisted device modeling work.",
+      "keywords": [
+        "SJ-LDMOS",
+        "Variable-K dielectric",
+        "Electric-field modulation",
+        "Breakdown voltage"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/variable-k-ldmos-device-structure.png",
+          "title": "Variable-K LDMOS Structure",
+          "caption": "The structure diagram shows the location and key geometry of high-k trenches in SJ-LDMOS.",
+          "insight": "It quickly explains what the variable-K design changes relative to conventional structures."
+        },
+        {
+          "src": "assets/images/paper-figures/variable-k-ldmos-efield-mechanism.png",
+          "title": "Bulk Electric-Field Modulation Mechanism",
+          "caption": "The figure compares electric-field profiles and shows how the high-k region modulates peak fields.",
+          "insight": "This is the physical core of the paper: improving breakdown capability through field redistribution."
+        },
+        {
+          "src": "assets/images/paper-figures/variable-k-ldmos-bv-field-tradeoff.png",
+          "title": "BV and Electric-Field Trade-Off",
+          "caption": "The results summarize how structural parameters affect breakdown voltage, field distribution and device performance.",
+          "insight": "This helps readers understand the trade-off among breakdown, on-resistance and thermal behavior."
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/variable-k-ldmos-device-structure.png",
+        "title": "Variable-K LDMOS 结构",
+        "caption": "结构图展示高介电常数沟槽在 SJ-LDMOS 中的空间位置和关键几何参数。",
+        "insight": "读者可以从这张图快速理解 variable-K 设计相对传统结构改变了哪里。"
+      },
+      {
+        "src": "assets/images/paper-figures/variable-k-ldmos-efield-mechanism.png",
+        "title": "体电场调制机制",
+        "caption": "图中比较不同结构下的电场分布，展示高介电常数区域对峰值电场的调制作用。",
+        "insight": "这是论文的物理核心：通过电场再分布提升击穿能力，而不是只做经验参数扫描。"
+      },
+      {
+        "src": "assets/images/paper-figures/variable-k-ldmos-bv-field-tradeoff.png",
+        "title": "击穿电压与电场权衡",
+        "caption": "结果图表总结结构参数变化对击穿电压、电场分布和器件性能的影响。",
+        "insight": "这部分帮助读者看到结构优化如何在击穿、电阻和热特性之间寻找平衡。"
+      }
+    ]
+  }
+]

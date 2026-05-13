@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving | 孙琦 Qi Sun</title>
+  <meta name="description" content="把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。">
+  <meta property="og:image" content="../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="zh">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>孙琦 Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="菜单">菜单</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">首页</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">论文成果</a></li>
+        <li><a href="../index.html#research" data-page="research">研究方向</a></li>
+        <li><a href="../blog.html" data-page="blog">博客</a></li>
+        <li><a href="../about.html" data-page="about">关于</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../en/papers/spiking-som-radar-deinterleaving.html">EN</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="暗">暗</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">返回论文列表</a>
+      <p class="eyebrow">论文导读 · 2026 May</p>
+      <h1>Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving</h1>
+      <p class="paper-authors"><span class="highlight">Sun, Qi</span>, Yang, Shumo, Cao, Zhen, Yang, Shiqing, Hou, Biao</p>
+      <p class="paper-lead">把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。</p>
+      <div class="tags paper-tags">
+          <span class="tag">Signal deinterleaving</span>
+          <span class="tag">Spiking SOM</span>
+          <span class="tag">Unsupervised learning</span>
+          <span class="tag">Edge computing</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.1109/icassp55912.2026.11464997" class="btn btn-primary" target="_blank" rel="noopener">查看 DOI</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png" alt="脉冲 SOM 去交织框架" loading="eager">
+        </div>
+        <figcaption>
+          <span>核心图表 · 脉冲 SOM 去交织框架</span>
+          <p>框架图说明 BMU 竞争、脉冲响应和簇更新如何组成无监督雷达脉冲去交织流程。</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>3 分钟读懂</span>
+        <h2>把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>核心结论</span>
+          <p>SOM 的拓扑保持能力可以与 SNN 的事件驱动稀疏计算结合，形成低功耗无监督去交织框架。</p>
+        </div>
+        <div class="quick-read-item">
+          <span>方法概览</span>
+          <p>Spiking-SOM 用 LIF 神经元表示 SOM 节点，输入 PDW 被编码为稀疏脉冲张量，BMU 由神经元平均放电率选择；权重更新在脉冲域完成，并用 Robbins-Monro 条件讨论收敛与拓扑稳定性。</p>
+        </div>
+        <div class="quick-read-item">
+          <span>为什么重要</span>
+          <p>该方法让无监督雷达分选不再完全依赖密集浮点距离计算，更适合部署在 FPGA 或类脑硬件等边缘平台。</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>核心结论</span>
+        <p>SOM 的拓扑保持能力可以与 SNN 的事件驱动稀疏计算结合，形成低功耗无监督去交织框架。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>研究问题</span>
+        <p>复杂电磁环境下的雷达信号去交织需要在未知标签、高密度脉冲和边缘算力受限之间取得平衡，传统 SOM 又依赖连续域距离计算。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>方法概览</span>
+        <p>Spiking-SOM 用 LIF 神经元表示 SOM 节点，输入 PDW 被编码为稀疏脉冲张量，BMU 由神经元平均放电率选择；权重更新在脉冲域完成，并用 Robbins-Monro 条件讨论收敛与拓扑稳定性。</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>为什么重要</span>
+        <p>该方法让无监督雷达分选不再完全依赖密集浮点距离计算，更适合部署在 FPGA 或类脑硬件等边缘平台。</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>更多图表速览</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../assets/images/paper-figures/spiking-som-radar-deinterleaving-performance-table.png" alt="多场景性能表" loading="eager">
+        </div>
+        <figcaption>
+          <span>多场景性能表</span>
+          <p>表格对比不同雷达脉冲密度、分布和重叠条件下的去交织指标。</p>
+          <strong>关键看点是模型在无监督条件下仍能维持较好的簇划分质量。</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../assets/images/paper-figures/spiking-som-radar-deinterleaving-bmu-energy.png" alt="BMU 放电与能量分析" loading="eager">
+        </div>
+        <figcaption>
+          <span>BMU 放电与能量分析</span>
+          <p>图中通过 BMU 响应和能量分布展示不同簇在脉冲域的竞争关系。</p>
+          <strong>它解释了模型为什么可以用放电活动完成雷达脉冲序列的自组织分离。</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>技术路线</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>Spike encoding</h3>
+        <p>将 PDW 特征编码为稀疏时间脉冲张量。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>Neuron response</h3>
+        <p>LIF 节点对输入脉冲进行膜电位累积和放电。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>BMU selection</h3>
+        <p>用平均放电率选择最佳匹配单元。</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>Topology update</h3>
+        <p>在 BMU 及邻域中完成脉冲域权重更新。</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>证据与结果</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>学习范式</span>
+        <strong>Unsupervised</strong>
+        <p>不依赖人工标签完成雷达脉冲去交织。</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>理论保证</span>
+        <strong>Convergence</strong>
+        <p>BMU 放电率单调性与 Robbins-Monro 条件。</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>计算特征</span>
+        <strong>Sparse update</strong>
+        <p>计算与访存随输入稀疏度下降。</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>主要贡献</span>
+        <ul class="paper-list">
+        <li>将 SOM 的 BMU 选择和邻域更新迁移到 spike domain，减少显式浮点距离计算。</li>
+        <li>给出 BMU 放电率单调性和权重更新收敛条件，为无监督 SNN 聚类提供理论支撑。</li>
+        <li>面向 FPGA 等边缘硬件，利用事件驱动累积和稀疏更新降低计算与访存。</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>阅读提示</span>
+        <p>这篇论文适合和 SGTE-SNN 对照阅读：前者关注有监督/任务驱动编码，本文关注无监督拓扑组织。</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

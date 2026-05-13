@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning-Based Figure of Merit Model of SIPOS Modulated Drift Region for U-MOSFET | Qi Sun</title>
+  <meta name="description" content="A physics-informed FOM model for SIPOS-modulated U-MOSFET combines analytical device modeling with Gaussian process regression.">
+  <meta property="og:image" content="../../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="en">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="Menu">Menu</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">Home</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">Publications</a></li>
+        <li><a href="../index.html#research" data-page="research">Research</a></li>
+        <li><a href="../blog.html" data-page="blog">Blog</a></li>
+        <li><a href="../about.html" data-page="about">About</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../../papers/sipos-umofet-fom.html">中文</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Dark">Dark</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">Back to Publications</a>
+      <p class="eyebrow">Paper Brief · 2024 Mar</p>
+      <h1>Machine Learning-Based Figure of Merit Model of SIPOS Modulated Drift Region for U-MOSFET</h1>
+      <p class="paper-authors">Cao, Zhen, <span class="highlight">Sun, Qi</span>, Ma, Chuanfeng, Hou, Biao, Jiao, Licheng</p>
+      <p class="paper-lead">A physics-informed FOM model for SIPOS-modulated U-MOSFET combines analytical device modeling with Gaussian process regression.</p>
+      <div class="tags paper-tags">
+          <span class="tag">U-MOSFET</span>
+          <span class="tag">SIPOS</span>
+          <span class="tag">Gaussian process regression</span>
+          <span class="tag">Figure of merit</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.3390/mi15030411" class="btn btn-primary" target="_blank" rel="noopener">View DOI</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../../assets/images/paper-figures/sipos-umofet-fom-device-and-model.png" alt="SIPOS U-MOSFET Structure and Modeling Target" loading="eager">
+        </div>
+        <figcaption>
+          <span>Core Figure · SIPOS U-MOSFET Structure and Modeling Target</span>
+          <p>The figure introduces the SIPOS-modulated drift-region structure and the key device parameters.</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>Three-Minute Brief</span>
+        <h2>A physics-informed FOM model for SIPOS-modulated U-MOSFET combines analytical device modeling with Gaussian process regression.</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>Core Claim</span>
+          <p>Analytical physics and GPR can jointly model BV-RON,sp trade-offs while preserving interpretable device-parameter relationships.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Method Overview</span>
+          <p>The paper builds analytical expressions from Poisson&#x27;s equation, uses GPR to predict FOM = BV²/RON,sp and tune parameters, and validates trends with TCAD.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Why It Matters</span>
+          <p>Physics-informed ML is useful for device research because it provides both performance prediction and interpretable parameter relationships.</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>Core Claim</span>
+        <p>Analytical physics and GPR can jointly model BV-RON,sp trade-offs while preserving interpretable device-parameter relationships.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Research Problem</span>
+        <p>The BV-RON,sp trade-off in SJ U-MOSFETs is influenced by electric-field modulation, charge coupling, and structural parameters; pure analytical models struggle to balance interpretability and accuracy.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Method Overview</span>
+        <p>The paper builds analytical expressions from Poisson&#x27;s equation, uses GPR to predict FOM = BV²/RON,sp and tune parameters, and validates trends with TCAD.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Why It Matters</span>
+        <p>Physics-informed ML is useful for device research because it provides both performance prediction and interpretable parameter relationships.</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Additional Figure Highlights</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/sipos-umofet-fom-gpr-model.png" alt="GPR Prediction Model" loading="eager">
+        </div>
+        <figcaption>
+          <span>GPR Prediction Model</span>
+          <p>The diagram shows how Gaussian process regression maps structural parameters to performance metrics.</p>
+          <strong>GPR is useful in limited-sample TCAD settings because it can provide interpretable predictions and uncertainty cues.</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/sipos-umofet-fom-fom-fitting.png" alt="FOM Fitting and Comparison" loading="eager">
+        </div>
+        <figcaption>
+          <span>FOM Fitting and Comparison</span>
+          <p>The fitting plots compare predicted FOM values with simulation or calculated results.</p>
+          <strong>This evidence determines whether the model can support rapid device screening.</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Technical Route</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>Device physics</h3>
+        <p>Analyze how SIPOS pillars affect drift-region electric fields and charge coupling.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>Analytical model</h3>
+        <p>Derive FOM-related expressions from Poisson solutions.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>GPR correction</h3>
+        <p>Use Gaussian process regression for prediction and parameter optimization.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>TCAD check</h3>
+        <p>Validate BV-RON,sp trade-offs and parameter trends.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Evidence and Results</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>Target</span>
+        <strong>FOM = BV²/RON,sp</strong>
+        <p>Combines breakdown voltage and on-resistance trade-off.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Method</span>
+        <strong>Physics + GPR</strong>
+        <p>Analytical model calibrated with ML.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Validation</span>
+        <strong>TCAD</strong>
+        <p>Simulation verifies trends and parameter choices.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>Key Contributions</span>
+        <ul class="paper-list">
+        <li>Introduces SIPOS pillars for drift-region modulation in SJ U-MOSFET.</li>
+        <li>Uses GPR to calibrate analytical model parameters.</li>
+        <li>Studies drift region, oxide thickness, and electric-field modulation coefficients.</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Reading Note</span>
+        <p>Useful for readers interested in physics-informed ML: data is used to refine a physically structured model, not replace it.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
