@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment | Qi Sun</title>
+  <meta name="description" content="An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading.">
+  <meta property="og:image" content="../../assets/images/profile.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.86em%27%20x%3D%27.5em%27%20text-anchor%3D%27middle%27%20font-size%3D%2776%27%20font-family%3D%27Arial%27%3EQS%3C%2Ftext%3E%3C%2Fsvg%3E">
+</head>
+<body data-page="publications" data-lang="en">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark">QS</span>
+        <span>Qi Sun</span>
+      </a>
+      <button class="menu-toggle" aria-label="Menu">Menu</button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-page="home">Home</a></li>
+        <li><a href="../publications.html" data-page="publications" class="active">Publications</a></li>
+        <li><a href="../index.html#research" data-page="research">Research</a></li>
+        <li><a href="../blog.html" data-page="blog">Blog</a></li>
+        <li><a href="../about.html" data-page="about">About</a></li>
+        <li class="nav-utility"><a class="lang-switch" href="../../papers/hsaf-net-fruit-quality-assessment.html">中文</a></li>
+        <li class="nav-utility"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Dark">Dark</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page paper-report-page">
+    <section class="paper-hero fade-in">
+      <a class="paper-back" href="../publications.html">Back to Publications</a>
+      <p class="eyebrow">Paper Brief · 2026 Aug</p>
+      <h1>Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment</h1>
+      <p class="paper-authors">Tang, Weibin, <span class="highlight">Sun, Qi</span>, Guo, Yunfan, Cao, Zhen</p>
+      <p class="paper-lead">An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading.</p>
+      <div class="tags paper-tags">
+          <span class="tag">SNN–ANN fusion</span>
+          <span class="tag">NIR sensing</span>
+          <span class="tag">Fruit quality assessment</span>
+          <span class="tag">Heterogeneous modality attention</span>
+      </div>
+      <div class="hero-actions paper-actions">
+        <a href="https://doi.org/10.3390/electronics15163613" class="btn btn-primary" target="_blank" rel="noopener">View DOI</a>
+            <a href="https://www.mdpi.com/2079-9292/15/16/3613/pdf" class="btn btn-secondary" target="_blank" rel="noopener">PDF</a>
+      </div>
+    </section>
+
+    <section class="paper-quick-read">
+      <figure class="paper-core-figure fade-in">
+        <div class="paper-core-media">
+          <img src="../../assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png" alt="HSAF-Net Multimodal Framework" loading="eager">
+        </div>
+        <figcaption>
+          <span>Core Figure · HSAF-Net Multimodal Framework</span>
+          <p>Original Figure 1: TH-YOLOv8 external detection, LSNN internal sensing, and HMA fusion.</p>
+        </figcaption>
+      </figure>
+      <article class="paper-quick-panel fade-in">
+        <span>Three-Minute Brief</span>
+        <h2>An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading.</h2>
+        <div class="quick-read-list">
+        <div class="quick-read-item">
+          <span>Core Claim</span>
+          <p>Internal photovoltage responses and RGB appearance provide complementary evidence; modality-specific encoders and adaptive fusion improve pear assessment under controlled conditions.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Method Overview</span>
+          <p>HSAF-Net uses LSNN for internal sequence features and two-head TH-YOLOv8 for global appearance and local defects. HMA aligns heterogeneous features and combines intra-modal attention, bidirectional cross-modal interaction, and sample-wise gating.</p>
+        </div>
+        <div class="quick-read-item">
+          <span>Why It Matters</span>
+          <p>The work extends neuromorphic temporal modeling to agricultural sensing and connects internal assessment, defect localization, and edge inference in one inspection pipeline.</p>
+        </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="paper-report-grid">
+      <article class="paper-info-card fade-in">
+        <span>Core Claim</span>
+        <p>Internal photovoltage responses and RGB appearance provide complementary evidence; modality-specific encoders and adaptive fusion improve pear assessment under controlled conditions.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Research Problem</span>
+        <p>RGB appearance alone cannot establish sweetness or internal damage. Photovoltage sequences and images also require different representations, making static fusion restrictive.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Method Overview</span>
+        <p>HSAF-Net uses LSNN for internal sequence features and two-head TH-YOLOv8 for global appearance and local defects. HMA aligns heterogeneous features and combines intra-modal attention, bidirectional cross-modal interaction, and sample-wise gating.</p>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Why It Matters</span>
+        <p>The work extends neuromorphic temporal modeling to agricultural sensing and connects internal assessment, defect localization, and edge inference in one inspection pipeline.</p>
+      </article>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Additional Figure Highlights</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-visual-grid">
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/hsaf-net-fruit-quality-assessment-performance-table.png" alt="Full-System Performance" loading="eager">
+        </div>
+        <figcaption>
+          <span>Full-System Performance</span>
+          <p>Original Table 1 compares classification, detection metrics, and inference time.</p>
+          <strong>The full-system comparison reports 95.2% accuracy and 55 ms inference latency.</strong>
+        </figcaption>
+      </figure>
+      <figure class="paper-visual-card fade-in">
+        <div class="paper-visual-media">
+          <img src="../../assets/images/paper-figures/hsaf-net-fruit-quality-assessment-fusion-ablation.png" alt="Fusion Strategy Ablation" loading="eager">
+        </div>
+        <figcaption>
+          <span>Fusion Strategy Ablation</span>
+          <p>Original Table 4 compares averaging, concatenation, and HMA.</p>
+          <strong>HMA reports 95.0% accuracy versus 90.4% for averaging and 91.2% for concatenation.</strong>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Technical Route</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="paper-pipeline">
+      <div class="paper-step fade-in">
+        <span>01</span>
+        <h3>Synchronized sensing</h3>
+        <p>Acquire aligned NIR photovoltage sequences and multi-view RGB images of each pear.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>02</span>
+        <h3>LSNN + TH-YOLOv8</h3>
+        <p>Extract internal quality cues, global appearance, and local defect features.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>03</span>
+        <h3>HMA</h3>
+        <p>Align sparse temporal and dense visual features for sample-wise fusion.</p>
+      </div>
+      <div class="paper-step fade-in">
+        <span>04</span>
+        <h3>Edge grading</h3>
+        <p>Run grading and detection on the Ascend Atlas 200DK A2 platform.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section">
+      <div class="section-header fade-in">
+        <h2>Evidence and Results</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="evidence-grid">
+      <div class="evidence-card fade-in">
+        <span>Evaluation samples</span>
+        <strong>616 pear samples</strong>
+        <p>Controlled crisp-pear acquisition; cross-variety and cross-season validation remains necessary.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Overall accuracy</span>
+        <strong>95.2%</strong>
+        <p>Table 1; fusion ablation Table 4 separately reports 95.0%, retained under its own protocol.</p>
+      </div>
+      <div class="evidence-card fade-in">
+        <span>Edge inference</span>
+        <strong>55 ms / sample</strong>
+        <p>Reported single-sample latency on Ascend Atlas 200DK A2.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-two-col">
+      <article class="paper-info-card fade-in">
+        <span>Key Contributions</span>
+        <ul class="paper-list">
+        <li>Pairs temporal sensing and dense image inputs with SNN and ANN encoders.</li>
+        <li>Combines two-head defect detection with heterogeneous modality attention.</li>
+        <li>Evaluates a sensing prototype on 616 pears and reports edge inference latency.</li>
+        </ul>
+      </article>
+      <article class="paper-info-card fade-in">
+        <span>Reading Note</span>
+        <p>Start with the two branches in Figure 1, then distinguish the full-system comparison in Table 1 from the fusion ablation in Table 4. They report 95.2% and 95.0% accuracy, respectively. Table 3 energy values are theoretical estimates. Evidence is limited to controlled pear data, with broader variety and seasonal validation still needed.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="../publications.html">Publications</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:qisun@stu.xidian.edu.cn">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Qi Sun. Academic homepage and research blog.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

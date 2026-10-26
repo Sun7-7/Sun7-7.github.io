@@ -1,0 +1,139 @@
+[
+  {
+    "slug": "high-k-trench-gan-hemt",
+    "localFile": "paperpdf/APL26-AR-05248_am.pdf",
+    "sha256": "78d948666aca6bac5ca571e70c94c3a657db578ef9cd78c34f0f75933da7d614",
+    "verifiedOn": "2026-10-26",
+    "metadataSources": [
+      "https://doi.org/10.1063/5.0345413",
+      "https://api.crossref.org/works/10.1063/5.0345413"
+    ],
+    "contentSource": "User-supplied PDF",
+    "figures": [
+      {
+        "page": 2,
+        "clip": [
+          50,
+          49,
+          565,
+          180
+        ],
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
+        "sourceLabel": "Figure 1"
+      },
+      {
+        "page": 2,
+        "clip": [
+          50,
+          242,
+          302,
+          346
+        ],
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-field-redistribution.png",
+        "sourceLabel": "Figure 2"
+      },
+      {
+        "page": 3,
+        "clip": [
+          312,
+          309,
+          565,
+          413
+        ],
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png",
+        "sourceLabel": "Figure 5"
+      }
+    ]
+  },
+  {
+    "slug": "hsaf-net-fruit-quality-assessment",
+    "localFile": "paperpdf/electronics-15-03613-v2.pdf",
+    "sha256": "60a1d1cbdf9800ec6293d8fcf2db4e6ad49b0b32bec8857fd9346955c70681f0",
+    "verifiedOn": "2026-10-26",
+    "metadataSources": [
+      "https://www.mdpi.com/2079-9292/15/16/3613"
+    ],
+    "contentSource": "User-supplied PDF",
+    "figures": [
+      {
+        "page": 5,
+        "clip": [
+          39,
+          508,
+          563,
+          682
+        ],
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png",
+        "sourceLabel": "Figure 1"
+      },
+      {
+        "page": 14,
+        "clip": [
+          36,
+          153,
+          563,
+          305
+        ],
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-performance-table.png",
+        "sourceLabel": "Table 1"
+      },
+      {
+        "page": 17,
+        "clip": [
+          162,
+          559,
+          563,
+          644
+        ],
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-fusion-ablation.png",
+        "sourceLabel": "Table 4"
+      }
+    ]
+  },
+  {
+    "slug": "mte-ste-continuous-temporal-signal-classification",
+    "localFile": "paperpdf/icml2026.pdf",
+    "sha256": "2c1e451f94c58de70d5e778157041fe69394ba7910333a98143341c26c5efd31",
+    "verifiedOn": "2026-10-26",
+    "metadataSources": [
+      "https://openreview.net/pdf?id=g0wATpD4Ic",
+      "https://proceedings.mlr.press/v306/sun26k.html"
+    ],
+    "contentSource": "User-supplied PDF",
+    "figures": [
+      {
+        "page": 4,
+        "clip": [
+          53,
+          65,
+          545,
+          242
+        ],
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
+        "sourceLabel": "Figure 2"
+      },
+      {
+        "page": 7,
+        "clip": [
+          52,
+          63,
+          546,
+          373
+        ],
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-main-results.png",
+        "sourceLabel": "Table 1"
+      },
+      {
+        "page": 8,
+        "clip": [
+          52,
+          63,
+          294,
+          195
+        ],
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-component-ablation.png",
+        "sourceLabel": "Table 2"
+      }
+    ]
+  }
+]

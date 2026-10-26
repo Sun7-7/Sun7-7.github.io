@@ -134,11 +134,16 @@ def load_publication_details() -> list[dict]:
     return details if isinstance(details, list) else []
 
 
+def publication_key(publication: dict) -> str:
+    """Match papers by DOI, or by a stable ID for proceedings without a DOI."""
+    return str(publication.get("doi") or publication.get("id") or "").lower()
+
+
 def detail_lookup(details: list[dict], lang: str) -> dict[str, dict]:
     lookup = {}
     for item in details:
-        if item.get("doi") and item.get("slug"):
-            lookup[str(item["doi"]).lower()] = localized_detail(item, lang)
+        if publication_key(item) and item.get("slug"):
+            lookup[publication_key(item)] = localized_detail(item, lang)
     return lookup
 
 
@@ -266,7 +271,22 @@ def render_page(
 
 
 def paper_detail_for(pub: dict, details_by_doi: dict[str, dict]) -> dict | None:
-    return details_by_doi.get(str(pub.get("doi", "")).lower())
+    return details_by_doi.get(publication_key(pub))
+
+
+def publication_links(pub: dict, lang: str, *, buttons: bool = False, full_doi: bool = False, primary_label: str | None = None) -> str:
+    links = []
+    if pub.get("url"):
+        label = primary_label or pub.get("linkLabel") or ("DOI" if pub.get("doi") else ("论文链接" if lang == "zh" else "Paper"))
+        if full_doi and pub.get("doi"):
+            label = f"DOI: {pub['doi']}"
+        links.append({"url": pub["url"], "label": label})
+    links.extend(pub.get("links", []))
+    rendered = []
+    for index, link in enumerate(links):
+        css = f' class="btn btn-{"primary" if index == 0 else "secondary"}"' if buttons else ""
+        rendered.append(f'<a href="{esc(link["url"])}"{css} target="_blank" rel="noopener">{esc(link["label"])}</a>')
+    return "\n            ".join(rendered)
 
 
 def paper_page_href(detail: dict) -> str:
@@ -304,8 +324,8 @@ def render_publication(
     labels = LABELS[lang]
     if detail:
         links.append(f'<a href="{esc(prefix_local(paper_page_href(detail), paper_link_prefix))}">{esc(labels["details"])}</a>')
-    if pub.get("url"):
-        links.append(f'<a href="{esc(pub["url"])}" target="_blank" rel="noopener">DOI: {esc(pub.get("doi", ""))}</a>')
+    if external_links := publication_links(pub, lang, full_doi=True):
+        links.append(external_links)
     links_html = "\n            ".join(links)
     return f"""        <article class="{class_name} fade-in">
           <div class="pub-topline">
@@ -551,7 +571,7 @@ def render_featured_publications(
           </div>
           <div class="pub-links">
             <a href="{esc(prefix_local(paper_page_href(detail), paper_link_prefix))}">{esc(labels["details"])}</a>
-            {f'<a href="{esc(pub["url"])}" target="_blank" rel="noopener">DOI</a>' if pub.get("url") else ""}
+            {publication_links(pub, lang)}
           </div>
         </div>
       </article>"""
@@ -954,12 +974,9 @@ def build_publication_detail(
         for author in pub.get("authors", [])
     )
     month = f" {esc(pub['month'])}" if pub.get("month") else ""
-    doi_link = ""
-    if pub.get("url"):
-        doi_link = (
-            f'        <a href="{esc(pub["url"])}" class="btn btn-primary" '
-            f'target="_blank" rel="noopener">{esc(page.get("doiLabel", "DOI"))}</a>'
-        )
+    doi_link = "        " + publication_links(
+        pub, lang, buttons=True, primary_label=page.get("doiLabel", "DOI") if pub.get("doi") else None
+    )
     highlights = "\n".join(f"        <li>{esc(item)}</li>" for item in detail.get("highlights", []))
     visual_section = ""
     visual_cards = render_visuals(detail, asset_prefix, start_index=1)

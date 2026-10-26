@@ -1,5 +1,455 @@
 [
   {
+    "doi": "10.1063/5.0345413",
+    "slug": "high-k-trench-gan-hemt",
+    "oneLine": "在 GaN-on-Si HEMT 漏侧引入 PZT 高介电常数沟槽，通过介电边界调控缓解电场拥挤，提高代表器件的耐压并改善动态导通电阻表现。",
+    "coreClaim": "漏侧介电边界工程能够重新分配高场区；TCAD 与同片器件实验共同支持耐压提升和动态电阻退化减轻。",
+    "problem": "GaN-on-Si HEMT 在漏侧存在电场拥挤，限制击穿电压，并可能加剧场辅助俘获与动态导通电阻退化。",
+    "method": "在漏侧制作 PZT 填充沟槽，以位移场边界条件解释电场调控。二维 TCAD 将相对介电常数从 3.9 扫至 500，再结合共工艺常规器件与沟槽器件的静态及动态电学测量检验设计。",
+    "whyItMatters": "该工作扩展了主页中的功率器件研究：从器件性能建模进入介电边界设计、实物制备与高压动态测量，连接物理解释和器件验证。",
+    "pipeline": [
+      {
+        "label": "Drain-side trench",
+        "text": "在 GaN-on-Si AlGaN/GaN HEMT 漏侧制备 PZT 填充沟槽。"
+      },
+      {
+        "label": "Boundary analysis",
+        "text": "根据位移场边界条件分析法向与切向电场分布。"
+      },
+      {
+        "label": "TCAD sweep",
+        "text": "扫描介电常数并考察二维电场与电势分布。"
+      },
+      {
+        "label": "Device measurements",
+        "text": "比较同片器件的击穿、静态导通与高压应力后的动态电阻。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "代表器件击穿电压",
+        "value": "1405 V",
+        "note": "LGD=9 μm；同片常规器件为 783 V，约提升 79%。"
+      },
+      {
+        "metric": "比导通电阻",
+        "value": "1.47 mΩ·cm²",
+        "note": "原文图 5(a)；与常规器件的 1.43 mΩ·cm² 接近。"
+      },
+      {
+        "metric": "动态 / 静态电阻",
+        "value": "1.6× / 2.5×",
+        "note": "分别对应 900 / 1200 V 关态应力，在栅极切换后 3 μs 提取。"
+      }
+    ],
+    "highlights": [
+      "将漏侧 PZT 沟槽集成至横向 GaN-on-Si HEMT 并开展电学测量。",
+      "用介电常数扫描和二维场分布分析介电边界调控作用。",
+      "同时报告耐压、比导通电阻及高压应力后的动态电阻变化。"
+    ],
+    "discussion": "先用图 1 定位沟槽，再看图 2 的介电常数扫描与图 5 的动态测量。1405 V 来自代表性同片器件，原文未提供器件间统计；TCAD 使用有效静态介电常数，未独立验证铁电极化收益，不宜把全部改善归因于铁电开关。",
+    "keywords": [
+      "GaN-on-Si HEMT",
+      "High-k dielectric trench",
+      "Electric-field redistribution",
+      "Dynamic ON-resistance"
+    ],
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
+        "title": "沟槽结构与实物显微图",
+        "caption": "原文图 1：常规与 PZT 沟槽器件截面及制备后的显微表征。",
+        "insight": "介电结构直接置于漏侧高场区域，改变局部电场边界。"
+      },
+      {
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-field-redistribution.png",
+        "title": "介电常数扫描与二维电场",
+        "caption": "原文图 2：终端电压指标随介电常数变化，以及各器件临近终端电压时的场分布。",
+        "insight": "电压指标随介电常数呈非单调变化；不同终端偏压下的场图不能当作同偏压直接比较。"
+      },
+      {
+        "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png",
+        "title": "静态与动态导通表现",
+        "caption": "原文图 5：输出特性、比导通电阻及应力电压对应的动态 / 静态电阻比。",
+        "insight": "在保持相近静态导通能力的同时评估高压应力后的动态退化。"
+      }
+    ],
+    "en": {
+      "oneLine": "A drain-side PZT high-k trench redistributes electric fields in GaN-on-Si HEMTs, improving voltage handling and dynamic ON-resistance in representative devices.",
+      "coreClaim": "Drain-side dielectric-boundary engineering reshapes the high-field region; TCAD and co-fabricated device measurements support enhanced breakdown and reduced dynamic resistance degradation.",
+      "problem": "Drain-side field crowding limits breakdown in GaN-on-Si HEMTs and can aggravate field-assisted trapping and dynamic ON-resistance degradation.",
+      "method": "A PZT-filled trench is fabricated near the drain. Displacement-field boundary conditions guide the interpretation, while 2D TCAD sweeps relative permittivity from 3.9 to 500. Static and dynamic measurements compare co-fabricated conventional and trench devices.",
+      "whyItMatters": "The work extends the device research line from performance modeling to dielectric-boundary design, fabrication, and high-voltage dynamic measurements.",
+      "pipeline": [
+        {
+          "label": "Drain-side trench",
+          "text": "Fabricate a PZT-filled trench in a GaN-on-Si AlGaN/GaN HEMT."
+        },
+        {
+          "label": "Boundary analysis",
+          "text": "Analyze normal and tangential fields through displacement-field boundary conditions."
+        },
+        {
+          "label": "TCAD sweep",
+          "text": "Sweep permittivity and inspect 2D electric-field and potential distributions."
+        },
+        {
+          "label": "Device measurements",
+          "text": "Compare breakdown, static conduction, and dynamic resistance after high-voltage stress."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Representative breakdown",
+          "value": "1405 V",
+          "note": "LGD=9 μm; the co-fabricated conventional device reaches 783 V, corresponding to a 79% breakdown increase."
+        },
+        {
+          "metric": "Specific ON-resistance",
+          "value": "1.47 mΩ·cm²",
+          "note": "Figure 5(a), close to the conventional device at 1.43 mΩ·cm²."
+        },
+        {
+          "metric": "Dynamic / static resistance",
+          "value": "1.6× / 2.5×",
+          "note": "After 900 / 1200 V off-state stress, respectively; extracted 3 μs after the gate transition."
+        }
+      ],
+      "highlights": [
+        "Integrates a drain-side PZT trench and characterizes fabricated lateral GaN-on-Si HEMTs.",
+        "Analyzes dielectric-boundary field management with a permittivity sweep and 2D TCAD.",
+        "Reports breakdown, specific ON-resistance, and dynamic resistance under high-voltage stress."
+      ],
+      "discussion": "Locate the trench in Figure 1, then read the permittivity sweep in Figure 2 and dynamic measurements in Figure 5. The 1405 V result is from representative co-fabricated devices without device-to-device statistics. TCAD uses an effective static permittivity; a separate ferroelectric contribution was not independently established.",
+      "keywords": [
+        "GaN-on-Si HEMT",
+        "High-k dielectric trench",
+        "Electric-field redistribution",
+        "Dynamic ON-resistance"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
+          "title": "Device Structure and Microscopy",
+          "caption": "Original Figure 1: conventional and PZT-trench cross sections with microscopy of the fabricated structure.",
+          "insight": "The drain-side dielectric structure changes the local high-field boundary."
+        },
+        {
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-field-redistribution.png",
+          "title": "Permittivity Sweep and Electric Fields",
+          "caption": "Original Figure 2: terminal-voltage metric versus permittivity and fields near each device’s terminal voltage.",
+          "insight": "The response is nonmonotonic; different terminal biases do not constitute a same-bias field comparison."
+        },
+        {
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png",
+          "title": "Static and Dynamic Conduction",
+          "caption": "Original Figure 5: output characteristics, specific ON-resistance, and dynamic-to-static resistance ratios.",
+          "insight": "Assess high-voltage stress degradation alongside comparable static conduction."
+        }
+      ]
+    }
+  },
+  {
+    "doi": "10.3390/electronics15163613",
+    "slug": "hsaf-net-fruit-quality-assessment",
+    "oneLine": "让 SNN 读取近红外光电压序列、ANN 检测表面缺陷，再用异构模态注意力融合内外部品质证据，完成梨果无损分级。",
+    "coreClaim": "内部光电压响应与外部 RGB 外观具有互补性，模态专用编码器与动态注意力融合可提高受控条件下的梨果品质评估表现。",
+    "problem": "单靠 RGB 外观难以判断糖度与内部损伤；近红外序列和图像的表示形式又不同，固定拼接或平均难以适应样本间的模态差异。",
+    "method": "HSAF-Net 以 LSNN 提取近红外光电压序列的内部特征，以双头 TH-YOLOv8 分别处理整体外观与局部缺陷。HMA 先对齐异构特征，再结合模态内注意力、双向跨模态交互和样本级门控完成分级。",
+    "whyItMatters": "将类脑时间序列建模扩展到农业传感场景，并把内部品质感知、表面缺陷定位和边缘端推理连接成完整检测流程。",
+    "pipeline": [
+      {
+        "label": "Synchronized sensing",
+        "text": "同步采集同一梨果的近红外光电压序列与多视角 RGB 图像。"
+      },
+      {
+        "label": "LSNN + TH-YOLOv8",
+        "text": "分别提取内部品质信息与整体外观、局部缺陷特征。"
+      },
+      {
+        "label": "HMA",
+        "text": "对齐稀疏时间特征与稠密视觉特征，按样本动态融合。"
+      },
+      {
+        "label": "Edge grading",
+        "text": "在 Ascend Atlas 200DK A2 上完成品质分级与检测输出。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "实验对象",
+        "value": "616 pear samples",
+        "note": "受控采集条件下的脆梨样本，跨品种与跨季节泛化仍待验证。"
+      },
+      {
+        "metric": "总体分类精度",
+        "value": "95.2%",
+        "note": "原文表 1；融合策略消融表 4 另报 95.0%，二者按各自实验口径保留。"
+      },
+      {
+        "metric": "边缘端推理",
+        "value": "55 ms / sample",
+        "note": "原文报告 Atlas 200DK A2 平台单样本推理延迟。"
+      }
+    ],
+    "highlights": [
+      "以 SNN 和 ANN 分别匹配时间序列传感与稠密图像的表示特点。",
+      "设计双头外观检测与 HMA 融合，连接内部品质与局部缺陷证据。",
+      "提供原型采集系统、616 个梨果样本实验及边缘端推理验证。"
+    ],
+    "discussion": "先看图 1 的双分支，再比较表 1 的完整系统与表 4 的融合策略消融。表 1 的准确率为 95.2%，表 4 的 HMA 准确率为 95.0%；表 3 的能耗属于理论估算。当前证据限于受控梨果数据，不能直接推及所有水果或跨季节部署。",
+    "keywords": [
+      "SNN–ANN fusion",
+      "NIR sensing",
+      "Fruit quality assessment",
+      "Heterogeneous modality attention"
+    ],
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png",
+        "title": "HSAF-Net 双模态框架",
+        "caption": "原文图 1：TH-YOLOv8 外部检测、LSNN 内部感知与 HMA 融合。",
+        "insight": "保留模态各自的编码优势，再学习内外部品质证据的互补关系。"
+      },
+      {
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-performance-table.png",
+        "title": "完整系统性能对比",
+        "caption": "原文表 1：对比检测方法的准确率、检测指标与推理时间。",
+        "insight": "95.2% 分类准确率与 55 ms 推理延迟对应完整系统的报告结果。"
+      },
+      {
+        "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-fusion-ablation.png",
+        "title": "融合策略消融",
+        "caption": "原文表 4：比较平均融合、特征拼接和 HMA。",
+        "insight": "该消融中 HMA 准确率为 95.0%，高于平均融合的 90.4% 和拼接的 91.2%。"
+      }
+    ],
+    "en": {
+      "oneLine": "An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading.",
+      "coreClaim": "Internal photovoltage responses and RGB appearance provide complementary evidence; modality-specific encoders and adaptive fusion improve pear assessment under controlled conditions.",
+      "problem": "RGB appearance alone cannot establish sweetness or internal damage. Photovoltage sequences and images also require different representations, making static fusion restrictive.",
+      "method": "HSAF-Net uses LSNN for internal sequence features and two-head TH-YOLOv8 for global appearance and local defects. HMA aligns heterogeneous features and combines intra-modal attention, bidirectional cross-modal interaction, and sample-wise gating.",
+      "whyItMatters": "The work extends neuromorphic temporal modeling to agricultural sensing and connects internal assessment, defect localization, and edge inference in one inspection pipeline.",
+      "pipeline": [
+        {
+          "label": "Synchronized sensing",
+          "text": "Acquire aligned NIR photovoltage sequences and multi-view RGB images of each pear."
+        },
+        {
+          "label": "LSNN + TH-YOLOv8",
+          "text": "Extract internal quality cues, global appearance, and local defect features."
+        },
+        {
+          "label": "HMA",
+          "text": "Align sparse temporal and dense visual features for sample-wise fusion."
+        },
+        {
+          "label": "Edge grading",
+          "text": "Run grading and detection on the Ascend Atlas 200DK A2 platform."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Evaluation samples",
+          "value": "616 pear samples",
+          "note": "Controlled crisp-pear acquisition; cross-variety and cross-season validation remains necessary."
+        },
+        {
+          "metric": "Overall accuracy",
+          "value": "95.2%",
+          "note": "Table 1; fusion ablation Table 4 separately reports 95.0%, retained under its own protocol."
+        },
+        {
+          "metric": "Edge inference",
+          "value": "55 ms / sample",
+          "note": "Reported single-sample latency on Ascend Atlas 200DK A2."
+        }
+      ],
+      "highlights": [
+        "Pairs temporal sensing and dense image inputs with SNN and ANN encoders.",
+        "Combines two-head defect detection with heterogeneous modality attention.",
+        "Evaluates a sensing prototype on 616 pears and reports edge inference latency."
+      ],
+      "discussion": "Start with the two branches in Figure 1, then distinguish the full-system comparison in Table 1 from the fusion ablation in Table 4. They report 95.2% and 95.0% accuracy, respectively. Table 3 energy values are theoretical estimates. Evidence is limited to controlled pear data, with broader variety and seasonal validation still needed.",
+      "keywords": [
+        "SNN–ANN fusion",
+        "NIR sensing",
+        "Fruit quality assessment",
+        "Heterogeneous modality attention"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png",
+          "title": "HSAF-Net Multimodal Framework",
+          "caption": "Original Figure 1: TH-YOLOv8 external detection, LSNN internal sensing, and HMA fusion.",
+          "insight": "Preserve modality-specific encoders and learn complementary internal and external evidence."
+        },
+        {
+          "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-performance-table.png",
+          "title": "Full-System Performance",
+          "caption": "Original Table 1 compares classification, detection metrics, and inference time.",
+          "insight": "The full-system comparison reports 95.2% accuracy and 55 ms inference latency."
+        },
+        {
+          "src": "assets/images/paper-figures/hsaf-net-fruit-quality-assessment-fusion-ablation.png",
+          "title": "Fusion Strategy Ablation",
+          "caption": "Original Table 4 compares averaging, concatenation, and HMA.",
+          "insight": "HMA reports 95.0% accuracy versus 90.4% for averaging and 91.2% for concatenation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "openreview:g0wATpD4Ic",
+    "slug": "mte-ste-continuous-temporal-signal-classification",
+    "oneLine": "以多尺度时间编码补充短时间窗中的有效信息，再用稀疏变换编码压缩冗余放电，改善连续一维信号分类的精度与脉冲活动率。",
+    "coreClaim": "在骨干和训练预算匹配的条件下，连续一维信号上的 ANN–SNN 平均精度差距较小；MTE 与 STE 的互补编码可进一步改善平均表现。",
+    "problem": "短时间窗 SNN 需要在有限推理步数中保留时间证据，同时控制冗余放电。直接重复输入不能充分利用连续信号自身的多尺度时间结构。",
+    "method": "MTE 将输入组织为多尺度时间流，并配置与尺度对应的多比特整数脉冲；STE 以分析变换、训练期重建和稀疏正则学习脉冲编码。推理时移除重建分支，仅保留前向编码路径。",
+    "whyItMatters": "该工作把短时间窗下的输入信息密度与内部放电冗余联系起来，为调制识别、故障诊断和生理信号分类提供可插入多类骨干的编码方案。",
+    "pipeline": [
+      {
+        "label": "Continuous 1D input",
+        "text": "接收调制、振动、生理或语音等连续一维信号片段。"
+      },
+      {
+        "label": "MTE",
+        "text": "构造多尺度时间流，通过尺度对齐的整数脉冲提高每步信息密度。"
+      },
+      {
+        "label": "STE",
+        "text": "以变换编码与稀疏正则控制内部表示和脉冲活动。"
+      },
+      {
+        "label": "Short-horizon readout",
+        "text": "默认 T=4，聚合多步输出；重建分支只参与训练。"
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "评估范围",
+        "value": "10 datasets · T=4",
+        "note": "覆盖六类任务；在匹配骨干与训练预算的协议下比较。"
+      },
+      {
+        "metric": "平均分类精度",
+        "value": "73.8% → 77.5%",
+        "note": "原文表 1：跨骨干平均；匹配 ANN 的平均精度为 76.8%。"
+      },
+      {
+        "metric": "平均脉冲活动率",
+        "value": "0.229 → 0.175",
+        "note": "原文表 1 的 Rating；属于算法效率代理，不是硬件实测功耗。"
+      }
+    ],
+    "highlights": [
+      "从连续信号的时间证据积累出发分析短时间窗 ANN–SNN 差距。",
+      "以 MTE 提高输入证据密度，以 STE 控制变换编码中的冗余活动。",
+      "在十个数据集和多类骨干上报告匹配实验、组件消融及效率估算。"
+    ],
+    "discussion": "先读图 2 的编码路径，再对照表 1 的跨骨干平均与逐任务差异。77.5% 是总体平均结果，并不意味着每个数据集都超过 ANN。表 4 的 SOPs 与换算能耗是算法级估算；完整方案在该表中仍可能高于基础 SNN。",
+    "keywords": [
+      "Spiking neural network",
+      "Continuous 1D signals",
+      "Multi-scale temporal encoding",
+      "Sparse transform coding"
+    ],
+    "visuals": [
+      {
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
+        "title": "MTE×STE 编码框架",
+        "caption": "原文图 2：从连续信号、多尺度输入流到可插拔 STE 和分类读出。",
+        "insight": "先增加短时间窗中的有效证据，再压缩内部冗余放电。"
+      },
+      {
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-main-results.png",
+        "title": "十个数据集的匹配实验",
+        "caption": "原文表 1：同时列出 ANN、基础 SNN 与 MTE×STE 的 ACC / Rating。",
+        "insight": "总体平均精度提高、活动率降低，同时保留逐骨干与逐任务差异。"
+      },
+      {
+        "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-component-ablation.png",
+        "title": "组件消融",
+        "caption": "原文表 2：比较 SLSTM 上的 ANN、SNN、STE、MTE 与组合方案。",
+        "insight": "MTE 增加时间证据也可能增加活动，STE 的作用需结合编码开销一起判断。"
+      }
+    ],
+    "en": {
+      "oneLine": "Multi-scale temporal encoding enriches short-horizon evidence, while sparse transform encoding controls redundant firing for continuous 1D signal classification.",
+      "coreClaim": "With matched backbones and training budgets, the mean ANN–SNN accuracy gap is modest on continuous 1D signals; complementary MTE and STE encoding further improves average performance.",
+      "problem": "Short-horizon SNNs must retain temporal evidence within few inference steps while controlling redundant firing. Repeated inputs underuse the multi-scale structure of continuous signals.",
+      "method": "MTE constructs multi-scale streams with scale-aligned integer spikes. STE learns spike codes through an analysis transform, training-only reconstruction, and sparsity regularization. Reconstruction branches are removed at inference.",
+      "whyItMatters": "The framework connects input information density with internal firing redundancy and can be inserted into multiple backbone families for modulation, fault diagnosis, and physiological signal tasks.",
+      "pipeline": [
+        {
+          "label": "Continuous 1D input",
+          "text": "Receive segments of modulation, vibration, physiological, or speech signals."
+        },
+        {
+          "label": "MTE",
+          "text": "Build multi-scale streams with scale-aligned integer spikes."
+        },
+        {
+          "label": "STE",
+          "text": "Control internal representations and spike activity through sparse transform coding."
+        },
+        {
+          "label": "Short-horizon readout",
+          "text": "Aggregate outputs at default T=4; reconstruction is used only in training."
+        }
+      ],
+      "evidence": [
+        {
+          "metric": "Evaluation",
+          "value": "10 datasets · T=4",
+          "note": "Six task domains under a matched-backbone, matched-budget protocol."
+        },
+        {
+          "metric": "Mean accuracy",
+          "value": "73.8% → 77.5%",
+          "note": "Table 1, averaged across backbones; matched ANN mean: 76.8%."
+        },
+        {
+          "metric": "Mean spike activity",
+          "value": "0.229 → 0.175",
+          "note": "Table 1 Rating: an algorithm-level efficiency proxy, not measured chip power."
+        }
+      ],
+      "highlights": [
+        "Analyzes short-horizon ANN–SNN differences through temporal evidence accumulation.",
+        "Combines denser multi-scale input evidence with sparsity-regularized transform codes.",
+        "Reports matched comparisons, component ablations, and efficiency estimates across ten datasets."
+      ],
+      "discussion": "Read Figure 2 before comparing backbone averages and task-specific outcomes in Table 1. The 77.5% result is an aggregate, not superiority over ANNs on every dataset. SOPs and converted energy in Table 4 are algorithm-level estimates; the full method can still cost more than the basic SNN in that table.",
+      "keywords": [
+        "Spiking neural network",
+        "Continuous 1D signals",
+        "Multi-scale temporal encoding",
+        "Sparse transform coding"
+      ],
+      "visuals": [
+        {
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
+          "title": "MTE×STE Encoding Framework",
+          "caption": "Original Figure 2: continuous signals, multi-scale streams, plug-in STE, and classification readout.",
+          "insight": "Enrich useful short-horizon evidence before compressing redundant internal firing."
+        },
+        {
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-main-results.png",
+          "title": "Matched Comparisons on Ten Datasets",
+          "caption": "Original Table 1 reports ACC / Rating for ANN, baseline SNN, and MTE×STE.",
+          "insight": "Mean accuracy improves and activity falls, with visible task and backbone variation."
+        },
+        {
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-component-ablation.png",
+          "title": "Component Ablation",
+          "caption": "Original Table 2 compares ANN, SNN, STE, MTE, and the combined method on SLSTM.",
+          "insight": "MTE can increase activity; assess STE together with transform overhead."
+        }
+      ]
+    }
+  },
+  {
     "slug": "sgte-snn-radar-emitter-denoising-recognition",
     "doi": "10.1109/icassp55912.2026.11464155",
     "oneLine": "将雷达脉冲与参考样本的相似性转化为结构化脉冲时序输入，在噪声干扰下同时服务去噪与辐射源识别。",

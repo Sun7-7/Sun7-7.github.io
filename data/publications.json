@@ -1,5 +1,85 @@
 [
   {
+    "title": "Electric-field redistribution via high-k dielectric trench in GaN-on-Si AlGaN/GaN HEMTs",
+    "authors": [
+      "Cao, Zhen",
+      "Hou, Zhiwei",
+      "Sun, Qi",
+      "Yu, Guohao",
+      "Zhang, Bingliang",
+      "Hou, Biao",
+      "Jiao, Licheng",
+      "Yang, Yintang"
+    ],
+    "year": 2026,
+    "month": "Oct",
+    "type": "article",
+    "venue": "Applied Physics Letters",
+    "publisher": "AIP Publishing",
+    "volume": "129",
+    "issue": "17",
+    "pages": "173502",
+    "doi": "10.1063/5.0345413",
+    "url": "https://doi.org/10.1063/5.0345413",
+    "highlightAuthor": "Sun, Qi"
+  },
+  {
+    "title": "Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment",
+    "authors": [
+      "Tang, Weibin",
+      "Sun, Qi",
+      "Guo, Yunfan",
+      "Cao, Zhen"
+    ],
+    "year": 2026,
+    "month": "Aug",
+    "type": "article",
+    "venue": "Electronics",
+    "publisher": "MDPI AG",
+    "volume": "15",
+    "issue": "16",
+    "pages": "3613",
+    "doi": "10.3390/electronics15163613",
+    "url": "https://doi.org/10.3390/electronics15163613",
+    "highlightAuthor": "Sun, Qi",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "https://www.mdpi.com/2079-9292/15/16/3613/pdf"
+      }
+    ]
+  },
+  {
+    "id": "openreview:g0wATpD4Ic",
+    "title": "Narrowing the ANN–SNN Gap for Continuous 1D Temporal Signal Classification with Multi-Scale Temporal Encoding and Sparsity-Regularized Transform Encoding",
+    "authors": [
+      "Sun, Qi",
+      "Huang, Yulei",
+      "Cao, Zhen",
+      "Hou, Biao"
+    ],
+    "year": 2026,
+    "month": "Jul",
+    "type": "inproceedings",
+    "venue": "Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)",
+    "publisher": "PMLR",
+    "volume": "306",
+    "pages": "116587-116606",
+    "url": "https://openreview.net/pdf?id=g0wATpD4Ic",
+    "linkLabel": "OpenReview PDF",
+    "highlightAuthor": "Sun, Qi",
+    "links": [
+      {
+        "label": "PMLR",
+        "url": "https://proceedings.mlr.press/v306/sun26k.html"
+      },
+      {
+        "label": "Code",
+        "url": "https://github.com/Sun7-7/Signal_Code_SNN"
+      }
+    ]
+  },
+  {
     "title": "SGTE-SNN: Similarity-Guided Temporal Encoding for Radar Emitter Denoising and Recognition",
     "authors": ["Sun, Qi", "Wang, Xiaoning", "Cao, Zhen", "Yang, Shiqing", "Hou, Biao"],
     "year": 2026,

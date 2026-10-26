@@ -74,7 +74,7 @@
         "label": "Peer-reviewed papers"
       },
       {
-        "value": "AAAI · ICASSP · IEEE",
+        "value": "ICML · AAAI · ICASSP · APL",
         "label": "Recent venues"
       },
       {
@@ -206,12 +206,12 @@
         {
           "label": "主线二",
           "title": "智能信号处理应用",
-          "text": "将类脑模型用于雷达脉冲序列、遥感图像等任务，关注噪声、密集脉冲和低功耗约束。"
+          "text": "将类脑模型用于连续一维信号、雷达脉冲序列、遥感图像与多模态品质感知，关注时间结构、噪声和边缘推理约束。"
         },
         {
           "label": "主线三",
           "title": "半导体器件智能建模",
-          "text": "用 TCAD 数据、物理先验和机器学习代理模型优化 LDMOS、U-MOSFET 等功率器件。"
+          "text": "结合 TCAD、物理先验与机器学习研究功率器件建模，并通过 GaN HEMT 沟槽设计与电学测量验证电场调控。"
         }
       ]
     },
@@ -235,7 +235,7 @@
     },
     {
       "title": "类脑计算的信号处理应用",
-      "summary": "将事件驱动表示与相似性学习用于雷达脉冲分选、去噪、辐射源识别以及遥感图像分类，验证类脑模型在真实信号任务中的价值。",
+      "summary": "从连续一维信号的多尺度时间编码出发，将类脑模型用于雷达分选、遥感分类与近红外–RGB 果品品质感知，研究信号结构与编码机制之间的联系。",
       "tags": [
         "Radar",
         "Remote Sensing",
@@ -245,7 +245,7 @@
     },
     {
       "title": "半导体器件智能建模",
-      "summary": "结合 TCAD、机器学习代理模型和器件物理，面向 LDMOS、U-MOSFET 等功率器件开展性能预测与结构优化。",
+      "summary": "结合 TCAD、机器学习代理模型和器件物理，研究 LDMOS、U-MOSFET 的预测优化，以及 GaN HEMT 高介电常数沟槽的电场调控与实验验证。",
       "tags": [
         "TCAD",
         "LDMOS",
@@ -260,7 +260,7 @@
       "description": "孙琦的论文成果列表，涵盖类脑计算、智能信号处理应用与半导体器件智能建模等方向。",
       "eyebrow": "Publications",
       "heading": "论文成果",
-      "intro": "按时间倒序整理已发表论文。每篇论文提供汇报式导读与 DOI 链接。"
+      "intro": "按时间倒序整理已发表论文。每篇论文提供汇报式导读与 DOI 或官方论文链接。"
     },
     "blog": {
       "title": "研究博客 | 孙琦 Qi Sun",
@@ -312,8 +312,8 @@
       {
         "title": "成果谱系",
         "paragraphs": [
-          "当前主页收录 {{publication_count}} 篇论文，覆盖 AAAI、ICASSP、IEEE Signal Processing Letters、Neurocomputing、IEEE Transactions on Electron Devices 与 Micromachines 等会议和期刊。",
-          "这些成果分别落在三条主线中：SNN 训练与类脑机制、类脑模型在雷达/遥感信号任务中的应用，以及机器学习辅助的器件建模与优化。"
+          "当前主页收录 {{publication_count}} 篇论文，覆盖 ICML、AAAI、ICASSP、Applied Physics Letters、Electronics、IEEE Signal Processing Letters、Neurocomputing、IEEE Transactions on Electron Devices 与 Micromachines 等会议和期刊。",
+          "这些成果分别落在三条主线中：SNN 训练与时间编码机制，类脑模型在雷达、遥感及多模态品质感知中的应用，以及半导体器件建模、结构设计与物理验证。"
         ]
       },
       {
@@ -557,12 +557,12 @@
             {
               "label": "Line 2",
               "title": "Signal-processing applications",
-              "text": "Radar pulse sequences and remote-sensing images serve as realistic testbeds for robust event-driven models."
+              "text": "Apply neuromorphic models to continuous 1D signals, radar pulses, remote-sensing images, and multimodal quality sensing under temporal, noise, and edge-inference constraints."
             },
             {
               "label": "Line 3",
               "title": "Device-aware modeling",
-              "text": "TCAD data, physical priors, and ML surrogates support optimization of LDMOS, U-MOSFET, and related devices."
+              "text": "Combine TCAD, physical priors, and ML for power-device modeling, with GaN HEMT trench design and electrical measurements for field-management validation."
             }
           ]
         },
@@ -578,7 +578,7 @@
             "label": "Peer-reviewed papers"
           },
           {
-            "value": "AAAI · ICASSP · IEEE",
+            "value": "ICML · AAAI · ICASSP · APL",
             "label": "Recent venues"
           },
           {
@@ -600,7 +600,7 @@
         },
         {
           "title": "Signal-Processing Applications of Neuromorphic Models",
-          "summary": "Event-driven representations and similarity learning for radar pulse deinterleaving, denoising, emitter recognition, and remote-sensing classification.",
+          "summary": "Connect multi-scale temporal encoding of continuous 1D signals with radar sorting, remote-sensing classification, and NIR–RGB fruit quality sensing.",
           "tags": [
             "Radar",
             "Remote Sensing",
@@ -610,7 +610,7 @@
         },
         {
           "title": "Intelligent Semiconductor Device Modeling",
-          "summary": "TCAD, ML surrogate models, and device physics for performance prediction and structure optimization of power devices.",
+          "summary": "Combine TCAD, ML surrogates, and device physics for LDMOS/U-MOSFET optimization and high-k trench field management with experimental validation in GaN HEMTs.",
           "tags": [
             "TCAD",
             "LDMOS",
@@ -625,7 +625,7 @@
           "description": "Qi Sun's publications on neuromorphic computing, signal-processing applications, and semiconductor device modeling.",
           "eyebrow": "Publications",
           "heading": "Publications",
-          "intro": "Papers are ordered by time. Each paper includes a presentation-style brief and DOI link."
+          "intro": "Published papers in reverse chronological order, with illustrated briefs and DOI or official paper links."
         },
         "blog": {
           "title": "Research Blog | Qi Sun",
@@ -699,8 +699,8 @@
           {
             "title": "Publication Footprint",
             "paragraphs": [
-              "This site currently includes {{publication_count}} papers across AAAI, ICASSP, IEEE Signal Processing Letters, Neurocomputing, IEEE Transactions on Electron Devices, and Micromachines.",
-              "These works map onto three lines: SNN and neuromorphic mechanisms, neuromorphic applications in radar/remote-sensing signal tasks, and ML-assisted device modeling and optimization."
+              "This site currently includes {{publication_count}} papers across ICML, AAAI, ICASSP, Applied Physics Letters, Electronics, IEEE Signal Processing Letters, Neurocomputing, IEEE Transactions on Electron Devices, and Micromachines.",
+              "These works map onto three lines: SNN training and temporal encoding, neuromorphic applications in radar, remote sensing and multimodal quality assessment, and semiconductor device modeling, structural design and physical validation."
             ]
           },
           {

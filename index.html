@@ -49,8 +49,8 @@
         <a href="about.html" class="btn btn-ghost">研究者简介</a>
         </div>
         <div class="hero-stats" aria-label="research overview">
-        <div><strong>8</strong><span>Peer-reviewed papers</span></div>
-        <div><strong>AAAI · ICASSP · IEEE</strong><span>Recent venues</span></div>
+        <div><strong>11</strong><span>Peer-reviewed papers</span></div>
+        <div><strong>ICML · AAAI · ICASSP · APL</strong><span>Recent venues</span></div>
         <div><strong>Neuromorphic × Signals × Devices</strong><span>Research architecture</span></div>
         </div>
         <div class="spike-viz" aria-hidden="true"></div>
@@ -122,12 +122,12 @@
       <article class="research-lens-card fade-in">
         <span>主线二</span>
         <h3>智能信号处理应用</h3>
-        <p>将类脑模型用于雷达脉冲序列、遥感图像等任务，关注噪声、密集脉冲和低功耗约束。</p>
+        <p>将类脑模型用于连续一维信号、雷达脉冲序列、遥感图像与多模态品质感知，关注时间结构、噪声和边缘推理约束。</p>
       </article>
       <article class="research-lens-card fade-in">
         <span>主线三</span>
         <h3>半导体器件智能建模</h3>
-        <p>用 TCAD 数据、物理先验和机器学习代理模型优化 LDMOS、U-MOSFET 等功率器件。</p>
+        <p>结合 TCAD、物理先验与机器学习研究功率器件建模，并通过 GaN HEMT 沟槽设计与电学测量验证电场调控。</p>
       </article>
       </div>
     </div>
@@ -143,7 +143,7 @@
       </article>
       <article class="interest-card fade-in">
         <div class="interest-top"><img class="interest-icon" src="assets/images/icons/radar.svg" alt="" loading="lazy"><h3>类脑计算的信号处理应用</h3></div>
-        <p>将事件驱动表示与相似性学习用于雷达脉冲分选、去噪、辐射源识别以及遥感图像分类，验证类脑模型在真实信号任务中的价值。</p>
+        <p>从连续一维信号的多尺度时间编码出发，将类脑模型用于雷达分选、遥感分类与近红外–RGB 果品品质感知，研究信号结构与编码机制之间的联系。</p>
         <div class="tags">
           <span class="tag">Radar</span>
           <span class="tag">Remote Sensing</span>
@@ -152,7 +152,7 @@
       </article>
       <article class="interest-card fade-in">
         <div class="interest-top"><img class="interest-icon" src="assets/images/icons/device.svg" alt="" loading="lazy"><h3>半导体器件智能建模</h3></div>
-        <p>结合 TCAD、机器学习代理模型和器件物理，面向 LDMOS、U-MOSFET 等功率器件开展性能预测与结构优化。</p>
+        <p>结合 TCAD、机器学习代理模型和器件物理，研究 LDMOS、U-MOSFET 的预测优化，以及 GaN HEMT 高介电常数沟槽的电场调控与实验验证。</p>
         <div class="tags">
           <span class="tag">TCAD</span>
           <span class="tag">LDMOS</span>
@@ -196,6 +196,72 @@
     <div class="featured-paper-grid">
       <article class="featured-paper-card fade-in">
         <div class="featured-paper-media">
+          <img src="assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png" alt="沟槽结构与实物显微图" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Applied Physics Letters</span>
+            <span class="pub-year">2026 Oct</span>
+          </div>
+          <h3>Electric-field redistribution via high-k dielectric trench in GaN-on-Si AlGaN/GaN HEMTs</h3>
+          <p>在 GaN-on-Si HEMT 漏侧引入 PZT 高介电常数沟槽，通过介电边界调控缓解电场拥挤，提高代表器件的耐压并改善动态导通电阻表现。</p>
+          <div class="featured-paper-insight">
+            <span>沟槽结构与实物显微图</span>
+            <strong>介电结构直接置于漏侧高场区域，改变局部电场边界。</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/high-k-trench-gan-hemt.html">论文介绍</a>
+            <a href="https://doi.org/10.1063/5.0345413" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png" alt="HSAF-Net 双模态框架" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Electronics</span>
+            <span class="pub-year">2026 Aug</span>
+          </div>
+          <h3>Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment</h3>
+          <p>让 SNN 读取近红外光电压序列、ANN 检测表面缺陷，再用异构模态注意力融合内外部品质证据，完成梨果无损分级。</p>
+          <div class="featured-paper-insight">
+            <span>HSAF-Net 双模态框架</span>
+            <strong>保留模态各自的编码优势，再学习内外部品质证据的互补关系。</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/hsaf-net-fruit-quality-assessment.html">论文介绍</a>
+            <a href="https://doi.org/10.3390/electronics15163613" target="_blank" rel="noopener">DOI</a>
+            <a href="https://www.mdpi.com/2079-9292/15/16/3613/pdf" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png" alt="MTE×STE 编码框架" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</span>
+            <span class="pub-year">2026 Jul</span>
+          </div>
+          <h3>Narrowing the ANN–SNN Gap for Continuous 1D Temporal Signal Classification with Multi-Scale Temporal Encoding and Sparsity-Regularized Transform Encoding</h3>
+          <p>以多尺度时间编码补充短时间窗中的有效信息，再用稀疏变换编码压缩冗余放电，改善连续一维信号分类的精度与脉冲活动率。</p>
+          <div class="featured-paper-insight">
+            <span>MTE×STE 编码框架</span>
+            <strong>先增加短时间窗中的有效证据，再压缩内部冗余放电。</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/mte-ste-continuous-temporal-signal-classification.html">论文介绍</a>
+            <a href="https://openreview.net/pdf?id=g0wATpD4Ic" target="_blank" rel="noopener">OpenReview PDF</a>
+            <a href="https://proceedings.mlr.press/v306/sun26k.html" target="_blank" rel="noopener">PMLR</a>
+            <a href="https://github.com/Sun7-7/Signal_Code_SNN" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
           <img src="assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png" alt="SGTE 处理框架" loading="lazy">
         </div>
         <div class="featured-paper-body">
@@ -212,69 +278,6 @@
           <div class="pub-links">
             <a href="papers/sgte-snn-radar-emitter-denoising-recognition.html">论文介绍</a>
             <a href="https://doi.org/10.1109/icassp55912.2026.11464155" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png" alt="脉冲 SOM 去交织框架" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>
-            <span class="pub-year">2026 May</span>
-          </div>
-          <h3>Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving</h3>
-          <p>把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。</p>
-          <div class="featured-paper-insight">
-            <span>脉冲 SOM 去交织框架</span>
-            <strong>方法把传统 SOM 的邻域竞争机制迁移到脉冲域，使模型更贴近事件驱动处理。</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/spiking-som-radar-deinterleaving.html">论文介绍</a>
-            <a href="https://doi.org/10.1109/icassp55912.2026.11464997" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png" alt="替代梯度宽度失配" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">Proceedings of the AAAI Conference on Artificial Intelligence</span>
-            <span class="pub-year">2026 Mar</span>
-          </div>
-          <h3>Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution</h3>
-          <p>根据膜电位分布动态调节替代梯度函数，让 SNN 训练中的梯度传播更稳定、更高效。</p>
-          <div class="featured-paper-insight">
-            <span>替代梯度宽度失配</span>
-            <strong>论文的切入点是：固定宽度替代梯度可能与膜电位分布不匹配，导致有效梯度区域偏移。</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/mpo-surrogate-function-snn.html">论文介绍</a>
-            <a href="https://doi.org/10.1609/aaai.v40i30.39769" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png" alt="长短时间步互蒸馏" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">Neurocomputing</span>
-            <span class="pub-year">2025 Oct</span>
-          </div>
-          <h3>Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation</h3>
-          <p>用长短时间步双模型互蒸馏缓解 SNN 降低推理时间步时的精度损失。</p>
-          <div class="featured-paper-insight">
-            <span>长短时间步互蒸馏</span>
-            <strong>核心目标是在降低推理时间步时保留长时间步模型的判别知识。</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/dual-model-snn-remote-sensing.html">论文介绍</a>
-            <a href="https://doi.org/10.1016/j.neucom.2025.130721" target="_blank" rel="noopener">DOI</a>
           </div>
         </div>
       </article>

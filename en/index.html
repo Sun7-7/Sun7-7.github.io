@@ -49,8 +49,8 @@
         <a href="about.html" class="btn btn-ghost">Research Profile</a>
         </div>
         <div class="hero-stats" aria-label="research overview">
-        <div><strong>8</strong><span>Peer-reviewed papers</span></div>
-        <div><strong>AAAI · ICASSP · IEEE</strong><span>Recent venues</span></div>
+        <div><strong>11</strong><span>Peer-reviewed papers</span></div>
+        <div><strong>ICML · AAAI · ICASSP · APL</strong><span>Recent venues</span></div>
         <div><strong>Neuromorphic × Signals × Devices</strong><span>Research architecture</span></div>
         </div>
         <div class="spike-viz" aria-hidden="true"></div>
@@ -122,12 +122,12 @@
       <article class="research-lens-card fade-in">
         <span>Line 2</span>
         <h3>Signal-processing applications</h3>
-        <p>Radar pulse sequences and remote-sensing images serve as realistic testbeds for robust event-driven models.</p>
+        <p>Apply neuromorphic models to continuous 1D signals, radar pulses, remote-sensing images, and multimodal quality sensing under temporal, noise, and edge-inference constraints.</p>
       </article>
       <article class="research-lens-card fade-in">
         <span>Line 3</span>
         <h3>Device-aware modeling</h3>
-        <p>TCAD data, physical priors, and ML surrogates support optimization of LDMOS, U-MOSFET, and related devices.</p>
+        <p>Combine TCAD, physical priors, and ML for power-device modeling, with GaN HEMT trench design and electrical measurements for field-management validation.</p>
       </article>
       </div>
     </div>
@@ -143,7 +143,7 @@
       </article>
       <article class="interest-card fade-in">
         <div class="interest-top"><img class="interest-icon" src="../assets/images/icons/radar.svg" alt="" loading="lazy"><h3>Signal-Processing Applications of Neuromorphic Models</h3></div>
-        <p>Event-driven representations and similarity learning for radar pulse deinterleaving, denoising, emitter recognition, and remote-sensing classification.</p>
+        <p>Connect multi-scale temporal encoding of continuous 1D signals with radar sorting, remote-sensing classification, and NIR–RGB fruit quality sensing.</p>
         <div class="tags">
           <span class="tag">Radar</span>
           <span class="tag">Remote Sensing</span>
@@ -152,7 +152,7 @@
       </article>
       <article class="interest-card fade-in">
         <div class="interest-top"><img class="interest-icon" src="../assets/images/icons/device.svg" alt="" loading="lazy"><h3>Intelligent Semiconductor Device Modeling</h3></div>
-        <p>TCAD, ML surrogate models, and device physics for performance prediction and structure optimization of power devices.</p>
+        <p>Combine TCAD, ML surrogates, and device physics for LDMOS/U-MOSFET optimization and high-k trench field management with experimental validation in GaN HEMTs.</p>
         <div class="tags">
           <span class="tag">TCAD</span>
           <span class="tag">LDMOS</span>
@@ -196,6 +196,72 @@
     <div class="featured-paper-grid">
       <article class="featured-paper-card fade-in">
         <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png" alt="Device Structure and Microscopy" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Applied Physics Letters</span>
+            <span class="pub-year">2026 Oct</span>
+          </div>
+          <h3>Electric-field redistribution via high-k dielectric trench in GaN-on-Si AlGaN/GaN HEMTs</h3>
+          <p>A drain-side PZT high-k trench redistributes electric fields in GaN-on-Si HEMTs, improving voltage handling and dynamic ON-resistance in representative devices.</p>
+          <div class="featured-paper-insight">
+            <span>Device Structure and Microscopy</span>
+            <strong>The drain-side dielectric structure changes the local high-field boundary.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/high-k-trench-gan-hemt.html">Paper Brief</a>
+            <a href="https://doi.org/10.1063/5.0345413" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/hsaf-net-fruit-quality-assessment-framework.png" alt="HSAF-Net Multimodal Framework" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Electronics</span>
+            <span class="pub-year">2026 Aug</span>
+          </div>
+          <h3>Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment</h3>
+          <p>An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading.</p>
+          <div class="featured-paper-insight">
+            <span>HSAF-Net Multimodal Framework</span>
+            <strong>Preserve modality-specific encoders and learn complementary internal and external evidence.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/hsaf-net-fruit-quality-assessment.html">Paper Brief</a>
+            <a href="https://doi.org/10.3390/electronics15163613" target="_blank" rel="noopener">DOI</a>
+            <a href="https://www.mdpi.com/2079-9292/15/16/3613/pdf" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
+          <img src="../assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png" alt="MTE×STE Encoding Framework" loading="lazy">
+        </div>
+        <div class="featured-paper-body">
+          <div class="pub-topline">
+            <span class="pub-venue">Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</span>
+            <span class="pub-year">2026 Jul</span>
+          </div>
+          <h3>Narrowing the ANN–SNN Gap for Continuous 1D Temporal Signal Classification with Multi-Scale Temporal Encoding and Sparsity-Regularized Transform Encoding</h3>
+          <p>Multi-scale temporal encoding enriches short-horizon evidence, while sparse transform encoding controls redundant firing for continuous 1D signal classification.</p>
+          <div class="featured-paper-insight">
+            <span>MTE×STE Encoding Framework</span>
+            <strong>Enrich useful short-horizon evidence before compressing redundant internal firing.</strong>
+          </div>
+          <div class="pub-links">
+            <a href="papers/mte-ste-continuous-temporal-signal-classification.html">Paper Brief</a>
+            <a href="https://openreview.net/pdf?id=g0wATpD4Ic" target="_blank" rel="noopener">OpenReview PDF</a>
+            <a href="https://proceedings.mlr.press/v306/sun26k.html" target="_blank" rel="noopener">PMLR</a>
+            <a href="https://github.com/Sun7-7/Signal_Code_SNN" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="featured-paper-card fade-in">
+        <div class="featured-paper-media">
           <img src="../assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png" alt="SGTE Processing Framework" loading="lazy">
         </div>
         <div class="featured-paper-body">
@@ -212,69 +278,6 @@
           <div class="pub-links">
             <a href="papers/sgte-snn-radar-emitter-denoising-recognition.html">Paper Brief</a>
             <a href="https://doi.org/10.1109/icassp55912.2026.11464155" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="../assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png" alt="Spiking SOM Deinterleaving Framework" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>
-            <span class="pub-year">2026 May</span>
-          </div>
-          <h3>Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving</h3>
-          <p>Spiking-SOM moves self-organizing-map clustering into the spike domain and uses BMU firing rates for unsupervised radar pulse deinterleaving.</p>
-          <div class="featured-paper-insight">
-            <span>Spiking SOM Deinterleaving Framework</span>
-            <strong>It transfers SOM-style neighborhood competition into the spiking domain for event-driven sequence separation.</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/spiking-som-radar-deinterleaving.html">Paper Brief</a>
-            <a href="https://doi.org/10.1109/icassp55912.2026.11464997" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="../assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png" alt="Surrogate Gradient Width Mismatch" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">Proceedings of the AAAI Conference on Artificial Intelligence</span>
-            <span class="pub-year">2026 Mar</span>
-          </div>
-          <h3>Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution</h3>
-          <p>MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training.</p>
-          <div class="featured-paper-insight">
-            <span>Surrogate Gradient Width Mismatch</span>
-            <strong>The paper starts from the observation that fixed surrogate widths can misalign with membrane-potential distributions.</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/mpo-surrogate-function-snn.html">Paper Brief</a>
-            <a href="https://doi.org/10.1609/aaai.v40i30.39769" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </article>
-      <article class="featured-paper-card fade-in">
-        <div class="featured-paper-media">
-          <img src="../assets/images/paper-figures/dual-model-snn-remote-sensing-dual-distillation.png" alt="Long-Short Time-Step Mutual Distillation" loading="lazy">
-        </div>
-        <div class="featured-paper-body">
-          <div class="pub-topline">
-            <span class="pub-venue">Neurocomputing</span>
-            <span class="pub-year">2025 Oct</span>
-          </div>
-          <h3>Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation</h3>
-          <p>A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened.</p>
-          <div class="featured-paper-insight">
-            <span>Long-Short Time-Step Mutual Distillation</span>
-            <strong>The goal is to preserve discriminative knowledge while reducing inference time steps.</strong>
-          </div>
-          <div class="pub-links">
-            <a href="papers/dual-model-snn-remote-sensing.html">Paper Brief</a>
-            <a href="https://doi.org/10.1016/j.neucom.2025.130721" target="_blank" rel="noopener">DOI</a>
           </div>
         </div>
       </article>
