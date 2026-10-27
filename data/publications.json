@@ -116,7 +116,22 @@
     "volume": "306",
     "pages": "116587-116606",
     "figureCredit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
-    "citationKey": "mte-ste-continuous-temporal-signal-classification"
+    "citationKey": "mte-ste-continuous-temporal-signal-classification",
+    "event_date": {
+      "start": "2026-07-06",
+      "end": "2026-07-11",
+      "source": "https://icml.cc/Conferences/2026",
+      "corroboration": "PMLR BibTeX month: 06--11 Jul"
+    },
+    "publisher_citation_publication_date": "2026-09-29",
+    "online_publication_date": null,
+    "date_provenance": {
+      "source": "https://proceedings.mlr.press/v306/sun26k.html",
+      "field": "citation_publication_date",
+      "observed_value": "2026/09/29",
+      "online_publication_date_status": "not_independently_stated",
+      "checked_on": "2026-10-27"
+    }
   },
   {
     "slug": "hsaf-net-fruit-quality-assessment",

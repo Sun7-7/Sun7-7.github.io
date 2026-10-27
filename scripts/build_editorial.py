@@ -104,7 +104,7 @@ def area_cards(lang,path):
  for i,a in enumerate(AREAS,1):
   p=BY_SLUG[a['papers'][0]]
   label=p['venue'] if str(p['year']) in p['venue'] else p['venue']+' '+str(p['year'])
-  items.append(f'<article class="area-summary"><p class="section-number">0{i} / {a["id"].upper()}</p><h3><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a></h3><p>{esc(atext(a,"short",lang))}</p><a class="text-link" href="papers/{p["slug"]}.html">{esc(label)}</a></article>')
+  items.append(f'<article class="area-summary"><h3><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a></h3><p>{esc(atext(a,"short",lang))}</p><a class="text-link" href="papers/{p["slug"]}.html">{esc(label)}</a></article>')
  return '<div class="area-grid">'+''.join(items)+'</div>'
 
 
@@ -177,18 +177,18 @@ def home(lang):
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
- body=intro('Research',u['research'],t(lang,'从脉冲网络的学习与时间表示，到复杂信号中的结构，再到器件物理与计算约束，我关注不同层次的模型如何形成相互可解释的联系。','My research connects learning and temporal representations in spiking networks with structure in complex signals and the physical constraints of devices.'))
+ body=intro('Research',u['research'],t(lang,'我研究脉冲网络如何表示和学习连续时间信息，并将这些机制用于雷达脉冲流等信号任务；在器件方向，关注结构、电场与电学特性之间的联系，以及神经形态器件的建模与设计。','I study how spiking networks represent and learn continuous temporal information, with applications to radar pulse streams and related signal tasks. My device research addresses the relationship between structure, electric fields, and electrical behavior, alongside interests in neuromorphic device modeling and design.'))
  body+='<nav class="section-index" aria-label="'+t(lang,'研究方向目录','Research themes')+'">'+''.join(f'<a href="#{a["id"]}">0{i} / {u[a["id"]]}</a>' for i,a in enumerate(AREAS,1))+'</nav>'
  for i,a in enumerate(AREAS,1):
   statement=f'<p>{esc(atext(a,"question",lang))}</p>'
   if a['id']=='device':
-   statement+=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'已发表的 APL、IEEE TED 与 Micromachines 工作研究功率器件的结构设计、电场调控和机器学习辅助建模，结合 TCAD 分析与论文中报告的器件验证，考察结构、模型与电学表现之间的关系。','Published work in APL, IEEE TED, and Micromachines studies power-device structures, field management, and ML-assisted modeling, relating device geometry and model predictions to TCAD analyses and the device evaluations reported in those papers.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'当前探索关注神经形态器件模型、神经元阵列建模与跨层设计，研究器件行为如何联系算法和硬件约束。上述功率器件论文提供器件研究基础，不作为神经形态芯片已完成流片或系统验证的证据。','Current interests concern neuromorphic device models, neuron-array modeling, and cross-layer design: how device behavior connects to algorithmic and hardware constraints. The power-device papers provide a device-research foundation, not evidence of a fabricated or system-validated neuromorphic chip.')}</p></div>'''
+   statement+=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'已发表的 APL、IEEE TED 与 Micromachines 工作研究功率器件的结构设计、电场调控和机器学习辅助建模，结合 TCAD 分析与论文中报告的器件验证，考察结构、模型与电学表现之间的关系。','Published work in APL, IEEE TED, and Micromachines studies power-device structures, field management, and ML-assisted modeling, relating device geometry and model predictions to TCAD analyses and the device evaluations reported in those papers.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'神经形态器件与跨层设计是另一条正在探索的方向。我关注器件行为与神经元动力学的对应关系，以及器件模型、神经元阵列建模和算法约束之间的联系。','Neuromorphic devices and cross-layer design form a separate, ongoing direction. I am interested in connections between device behavior and neuron dynamics, and in how device models, neuron-array modeling, and algorithmic constraints inform design.')}</p></div>'''
    figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG['high-k-trench-gan-hemt'],index,lang,path) for index in [0,2])+'</div>'
   else:
    statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
    figures=research_figure(BY_SLUG[a['figure']],0,lang,path)
   refs=''.join(f'<li><a href="papers/{slug}.html">{esc(BY_SLUG[slug]["title"])}</a><span>{venue(BY_SLUG[slug])}</span></li>' for slug in a['papers'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表证据","Published evidence")}</h3><ul class="research-references">{refs}</ul></section>'
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><ul class="research-references">{refs}</ul></section>'
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):
@@ -209,7 +209,7 @@ def education(lang):
 def about(lang,cv=False):
  if cv:return cv_document(lang)
  path=route(lang,'about.html');u=UI[lang];bio=PROFILE['bio_zh' if lang=='zh' else 'bio_en']
- body=intro('About',t(lang,'学术简介','Academic Biography'))
+ body=intro('About',t(lang,'个人简介','Biography'))
  body+=f'<div class="biography-layout"><div class="prose"><p class="lead">{esc(bio)}</p></div>{image("assets/images/portraits/portrait_about_2x3.webp",t(lang,"孙琦的职业照","Professional portrait of Qi Sun"),path,False,"class=about-portrait")}</div>'
  body+=f'<section class="about-section"><h2>{t(lang,"教育经历","Education")}</h2>{education(lang)}</section><section class="about-section"><h2>{t(lang,"研究兴趣","Research Interests")}</h2><ul class="interest-list">'+''.join(f'<li><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a></li>' for a in AREAS)+'</ul></section>'
  body+=f'<section id="contact" class="about-section"><h2>{t(lang,"学术入口与联系","Academic Profiles & Contact")}</h2><div class="contact-list"><a href="mailto:{PROFILE["email"]}">{PROFILE["email"]}</a>{profile_links()}<a href="publications.html">{u["publications"]}</a><a href="cv.html">{u["cv"]}</a></div></section>'
@@ -218,7 +218,7 @@ def about(lang,cv=False):
 def paper(pub,lang):
  path=route(lang,'papers/'+pub['slug']+'.html');u=UI[lang];d=detail(pub['slug'],lang)
  record=pub['publication']+(', '+pub['volume'] if pub.get('volume') else '')+('('+pub['issue']+')' if pub.get('issue') else '')+' · '+pub['pages']
- body=f'<header class="paper-header"><a class="back-link" href="../publications.html">← {t(lang,"全部论文","All publications")}</a><p class="eyebrow">{u["brief"]}</p><h1>{esc(pub["title"])}</h1><p class="authors">{authors(pub)}.</p><div class="publication-meta">{venue(pub)}<span class="publication-date">{t(lang,"出版日期：","Published: ")}<time datetime="{pub["date"]}">{pub["date"]}</time></span></div><p class="publication-record">{esc(record)}</p>{links(pub,lang,path,False)}<p class="key-takeaway">{esc(d["oneLine"])}</p></header>'
+ body=f'<header class="paper-header"><a class="back-link" href="../publications.html">← {t(lang,"全部论文","All publications")}</a><p class="eyebrow">{u["brief"]}</p><h1>{esc(pub["title"])}</h1><p class="authors">{authors(pub)}.</p><div class="publication-meta">{venue(pub)}<span class="publication-date">{t(lang,"出版记录日期：","Publication record: ") if pub.get("publisher_citation_publication_date") else t(lang,"出版日期：","Published: ")}<time datetime="{pub["date"]}">{pub["date"]}</time></span></div><p class="publication-record">{esc(record)}</p>{links(pub,lang,path,False)}<p class="key-takeaway">{esc(d["oneLine"])}</p></header>'
  steps=''.join(f'<li><strong>{esc(x["label"])}</strong><p>{esc(x["text"])}</p></li>' for x in d['pipeline'])
  metrics=''.join(f'<div><dt>{esc(x["metric"])}</dt><dd><strong>{esc(x["value"])}</strong><p>{esc(x["note"])}</p></dd></div>' for x in d['evidence'])
  body+=f'<div class="paper-body"><section class="paper-section prose"><h2>{u["question"]}</h2><p>{esc(d["problem"])}</p></section><section class="paper-section prose"><h2>{u["method"]}</h2><p>{esc(d["method"])}</p><details class="technical-route"><summary>{u["route"]}</summary><ol>{steps}</ol></details></section><section class="paper-section"><h2>{u["evidence"]}</h2><dl class="evidence-list">{metrics}</dl><div class="figure-gallery">'

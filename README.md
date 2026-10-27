@@ -1,8 +1,9 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
-V3.2 refines the V3.1 candidate `702972e4f79342aeb010e26c7232036f7b98cd7c`
-on `redesign/academic-homepage-v3-1` (Draft PR #1). Production `main` remains
-`001a1dff3b45b99949da3454f7b3d828ec13782c`. It is a static GitHub Pages site.
+V3.3 is a focused revision of V3.2 (`964f364d0b930ebe22e56b5e906864bdf30f81cd`)
+on `redesign/academic-homepage-v3-1` (PR #1). The original production baseline
+is `001a1dff3b45b99949da3454f7b3d828ec13782c`. The owner has authorized publication
+after revision and verification. This is a static GitHub Pages site.
 
 ## Build and preview
 
@@ -61,12 +62,17 @@ results. A local Lighthouse result is not a measurement of the production site.
 
 ## Review and release
 
-Review the candidate and its public-content audit before merging. This branch
-must not be deployed automatically to the production site. The existing Pages
-source is `main`; release requires an explicit later decision by the owner.
+Review the candidate and its public-content audit before merging. The Pages source is `main`. The owner explicitly authorized the V3.3 release
+after revision and verification. Preserve source credits and record unresolved
+article-specific rights questions; do not infer new third-party permission.
 
 V3.2 groups homepage work by research theme, presents the complete publication
 record as a year-grouped bibliography, and separates the compact public CV from
 web briefs. Google Scholar uses the exact profile URL supplied by the owner;
 no citation counts or profile statistics are imported. Non-OA figure reuse
 permissions remain a publishing gate; source attribution is not permission.
+
+V3.3 distinguishes the official ICML conference interval from PMLR citation
+publication metadata. A first-online date is left unset when not independently
+stated. Research/About terminology and the research statement are maintained
+in the shared renderer.

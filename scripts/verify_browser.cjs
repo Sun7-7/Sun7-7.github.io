@@ -42,7 +42,9 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
    if(file==='research'){
     assert.equal(await page.locator('.full-figure-link').count(),4);
     assert((await page.locator('#device img').first().getAttribute('src')).includes('high-k-trench-gan-hemt'));
+    assert.deepEqual(await page.locator('.small-heading').allTextContents(),Array(3).fill(lang==='zh'?'已发表论文':'Published Papers'));
    }
+   if(file==='about')assert.equal(await page.locator('h1').innerText(),lang==='zh'?'个人简介':'Biography');
    results.push({url,...size,theme,...s});
    if(size.width===1440||size.width===390){
     await page.addScriptTag({path:AXE});
@@ -63,7 +65,9 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
    await page.goto(url,{waitUntil:'networkidle'});await ready(page);const s=await state(page);
    assert.equal(s.scrollWidth,size.width,url);assert.equal(s.brokenImages.length,0,url);assert.equal(s.clippedText.length,0,JSON.stringify(s));results.push({url,...size,...s});
    const a=await page.locator('.paper-header .authors').innerText();const names=p.authors.map(x=>x.given+' '+x.family);const natural=names.slice(0,-1).join(', ')+', and '+names.at(-1)+'.';assert.equal(a,natural);assert.equal(a.split('Qi Sun').length-1,1);
-   assert((await page.locator('.publication-date').innerText()).startsWith(lang==='zh'?'出版日期：':'Published:'));
+   const expectedDateLabel=p.publisher_citation_publication_date?(lang==='zh'?'出版记录日期：':'Publication record:'):(lang==='zh'?'出版日期：':'Published:');
+   assert((await page.locator('.publication-date').innerText()).startsWith(expectedDateLabel));
+   if(p.publisher_citation_publication_date){assert.equal(p.date,'2026-09-29');assert.equal(p.online_publication_date,null);assert.equal(p.event_date.start,'2026-07-06');assert.equal(p.event_date.end,'2026-07-11');}
    assert.equal(await page.locator('.full-figure-link').count(),3);
    for(const credit of await page.locator('.figure-credit').allTextContents())assert.equal((credit.match(lang==='zh'?/图源：/g:/Source:/g)||[]).length,1);
    if(p.slug==='mte-ste-continuous-temporal-signal-classification'){
