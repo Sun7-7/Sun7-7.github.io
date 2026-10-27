@@ -1,0 +1,37 @@
+{
+  "full_name_zh": "孙琦",
+  "full_name_en": "Qi Sun",
+  "institution_zh": "西安电子科技大学",
+  "institution_en": "Xidian University",
+  "school_zh": "人工智能学院",
+  "school_en": "School of Artificial Intelligence",
+  "stage_zh": "智能科学与技术博士研究生",
+  "stage_en": "Ph.D. Student in Intelligence Science and Technology",
+  "email": "qisun@stu.xidian.edu.cn",
+  "bio_zh": "孙琦，西安电子科技大学人工智能学院智能科学与技术博士研究生。研究方向包括脉冲神经网络学习与时序计算、雷达与智能信号处理，以及半导体器件与神经形态硬件。相关成果发表于 ICML、AAAI、ICASSP、Applied Physics Letters、IEEE Transactions on Electron Devices 等会议和期刊。",
+  "bio_en": "Qi Sun is a Ph.D. student in Intelligence Science and Technology at the School of Artificial Intelligence, Xidian University. His research interests include spiking neural network learning and temporal computing, radar and intelligent signal processing, and semiconductor devices and neuromorphic hardware. His work appears in ICML, AAAI, ICASSP, Applied Physics Letters, IEEE Transactions on Electron Devices, and other venues.",
+  "academicProfiles": [
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com.hk/citations?user=pW8kkrsAAAAJ&hl=zh-CN"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/Sun7-7"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ph.D.",
+      "major": "Intelligence Science and Technology",
+      "university": "Xidian University",
+      "period": "In progress"
+    },
+    {
+      "degree": "B.Eng.",
+      "major": "Intelligence Science and Technology",
+      "university": "Xidian University",
+      "period": "2019-09 – 2023-06"
+    }
+  ]
+}

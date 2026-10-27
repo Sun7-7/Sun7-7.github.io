@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.62.1"
+  },
+  "name": "qisun-academic-homepage",
+  "version": "3.3.0",
+  "private": true,
+  "description": "Static bilingual academic homepage; Node packages are QA-only.",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "check:browser": "node scripts/verify_browser.cjs",
+    "check:lighthouse": "node scripts/run_lighthouse.mjs",
+    "check:editorial": "node scripts/check_editorial.cjs"
+  }
+}
