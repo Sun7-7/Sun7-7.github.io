@@ -83,7 +83,11 @@ def main():
     for page in pages.values():
         content=' '.join(page.text)
         assert not any(a['family']+', '+a['given'] in content for p in papers for a in p['authors'])
-    tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT).decode('utf-8').splitlines()
+    try:
+        tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT,stderr=subprocess.DEVNULL).decode('utf-8').splitlines()
+    except (subprocess.CalledProcessError,FileNotFoundError):
+        # The review packet is also a runnable source snapshot without .git.
+        tracked=[]
     all_files={ROOT/name for name in tracked if (ROOT/name).is_file()}
     all_files.update(p for p in ROOT.rglob('*') if p.is_file() and not {'.git','tmp','node_modules','test-results'}.intersection(p.relative_to(ROOT).parts))
     # Category patterns only; do not embed actual private strings in this checker.
