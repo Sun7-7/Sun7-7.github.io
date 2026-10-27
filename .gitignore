@@ -1,7 +1,10 @@
 个人简历.docx
 *.md
+!README.md
 paperpdf/
 __pycache__/
 .DS_Store
 Thumbs.db
 /tmp/
+/node_modules/
+/test-results/

@@ -1,186 +1,620 @@
 [
   {
+    "slug": "high-k-trench-gan-hemt",
     "title": "Electric-field redistribution via high-k dielectric trench in GaN-on-Si AlGaN/GaN HEMTs",
     "authors": [
-      "Cao, Zhen",
-      "Hou, Zhiwei",
-      "Sun, Qi",
-      "Yu, Guohao",
-      "Zhang, Bingliang",
-      "Hou, Biao",
-      "Jiao, Licheng",
-      "Yang, Yintang"
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Zhiwei",
+        "family": "Hou"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Guohao",
+        "family": "Yu"
+      },
+      {
+        "given": "Bingliang",
+        "family": "Zhang"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      },
+      {
+        "given": "Licheng",
+        "family": "Jiao"
+      },
+      {
+        "given": "Yintang",
+        "family": "Yang"
+      }
     ],
     "year": 2026,
-    "month": "Oct",
-    "type": "article",
+    "kind": "journal",
+    "area": "device",
     "venue": "Applied Physics Letters",
+    "publication": "Applied Physics Letters",
     "publisher": "AIP Publishing",
+    "date": "2026-10-26",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": 5,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1063/5.0345413"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1063/5.0345413"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
+    "doi": "10.1063/5.0345413",
     "volume": "129",
     "issue": "17",
     "pages": "173502",
-    "doi": "10.1063/5.0345413",
-    "url": "https://doi.org/10.1063/5.0345413",
-    "highlightAuthor": "Sun, Qi"
+    "figureCredit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
+    "citationKey": "high-k-trench-gan-hemt"
   },
   {
-    "title": "Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment",
-    "authors": [
-      "Tang, Weibin",
-      "Sun, Qi",
-      "Guo, Yunfan",
-      "Cao, Zhen"
-    ],
-    "year": 2026,
-    "month": "Aug",
-    "type": "article",
-    "venue": "Electronics",
-    "publisher": "MDPI AG",
-    "volume": "15",
-    "issue": "16",
-    "pages": "3613",
-    "doi": "10.3390/electronics15163613",
-    "url": "https://doi.org/10.3390/electronics15163613",
-    "highlightAuthor": "Sun, Qi",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "https://www.mdpi.com/2079-9292/15/16/3613/pdf"
-      }
-    ]
-  },
-  {
-    "id": "openreview:g0wATpD4Ic",
+    "slug": "mte-ste-continuous-temporal-signal-classification",
     "title": "Narrowing the ANN–SNN Gap for Continuous 1D Temporal Signal Classification with Multi-Scale Temporal Encoding and Sparsity-Regularized Transform Encoding",
     "authors": [
-      "Sun, Qi",
-      "Huang, Yulei",
-      "Cao, Zhen",
-      "Hou, Biao"
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Yulei",
+        "family": "Huang"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      }
     ],
     "year": 2026,
-    "month": "Jul",
-    "type": "inproceedings",
-    "venue": "Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)",
+    "kind": "conference",
+    "area": "learning",
+    "venue": "ICML 2026",
+    "publication": "Proceedings of the 43rd International Conference on Machine Learning",
     "publisher": "PMLR",
-    "volume": "306",
-    "pages": "116587-116606",
-    "url": "https://openreview.net/pdf?id=g0wATpD4Ic",
-    "linkLabel": "OpenReview PDF",
-    "highlightAuthor": "Sun, Qi",
+    "date": "2026-09-29",
+    "datePrecision": "day",
+    "dateBasis": "PMLR_citation_publication_date",
+    "selectedRank": 1,
     "links": [
       {
         "label": "PMLR",
         "url": "https://proceedings.mlr.press/v306/sun26k.html"
       },
       {
+        "label": "PDF",
+        "url": "https://openreview.net/pdf?id=g0wATpD4Ic"
+      },
+      {
         "label": "Code",
         "url": "https://github.com/Sun7-7/Signal_Code_SNN"
       }
-    ]
+    ],
+    "metadataSources": [
+      "https://proceedings.mlr.press/v306/sun26k.html"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
+    "ccf": "A",
+    "volume": "306",
+    "pages": "116587-116606",
+    "figureCredit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
+    "citationKey": "mte-ste-continuous-temporal-signal-classification"
   },
   {
+    "slug": "hsaf-net-fruit-quality-assessment",
+    "title": "Heterogeneous SNN-ANN Multimodal Fusion Framework for Comprehensive Fruit Quality Assessment",
+    "authors": [
+      {
+        "given": "Weibin",
+        "family": "Tang"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Yunfan",
+        "family": "Guo"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      }
+    ],
+    "year": 2026,
+    "kind": "journal",
+    "area": "signals",
+    "venue": "Electronics",
+    "publication": "Electronics",
+    "publisher": "MDPI AG",
+    "date": "2026-08-13",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": null,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.3390/electronics15163613"
+      },
+      {
+        "label": "PDF",
+        "url": "https://www.mdpi.com/2079-9292/15/16/3613/pdf"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.3390/electronics15163613"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
+    "doi": "10.3390/electronics15163613",
+    "volume": "15",
+    "issue": "16",
+    "pages": "3613",
+    "figureCredit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
+    "citationKey": "hsaf-net-fruit-quality-assessment"
+  },
+  {
+    "slug": "sgte-snn-radar-emitter-denoising-recognition",
     "title": "SGTE-SNN: Similarity-Guided Temporal Encoding for Radar Emitter Denoising and Recognition",
-    "authors": ["Sun, Qi", "Wang, Xiaoning", "Cao, Zhen", "Yang, Shiqing", "Hou, Biao"],
+    "authors": [
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Xiaoning",
+        "family": "Wang"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Shiqing",
+        "family": "Yang"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      }
+    ],
     "year": 2026,
-    "month": "May",
-    "type": "inproceedings",
-    "venue": "ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    "kind": "conference",
+    "area": "signals",
+    "venue": "ICASSP 2026",
+    "publication": "ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
     "publisher": "IEEE",
-    "pages": "20337-20341",
+    "date": "2026-05-03",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": null,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1109/icassp55912.2026.11464155"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.1109/icassp55912.2026.11464155",
-    "url": "https://doi.org/10.1109/icassp55912.2026.11464155",
-    "highlightAuthor": "Sun, Qi"
+    "ccf": "B",
+    "pages": "20337-20341",
+    "figureCredit": "© 2026 IEEE. Source: ICASSP 2026.",
+    "citationKey": "sgte-snn-radar-emitter-denoising-recognition"
   },
   {
+    "slug": "spiking-som-radar-deinterleaving",
     "title": "Spiking Self-Organizing Maps with Convergence Guarantees for Unsupervised Radar Signal Deinterleaving",
-    "authors": ["Sun, Qi", "Yang, Shumo", "Cao, Zhen", "Yang, Shiqing", "Hou, Biao"],
+    "authors": [
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Shumo",
+        "family": "Yang"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Shiqing",
+        "family": "Yang"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      }
+    ],
     "year": 2026,
-    "month": "May",
-    "type": "inproceedings",
-    "venue": "ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    "kind": "conference",
+    "area": "signals",
+    "venue": "ICASSP 2026",
+    "publication": "ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
     "publisher": "IEEE",
-    "pages": "19532-19536",
+    "date": "2026-05-03",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": 3,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      },
+      {
+        "label": "Oral session",
+        "url": "https://www.cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=14851"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1109/icassp55912.2026.11464997",
+      "https://www.cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=14851"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.1109/icassp55912.2026.11464997",
-    "url": "https://doi.org/10.1109/icassp55912.2026.11464997",
-    "highlightAuthor": "Sun, Qi"
+    "ccf": "B",
+    "pages": "19532-19536",
+    "figureCredit": "© 2026 IEEE. Source: ICASSP 2026.",
+    "oral": true,
+    "oralSource": "https://www.cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=14851",
+    "citationKey": "spiking-som-radar-deinterleaving"
   },
   {
+    "slug": "mpo-surrogate-function-snn",
     "title": "Optimization Method for Surrogate Function in Spiking Neural Networks Based on Membrane Potential Distribution",
-    "authors": ["Sun, Qi", "Cao, Zhen", "Geng, Kaige", "Zhang, Ziyi", "Hou, Biao"],
+    "authors": [
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Kaige",
+        "family": "Geng"
+      },
+      {
+        "given": "Ziyi",
+        "family": "Zhang"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      }
+    ],
     "year": 2026,
-    "month": "Mar",
-    "type": "article",
-    "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+    "kind": "conference",
+    "area": "learning",
+    "venue": "AAAI 2026",
+    "publication": "Proceedings of the AAAI Conference on Artificial Intelligence",
     "publisher": "Association for the Advancement of Artificial Intelligence (AAAI)",
-    "pages": "25718-25726",
+    "date": "2026-03-14",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": 2,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1609/aaai.v40i30.39769"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1609/aaai.v40i30.39769",
+      "https://ojs.aaai.org/index.php/AAAI/article/view/39769"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.1609/aaai.v40i30.39769",
-    "url": "https://doi.org/10.1609/aaai.v40i30.39769",
-    "highlightAuthor": "Sun, Qi"
+    "ccf": "A",
+    "volume": "40",
+    "issue": "30",
+    "pages": "25718-25726",
+    "figureCredit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
+    "citationKey": "mpo-surrogate-function-snn"
   },
   {
-    "title": "Adaptive Clustering With Similarity Learning for Enhanced Multi-Scenario Radar Signal Processing",
-    "authors": ["Sun, Qi", "Cao, Zhen", "Huang, Yulei", "Ge, Yifan", "Wang, Yunlong"],
-    "year": 2025,
-    "month": "",
-    "type": "article",
-    "venue": "IEEE Signal Processing Letters",
-    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
-    "pages": "1840-1844",
-    "doi": "10.1109/lsp.2025.3556782",
-    "url": "https://doi.org/10.1109/lsp.2025.3556782",
-    "highlightAuthor": "Sun, Qi"
-  },
-  {
+    "slug": "dual-model-snn-remote-sensing",
     "title": "Dual-model spiking neural network for remote sensing image classification using mutual knowledge distillation",
-    "authors": ["Cao, Zhen", "Liu, Ju", "Sun, Qi", "Hou, Biao", "Zhu, Hao", "Guo, Lei", "Ge, Yifan", "Wang, Yulong", "Jiao, Licheng"],
+    "authors": [
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Ju",
+        "family": "Liu"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      },
+      {
+        "given": "Hao",
+        "family": "Zhu"
+      },
+      {
+        "given": "Lei",
+        "family": "Guo"
+      },
+      {
+        "given": "Yifan",
+        "family": "Ge"
+      },
+      {
+        "given": "Yulong",
+        "family": "Wang"
+      },
+      {
+        "given": "Licheng",
+        "family": "Jiao"
+      }
+    ],
     "year": 2025,
-    "month": "Oct",
-    "type": "article",
+    "kind": "journal",
+    "area": "signals",
     "venue": "Neurocomputing",
+    "publication": "Neurocomputing",
     "publisher": "Elsevier BV",
-    "pages": "130721",
+    "date": "2025-10",
+    "datePrecision": "month",
+    "dateBasis": "publisher_issue_date",
+    "selectedRank": null,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1016/j.neucom.2025.130721"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1016/j.neucom.2025.130721"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.1016/j.neucom.2025.130721",
-    "url": "https://doi.org/10.1016/j.neucom.2025.130721",
-    "highlightAuthor": "Sun, Qi"
+    "volume": "651",
+    "pages": "130721",
+    "figureCredit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
+    "citationKey": "dual-model-snn-remote-sensing"
   },
   {
-    "title": "Machine Learning-Based Modeling and BV Optimization for LDMOS With Multifloating Buried Layers",
-    "authors": ["Cao, Zhen", "Sun, Qi", "Peng, Qiaowei", "Hou, Biao", "Jiao, Licheng", "Yang, Yintang"],
+    "slug": "adaptive-clustering-radar-signal-processing",
+    "title": "Adaptive Clustering With Similarity Learning for Enhanced Multi-Scenario Radar Signal Processing",
+    "authors": [
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Yulei",
+        "family": "Huang"
+      },
+      {
+        "given": "Yifan",
+        "family": "Ge"
+      },
+      {
+        "given": "Yunlong",
+        "family": "Wang"
+      }
+    ],
     "year": 2025,
-    "month": "Feb",
-    "type": "article",
-    "venue": "IEEE Transactions on Electron Devices",
+    "kind": "journal",
+    "area": "signals",
+    "venue": "IEEE Signal Processing Letters",
+    "publication": "IEEE Signal Processing Letters",
     "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
-    "pages": "550-556",
+    "date": "2025-04-02",
+    "datePrecision": "day",
+    "dateBasis": "publication_date_on_publisher_PDF",
+    "selectedRank": 4,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1109/lsp.2025.3556782"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1109/lsp.2025.3556782"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
+    "doi": "10.1109/lsp.2025.3556782",
+    "volume": "32",
+    "pages": "1840-1844",
+    "figureCredit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
+    "citationKey": "adaptive-clustering-radar-signal-processing"
+  },
+  {
+    "slug": "ml-ldmos-bv-optimization",
+    "title": "Machine Learning-Based Modeling and BV Optimization for LDMOS With Multifloating Buried Layers",
+    "authors": [
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Qiaowei",
+        "family": "Peng"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      },
+      {
+        "given": "Licheng",
+        "family": "Jiao"
+      },
+      {
+        "given": "Yintang",
+        "family": "Yang"
+      }
+    ],
+    "year": 2025,
+    "kind": "journal",
+    "area": "device",
+    "venue": "IEEE Transactions on Electron Devices",
+    "publication": "IEEE Transactions on Electron Devices",
+    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "date": "2025-02",
+    "datePrecision": "month",
+    "dateBasis": "publisher_issue_date",
+    "selectedRank": 6,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.1109/ted.2024.3517578"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.1109/ted.2024.3517578"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.1109/ted.2024.3517578",
-    "url": "https://doi.org/10.1109/ted.2024.3517578",
-    "highlightAuthor": "Sun, Qi"
+    "volume": "72",
+    "issue": "2",
+    "pages": "550-556",
+    "figureCredit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
+    "citationKey": "ml-ldmos-bv-optimization"
   },
   {
+    "slug": "sipos-umofet-fom",
     "title": "Machine Learning-Based Figure of Merit Model of SIPOS Modulated Drift Region for U-MOSFET",
-    "authors": ["Cao, Zhen", "Sun, Qi", "Ma, Chuanfeng", "Hou, Biao", "Jiao, Licheng"],
+    "authors": [
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Chuanfeng",
+        "family": "Ma"
+      },
+      {
+        "given": "Biao",
+        "family": "Hou"
+      },
+      {
+        "given": "Licheng",
+        "family": "Jiao"
+      }
+    ],
     "year": 2024,
-    "month": "Mar",
-    "type": "article",
+    "kind": "journal",
+    "area": "device",
     "venue": "Micromachines",
+    "publication": "Micromachines",
     "publisher": "MDPI AG",
-    "pages": "411",
+    "date": "2024-03-19",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": null,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.3390/mi15030411"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.3390/mi15030411",
+      "https://www.mdpi.com/2072-666X/15/3/411"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.3390/mi15030411",
-    "url": "https://doi.org/10.3390/mi15030411",
-    "highlightAuthor": "Sun, Qi"
+    "volume": "15",
+    "issue": "3",
+    "pages": "411",
+    "figureCredit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
+    "citationKey": "sipos-umofet-fom"
   },
   {
+    "slug": "variable-k-ldmos",
     "title": "A TCAD Study on High-Voltage Superjunction LDMOS with Variable-K Dielectric Trench",
-    "authors": ["Sun, Qi", "Cao, Zhen", "Sun, Qi", "Zhang, Hongwei", "Wang, Qian", "Ma, Chuanfeng", "Jiao, Licheng"],
+    "authors": [
+      {
+        "given": "Zhen",
+        "family": "Cao"
+      },
+      {
+        "given": "Qi",
+        "family": "Sun"
+      },
+      {
+        "given": "Hongwei",
+        "family": "Zhang"
+      },
+      {
+        "given": "Qian",
+        "family": "Wang"
+      },
+      {
+        "given": "Chuanfeng",
+        "family": "Ma"
+      },
+      {
+        "given": "Licheng",
+        "family": "Jiao"
+      }
+    ],
     "year": 2022,
-    "month": "",
-    "type": "article",
+    "kind": "journal",
+    "area": "device",
     "venue": "Micromachines",
+    "publication": "Micromachines",
     "publisher": "MDPI AG",
-    "pages": "",
+    "date": "2022-05-28",
+    "datePrecision": "day",
+    "dateBasis": "publisher_publication_date",
+    "selectedRank": null,
+    "links": [
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.3390/mi13060843"
+      }
+    ],
+    "metadataSources": [
+      "https://api.crossref.org/works/10.3390/mi13060843",
+      "https://www.mdpi.com/2072-666X/13/6/843"
+    ],
+    "metadataVerifiedOn": "2026-10-27",
     "doi": "10.3390/mi13060843",
-    "url": "https://doi.org/10.3390/mi13060843",
-    "highlightAuthor": "Sun, Qi"
+    "volume": "13",
+    "issue": "6",
+    "pages": "843",
+    "figureCredit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
+    "citationKey": "variable-k-ldmos"
   }
 ]

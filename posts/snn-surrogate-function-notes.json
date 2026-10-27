@@ -4,5 +4,11 @@
   "date": "2026-03-20",
   "category": "论文笔记",
   "excerpt": "围绕膜电位分布与替代梯度函数设计，整理 SNN 训练稳定性和梯度传播中的关键问题。",
-  "content": "<h2>问题背景</h2><p>脉冲发放函数不可导，使得 SNN 的反向传播需要借助替代梯度。替代函数的形状、宽度和膜电位分布之间的匹配关系，会直接影响训练稳定性。</p><h2>记录重点</h2><p>后续可以在这里展开整理 AAAI 2026 工作中的动机、公式推导、实验现象和复现实验设置。</p>"
+  "content": "<h2>问题背景</h2><p>脉冲发放函数不可导，使得 SNN 的反向传播需要借助替代梯度。替代函数的形状、宽度和膜电位分布之间的匹配关系，会直接影响训练稳定性。</p><h2>记录重点</h2><p>后续可以在这里展开整理 AAAI 2026 工作中的动机、公式推导、实验现象和复现实验设置。</p>",
+  "en": {
+    "title": "Notes on surrogate-function optimization in spiking neural networks",
+    "category": "Paper notes",
+    "excerpt": "Membrane-potential distributions, surrogate-gradient design, and their role in training stability and gradient propagation.",
+    "content": "<h2>Background</h2><p>The spike-generation function is not differentiable, so SNN backpropagation relies on surrogate gradients. The alignment between surrogate shape, width, and the membrane-potential distribution directly influences training stability.</p><h2>Reading focus</h2><p>Further notes may develop the motivation, derivations, experimental observations, and reproduction settings of the AAAI 2026 work.</p>"
+  }
 }

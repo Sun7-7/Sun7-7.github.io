@@ -4,5 +4,11 @@
   "date": "2026-03-08",
   "category": "技术笔记",
   "excerpt": "梳理 Spiking Self-Organizing Maps 在无监督雷达脉冲序列聚类和去交织任务中的使用方式。",
-  "content": "<h2>任务视角</h2><p>雷达信号去交织通常需要在混合脉冲序列中恢复不同辐射源的结构。脉冲自组织映射提供了一种无监督聚类路径，适合与事件驱动计算范式结合。</p><h2>后续整理</h2><p>这里可以继续补充收敛保证、竞争学习机制和复杂场景下的鲁棒性分析。</p>"
+  "content": "<h2>任务视角</h2><p>雷达信号去交织通常需要在混合脉冲序列中恢复不同辐射源的结构。脉冲自组织映射提供了一种无监督聚类路径，适合与事件驱动计算范式结合。</p><h2>后续整理</h2><p>这里可以继续补充收敛保证、竞争学习机制和复杂场景下的鲁棒性分析。</p>",
+  "en": {
+    "title": "Spiking self-organizing maps for radar signal deinterleaving",
+    "category": "Technical notes",
+    "excerpt": "An overview of spiking self-organizing maps for unsupervised radar pulse clustering and deinterleaving.",
+    "content": "<h2>Task perspective</h2><p>Radar signal deinterleaving seeks to recover the structure of individual emitters from mixed pulse streams. Spiking self-organizing maps offer an unsupervised clustering route compatible with event-driven computation.</p><h2>Reading focus</h2><p>Further notes may cover convergence guarantees, competitive learning, and robustness in complex scenarios.</p>"
+  }
 }
