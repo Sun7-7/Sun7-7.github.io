@@ -72,6 +72,10 @@ def main():
     (out/'logs').mkdir(exist_ok=True)
     (out/'logs/bilingual_structure.json').write_text(json.dumps(bilingual,indent=2),encoding='utf-8')
     papers=json.loads((ROOT/'data/publications.json').read_text(encoding='utf-8'))
+    profile=json.loads((ROOT/'data/profile.json').read_text(encoding='utf-8'))
+    for education in profile.get('education',[]):
+        if education.get('degree')=='Ph.D.' and re.search(r'\d',education.get('period','')) and not education.get('periodVerified',False):
+            errors.append(['data/profile.json','unconfirmed_doctoral_period'])
     expected_selected=[p['slug'] for p in sorted([p for p in papers if p.get('selectedRank')],key=lambda p:p['selectedRank'])]
     expected_all=[p['slug'] for p in sorted(papers,key=lambda p:p['date'].ljust(10,'0'),reverse=True)]
     assert len(papers)==11 and len(expected_selected)==6
@@ -94,7 +98,7 @@ def main():
     rules={'phone_number':r'(?<![\w\d])(?:\+86[- ]?)?1[3-9]\d{9}(?!\d)',
            'private_email_domain':r'[\w.+-]+@(?:qq\.com|163\.com|126\.com|gmail\.com)',
            'private_resume_filename':r'(?:求职|个人简历|resume).*\.(?:pdf|docx?)',
-           'unconfirmed_doctoral_start':r'(?:Ph\.?D\.?|博士)[^\n<]{0,60}(?:2023[-./]09|2024[-./]09)',
+           'unconfirmed_doctoral_start':r'(?:Ph\.?D\.?|博士)[^\n<]{0,60}(?:19|20)\d{2}[-./](?:0[1-9]|1[0-2])',
            'disallowed_public_section':r'<h[1-6][^>]*>\s*(?:Projects|Teaching|Academic Service|Leadership|Competition|科研项目|教学经历|学生工作|竞赛)\s*</h[1-6]>'}
     findings=[];manifest=[]
     for p in sorted(all_files):
