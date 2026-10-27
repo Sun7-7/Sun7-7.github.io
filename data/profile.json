@@ -12,6 +12,10 @@
   "bio_en": "Qi Sun is a Ph.D. student in Intelligence Science and Technology at the School of Artificial Intelligence, Xidian University. His research interests include spiking neural network learning and temporal computing, radar and intelligent signal processing, and semiconductor devices and neuromorphic hardware. His work appears in ICML, AAAI, ICASSP, Applied Physics Letters, IEEE Transactions on Electron Devices, and other venues.",
   "academicProfiles": [
     {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com.hk/citations?user=pW8kkrsAAAAJ&hl=zh-CN"
+    },
+    {
       "label": "GitHub",
       "url": "https://github.com/Sun7-7"
     }

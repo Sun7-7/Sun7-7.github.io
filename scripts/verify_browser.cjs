@@ -22,6 +22,27 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
    const url=`${BASE}/${lang==='en'?'en/':''}${file}.html`;
    await page.goto(url,{waitUntil:'networkidle'});await ready(page);
    const s=await state(page);assert.equal(s.width,s.scrollWidth,url);assert.equal(s.h1,1);assert.equal(s.theme,theme);assert.equal(s.brokenImages.length,0,url);assert.equal(s.clippedText.length,0,JSON.stringify(s));
+   const scholar='https://scholar.google.com.hk/citations?user=pW8kkrsAAAAJ&hl=zh-CN';
+   assert(await page.locator(`a[href="${scholar}"]`).count()>=1);
+   if(file==='index'){
+    assert((await page.locator('h1').innerText()).startsWith(lang==='zh'?'孙琦':'Qi Sun'));
+    assert.equal(await page.locator('.selected-domain').count(),3);
+    for(const area of ['learning','signals','device'])assert.equal(await page.locator(`[aria-labelledby=selected-${area}] [data-publication]`).count(),2);
+    assert.equal(await page.locator('.selected-domains [data-publication]').count(),6);
+   }
+   if(file==='publications'){
+    assert.equal(await page.locator('#all-publications-list [data-publication]').count(),11);
+    assert.equal(await page.locator('#all-publications-list .publication-summary').count(),0);
+    assert.equal(await page.locator('.selected-row time').count(),0);
+   }
+   if(file==='cv'){
+    assert.equal(await page.locator('.cv-publications [data-publication]').count(),11);
+    assert.equal(await page.locator('.publication-summary').count(),0);
+   }
+   if(file==='research'){
+    assert.equal(await page.locator('.full-figure-link').count(),4);
+    assert((await page.locator('#device img').first().getAttribute('src')).includes('high-k-trench-gan-hemt'));
+   }
    results.push({url,...size,theme,...s});
    if(size.width===1440||size.width===390){
     await page.addScriptTag({path:AXE});
@@ -42,6 +63,9 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
    await page.goto(url,{waitUntil:'networkidle'});await ready(page);const s=await state(page);
    assert.equal(s.scrollWidth,size.width,url);assert.equal(s.brokenImages.length,0,url);assert.equal(s.clippedText.length,0,JSON.stringify(s));results.push({url,...size,...s});
    const a=await page.locator('.paper-header .authors').innerText();const names=p.authors.map(x=>x.given+' '+x.family);const natural=names.slice(0,-1).join(', ')+', and '+names.at(-1)+'.';assert.equal(a,natural);assert.equal(a.split('Qi Sun').length-1,1);
+   assert((await page.locator('.publication-date').innerText()).startsWith(lang==='zh'?'出版日期：':'Published:'));
+   assert.equal(await page.locator('.full-figure-link').count(),3);
+   for(const credit of await page.locator('.figure-credit').allTextContents())assert.equal((credit.match(lang==='zh'?/图源：/g:/Source:/g)||[]).length,1);
    if(p.slug==='mte-ste-continuous-temporal-signal-classification'){
     await page.screenshot({path:path.join(PACKET,'screenshots',`paper_detail_${lang}_${size.width}x${size.height}_light_full.png`),fullPage:true});
     await page.addScriptTag({path:AXE});const r=await page.evaluate(async()=>{let r=await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','best-practice']}});return {violations:r.violations,incomplete:r.incomplete.map(x=>({id:x.id,nodes:x.nodes.length})),passes:r.passes.length}});accessibility.push({url,width:size.width,theme:'light',...r});
@@ -63,7 +87,12 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
   await page.locator(`[data-filter-group=area][data-filter=${area}]`).click();
   const expected=papers.filter(p=>(kind==='all'||p.kind===kind)&&(area==='all'||p.area===area)).length;
   const actual=await page.locator('#all-publications-list [data-publication]:visible').count();assert.equal(actual,expected);
-  assert.equal(await page.locator('[data-filter-empty]').isVisible(),expected===0);counts.push({kind,area,expected,actual});
+  assert.equal(await page.locator('[data-filter-empty]').isVisible(),expected===0);
+  for(const group of await page.locator('[data-year-group]').all()){
+   const visibleRows=await group.locator('[data-publication]:visible').count();
+   assert.equal(await group.isVisible(),visibleRows>0);
+  }
+  counts.push({kind,area,expected,actual});
  }
  await page.locator('[data-filter-group=kind][data-filter=conference]').focus();await page.keyboard.press('ArrowRight');assert.equal(await page.locator(':focus').getAttribute('data-filter'),'journal');assert.equal(await page.locator(':focus').getAttribute('aria-pressed'),'true');
  await page.locator('[data-filter-group=area][data-filter=device]').focus();await page.keyboard.press('Home');assert.equal(await page.locator(':focus').getAttribute('data-filter'),'all');
@@ -72,6 +101,10 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
   await page.goto(`${BASE}/${lang}post.html?slug=${p}`);await page.waitForURL(`**/${lang}notes/${p}.html`);assert.equal(await page.locator('h1').count(),1);
  }
  await page.goto(BASE+'/index.html#featured-publications');assert(await page.locator('#featured-publications').count());
+ await page.goto(BASE+'/research.html');await page.locator('.full-figure-link').first().focus();
+ const popupPromise=page.waitForEvent('popup');await page.keyboard.press('Enter');const popup=await popupPromise;
+ await popup.waitForLoadState('domcontentloaded');assert(popup.url().endsWith('.png'));assert(await popup.locator('img').evaluate(i=>i.naturalWidth>1000));await popup.close();
+ interactions.push({name:'keyboard_full_size_original_figure',status:'PASS'});
  await context.close();
  // No-JavaScript readability is tested, including mobile navigation and all papers.
  for(const lang of ['','en/']){

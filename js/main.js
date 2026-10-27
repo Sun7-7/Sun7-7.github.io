@@ -47,6 +47,9 @@
       row.hidden = !((filters.kind === 'all' || row.dataset.kind === filters.kind) && (filters.area === 'all' || row.dataset.area === filters.area));
       if (!row.hidden) count += 1;
     });
+    list?.querySelectorAll('[data-year-group]').forEach(group => {
+      group.hidden = ![...group.querySelectorAll('[data-publication]')].some(row => !row.hidden);
+    });
     document.querySelectorAll('[data-filter-group]').forEach(button => {
       button.setAttribute('aria-pressed', String(filters[button.dataset.filterGroup] === button.dataset.filter));
     });

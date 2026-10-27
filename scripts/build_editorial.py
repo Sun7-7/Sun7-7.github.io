@@ -59,7 +59,8 @@ def image(src,alt,path,lazy=True,extra=''):
  return f'<img src="{esc(rel(path,src))}" alt="{esc(alt)}" width="{width}" height="{height}"{loading} {extra}>'
 
 def venue(pub):
- parts=[pub['venue']]
+ label=pub['venue'] if str(pub['year']) in pub['venue'] else pub['venue']+' · '+str(pub['year'])
+ parts=[label]
  if pub['kind']=='conference' and pub.get('ccf'):parts.append('CCF-'+pub['ccf'])
  if pub.get('oral'):parts.append('Oral')
  return '<span class="venue">'+esc(' · '.join(parts))+'</span>'
@@ -74,22 +75,22 @@ def links(pub,lang,path,brief=True):
 def row(pub,lang,path,selected=False):
  d=detail(pub['slug'],lang);v=d['visuals'][0];thumb=''
  if selected:thumb=f'<a class="publication-thumb" href="{esc(rel(path,route(lang,"papers/"+pub["slug"]+".html")))}" tabindex="-1" aria-hidden="true">{image(v["src"],v["title"],path)}</a>'
- return f'''<article class="publication-row{' selected-row' if selected else ''}" data-publication="{pub['slug']}" data-kind="{pub['kind']}" data-area="{pub['area']}">{thumb}<div class="publication-copy"><div class="publication-meta">{venue(pub)}<time datetime="{pub['date']}">{pub['date']}</time></div><h3><a href="{esc(rel(path,route(lang,'papers/'+pub['slug']+'.html')))}">{esc(pub['title'])}</a></h3><p class="authors">{authors(pub)}.</p><p class="publication-summary">{esc(d['oneLine'])}</p>{links(pub,lang,path)}</div></article>'''
+ return f'''<article class="publication-row{' selected-row' if selected else ''}" data-publication="{pub['slug']}" data-kind="{pub['kind']}" data-area="{pub['area']}">{thumb}<div class="publication-copy"><div class="publication-meta">{venue(pub)}</div><h3><a href="{esc(rel(path,route(lang,'papers/'+pub['slug']+'.html')))}">{esc(pub['title'])}</a></h3><p class="authors">{authors(pub)}.</p><p class="publication-summary">{esc(d['oneLine'])}</p>{links(pub,lang,path)}</div></article>'''
 
 def header(path,lang,page):
  u=UI[lang];items=[]
  for key,file in [('home','index.html'),('research','research.html'),('publications','publications.html'),('about','about.html'),('cv','cv.html')]:
   active=' aria-current="page"' if key==page else '';items.append(f'<a href="{esc(rel(path,route(lang,file)))}"{active}>{u[key]}</a>')
  other=path.removeprefix('en/') if lang=='en' else 'en/'+path
- return f'''<a class="skip-link" href="#main">{u['skip']}</a><header class="site-header"><div class="container nav-bar"><a class="wordmark" href="{esc(rel(path,route(lang,'index.html')))}">Qi Sun <span lang="zh-CN">/ 孙琦</span></a><div class="nav-controls"><button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">{u['menu']}</button><nav id="primary-navigation" class="primary-navigation" aria-label="{t(lang,'主导航','Main navigation')}">{''.join(items)}</nav><a class="language-switch" href="{esc(rel(path,other))}" lang="{'en' if lang=='zh' else 'zh-CN'}" hreflang="{'en' if lang=='zh' else 'zh-CN'}" aria-label="{t(lang,'EN — Switch to English','中 — 切换为中文')}">{'EN' if lang=='zh' else '中'}</a><button class="theme-toggle" type="button" aria-pressed="false" aria-label="{t(lang,'切换深色主题','Switch to dark theme')}">{u['dark']}</button></div></div></header>'''
+ return f'''<a class="skip-link" href="#main">{u['skip']}</a><header class="site-header"><div class="container nav-bar"><a class="wordmark" href="{esc(rel(path,route(lang,'index.html')))}">{t(lang,"孙琦","Qi Sun")} <span lang="{t(lang,"en","zh-CN")}">/ {t(lang,"Qi Sun","孙琦")}</span></a><div class="nav-controls"><button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">{u['menu']}</button><nav id="primary-navigation" class="primary-navigation" aria-label="{t(lang,'主导航','Main navigation')}">{''.join(items)}</nav><a class="language-switch" href="{esc(rel(path,other))}" lang="{'en' if lang=='zh' else 'zh-CN'}" hreflang="{'en' if lang=='zh' else 'zh-CN'}" aria-label="{t(lang,'EN — Switch to English','中 — 切换为中文')}">{'EN' if lang=='zh' else '中'}</a><button class="theme-toggle" type="button" aria-pressed="false" aria-label="{t(lang,'切换深色主题','Switch to dark theme')}">{u['dark']}</button></div></div></header>'''
 
 def footer(path,lang):
- return f'''<footer class="site-footer"><div class="container footer-inner"><p>Qi Sun · {PROFILE['institution_zh' if lang=='zh' else 'institution_en']}<br><span>Academic Homepage + Research Portfolio</span></p><div class="footer-links"><a href="mailto:{PROFILE['email']}">{PROFILE['email']}</a><a href="https://github.com/Sun7-7">GitHub</a><a href="{esc(rel(path,route(lang,'blog.html')))}">{UI[lang]['notes']}</a></div></div></footer>'''
+ return f'''<footer class="site-footer"><div class="container footer-inner"><p>© 2026 {esc(display_name(lang))}<br>{esc(PROFILE['institution_zh' if lang=='zh' else 'institution_en'])}</p><div class="footer-links"><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}<a href="{esc(rel(path,route(lang,'blog.html')))}">{UI[lang]['notes']}</a></div></div></footer>'''
 
 def document(path,lang,page,title,description,body,profile=False):
  base=CONFIG['site']['url'];canonical=base+'/'+path;zh=path.removeprefix('en/');en='en/'+zh
  schema={'@context':'https://schema.org','@type':'ProfilePage' if profile else 'WebPage','url':canonical,'name':title,'inLanguage':'zh-CN' if lang=='zh' else 'en'}
- if profile:schema['mainEntity']={'@type':'Person','name':'Qi Sun','alternateName':'孙琦','url':base+'/en/index.html','image':base+'/assets/images/portraits/portrait_hero_4x5.webp','jobTitle':PROFILE['stage_en'],'affiliation':{'@type':'CollegeOrUniversity','name':'Xidian University'},'email':'mailto:'+PROFILE['email'],'sameAs':['https://github.com/Sun7-7']}
+ if profile:schema['mainEntity']={'@type':'Person','name':'Qi Sun','alternateName':'孙琦','url':base+'/en/index.html','image':base+'/assets/images/portraits/portrait_hero_4x5.webp','jobTitle':PROFILE['stage_en'],'affiliation':{'@type':'CollegeOrUniversity','name':'Xidian University'},'email':'mailto:'+PROFILE['email'],'sameAs':[p['url'] for p in PROFILE['academicProfiles']]}
  structured=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
  output=f'''<!DOCTYPE html>
 <html lang="{'zh-CN' if lang=='zh' else 'en'}" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"><link rel="alternate" hreflang="en" href="{base}/{en}"><link rel="alternate" hreflang="x-default" href="{base}/{en}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp"><meta property="og:image:alt" content="Qi Sun professional portrait"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp"><meta name="color-scheme" content="light dark"><link rel="icon" href="{esc(rel(path,'assets/favicon.svg'))}" type="image/svg+xml"><script src="{esc(rel(path,'js/theme-init.js'))}"></script><link rel="stylesheet" href="{esc(rel(path,'css/style.css'))}"><script type="application/ld+json">{structured}</script></head><body data-page="{page}" data-lang="{lang}">{header(path,lang,page)}<main id="main" class="container" tabindex="-1">{body}</main>{footer(path,lang)}<script src="{esc(rel(path,'js/main.js'))}" defer></script></body></html>'''
@@ -106,24 +107,89 @@ def area_cards(lang,path):
   items.append(f'<article class="area-summary"><p class="section-number">0{i} / {a["id"].upper()}</p><h3><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a></h3><p>{esc(atext(a,"short",lang))}</p><a class="text-link" href="papers/{p["slug"]}.html">{esc(label)}</a></article>')
  return '<div class="area-grid">'+''.join(items)+'</div>'
 
+
+def profile_links():
+ return ''.join(f'<a href="{esc(p["url"])}" target="_blank" rel="noopener noreferrer">{esc(p["label"])}</a>' for p in PROFILE['academicProfiles'])
+
+def display_name(lang):
+ return '孙琦 / Qi Sun' if lang=='zh' else 'Qi Sun / 孙琦'
+
+def publication_reference(pub):
+ volume=(', '+pub['volume']) if pub.get('volume') else ''
+ issue=('('+pub['issue']+')') if pub.get('issue') else ''
+ return pub['publication']+volume+issue+', '+pub['pages']+' ('+str(pub['year'])+')'
+
+def figure_credit(pub,lang):
+ # Preserve the existing copyright holder and manuscript provenance; do not infer permission.
+ credit=pub['figureCredit']
+ if credit.startswith('Author-supplied'):
+  rights=t(lang,'图取自作者提供的接收稿。','Figures from the author-supplied accepted manuscript.')
+ elif credit.startswith('©'):
+  rights=credit.split('Source:',1)[0].strip()
+  if lang=='zh':rights=rights.replace('the authors.','作者。').replace('IEEE.','IEEE。')
+ elif 'existing publication archive' in credit:
+  rights=t(lang,'图取自作者既有论文资料。','Figures from the author’s existing publication archive.')
+ else:rights=''
+ label=t(lang,'图源：','Source: ');separator=t(lang,'。','.')
+ return f'<p class="figure-credit">{label}<a href="{esc(pub["links"][0]["url"])}">{esc(publication_reference(pub))}</a>{separator} <span>{esc(rights)}</span></p>'
+
+def bibliography_row(pub,lang,path,heading='h4'):
+ extra=[]
+ if pub['kind']=='conference' and pub.get('ccf'):extra.append('CCF-'+pub['ccf'])
+ if pub.get('oral'):extra.append('Oral')
+ annotation=(' · '+' · '.join('<span class="publication-label">'+esc(x)+'</span>' for x in extra)) if extra else ''
+ primary=pub['links'][0]
+ return f'''<article class="bibliography-entry" data-publication="{pub['slug']}" data-kind="{pub['kind']}" data-area="{pub['area']}"><p class="authors">{authors(pub)}.</p><{heading}><a href="{esc(rel(path,route(lang,'papers/'+pub['slug']+'.html')))}">{esc(pub['title'])}</a></{heading}><p class="bibliography-record">{esc(publication_reference(pub))}{annotation}.</p><div class="bibliography-links"><a href="{esc(primary['url'])}" target="_blank" rel="noopener noreferrer">{esc(primary['label'])}</a><a href="{esc(rel(path,'assets/citations/'+pub['slug']+'.bib'))}" download>BibTeX</a></div></article>'''
+
+def bibliography_years(lang,path):
+ groups=[]
+ for year in sorted({p['year'] for p in PAPERS},reverse=True):
+  group=''.join(bibliography_row(p,lang,path) for p in PAPERS if p['year']==year)
+  groups.append(f'<section class="publication-year" data-year-group="{year}" aria-labelledby="year-{year}"><h3 id="year-{year}">{year}</h3><div>{group}</div></section>')
+ return ''.join(groups)
+
+def selected_groups(lang,path):
+ groups=[]
+ for i,area in enumerate(AREAS,1):
+  pubs=[p for p in SELECTED if p['area']==area['id']]
+  v=detail(pubs[0]['slug'],lang)['visuals'][0]
+  items=''.join(f'<article class="home-work" data-publication="{p["slug"]}"><p class="publication-meta">{venue(p)}</p><h4><a href="{esc(rel(path,route(lang,"papers/"+p["slug"]+".html")))}">{esc(p["title"])}</a></h4></article>' for p in pubs)
+  groups.append(f'<section class="selected-domain" aria-labelledby="selected-{area["id"]}"><p class="section-number">0{i} / {area["id"].upper()}</p><h3 id="selected-{area["id"]}">{UI[lang][area["id"]]}</h3><a class="domain-figure" href="{esc(rel(path,route(lang,"papers/"+pubs[0]["slug"]+".html")))}">{image(v["src"],v["title"],path)}</a>{items}</section>')
+ return '<div class="selected-domains">'+''.join(groups)+'</div>'
+
+def research_figure(pub,index,lang,path):
+ v=detail(pub['slug'],lang)['visuals'][index];src=esc(rel(path,v['src']))
+ return f'<figure class="research-figure"><a href="{src}" target="_blank" rel="noopener noreferrer" aria-label="{esc(t(lang,"查看原图：","View full-size figure: ")+v["title"])}">{image(v["src"],v["title"],path)}</a><figcaption><h3>{esc(v["title"])}</h3><p>{esc(v["caption"])}</p>{figure_credit(pub,lang)}<a class="full-figure-link" href="{src}" target="_blank" rel="noopener noreferrer">{t(lang,"查看原图","View full-size figure")} <span aria-hidden="true">↗</span></a></figcaption></figure>'
+
+def cv_document(lang):
+ path=route(lang,'cv.html');u=UI[lang]
+ body=f'<article class="cv-document"><header class="cv-header"><p class="eyebrow">Curriculum Vitae</p><h1>{esc(display_name(lang))}</h1><p>{esc(PROFILE["stage_zh" if lang=="zh" else "stage_en"])}</p><p>{esc(PROFILE["school_zh" if lang=="zh" else "school_en"])} · {esc(PROFILE["institution_zh" if lang=="zh" else "institution_en"])}</p><div class="cv-contacts"><a href="mailto:{PROFILE["email"]}">{PROFILE["email"]}</a>{profile_links()}</div><p class="print-actions"><button class="button print-button" type="button">{u["print"]}</button></p></header><section class="cv-section"><h2>{t(lang,"教育经历","Education")}</h2>{education(lang)}</section><section class="cv-section"><h2>{t(lang,"研究兴趣","Research Interests")}</h2><ul class="cv-interests">'+''.join(f'<li>{esc(atext(a,"names",lang))}</li>' for a in AREAS)+'</ul></section>'
+ body+=f'<section class="cv-section cv-publications"><h2>{u["publications"]}</h2>{bibliography_years(lang,path)}</section></article>'
+ document(path,lang,'cv',t(lang,'孙琦 — 学术 CV','Qi Sun — Academic CV'),t(lang,'孙琦的公开学术履历：教育、研究兴趣与正式发表论文。','Qi Sun’s public academic curriculum vitae: education, research interests, and publications.'),body)
+
 def home(lang):
  path=route(lang,'index.html');u=UI[lang]
- description=t(lang,'我的研究围绕脉冲神经网络的学习与时序计算展开，并关注雷达信号智能处理及半导体器件与神经形态硬件设计。研究从算法机制、实际信号任务与器件建模三个层面推进。','My research spans spiking neural network learning and temporal computation, intelligent radar signal processing, and semiconductor devices and neuromorphic hardware, connecting learning mechanisms with signal-domain applications and device-oriented investigations.')
- body=f'''<section class="hero" aria-labelledby="home-name"><div class="hero-copy"><p class="eyebrow">{t(lang,'博士研究生 · 西安电子科技大学','Ph.D. Student · Xidian University')}</p><h1 id="home-name">Qi Sun <span lang="zh-CN">孙琦</span></h1><p class="identity">{esc(PROFILE['school_zh' if lang=='zh' else 'school_en'])}<br>{esc(PROFILE['stage_zh' if lang=='zh' else 'stage_en'])}</p><p class="research-position">{t(lang,'类脑计算 · 雷达与信号智能 · 半导体器件','Neuromorphic Computing · Radar & Signal Intelligence · Semiconductor Devices')}</p><p class="hero-description">{esc(description)}</p><div class="hero-links"><a class="button" href="cv.html">{u['cv']}</a><a href="mailto:{PROFILE['email']}">Email</a><a href="https://github.com/Sun7-7">GitHub</a></div></div>{image('assets/images/portraits/portrait_hero_4x5.webp',t(lang,'孙琦的职业照','Professional portrait of Qi Sun'),path,False,'class="hero-portrait"')}</section><section id="research" class="home-section" aria-labelledby="areas-title"><div class="section-heading"><h2 id="areas-title">{t(lang,'研究方向','Research Areas')}</h2><a href="research.html">{t(lang,'研究陈述','Research statement')} <span aria-hidden="true">↗</span></a></div>{area_cards(lang,path)}</section><section id="selected-publications" class="home-section" aria-labelledby="selected-title"><span id="featured-publications" class="anchor-alias"></span><div class="section-heading"><div><h2 id="selected-title">{u['selected']}</h2><p>{t(lang,'学习机制、信号处理与器件研究中的代表工作。','Representative work in learning, signal processing, and device research.')}</p></div><a href="publications.html">{t(lang,'全部论文','All publications')} <span aria-hidden="true">↗</span></a></div><div class="publication-list">{''.join(row(p,lang,path,True) for p in SELECTED)}</div></section>'''
- document(path,lang,'home','Qi Sun / 孙琦 — Academic Homepage',CONFIG['site']['description'][lang],body,True)
+ description=t(lang,'我的研究围绕脉冲神经网络的学习与时序计算展开，结合雷达与其他连续信号任务研究事件驱动表示，并探索半导体器件建模与神经形态硬件的跨层联系。','I study learning and temporal computation in spiking neural networks, develop event-driven representations for radar and other continuous signals, and explore semiconductor device models and their connections to neuromorphic hardware.')
+ name=('孙琦 <span lang="en">/ Qi Sun</span>' if lang=='zh' else 'Qi Sun <span lang="zh-CN">/ 孙琦</span>')
+ institution=PROFILE['institution_zh' if lang=='zh' else 'institution_en']+' · '+PROFILE['school_zh' if lang=='zh' else 'school_en']
+ body=f'''<section class="hero" aria-labelledby="home-name"><div class="hero-copy"><p class="eyebrow">{esc(institution)}</p><h1 id="home-name">{name}</h1><p class="identity">{esc(PROFILE['stage_zh' if lang=='zh' else 'stage_en'])}</p><p class="hero-description">{esc(description)}</p><div class="hero-links"><a class="button" href="cv.html">{u['cv']}</a><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}</div></div>{image('assets/images/portraits/portrait_hero_4x5.webp',t(lang,'孙琦的职业照','Professional portrait of Qi Sun'),path,False,'class="hero-portrait"')}</section><section id="research" class="home-section" aria-labelledby="areas-title"><div class="section-heading"><h2 id="areas-title">{t(lang,'研究方向','Research Areas')}</h2><a href="research.html">{t(lang,'研究陈述','Research statement')} <span aria-hidden="true">↗</span></a></div>{area_cards(lang,path)}</section><section id="selected-publications" class="home-section" aria-labelledby="selected-title"><span id="featured-publications" class="anchor-alias"></span><div class="section-heading"><h2 id="selected-title">{u['selected']}</h2><a href="publications.html">{t(lang,'完整发表目录','Complete publication record')} <span aria-hidden="true">↗</span></a></div>{selected_groups(lang,path)}</section>'''
+ document(path,lang,'home',t(lang,'孙琦 | 脉冲学习、信号处理与半导体器件','Qi Sun | Spiking Learning, Signal Processing & Semiconductor Devices'),CONFIG['site']['description'][lang],body,True)
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
- body=intro('Research',u['research'],t(lang,'研究围绕三个相互关联的层次展开：学习与时序计算机制、实际信号任务，以及器件建模与硬件约束。已发表成果与当前研究兴趣在各方向中分别说明。','My research connects learning and temporal computation, signal-domain tasks, and device models with hardware constraints. Published evidence and current interests are distinguished within each theme.'))
+ body=intro('Research',u['research'],t(lang,'从脉冲网络的学习与时间表示，到复杂信号中的结构，再到器件物理与计算约束，我关注不同层次的模型如何形成相互可解释的联系。','My research connects learning and temporal representations in spiking networks with structure in complex signals and the physical constraints of devices.'))
  body+='<nav class="section-index" aria-label="'+t(lang,'研究方向目录','Research themes')+'">'+''.join(f'<a href="#{a["id"]}">0{i} / {u[a["id"]]}</a>' for i,a in enumerate(AREAS,1))+'</nav>'
  for i,a in enumerate(AREAS,1):
-  subs=''
-  if a['id']=='device':subs=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'APL、IEEE TED 与 Micromachines 论文提供功率器件结构、电场调控与数据驱动建模的公开证据。','The APL, IEEE TED, and Micromachines papers provide published evidence on power-device structures, field management, and data-driven modeling.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'当前研究兴趣包括神经形态器件模型、神经元阵列建模与跨层设计。上述功率器件论文不作为神经形态芯片已完成流片或系统验证的证据。','Current interests include neuromorphic device models, neuron-array modeling, and cross-layer design. The power-device papers above do not establish a fabricated or system-validated neuromorphic chip.')}</p></div>'''
-  p=BY_SLUG[a['figure']];v=detail(p['slug'],lang)['visuals'][0]
-  figure=f'<figure class="research-figure"><a href="{esc(rel(path,v["src"]))}">{image(v["src"],v["title"],path)}</a><figcaption>{esc(v["title"])}. {u["source"]}: <a href="{esc(p["links"][0]["url"])}">{esc(p["venue"])}, {p["year"]}</a>. {esc(p["figureCredit"])}</figcaption></figure>'
-  refs=''.join(f'<li><a href="papers/{s}.html">{esc(BY_SLUG[s]["title"])}</a><span>{esc(BY_SLUG[s]["venue"])} · {BY_SLUG[s]["year"]}</span></li>' for s in a['papers'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-columns"><div class="prose"><h3>{u["question"]}</h3><p>{esc(atext(a,"question",lang))}</p><h3>{u["method"]}</h3><p>{esc(atext(a,"method",lang))}</p>{subs}</div>{figure}</div><h3 class="small-heading">{t(lang,"相关发表","Related publications")}</h3><ul class="research-references">{refs}</ul></section>'
- document(path,lang,'research',u['research']+' | Qi Sun',CONFIG['site']['description'][lang],body)
+  statement=f'<p>{esc(atext(a,"question",lang))}</p>'
+  if a['id']=='device':
+   statement+=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'已发表的 APL、IEEE TED 与 Micromachines 工作研究功率器件的结构设计、电场调控和机器学习辅助建模，结合 TCAD 分析与论文中报告的器件验证，考察结构、模型与电学表现之间的关系。','Published work in APL, IEEE TED, and Micromachines studies power-device structures, field management, and ML-assisted modeling, relating device geometry and model predictions to TCAD analyses and the device evaluations reported in those papers.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'当前探索关注神经形态器件模型、神经元阵列建模与跨层设计，研究器件行为如何联系算法和硬件约束。上述功率器件论文提供器件研究基础，不作为神经形态芯片已完成流片或系统验证的证据。','Current interests concern neuromorphic device models, neuron-array modeling, and cross-layer design: how device behavior connects to algorithmic and hardware constraints. The power-device papers provide a device-research foundation, not evidence of a fabricated or system-validated neuromorphic chip.')}</p></div>'''
+   figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG['high-k-trench-gan-hemt'],index,lang,path) for index in [0,2])+'</div>'
+  else:
+   statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
+   figures=research_figure(BY_SLUG[a['figure']],0,lang,path)
+  refs=''.join(f'<li><a href="papers/{slug}.html">{esc(BY_SLUG[slug]["title"])}</a><span>{venue(BY_SLUG[slug])}</span></li>' for slug in a['papers'])
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表证据","Published evidence")}</h3><ul class="research-references">{refs}</ul></section>'
+ document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):
  path=route(lang,'publications.html');u=UI[lang]
@@ -134,35 +200,31 @@ def publications(lang):
   btns=''.join(f'<button type="button" data-filter-group="{group}" data-filter="{v}" aria-pressed="{"true" if v=="all" else "false"}" aria-controls="all-publications-list">{u[v]}</button>' for v in values)
   label=t(lang,'论文类型' if group=='kind' else '研究方向','Publication type' if group=='kind' else 'Research area')
   filters.append(f'<div class="filter-group" role="group" aria-label="{label}">{btns}</div>')
- body+=f'<section id="all-publications" class="all-publications" aria-labelledby="all-title"><div class="section-heading"><h2 id="all-title">{u["allPapers"]}</h2><a href="{rel(path,"assets/citations/all-publications.bib")}" download>{t(lang,"下载全部 BibTeX","Download all BibTeX")}</a></div><div class="publication-filters">'+''.join(filters)+f'</div><p class="filter-status" role="status" aria-live="polite" data-result-status>{t(lang,"显示 11 篇论文","Showing 11 publications")}</p><div id="all-publications-list" class="publication-list">'+''.join(row(p,lang,path) for p in PAPERS)+f'</div><p class="empty-state" data-filter-empty hidden>{u["empty"]}</p><noscript><p>{t(lang,"筛选需要 JavaScript；完整论文列表已显示。","Filtering requires JavaScript; the complete publication list is displayed.")}</p></noscript></section>'
+ body+=f'<section id="all-publications" class="all-publications" aria-labelledby="all-title"><div class="section-heading"><h2 id="all-title">{u["allPapers"]}</h2><a href="{rel(path,"assets/citations/all-publications.bib")}" download>{t(lang,"下载全部 BibTeX","Download all BibTeX")}</a></div><div class="publication-filters">'+''.join(filters)+f'</div><p class="filter-status" role="status" aria-live="polite" data-result-status>{t(lang,"显示 11 篇论文","Showing 11 publications")}</p><div id="all-publications-list" class="publication-list">'+bibliography_years(lang,path)+f'</div><p class="empty-state" data-filter-empty hidden>{u["empty"]}</p><noscript><p>{t(lang,"筛选需要 JavaScript；完整论文列表已显示。","Filtering requires JavaScript; the complete publication list is displayed.")}</p></noscript></section>'
  document(path,lang,'publications',u['publications']+' | Qi Sun',t(lang,'孙琦的代表性论文与完整发表目录。','Selected publications and the full publication record of Qi Sun.'),body)
 
 def education(lang):
  return f'<dl class="education"><div><dt>{t(lang,"博士研究生 · 智能科学与技术","Ph.D. Student · Intelligence Science and Technology")}</dt><dd>{PROFILE["institution_zh" if lang=="zh" else "institution_en"]} · {t(lang,"在读","In progress")}</dd></div><div><dt>{t(lang,"工学学士 · 智能科学与技术","B.Eng. · Intelligence Science and Technology")}</dt><dd>{PROFILE["institution_zh" if lang=="zh" else "institution_en"]} · 2019-09 – 2023-06</dd></div></dl>'
 
 def about(lang,cv=False):
- path=route(lang,'cv.html' if cv else 'about.html');u=UI[lang];bio=PROFILE['bio_zh' if lang=='zh' else 'bio_en']
- if cv:
-  body=intro('Curriculum Vitae','Qi Sun / 孙琦',PROFILE['stage_zh' if lang=='zh' else 'stage_en'])
-  body+=f'<p class="cv-affiliation">{PROFILE["school_zh" if lang=="zh" else "school_en"]} · {PROFILE["institution_zh" if lang=="zh" else "institution_en"]}</p><p class="print-actions"><button class="button print-button" type="button">{u["print"]}</button></p>'
- else:
-  body=intro('About',t(lang,'学术简介','Academic Biography'))
-  body+=f'<div class="biography-layout"><div class="prose"><p class="lead">{esc(bio)}</p><p>{t(lang,"研究关注学习机制、时序信号中的结构与器件物理约束之间的联系，以公开论文所报告的实验和分析作为讨论依据。","I am interested in how learning mechanisms, temporal signal structure, and physical device constraints inform one another, grounding these questions in the experiments and analyses reported in my publications.")}</p></div>{image("assets/images/portraits/portrait_about_2x3.webp",t(lang,"孙琦的职业照","Professional portrait of Qi Sun"),path,False,"class=about-portrait")}</div>'
- body+=f'<section class="about-section"><h2>{t(lang,"教育经历","Education")}</h2>{education(lang)}</section><section class="about-section"><h2>{t(lang,"研究兴趣","Research Interests")}</h2><ul class="interest-list">'+''.join(f'<li><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a><p>{esc(atext(a,"short",lang))}</p></li>' for a in AREAS)+'</ul></section>'
- if cv:body+=f'<section class="about-section"><h2>{u["publications"]}</h2><div class="publication-list">'+''.join(row(p,lang,path) for p in PAPERS)+'</div></section>'
- body+=f'<section id="contact" class="about-section"><h2>{t(lang,"学术入口与联系","Academic Profiles & Contact")}</h2><div class="contact-list"><a href="mailto:{PROFILE["email"]}">{PROFILE["email"]}</a><a href="https://github.com/Sun7-7">GitHub / Sun7-7</a><a href="publications.html">{u["publications"]}</a>'+('' if cv else f'<a href="cv.html">{u["cv"]}</a>')+'</div></section>'
- document(path,lang,'cv' if cv else 'about',('Academic CV' if cv else u['about'])+' | Qi Sun',bio,body,not cv)
+ if cv:return cv_document(lang)
+ path=route(lang,'about.html');u=UI[lang];bio=PROFILE['bio_zh' if lang=='zh' else 'bio_en']
+ body=intro('About',t(lang,'学术简介','Academic Biography'))
+ body+=f'<div class="biography-layout"><div class="prose"><p class="lead">{esc(bio)}</p></div>{image("assets/images/portraits/portrait_about_2x3.webp",t(lang,"孙琦的职业照","Professional portrait of Qi Sun"),path,False,"class=about-portrait")}</div>'
+ body+=f'<section class="about-section"><h2>{t(lang,"教育经历","Education")}</h2>{education(lang)}</section><section class="about-section"><h2>{t(lang,"研究兴趣","Research Interests")}</h2><ul class="interest-list">'+''.join(f'<li><a href="research.html#{a["id"]}">{esc(atext(a,"names",lang))}</a></li>' for a in AREAS)+'</ul></section>'
+ body+=f'<section id="contact" class="about-section"><h2>{t(lang,"学术入口与联系","Academic Profiles & Contact")}</h2><div class="contact-list"><a href="mailto:{PROFILE["email"]}">{PROFILE["email"]}</a>{profile_links()}<a href="publications.html">{u["publications"]}</a><a href="cv.html">{u["cv"]}</a></div></section>'
+ document(path,lang,'about',t(lang,'关于孙琦 | 西安电子科技大学','About Qi Sun | Xidian University'),bio,body,True)
 
 def paper(pub,lang):
  path=route(lang,'papers/'+pub['slug']+'.html');u=UI[lang];d=detail(pub['slug'],lang)
  record=pub['publication']+(', '+pub['volume'] if pub.get('volume') else '')+('('+pub['issue']+')' if pub.get('issue') else '')+' · '+pub['pages']
- body=f'<header class="paper-header"><a class="back-link" href="../publications.html">← {t(lang,"全部论文","All publications")}</a><p class="eyebrow">{u["brief"]}</p><h1>{esc(pub["title"])}</h1><p class="authors">{authors(pub)}.</p><div class="publication-meta">{venue(pub)}<time datetime="{pub["date"]}">{pub["date"]}</time></div><p class="publication-record">{esc(record)}</p>{links(pub,lang,path,False)}<p class="key-takeaway">{esc(d["oneLine"])}</p></header>'
+ body=f'<header class="paper-header"><a class="back-link" href="../publications.html">← {t(lang,"全部论文","All publications")}</a><p class="eyebrow">{u["brief"]}</p><h1>{esc(pub["title"])}</h1><p class="authors">{authors(pub)}.</p><div class="publication-meta">{venue(pub)}<span class="publication-date">{t(lang,"出版日期：","Published: ")}<time datetime="{pub["date"]}">{pub["date"]}</time></span></div><p class="publication-record">{esc(record)}</p>{links(pub,lang,path,False)}<p class="key-takeaway">{esc(d["oneLine"])}</p></header>'
  steps=''.join(f'<li><strong>{esc(x["label"])}</strong><p>{esc(x["text"])}</p></li>' for x in d['pipeline'])
  metrics=''.join(f'<div><dt>{esc(x["metric"])}</dt><dd><strong>{esc(x["value"])}</strong><p>{esc(x["note"])}</p></dd></div>' for x in d['evidence'])
  body+=f'<div class="paper-body"><section class="paper-section prose"><h2>{u["question"]}</h2><p>{esc(d["problem"])}</p></section><section class="paper-section prose"><h2>{u["method"]}</h2><p>{esc(d["method"])}</p><details class="technical-route"><summary>{u["route"]}</summary><ol>{steps}</ol></details></section><section class="paper-section"><h2>{u["evidence"]}</h2><dl class="evidence-list">{metrics}</dl><div class="figure-gallery">'
  for v in d['visuals']:
   label=t(lang,'打开原尺寸图表：','Open full-size figure: ')+v['title']
-  body+=f'<figure><a href="{esc(rel(path,v["src"]))}" aria-label="{esc(label)}">{image(v["src"],v["title"]+". "+v["caption"],path)}</a><figcaption><h3>{esc(v["title"])}</h3><p>{esc(v["caption"])}</p><p>{esc(v["insight"])}</p><p class="figure-credit">{esc(pub["figureCredit"])} <a href="{esc(pub["links"][0]["url"])}">{u["source"]}</a>.</p></figcaption></figure>'
+  body+=f'<figure><a href="{esc(rel(path,v["src"]))}" aria-label="{esc(label)}">{image(v["src"],v["title"]+". "+v["caption"],path)}</a><figcaption><h3>{esc(v["title"])}</h3><p>{esc(v["caption"])}</p><p>{esc(v["insight"])}</p>{figure_credit(pub,lang)}<a class="full-figure-link" href="{esc(rel(path,v["src"]))}" target="_blank" rel="noopener noreferrer">{t(lang,'查看原图','View full-size figure')}</a></figcaption></figure>'
  body+=f'</div></section><section class="paper-section prose"><h2>{u["conclusion"]}</h2><p class="conclusion-statement">{esc(d["coreClaim"])}</p><p>{esc(d["whyItMatters"])}</p><ul>'+''.join('<li>'+esc(x)+'</li>' for x in d['highlights'])+f'</ul><p class="limitations">{esc(d["discussion"])}</p></section><section class="paper-section prose"><h2>{u["citation"]}</h2><p>{authors(pub)}. {esc(pub["title"])}. <em>{esc(pub["publication"])}</em>, {pub["year"]}, {esc(pub["pages"])}.</p><a href="{esc(rel(path,"assets/citations/"+pub["slug"]+".bib"))}" download>{t(lang,"下载 BibTeX","Download BibTeX")}</a></section></div>'
  document(path,lang,'publications',pub['title']+' | Qi Sun',d['oneLine'],body)
 

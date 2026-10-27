@@ -1,6 +1,7 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
-V3.1 is a review candidate on `redesign/academic-homepage-v3-1`, based on
+V3.2 refines the V3.1 candidate `702972e4f79342aeb010e26c7232036f7b98cd7c`
+on `redesign/academic-homepage-v3-1` (Draft PR #1). Production `main` remains
 `001a1dff3b45b99949da3454f7b3d828ec13782c`. It is a static GitHub Pages site.
 
 ## Build and preview
@@ -44,6 +45,7 @@ npm ci
 $env:REVIEW_PACKET_DIR = 'tmp/review'
 $env:TEST_BASE_URL = 'http://127.0.0.1:8091'
 npm run check:browser
+npm run check:editorial
 npm run check:lighthouse
 ```
 
@@ -62,3 +64,9 @@ results. A local Lighthouse result is not a measurement of the production site.
 Review the candidate and its public-content audit before merging. This branch
 must not be deployed automatically to the production site. The existing Pages
 source is `main`; release requires an explicit later decision by the owner.
+
+V3.2 groups homepage work by research theme, presents the complete publication
+record as a year-grouped bibliography, and separates the compact public CV from
+web briefs. Google Scholar uses the exact profile URL supplied by the owner;
+no citation counts or profile statistics are imported. Non-OA figure reuse
+permissions remain a publishing gate; source attribution is not permission.
