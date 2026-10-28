@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Publication record",
+  "type": "object",
+  "required": [
+    "slug",
+    "title",
+    "authors",
+    "year",
+    "kind",
+    "area",
+    "date",
+    "datePrecision",
+    "dateBasis",
+    "venue",
+    "publication",
+    "pages",
+    "publisher",
+    "links",
+    "metadataSources",
+    "citationKey"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "given",
+          "family"
+        ],
+        "properties": {
+          "given": {
+            "type": "string",
+            "minLength": 1
+          },
+          "family": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 1900
+    },
+    "kind": {
+      "enum": [
+        "conference",
+        "journal"
+      ]
+    },
+    "area": {
+      "enum": [
+        "learning",
+        "signals",
+        "device"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(-[0-9]{2}){0,2}$"
+    },
+    "datePrecision": {
+      "enum": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "dateBasis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "doi": {
+      "type": "string",
+      "pattern": "^10\\.[0-9]{4,9}/\\S+$"
+    },
+    "ccf": {
+      "enum": [
+        "A",
+        "B"
+      ]
+    },
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "label"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "metadataSources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^https://"
+      }
+    },
+    "selectedRank": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "journal"
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "required": [
+            "ccf"
+          ]
+        }
+      }
+    }
+  ]
+}

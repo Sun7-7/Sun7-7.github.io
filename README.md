@@ -1,100 +1,61 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
-V3.4 is a Research portfolio candidate based on released main
-`f9e1f1213040b42d05257a44f4df77c77a9a7d8f`, on
-`codex/research-portfolio-v34`. This candidate is not deployed. The V3.4 handoff
-requires review before any merge or publication.
+V3.5 candidate on `codex/v35-research-ux-content-pipeline`, based on released V3.4
+main `775611fad908048f91877481fb125b52ff689f79`. The owner approved this exact existing-site snapshot for production on 2026-10-29.
+The recorded approval expires on any source/artifact change. The existing static Python/GitHub Pages architecture and
+all 44 bilingual URLs remain in place.
 
-Research defaults to six overview figures across three directions. Hover/focus a
-paper or use its button to collapse that direction's overview and unfold the
-paper's own two figures and introduction below its title. Selecting another
-paper closes the previous selection. Selection persists while reading/scrolling;
-collapse buttons or Escape restore the overview. Titles remain navigation links.
-All panels participate in normal document flow. Scroll compensation preserves the
-selected title's screen position when earlier content folds. Height and opacity
-transition over 320 ms with gentle ease-out; interrupted transitions retarget from
-their current size. Reduced-motion users get immediate changes; deliberate scroll
-gestures override automatic anchoring. No JavaScript means
-static overview figures and original paper navigation remain available.
-
-The source mapping is `data/research_visuals.json`; bilingual captions and credits
-reuse unchanged publication data. Supplied optimized portraits remain unchanged
-from the initial V3.4 candidate. No scientific figure pixels are modified.
+Research now separates stable whole-row hover/focus previews, optional pinning,
+and an explicit native-dialog illustrated reader. Preview changes affect only
+opacity/4px translation over 180 ms; they never change document height or call
+window scrolling APIs. Touch and narrow layouts use the explicit reader button.
+Without JavaScript the original paper links and static overview figures remain.
+Reduced-motion disables the preview animation. The current professional portraits
+and all scientific image pixels are unchanged.
 
 ## Build and preview
 
-Python 3.10+ and the standard library are sufficient for the site build:
-
 ```powershell
 python scripts/build_site.py
-python -m http.server 8091 --bind 127.0.0.1
+python -m http.server 8095 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8091/`. Prebuilt HTML works without Node.js or a dynamic
-server. No framework migration or remote font service is required.
+Open http://127.0.0.1:8095/research.html . Python 3.10+ standard library is enough
+for candidate builds and semantic validation. QA-only tools require Node.js
+22.19+ and jsonschema (requirements-qa.txt).
 
-## Content ownership
+## Content and publication workflow
 
-- `data/publications.json`: the sole bibliographic authority, including author
-  order, publication-date precision, research area, selected rank, and source URLs.
-- `data/publication_details.json`: original scientific briefs and figure captions,
-  keyed by stable slug. Scientific results and figure pixels are preserved.
-- `data/profile.json`: deliberately limited public academic information. Do not
-  replace it with a job-search résumé or add unverified education dates.
-- `scripts/build_editorial.py`: bilingual templates and research statements.
-- `posts/*.json`: original short notes with explicit English translations.
-- `cv.html`, `en/cv.html`: public print-friendly CVs generated from safe data.
-
-The two optimized portrait files are used exactly as supplied. No original
-full-resolution portrait, private résumé, or source paper PDF is distributed.
-Figure credits point to the source publications; third-party publisher rights
-and author-sharing terms remain applicable.
-
-Existing `papers/*.html`, `en/papers/*.html`, `blog.html`, `en/blog.html`, and
-`post.html?slug=...` links are retained. Legacy query links resolve only to the
-four existing note slugs. All core page text is present without JavaScript.
+See [the data contract and draft/import instructions](docs/PUBLICATION_WORKFLOW.md).
+Draft creation cannot publish. Pending image rights remain explicitly recorded;
+`python scripts/build_site.py --release` blocks incomplete reviews, except for the
+exact owner-approved existing-site snapshot recorded in data/release_authorization.json.
+Pending rights are retained; this is not new third-party permission. Owner consent to release is separate from third-party image permission.
+No raw job-search document, original portrait PNG, unpublished project material,
+or source paper PDF belongs in the public repository.
 
 ## Checks
 
 ```powershell
+python scripts/validate_publications.py --check-output --report tmp/review/publications.json
 python scripts/check_site.py --report-dir tmp/review
+python scripts/check_wording.py --report-dir tmp/review
+python -m pip install -r requirements-qa.txt
+python scripts/test_publication_pipeline.py
 npm ci
-$env:REVIEW_PACKET_DIR = 'tmp/review'
-$env:TEST_BASE_URL = 'http://127.0.0.1:8091'
+npx playwright install firefox webkit ffmpeg
+$env:TEST_BASE_URL = 'http://127.0.0.1:8095'
+$env:REVIEW_PACKET_DIR = 'tmp/v35'
 npm run check:browser
-npm run check:editorial
-npm run check:lighthouse
-```
-
-Node.js 22.19+ is needed only for QA. Windows browser checks use installed Edge;
-set `BROWSER_CHANNEL=chrome` to use Chrome. On other platforms, install the
-Playwright Chromium runtime with `npx playwright install chromium`. Lighthouse
-uses installed Chrome; `CHROME_PATH` can override its location.
-
-Browser checks cover four viewports, both languages, both themes, keyboard
-controls, combined filters, legacy links, no-JavaScript content, and printable
-CVs. The report directory includes actual screenshots and raw axe/Lighthouse
-results. A local Lighthouse result is not a measurement of the production site.
-
-## Review and release
-
-V3.4 is a candidate for review. Do not merge or deploy without new owner approval.
-All 11 bibliographic records, scientific descriptions, and 33 research figures
-remain unchanged. Existing non-OA figure rights require article-specific review;
-source attribution and previous website use do not establish permission.
-
-Additional Research interaction checks (Edge, installed locally):
-
-```powershell
-python -m http.server 8094 --bind 127.0.0.1
-# In another terminal:
 npm run check:research
+node scripts/check_research_stress.cjs
+node scripts/benchmark_research.cjs v35 http://127.0.0.1:8095
 ```
 
-The Research checker captures actual local browser scenes and logs in `tmp/v34-inline`.
-It covers five widths, both languages/themes, all nine mappings, hover, keyboard,
-touch, no-JavaScript reading, title anchoring, collapse restoration, and axe scans. A 720×450
-viewport approximates 200% scaling of 1440×900; native browser zoom, real mobile
-devices, Safari, and screen readers still require human device testing.
-
-Transition frame checks: `node scripts/check_transitions.cjs` (writes `tmp/v34-smooth/logs/transition_frames.json`).
+The benchmark records actual browser video, frame intervals, long tasks and raw
+Chromium traces. These are headless desktop/viewport tests, not physical-device
+measurements, energy measurements or a Lighthouse score. Browser-engine launch
+failures and axe incomplete results must remain visible in the report. WebKit
+on Windows is not a claim of testing Safari/iOS. A 720×450 CSS viewport is only
+a layout equivalent for 200% zoom; native menu zoom and real screen readers still
+need manual testing. Old release test results must not be reported as new runs.

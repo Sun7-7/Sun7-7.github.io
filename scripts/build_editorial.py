@@ -30,22 +30,12 @@ def route(lang,filename):return ('en/' if lang=='en' else '')+filename
 def detail(slug,lang):
  d=DETAILS[slug];return {**{k:v for k,v in d.items() if k!='en'},**(d.get('en',{}) if lang=='en' else {})}
 
-AREAS=[
- dict(id='learning',names=['脉冲学习与时序计算','Spiking Learning & Temporal Computing'],
- short=['研究脉冲网络的训练与时间表示，通过替代梯度、多尺度编码和稀疏计算，理解有限时间窗内的学习与推理。','Learning and temporal representations in spiking networks, from surrogate gradients to multi-scale encoding and sparse inference.'],
- question=['离散脉冲如何在有限时间窗中保留有效信息，并获得稳定、可控的梯度？这一问题连接训练动力学、时序表示与计算开销。','How can discrete spikes preserve useful evidence within a short horizon while supporting stable gradients? This connects training dynamics, temporal representations, and computational cost.'],
- method=['从膜电位分布与替代梯度的匹配出发，研究训练中的梯度传播；以多尺度时间编码和稀疏变换编码组织连续信号，比较匹配骨干与训练预算下的效果。','I study gradient propagation through the alignment of membrane-potential distributions and surrogate functions, and organize continuous signals through multi-scale temporal and sparse transform encoding under matched comparisons.'],
- papers=['mte-ste-continuous-temporal-signal-classification','mpo-surrogate-function-snn'],figure='mte-ste-continuous-temporal-signal-classification'),
- dict(id='signals',names=['雷达与智能信号处理','Radar & Intelligent Signal Processing'],
- short=['面向混合脉冲流与复杂时序信号，研究雷达分选、去交织和识别，结合无监督学习、相似性结构与事件驱动表示。','Radar sorting, deinterleaving, and recognition in mixed pulse streams, using unsupervised learning, similarity structure, and event-driven representations.'],
- question=['多源脉冲高度交叠、噪声增加或标签不足时，如何恢复辐射源结构，并形成可用于去噪与识别的表示？','How can emitter structure be recovered when pulse streams overlap, noise grows, or labels are scarce, while retaining representations useful for denoising and recognition?'],
- method=['以自组织竞争学习建立无监督分选路径，将脉冲间相似性与伪标签用于簇关系判断，并研究相似性分布到脉冲时序的编码。相关应用也扩展到遥感和多模态传感。','Self-organizing competitive learning provides an unsupervised route; similarity structure and pseudo-labels support cluster decisions, while similarity-guided temporal encoding connects radar inputs to SNNs. Related applications extend to remote sensing and multimodal sensing.'],
- papers=['spiking-som-radar-deinterleaving','sgte-snn-radar-emitter-denoising-recognition','adaptive-clustering-radar-signal-processing'],figure='spiking-som-radar-deinterleaving'),
- dict(id='device',names=['半导体器件与神经形态硬件','Semiconductor Devices & Neuromorphic Hardware'],
- short=['结合器件物理、TCAD 与数据建模研究功率器件设计；同时关注神经形态器件模型、神经元阵列与跨层设计问题。','Power-device design through device physics, TCAD, and data-driven models, alongside interests in neuromorphic device models, neuron arrays, and cross-layer design.'],
- question=['器件结构、边界条件与模型精度如何共同决定电学表现？器件模型又如何与神经形态计算中的神经元行为和系统约束建立联系？','How do device geometry, boundary conditions, and model fidelity shape electrical behavior, and how can device models connect with neuron dynamics and system constraints in neuromorphic computing?'],
- method=['已发表工作包括功率器件的结构设计、电场调控与机器学习辅助建模。神经形态器件与跨层设计属于另一研究层次，关注器件模型、神经元阵列建模及算法与硬件约束的联系。','Published studies address power-device structures, field management, and ML-assisted modeling. Neuromorphic devices and cross-layer design form a distinct research scope involving device models, neuron-array modeling, and connections between algorithms and hardware constraints.'],
- papers=['high-k-trench-gan-hemt','ml-ldmos-bv-optimization','sipos-umofet-fom','variable-k-ldmos'],figure='sipos-umofet-fom')]
+AREAS=load('data/research_areas.json')
+EDITORIAL=load('data/publication_editorial.json')
+FIGURES={f['id']:f for f in load('data/figures.json')}
+
+def figure_src(ref):
+ f=FIGURES[ref];return DETAILS[f['publication_slug']]['visuals'][f['visual_index']]['src']
 
 def atext(area,key,lang):return area[key][0 if lang=='zh' else 1]
 
@@ -157,7 +147,7 @@ def selected_groups(lang,path):
  for i,area in enumerate(AREAS,1):
   pubs=[p for p in SELECTED if p['area']==area['id']]
   v=detail(pubs[0]['slug'],lang)['visuals'][0]
-  items=''.join(f'<article class="home-work" data-publication="{p["slug"]}"><p class="publication-meta">{venue(p)}</p><h4><a href="{esc(rel(path,route(lang,"papers/"+p["slug"]+".html")))}">{esc(p["title"])}</a></h4></article>' for p in pubs)
+  items=''.join(f'<article class="home-work" data-publication="{p["slug"]}"><p class="publication-meta">{venue(p)}</p><h4><a href="{esc(rel(path,route(lang,"papers/"+p["slug"]+".html")))}">{esc(p["title"])}</a></h4><p class="work-highlight">{esc(EDITORIAL[p["slug"]][lang])}</p></article>' for p in pubs)
   groups.append(f'<section class="selected-domain" aria-labelledby="selected-{area["id"]}"><p class="section-number">0{i} / {area["id"].upper()}</p><h3 id="selected-{area["id"]}">{UI[lang][area["id"]]}</h3><a class="domain-figure" href="{esc(rel(path,route(lang,"papers/"+pubs[0]["slug"]+".html")))}">{image(v["src"],v["title"],path)}</a>{items}</section>')
  return '<div class="selected-domains">'+''.join(groups)+'</div>'
 
@@ -179,13 +169,14 @@ def home(lang):
  body=f'''<section class="hero" aria-labelledby="home-name"><div class="hero-copy"><p class="eyebrow">{esc(institution)}</p><h1 id="home-name">{name}</h1><p class="identity">{esc(PROFILE['stage_zh' if lang=='zh' else 'stage_en'])}</p><p class="hero-description">{esc(description)}</p><div class="hero-links"><a class="button" href="cv.html">{u['cv']}</a><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}</div></div>{image('assets/images/portraits/portrait_hero_4x5.webp',t(lang,'孙琦的职业照','Professional portrait of Qi Sun'),path,False,'class="hero-portrait"')}</section><section id="research" class="home-section" aria-labelledby="areas-title"><div class="section-heading"><h2 id="areas-title">{t(lang,'研究方向','Research Areas')}</h2><a href="research.html">{t(lang,'研究陈述','Research statement')} <span aria-hidden="true">↗</span></a></div>{area_cards(lang,path)}</section><section id="selected-publications" class="home-section" aria-labelledby="selected-title"><span id="featured-publications" class="anchor-alias"></span><div class="section-heading"><h2 id="selected-title">{u['selected']}</h2><a href="publications.html">{t(lang,'完整发表目录','Complete publication record')} <span aria-hidden="true">↗</span></a></div>{selected_groups(lang,path)}</section>'''
  document(path,lang,'home',t(lang,'孙琦 | 脉冲学习、信号处理与半导体器件','Qi Sun | Spiking Learning, Signal Processing & Semiconductor Devices'),CONFIG['site']['description'][lang],body,True)
 
+def preview_figures(slug,srcs,lang,path):
+ pub=BY_SLUG[slug];visuals=detail(slug,lang)['visuals']
+ return ''.join(research_figure(pub,next(i for i,v in enumerate(visuals) if v['src']==src),lang,path) for src in srcs)
+
 def research_preview(mapping,lang,path):
  slug=mapping['slug'];pub=BY_SLUG[slug];d=detail(slug,lang)
- panel='preview-'+slug
- indices=[next(i for i,v in enumerate(d['visuals']) if v['src']==src) for src in mapping['figures']]
- figures=''.join(research_figure(pub,i,lang,path) for i in indices)
- return f'''<li class="research-paper" data-preview-slug="{slug}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><button class="preview-toggle" type="button" hidden aria-expanded="false" aria-controls="{panel}" data-open-label="{t(lang,'展开图文','Explore figures')}" data-close-label="{t(lang,'收起图文','Collapse figures')}">{t(lang,'展开图文','Explore figures')}</button></div><div class="paper-preview" id="{panel}" hidden role="region" aria-label="{esc(t(lang,'论文图文：','Paper figures: ')+pub['title'])}"><p class="preview-summary">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div><p class="preview-error" hidden>{t(lang,'部分图片暂时无法加载，可通过原图入口或论文标题继续阅读。','Some figures could not load. Use the original figure links or paper title to continue reading.')}</p><button class="preview-close" type="button">{t(lang,'收起图文，恢复方向概览','Close figures and restore overview')}</button></div></li>'''
-
+ figures=preview_figures(slug,[figure_src(ref) for ref in mapping['figureRefs']],lang,path)
+ return f'''<li class="research-paper" data-preview-slug="{slug}" data-paper-title="{esc(pub['title'])}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" tabindex="0" href="papers/{slug}.html">{esc(pub['title'])}</a><p class="research-authors">{authors(pub)}.</p><p class="research-summary">{esc(d['oneLine'])}</p><div class="research-actions"><button class="pin-preview" type="button" hidden aria-pressed="false">{t(lang,'固定预览','Pin preview')}</button><button class="preview-toggle" type="button" hidden aria-haspopup="dialog" aria-controls="paper-reader">{t(lang,'阅读图解','Read illustrated brief')}</button></div></div><template data-stage-template="{slug}"><div class="stage-figures">{figures}</div></template><template data-reader-template="{slug}"><p class="lead">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div>{links(pub,lang,path)}</template></li>'''
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
@@ -193,16 +184,19 @@ def research(lang):
  body+='<nav class="section-index" aria-label="'+t(lang,'研究方向目录','Research themes')+'">'+''.join(f'<a href="#{a["id"]}">0{i} / {u[a["id"]]}</a>' for i,a in enumerate(AREAS,1))+'</nav>'
  for i,a in enumerate(AREAS,1):
   statement=f'<p>{esc(atext(a,"question",lang))}</p>'
-  if a['id']=='device':
-   statement+=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'已发表的 APL、IEEE TED 与 Micromachines 工作研究功率器件的结构设计、电场调控和机器学习辅助建模，结合 TCAD 分析与论文中报告的器件验证，考察结构、模型与电学表现之间的关系。','Published work in APL, IEEE TED, and Micromachines studies power-device structures, field management, and ML-assisted modeling, relating device geometry and model predictions to TCAD analyses and the device evaluations reported in those papers.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'神经形态器件与跨层设计是另一条正在探索的方向。我关注器件行为与神经元动力学的对应关系，以及器件模型、神经元阵列建模和算法约束之间的联系。','Neuromorphic devices and cross-layer design form a separate, ongoing direction. I am interested in connections between device behavior and neuron dynamics, and in how device models, neuron-array modeling, and algorithmic constraints inform design.')}</p></div>'''
-
-  else:
-   statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
+  if a.get('scopes'):
+   statement+='<div class="device-scopes">'+''.join(f'<h3>{esc(scope["title"])}</h3><p>{esc(scope[lang])}</p>' for scope in a['scopes'])+'</div>'
+  else:statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
 
   mapping=VISUALS[a['id']]
-  figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==x['src']),lang,path) for x in mapping['gallery'])+'</div>'
+  figures='<div class="stage-figures">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==figure_src(x['figureRef'])),lang,path) for x in mapping['gallery'])+'</div>'
   refs=''.join(research_preview(x,lang,path) for x in mapping['previews'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{t(lang,"悬停或聚焦论文，在标题下展开该篇双图介绍；收起后恢复方向概览。","Hover or focus a paper to unfold its two figures below the title. Collapse to restore the overview.")}</p><div class="research-browser" data-preview-state="idle"><ul class="research-references">{refs}</ul></div></section>'
+  hint=t(lang,'悬停或聚焦整条论文可切换右侧预览；点击阅读图解查看大图。','Hover or focus a paper row to preview; choose Read illustrated brief for larger figures.')
+  related=('<p class="related-work">'+t(lang,'相关应用：','Related applications: ')+ ' · '.join(f'<a href="papers/{slug}.html">{esc(BY_SLUG[slug]["venue"])} · {BY_SLUG[slug]["year"]}</a>' for slug in a.get('related',[]))+'</p>') if a.get('related') else ''
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2 id="theme-title-{a["id"]}">{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div><h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{hint}</p><div class="research-browser" data-preview-state="overview"><ul class="research-references">{refs}</ul><aside class="preview-stage" aria-labelledby="theme-title-{a["id"]} stage-title-{a["id"]}"><div class="stage-heading"><h4 id="stage-title-{a["id"]}">{t(lang,"图解预览","Figure preview")}</h4><button class="reset-preview" hidden type="button">{t(lang,"恢复概览","Reset overview")}</button></div><p class="stage-status" role="status">{t(lang,"方向概览","Area overview")}</p><div class="stage-content" data-stage-slug="overview">{figures}</div><template data-stage-template="overview">{figures}</template></aside></div>{related}</section>'
+
+ body+=f'<dialog id="paper-reader" aria-labelledby="reader-title"><header class="reader-header"><h2 id="reader-title">{t(lang,"论文图解","Illustrated paper brief")}</h2><button class="dialog-close" type="button" autofocus>{t(lang,"关闭","Close")}</button></header><div class="reader-content"></div></dialog>'
+
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):
@@ -214,7 +208,7 @@ def publications(lang):
   btns=''.join(f'<button type="button" data-filter-group="{group}" data-filter="{v}" aria-pressed="{"true" if v=="all" else "false"}" aria-controls="all-publications-list">{u[v]}</button>' for v in values)
   label=t(lang,'论文类型' if group=='kind' else '研究方向','Publication type' if group=='kind' else 'Research area')
   filters.append(f'<div class="filter-group" role="group" aria-label="{label}">{btns}</div>')
- body+=f'<section id="all-publications" class="all-publications" aria-labelledby="all-title"><div class="section-heading"><h2 id="all-title">{u["allPapers"]}</h2><a href="{rel(path,"assets/citations/all-publications.bib")}" download>{t(lang,"下载全部 BibTeX","Download all BibTeX")}</a></div><div class="publication-filters">'+''.join(filters)+f'</div><p class="filter-status" role="status" aria-live="polite" data-result-status>{t(lang,"显示 11 篇论文","Showing 11 publications")}</p><div id="all-publications-list" class="publication-list">'+bibliography_years(lang,path)+f'</div><p class="empty-state" data-filter-empty hidden>{u["empty"]}</p><noscript><p>{t(lang,"筛选需要 JavaScript；完整论文列表已显示。","Filtering requires JavaScript; the complete publication list is displayed.")}</p></noscript></section>'
+ body+=f'<section id="all-publications" class="all-publications" aria-labelledby="all-title"><div class="section-heading"><h2 id="all-title">{u["allPapers"]}</h2><a href="{rel(path,"assets/citations/all-publications.bib")}" download>{t(lang,"下载全部 BibTeX","Download all BibTeX")}</a></div><div class="publication-filters">'+''.join(filters)+f'</div><p class="filter-status" role="status" aria-live="polite" data-result-status>{t(lang,"显示 "+str(len(PAPERS))+" 篇论文","Showing "+str(len(PAPERS))+" publications")}</p><div id="all-publications-list" class="publication-list">'+bibliography_years(lang,path)+f'</div><p class="empty-state" data-filter-empty hidden>{u["empty"]}</p><noscript><p>{t(lang,"筛选需要 JavaScript；完整论文列表已显示。","Filtering requires JavaScript; the complete publication list is displayed.")}</p></noscript></section>'
  document(path,lang,'publications',u['publications']+' | Qi Sun',t(lang,'孙琦的代表性论文与完整发表目录。','Selected publications and the full publication record of Qi Sun.'),body)
 
 def education(lang):
@@ -267,12 +261,15 @@ def bibtex(pub):
  return '@'+('inproceedings' if pub['kind']=='conference' else 'article')+'{'+pub['citationKey']+',\n'+',\n'.join('  '+k+' = {'+str(v)+'}' for k,v in fields.items())+'\n}\n'
 
 def main():
- assert len(PAPERS)==11 and len(SELECTED)==6 and set(BY_SLUG)==set(DETAILS)
- assert [p['area'] for p in SELECTED]==['learning','learning','signals','signals','device','device']
+ from validate_publications import validate
+ result=validate(ROOT)
+ assert not result['errors'],result['errors']
+ assert len(PAPERS)>=11 and set(BY_SLUG)==set(DETAILS)
+ assert [p['selectedRank'] for p in SELECTED]==sorted({p['selectedRank'] for p in SELECTED})
  for p in PAPERS:
   assert p['kind']=='conference' or not p.get('ccf')
   assert sum(a['given']=='Qi' and a['family']=='Sun' for a in p['authors'])==1
-  for lang in ['zh','en']:assert all(detail(p['slug'],lang).get(k) for k in ['oneLine','coreClaim','problem','method','whyItMatters','pipeline','evidence','highlights','discussion','visuals'])
+  for lang in ['zh','en']:assert all(detail(p['slug'],lang).get(k) for k in ['oneLine','coreClaim','problem','method','whyItMatters','discussion'])
  citations=ROOT/'assets/citations';citations.mkdir(exist_ok=True)
  for p in PAPERS:(citations/(p['slug']+'.bib')).write_text(bibtex(p),encoding='utf-8')
  (citations/'all-publications.bib').write_text('\n'.join(bibtex(p) for p in PAPERS),encoding='utf-8')
@@ -286,5 +283,5 @@ def main():
   entries.append(f'<url><loc>{xml_escape(base+"/"+path)}</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"/><xhtml:link rel="alternate" hreflang="en" href="{base}/{en}"/></url>')
  (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'+''.join(entries)+'</urlset>\n',encoding='utf-8')
  (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+base+'/sitemap.xml\n',encoding='utf-8')
- print(f'Built {len(GENERATED)} bilingual HTML pages, 11 individual BibTeX files, combined bibliography, sitemap and robots.txt.')
+ print(f'Built {len(GENERATED)} bilingual HTML pages, {len(PAPERS)} individual BibTeX files, combined bibliography, sitemap and robots.txt.')
  print('Metadata: data/publications.json; public profile: data/profile.json. All old paper and note entry points retained.')

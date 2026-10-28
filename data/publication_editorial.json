@@ -1,0 +1,50 @@
+{
+  "mte-ste-continuous-temporal-signal-classification": {
+    "zh": "以多尺度与稀疏变换编码学习连续一维信号。",
+    "en": "Multi-scale and sparse transform encoding organize continuous signals for short-horizon spiking classification.",
+    "sources": [
+      "https://proceedings.mlr.press/v306/sun26k.html"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  },
+  "mpo-surrogate-function-snn": {
+    "zh": "依据膜电位分布调整脉冲网络的替代梯度。",
+    "en": "Membrane-potential statistics guide surrogate-gradient optimization during spiking network training.",
+    "sources": [
+      "https://doi.org/10.1609/aaai.v40i30.39769"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  },
+  "spiking-som-radar-deinterleaving": {
+    "zh": "以脉冲域竞争学习实现无监督雷达去交织。",
+    "en": "Spike-domain competitive learning supports unsupervised radar pulse deinterleaving with a self-organizing map.",
+    "sources": [
+      "https://doi.org/10.1109/icassp55912.2026.11464997"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  },
+  "adaptive-clustering-radar-signal-processing": {
+    "zh": "结合自适应聚类与相似性学习判断雷达簇关系。",
+    "en": "Adaptive clustering generates pseudo-labels, while similarity learning refines radar cluster relationships across scenarios.",
+    "sources": [
+      "https://doi.org/10.1109/lsp.2025.3556782"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  },
+  "high-k-trench-gan-hemt": {
+    "zh": "以高介电沟槽调控 GaN 器件漏侧电场。",
+    "en": "A high-k trench redistributes drain-side electric fields in GaN-on-Si HEMTs, evaluated through simulation and device measurements.",
+    "sources": [
+      "https://doi.org/10.1063/5.0345413"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  },
+  "ml-ldmos-bv-optimization": {
+    "zh": "结合 CNN 代理与遗传搜索优化 LDMOS 耐压。",
+    "en": "A CNN surrogate and genetic search explore breakdown-voltage designs for LDMOS, with TCAD verification.",
+    "sources": [
+      "https://doi.org/10.1109/ted.2024.3517578"
+    ],
+    "basis": "Existing verified detail.method and framework/device visual; no new numerical claim."
+  }
+}

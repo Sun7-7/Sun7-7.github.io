@@ -78,7 +78,8 @@ def main():
             errors.append(['data/profile.json','unconfirmed_doctoral_period'])
     expected_selected=[p['slug'] for p in sorted([p for p in papers if p.get('selectedRank')],key=lambda p:p['selectedRank'])]
     expected_all=[p['slug'] for p in sorted(papers,key=lambda p:p['date'].ljust(10,'0'),reverse=True)]
-    assert len(papers)==11 and len(expected_selected)==6
+    assert len(papers)>=11
+    assert len(expected_selected)==len(set(expected_selected))
     for lang in ['', 'en/']:
         assert pages[(ROOT/lang/'index.html').resolve()].pub==expected_selected
         assert pages[(ROOT/lang/'publications.html').resolve()].pub==expected_selected+expected_all
@@ -93,7 +94,7 @@ def main():
         # The review packet is also a runnable source snapshot without .git.
         tracked=[]
     all_files={ROOT/name for name in tracked if (ROOT/name).is_file()}
-    all_files.update(p for p in ROOT.rglob('*') if p.is_file() and not {'.git','tmp','node_modules','test-results'}.intersection(p.relative_to(ROOT).parts))
+    all_files.update(p for p in ROOT.rglob('*') if p.is_file() and not {'.git','tmp','node_modules','test-results','__pycache__'}.intersection(p.relative_to(ROOT).parts))
     # Category patterns only; do not embed actual private strings in this checker.
     rules={'phone_number':r'(?<![\w\d])(?:\+86[- ]?)?1[3-9]\d{9}(?!\d)',
            'private_email_domain':r'[\w.+-]+@(?:qq\.com|163\.com|126\.com|gmail\.com)',

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "publication_slug",
+    "visual_index",
+    "role",
+    "sourceUrl",
+    "rights"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publication_slug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visual_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "role": {
+      "enum": [
+        "framework",
+        "result",
+        "device",
+        "table"
+      ]
+    },
+    "sourceUrl": {
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "verified",
+            "not-reusable"
+          ]
+        },
+        "evidence": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}

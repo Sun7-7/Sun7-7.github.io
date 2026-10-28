@@ -5,7 +5,7 @@ const AXE=require.resolve('axe-core/axe.min.js');
 const BASE=process.env.TEST_BASE_URL || 'http://127.0.0.1:8091';
 const papers=JSON.parse(fs.readFileSync('data/publications.json','utf8'));
 const core=['index','research','publications','about','cv'];
-const sizes=[{width:1440,height:900},{width:1280,height:800},{width:768,height:1024},{width:390,height:844}];
+const sizes=[{width:1440,height:900},{width:1280,height:800},{width:768,height:1024},{width:390,height:844},{width:320,height:700}];
 fs.mkdirSync(path.join(PACKET,'screenshots'),{recursive:true});
 fs.mkdirSync(path.join(PACKET,'logs'),{recursive:true});
 const errors=[],results=[],accessibility=[],interactions=[];
@@ -40,7 +40,7 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
     assert.equal(await page.locator('.publication-summary').count(),0);
    }
    if(file==='research'){
-    assert.equal(await page.locator('.research-theme > .research-figure-pair .full-figure-link').count(),6);
+    assert.equal(await page.locator('.preview-stage .stage-content .full-figure-link').count(),6);
     assert((await page.locator('#device img').first().getAttribute('src')).includes('high-k-trench-gan-hemt'));
     assert.deepEqual(await page.locator('.small-heading').allTextContents(),Array(3).fill(lang==='zh'?'已发表论文':'Published Papers'));
    }
@@ -105,7 +105,7 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
   await page.goto(`${BASE}/${lang}post.html?slug=${p}`);await page.waitForURL(`**/${lang}notes/${p}.html`);assert.equal(await page.locator('h1').count(),1);
  }
  await page.goto(BASE+'/index.html#featured-publications');assert(await page.locator('#featured-publications').count());
- await page.goto(BASE+'/research.html');await page.locator('.full-figure-link').first().focus();
+ await page.goto(BASE+'/research.html');await page.locator('.preview-toggle').first().click();await page.locator('#paper-reader .full-figure-link').first().focus();
  const popupPromise=page.waitForEvent('popup');await page.keyboard.press('Enter');const popup=await popupPromise;
  await popup.waitForLoadState('domcontentloaded');assert(popup.url().endsWith('.png'));assert(await popup.locator('img').evaluate(i=>i.naturalWidth>1000));await popup.close();
  interactions.push({name:'keyboard_full_size_original_figure',status:'PASS'});

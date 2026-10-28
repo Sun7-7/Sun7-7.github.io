@@ -8,3 +8,6 @@ Thumbs.db
 /tmp/
 /node_modules/
 /test-results/
+
+!docs/
+!docs/**/*.md

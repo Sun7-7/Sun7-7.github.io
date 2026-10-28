@@ -1,0 +1,563 @@
+[
+  {
+    "id": "high-k-trench-gan-hemt#device-structure",
+    "publication_slug": "high-k-trench-gan-hemt",
+    "visual_index": 0,
+    "role": "device",
+    "sourceFigureNo": {
+      "zh": "原文图 1",
+      "en": "Figure 1"
+    },
+    "sourceUrl": "https://doi.org/10.1063/5.0345413",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "high-k-trench-gan-hemt#field-redistribution",
+    "publication_slug": "high-k-trench-gan-hemt",
+    "visual_index": 1,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": "原文图 2",
+      "en": "Figure 2"
+    },
+    "sourceUrl": "https://doi.org/10.1063/5.0345413",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "high-k-trench-gan-hemt#dynamic-resistance",
+    "publication_slug": "high-k-trench-gan-hemt",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": "原文图 5",
+      "en": "Figure 5"
+    },
+    "sourceUrl": "https://doi.org/10.1063/5.0345413",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "hsaf-net-fruit-quality-assessment#framework",
+    "publication_slug": "hsaf-net-fruit-quality-assessment",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": "原文图 1",
+      "en": "Figure 1"
+    },
+    "sourceUrl": "https://doi.org/10.3390/electronics15163613",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "hsaf-net-fruit-quality-assessment#performance-table",
+    "publication_slug": "hsaf-net-fruit-quality-assessment",
+    "visual_index": 1,
+    "role": "table",
+    "sourceFigureNo": {
+      "zh": "原文表 1",
+      "en": "Table 1"
+    },
+    "sourceUrl": "https://doi.org/10.3390/electronics15163613",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "hsaf-net-fruit-quality-assessment#fusion-ablation",
+    "publication_slug": "hsaf-net-fruit-quality-assessment",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": "原文表 4",
+      "en": "Table 4"
+    },
+    "sourceUrl": "https://doi.org/10.3390/electronics15163613",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mte-ste-continuous-temporal-signal-classification#framework",
+    "publication_slug": "mte-ste-continuous-temporal-signal-classification",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": "原文图 2",
+      "en": "Figure 2"
+    },
+    "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mte-ste-continuous-temporal-signal-classification#main-results",
+    "publication_slug": "mte-ste-continuous-temporal-signal-classification",
+    "visual_index": 1,
+    "role": "table",
+    "sourceFigureNo": {
+      "zh": "原文表 1",
+      "en": "Table 1"
+    },
+    "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mte-ste-continuous-temporal-signal-classification#component-ablation",
+    "publication_slug": "mte-ste-continuous-temporal-signal-classification",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": "原文表 2",
+      "en": "Table 2"
+    },
+    "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sgte-snn-radar-emitter-denoising-recognition#framework",
+    "publication_slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sgte-snn-radar-emitter-denoising-recognition#denoising-table",
+    "publication_slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "visual_index": 1,
+    "role": "table",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sgte-snn-radar-emitter-denoising-recognition#ablation-recognition",
+    "publication_slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "spiking-som-radar-deinterleaving#framework",
+    "publication_slug": "spiking-som-radar-deinterleaving",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "spiking-som-radar-deinterleaving#performance-table",
+    "publication_slug": "spiking-som-radar-deinterleaving",
+    "visual_index": 1,
+    "role": "table",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "spiking-som-radar-deinterleaving#bmu-energy",
+    "publication_slug": "spiking-som-radar-deinterleaving",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mpo-surrogate-function-snn#surrogate-mismatch",
+    "publication_slug": "mpo-surrogate-function-snn",
+    "visual_index": 0,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mpo-surrogate-function-snn#framework",
+    "publication_slug": "mpo-surrogate-function-snn",
+    "visual_index": 1,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "mpo-surrogate-function-snn#stability-robustness",
+    "publication_slug": "mpo-surrogate-function-snn",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "adaptive-clustering-radar-signal-processing#architecture",
+    "publication_slug": "adaptive-clustering-radar-signal-processing",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "adaptive-clustering-radar-signal-processing#multi-scenario",
+    "publication_slug": "adaptive-clustering-radar-signal-processing",
+    "visual_index": 1,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "adaptive-clustering-radar-signal-processing#pseudo-label-ablation",
+    "publication_slug": "adaptive-clustering-radar-signal-processing",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "dual-model-snn-remote-sensing#dual-distillation",
+    "publication_slug": "dual-model-snn-remote-sensing",
+    "visual_index": 0,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "dual-model-snn-remote-sensing#training-overview",
+    "publication_slug": "dual-model-snn-remote-sensing",
+    "visual_index": 1,
+    "role": "framework",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "dual-model-snn-remote-sensing#performance-table",
+    "publication_slug": "dual-model-snn-remote-sensing",
+    "visual_index": 2,
+    "role": "table",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "ml-ldmos-bv-optimization#ml-flow-device",
+    "publication_slug": "ml-ldmos-bv-optimization",
+    "visual_index": 0,
+    "role": "device",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "ml-ldmos-bv-optimization#prediction-results",
+    "publication_slug": "ml-ldmos-bv-optimization",
+    "visual_index": 1,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "ml-ldmos-bv-optimization#ga-optimization",
+    "publication_slug": "ml-ldmos-bv-optimization",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sipos-umofet-fom#device-and-model",
+    "publication_slug": "sipos-umofet-fom",
+    "visual_index": 0,
+    "role": "device",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi15030411",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sipos-umofet-fom#gpr-model",
+    "publication_slug": "sipos-umofet-fom",
+    "visual_index": 1,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi15030411",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "sipos-umofet-fom#fom-fitting",
+    "publication_slug": "sipos-umofet-fom",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi15030411",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "variable-k-ldmos#device-structure",
+    "publication_slug": "variable-k-ldmos",
+    "visual_index": 0,
+    "role": "device",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi13060843",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "variable-k-ldmos#efield-mechanism",
+    "publication_slug": "variable-k-ldmos",
+    "visual_index": 1,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi13060843",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  },
+  {
+    "id": "variable-k-ldmos#bv-field-tradeoff",
+    "publication_slug": "variable-k-ldmos",
+    "visual_index": 2,
+    "role": "result",
+    "sourceFigureNo": {
+      "zh": null,
+      "en": null
+    },
+    "sourceUrl": "https://doi.org/10.3390/mi13060843",
+    "rights": {
+      "status": "pending",
+      "evidence": [],
+      "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
+      "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    }
+  }
+]

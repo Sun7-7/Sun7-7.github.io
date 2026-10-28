@@ -83,136 +83,78 @@
   }
 })();
 
-/* In-flow Research accordion: default overview or a paper's two figures. */
+/* Stable Research preview; only an explicit action opens the illustrated reader. */
 (() => {
  'use strict';
- const hover = matchMedia('(hover: hover) and (pointer: fine)');
- document.querySelectorAll('.research-browser').forEach(browser => {
-  const section = browser.closest('.research-theme');
-  const overview = section.querySelector(':scope > .research-figure-pair');
-  const rows = [...browser.querySelectorAll('.research-paper')];
-  let active = null, timer, suppressFocus = false;
-  function cancel() { clearTimeout(timer); }
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const blocks = [overview,...rows.map(row=>row.querySelector('.paper-preview'))];
-  let settleTransition = null;
-  // Animate real document height; keep the selected title steady during folding.
-  function mutateAt(row, change) {
-   const anchor = row.querySelector('.research-paper-title');
-   const anchorY = anchor.getBoundingClientRect().top;
-   const starts = blocks.map(node=>({
-    height:node.hidden?0:node.getBoundingClientRect().height,
-    opacity:node.hidden?0:Number(getComputedStyle(node).opacity)
+ const desktop=matchMedia('(min-width: 960px) and (hover: hover) and (pointer: fine)');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const english=document.body.dataset.lang==='en';
+ const dialog=document.getElementById('paper-reader');
+ let returnFocus=null;
+ dialog?.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
+ dialog?.addEventListener('close',()=>{dialog.querySelector('.reader-content').replaceChildren();returnFocus?.focus({preventScroll:true});});
+ document.querySelectorAll('.research-browser').forEach(browser=>{
+  const rows=[...browser.querySelectorAll('.research-paper')];
+  const stage=browser.querySelector('.preview-stage'),content=stage.querySelector('.stage-content');
+  const status=stage.querySelector('.stage-status');
+  let locked=null,hovered=null,focused=null,hold=false,timer,request=0,presented='overview';
+  function cancel(){clearTimeout(timer);}
+  async function render(row){
+   const slug=row?.dataset.previewSlug||'overview';
+   const token=++request;
+   rows.forEach(item=>{item.toggleAttribute('data-active',item===row);item.querySelector('.pin-preview').setAttribute('aria-pressed',String(item===locked));});
+   browser.dataset.previewState=locked?'locked':row?'preview':'overview';
+   status.textContent=locked?(english?'Pinned preview':'已固定预览'):row?(english?'Paper preview':'论文预览'):(english?'Area overview':'方向概览');
+   if(slug===presented){stage.removeAttribute('aria-busy');return;}
+   const template=browser.querySelector(`template[data-stage-template="${slug}"]`);
+   const fragment=template.content.cloneNode(true);
+   stage.setAttribute('aria-busy','true');
+   status.textContent=english?'Loading figures…':'正在加载图解…';
+   await Promise.all([...fragment.querySelectorAll('img')].map(async img=>{
+    img.loading='eager';const probe=new Image();probe.src=new URL(img.getAttribute('src'),document.baseURI).href;try{await probe.decode();}catch{img.alt+=(english?' (unavailable; use original figure link)':'（暂不可用，请使用原图入口）');}
    }));
-   settleTransition?.();
-   change();
-   const targets=blocks.map(node=>({hidden:node.hidden,height:node.hidden?0:node.getBoundingClientRect().height}));
-   let followAnchor=true;
-   function align() {
-    if(!followAnchor)return;
-    const delta=anchor.getBoundingClientRect().top-anchorY;
-    if(Math.abs(delta)>.5)window.scrollBy({top:delta,behavior:'instant'});
-   }
-   if(reducedMotion.matches || !Element.prototype.animate){align();return;}
-   const animations=[];
-   const controls=new AbortController();
-   let frame;
-   section.setAttribute('data-transitioning','');
-   blocks.forEach((node,index)=>{
-    const start=starts[index],target=targets[index];
-    if(!start.height && !target.height)return;
-    node.hidden=false;
-    node.style.overflow='clip';
-    node.inert=target.hidden;
-    if(target.hidden)node.setAttribute('aria-hidden','true');
-    animations.push(node.animate([
-     {height:start.height+'px',opacity:start.opacity},
-     {height:target.height+'px',opacity:target.hidden?0:1}
-    ],{duration:320,easing:'cubic-bezier(0.22, 1, 0.36, 1)',fill:'both'}));
-   });
-   function settle() {
-    cancelAnimationFrame(frame);controls.abort();
-    animations.forEach(animation=>animation.cancel());
-    blocks.forEach((node,index)=>{
-     node.hidden=targets[index].hidden;node.style.overflow='';
-     node.inert=false;node.removeAttribute('aria-hidden');
-    });
-    section.removeAttribute('data-transitioning');
-    settleTransition=null;
-   }
-   settleTransition=settle;
-   // A deliberate scroll gesture takes precedence over automatic anchoring.
-   for(const event of ['wheel','touchstart','pointerdown'])
-    window.addEventListener(event,()=>{followAnchor=false;},{passive:true,signal:controls.signal});
-   window.addEventListener('keydown',event=>{
-    if(['PageDown','PageUp','Home','End','ArrowDown','ArrowUp',' '].includes(event.key))followAnchor=false;
-   },{signal:controls.signal});
-   function tick(){align();frame=requestAnimationFrame(tick);}
-   align();frame=requestAnimationFrame(tick);
-   Promise.all(animations.map(animation=>animation.finished)).then(()=>{
-    if(settleTransition!==settle)return;
-    settle();align();
-   }).catch(()=>{/* A new selection replaces the interrupted animation. */});
+   if(token!==request)return;
+   const next=document.createElement('div');next.className='stage-layer';next.append(fragment);
+   content.replaceChildren(next);content.dataset.stageSlug=slug;presented=slug;
+   stage.removeAttribute('aria-busy');
+   status.textContent=locked?(english?'Pinned preview':'已固定预览'):row?(english?'Paper preview':'论文预览'):(english?'Area overview':'方向概览');
+   if(!reduced.matches)next.animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
   }
-  function setRow(row, open) {
-   row.toggleAttribute('data-active',open);
-   row.querySelector('.paper-preview').hidden = !open;
-   const button=row.querySelector('.preview-toggle');
-   button.setAttribute('aria-expanded',String(open));
-   button.textContent=open?button.dataset.closeLabel:button.dataset.openLabel;
-  }
-  function close(restore = false) {
-   cancel(); if(!active)return;
-   const previous=active;
-   mutateAt(previous,()=>{
-    setRow(previous,false); overview.hidden=false; active=null;
-    browser.dataset.previewState='idle';
-   });
-   if(restore){
-    suppressFocus=true;
-    const trigger=previous.querySelector('.preview-toggle');
-    trigger.focus({preventScroll:true});
-    function revealTrigger() {
-     if(active || document.activeElement!==trigger)return;
-     if(section.hasAttribute('data-transitioning')){requestAnimationFrame(revealTrigger);return;}
-     const rect=trigger.getBoundingClientRect();
-     if(rect.top<0 || rect.bottom>innerHeight)
-      trigger.scrollIntoView({block:'center',behavior:reducedMotion.matches?'instant':'smooth'});
-    }
-    requestAnimationFrame(revealTrigger);
-    suppressFocus=false;
-   }
-  }
-  function show(row,state) {
-   cancel(); if(active===row)return;
-   mutateAt(row,()=>{
-    if(active)setRow(active,false);
-    overview.hidden=true; active=row;setRow(row,true);
-    browser.dataset.previewState=state;
-   });
-  }
+  function choose(){if(content.contains(document.activeElement))return;if(desktop.matches)render(locked||hovered||focused||(hold?rows.find(row=>row.dataset.previewSlug===presented):null));}
   rows.forEach(row=>{
-   const title=row.querySelector('.research-paper-title');
-   const button=row.querySelector('.preview-toggle');
-   const panel=row.querySelector('.paper-preview');
-   button.hidden=false;
-   title.addEventListener('mouseenter',()=>{
-    if(!hover.matches)return;
-    cancel();timer=setTimeout(()=>show(row,'hover-expanded'),120);
+   const pin=row.querySelector('.pin-preview'),read=row.querySelector('.preview-toggle');
+   pin.hidden=false;read.hidden=false;
+   row.addEventListener('pointerenter',()=>{
+    if(!desktop.matches || locked)return;
+    cancel();hovered=row;
+    timer=setTimeout(choose,presented==='overview'?120:0);
    });
-   title.addEventListener('mouseleave',cancel);
-   title.addEventListener('focus',()=>{if(!suppressFocus)show(row,'focus-expanded');});
-   button.addEventListener('pointerdown',cancel);
-   button.addEventListener('click',()=>active===row?close():show(row,'button-expanded'));
-   panel.querySelector('.preview-close').addEventListener('click',()=>close(true));
-   panel.querySelectorAll('img').forEach(image=>image.addEventListener('error',()=>{
-    panel.querySelector('.preview-error').hidden=false;
-   }));
+   row.addEventListener('pointerleave',()=>{if(!desktop.matches)return;cancel();if(hovered===row)hovered=null;timer=setTimeout(choose,150);});
+   row.addEventListener('focusin',()=>{if(desktop.matches){cancel();focused=row;choose();}});
+   row.addEventListener('focusout',()=>{setTimeout(()=>{
+    if(row.contains(document.activeElement))return;
+    if(focused===row)focused=null;
+    hold=stage.contains(document.activeElement);choose();
+   },0);});
+   pin.addEventListener('click',()=>{cancel();locked=locked===row?null:row;choose();});
+   read.addEventListener('click',()=>{
+    returnFocus=read;
+    dialog.querySelector('#reader-title').textContent=row.dataset.paperTitle;
+    dialog.querySelector('.reader-content').replaceChildren(row.querySelector('template[data-reader-template]').content.cloneNode(true));
+    dialog.querySelectorAll('img').forEach(img=>{img.loading='eager';});
+    dialog.showModal();
+   });
+   row.addEventListener('pointerenter',()=>row.querySelector('template[data-stage-template]').content.querySelectorAll('img').forEach(img=>{const warm=new Image();warm.src=img.src;}),{once:true});
   });
-  section.addEventListener('keydown',event=>{
-   if(event.key==='Escape' && active){event.preventDefault();close(true);}
-  });
-  reducedMotion.addEventListener('change',()=>{if(reducedMotion.matches)settleTransition?.();});
-  // Selection persists while scrolling/reading. Explicit collapse restores overview.
+  stage.addEventListener('focusin',()=>{cancel();hold=true;++request;stage.removeAttribute('aria-busy');});
+  stage.addEventListener('pointerenter',()=>{cancel();hold=true;});
+  stage.addEventListener('pointerleave',()=>{hold=false;timer=setTimeout(choose,150);});
+  stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement)){hold=false;choose();}},0));
+  function reset(){cancel();locked=null;hovered=null;focused=null;hold=false;render(null);}
+  stage.querySelector('.reset-preview').hidden=false;
+  stage.querySelector('.reset-preview').addEventListener('click',reset);
+  browser.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();if(stage.contains(document.activeElement))stage.querySelector('.reset-preview').focus({preventScroll:true});reset();}});
+  desktop.addEventListener('change',reset);
+  reduced.addEventListener('change',()=>{if(reduced.matches)content.getAnimations({subtree:true}).forEach(animation=>animation.finish());});
  });
 })();

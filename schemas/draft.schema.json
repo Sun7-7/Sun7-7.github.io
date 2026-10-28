@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Non-public draft envelope (incomplete fields allowed until review)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "publication",
+    "detail",
+    "review",
+    "features",
+    "figures",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "slug",
+        "authors",
+        "links",
+        "metadataSources"
+      ]
+    },
+    "detail": {
+      "type": "object"
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "state",
+        "metadata_verified",
+        "content_reviewed",
+        "rights_reviewed",
+        "publishable"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "draft",
+            "metadata_verified",
+            "content_reviewed",
+            "rights_reviewed",
+            "publishable"
+          ]
+        }
+      }
+    },
+    "features": {
+      "type": "object"
+    },
+    "figures": {
+      "type": "array"
+    },
+    "provenance": {
+      "type": "array"
+    }
+  }
+}
