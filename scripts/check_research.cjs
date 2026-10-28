@@ -5,6 +5,7 @@ fs.mkdirSync(out+'/screenshots',{recursive:true});fs.mkdirSync(out+'/logs',{recu
 const mapping=JSON.parse(fs.readFileSync('data/research_visuals.json','utf8'));
 const checks=[],scenes=[],axeResults=[],errors=[];
 async function ready(p){await p.evaluate(async()=>{for(const i of document.images)i.loading='eager';await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));});}
+async function settled(area){await area.evaluate(el=>new Promise(resolve=>{function poll(){if(!el.hasAttribute('data-transitioning'))resolve();else requestAnimationFrame(poll);}poll();}));}
 async function capture(p,name,state,fullPage=false){await p.screenshot({path:out+'/screenshots/'+name+'.png',fullPage});scenes.push({file:name+'.png',state,url:p.url(),viewport:p.viewportSize(),environment:'local candidate',theme:await p.locator('html').getAttribute('data-theme')});}
 (async()=>{
  const b=await chromium.launch({channel:'msedge',headless:true});
@@ -21,7 +22,8 @@ async function capture(p,name,state,fullPage=false){await p.screenshot({path:out
    for(const [i,m] of section.previews.entries()){
     const row=area.locator(`[data-preview-slug="${m.slug}"]`),title=row.locator('.research-paper-title'),panel=row.locator('.paper-preview'),btn=row.locator('.preview-toggle');
     await title.scrollIntoViewIfNeeded();const before=(await title.boundingBox()).y;
-    if(width>900){await title.hover();await p.waitForTimeout(180);}else await btn.tap();
+    if(width>900){await title.hover();await p.waitForTimeout(150);}else await btn.tap();
+    await settled(area);
     assert(await panel.isVisible());assert(!(await overview.isVisible()));assert.equal(await area.locator('.paper-preview:visible').count(),1);
     assert.equal(await panel.locator('img').count(),2);assert.equal(await btn.getAttribute('aria-expanded'),'true');
     assert.deepEqual(await panel.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src'))),m.figures.map(src=>(lang==='en'?'../':'')+src));
@@ -33,13 +35,13 @@ async function capture(p,name,state,fullPage=false){await p.screenshot({path:out
     checks.push({slug:m.slug,lang,width,theme,figures:m.figures,passed:true});
    }
    const row=area.locator('.research-paper').last(),title=row.locator('.research-paper-title'),btn=row.locator('.preview-toggle');
-   await btn.click();assert(await overview.isVisible());assert.equal(await area.locator('.paper-preview:visible').count(),0);
-   await title.focus();assert(!(await overview.isVisible()));await p.keyboard.press('Tab');assert(await btn.evaluate(e=>e===document.activeElement));await p.keyboard.press('Tab');assert(await row.locator('.paper-preview a').first().evaluate(e=>e===document.activeElement));
-   await p.keyboard.press('Escape');assert(await overview.isVisible());assert(await btn.evaluate(e=>e===document.activeElement));
-   await btn.press('Space');assert(await row.locator('.paper-preview').isVisible());await row.locator('.preview-close').click();assert(await overview.isVisible());assert(await btn.evaluate(e=>e===document.activeElement));
+   await btn.click();await settled(area);assert(await overview.isVisible());assert.equal(await area.locator('.paper-preview:visible').count(),0);
+   await title.focus();await settled(area);assert(!(await overview.isVisible()));await p.keyboard.press('Tab');assert(await btn.evaluate(e=>e===document.activeElement));await p.keyboard.press('Tab');assert(await row.locator('.paper-preview a').first().evaluate(e=>e===document.activeElement));
+   await p.keyboard.press('Escape');await settled(area);assert(await overview.isVisible());assert(await btn.evaluate(e=>e===document.activeElement));
+   await btn.press('Space');await settled(area);assert(await row.locator('.paper-preview').isVisible());await row.locator('.preview-close').click();await settled(area);assert(await overview.isVisible());assert(await btn.evaluate(e=>e===document.activeElement));
   }
   await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});let ax=await p.evaluate(async()=>{let r=await axe.run();return {violations:r.violations,incomplete:r.incomplete.map(x=>x.id)};});axeResults.push({width,lang,theme,state:'default',...ax});assert.equal(ax.violations.length,0);
-  await p.locator('.research-paper-title').first().focus();ax=await p.evaluate(async()=>{let r=await axe.run();return {violations:r.violations,incomplete:r.incomplete.map(x=>x.id)};});axeResults.push({width,lang,theme,state:'expanded',...ax});assert.equal(ax.violations.length,0);
+  await p.locator('.research-paper-title').first().focus();await settled(p.locator('#learning'));ax=await p.evaluate(async()=>{let r=await axe.run();return {violations:r.violations,incomplete:r.incomplete.map(x=>x.id)};});axeResults.push({width,lang,theme,state:'expanded',...ax});assert.equal(ax.violations.length,0);
   await p.close();
  }
  for(const lang of ['zh','en']){const p=await b.newPage({javaScriptEnabled:false,viewport:{width:375,height:812}});await p.goto(`${base}/${lang==='en'?'en/':''}research.html`);assert.equal(await p.locator('.research-theme > .research-figure-pair:visible img').count(),6);assert.equal(await p.locator('.research-paper-title:visible').count(),9);assert.equal(await p.locator('.preview-toggle:visible').count(),0);await p.close();}

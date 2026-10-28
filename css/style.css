@@ -393,10 +393,10 @@ html:not(.js) .publication-filters { display: none; }
 .research-paper-title { display: block; color: var(--ink); line-height: 1.55; margin: 7px 0; }
 .research-paper[data-active] .research-paper-copy { border-left: 2px solid var(--accent); padding-left: 12px; }
 .preview-toggle, .preview-close { font: inherit; font-size: 13px; color: var(--accent); border: 1px solid var(--line); background: var(--bg); padding: 7px 12px; min-height: 42px; cursor: pointer; margin-top: 6px; }
-.paper-preview { position: static; width: 100%; padding: 24px 0 8px; }
-.preview-summary { max-width: 850px; margin: 0 0 24px; font-size: 16px; line-height: 1.8; }
+.paper-preview { display: flow-root; position: static; width: 100%; padding: 0; }
+.preview-summary { max-width: 850px; margin: 24px 0; font-size: 16px; line-height: 1.8; }
 .paper-preview .preview-error { font-size: 14px; color: var(--muted); }
-.paper-preview .preview-close { margin-top: 22px; }
+.paper-preview .preview-close { margin: 22px 0 8px; }
 .research-browser .research-figure span { display: inline; font-size: inherit; margin: 0; }
 @media (max-width: 700px) {
  .research-figure-pair { grid-template-columns: 1fr; }

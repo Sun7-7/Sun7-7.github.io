@@ -93,13 +93,66 @@
   const rows = [...browser.querySelectorAll('.research-paper')];
   let active = null, timer, suppressFocus = false;
   function cancel() { clearTimeout(timer); }
-  // Preserve the selected title's screen position as content above it folds.
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const blocks = [overview,...rows.map(row=>row.querySelector('.paper-preview'))];
+  let settleTransition = null;
+  // Animate real document height; keep the selected title steady during folding.
   function mutateAt(row, change) {
    const anchor = row.querySelector('.research-paper-title');
-   const before = anchor.getBoundingClientRect().top;
+   const anchorY = anchor.getBoundingClientRect().top;
+   const starts = blocks.map(node=>({
+    height:node.hidden?0:node.getBoundingClientRect().height,
+    opacity:node.hidden?0:Number(getComputedStyle(node).opacity)
+   }));
+   settleTransition?.();
    change();
-   const delta = anchor.getBoundingClientRect().top - before;
-   if (Math.abs(delta) > 1) window.scrollBy({top:delta,behavior:'instant'});
+   const targets=blocks.map(node=>({hidden:node.hidden,height:node.hidden?0:node.getBoundingClientRect().height}));
+   let followAnchor=true;
+   function align() {
+    if(!followAnchor)return;
+    const delta=anchor.getBoundingClientRect().top-anchorY;
+    if(Math.abs(delta)>.5)window.scrollBy({top:delta,behavior:'instant'});
+   }
+   if(reducedMotion.matches || !Element.prototype.animate){align();return;}
+   const animations=[];
+   const controls=new AbortController();
+   let frame;
+   section.setAttribute('data-transitioning','');
+   blocks.forEach((node,index)=>{
+    const start=starts[index],target=targets[index];
+    if(!start.height && !target.height)return;
+    node.hidden=false;
+    node.style.overflow='clip';
+    node.inert=target.hidden;
+    if(target.hidden)node.setAttribute('aria-hidden','true');
+    animations.push(node.animate([
+     {height:start.height+'px',opacity:start.opacity},
+     {height:target.height+'px',opacity:target.hidden?0:1}
+    ],{duration:320,easing:'cubic-bezier(0.22, 1, 0.36, 1)',fill:'both'}));
+   });
+   function settle() {
+    cancelAnimationFrame(frame);controls.abort();
+    animations.forEach(animation=>animation.cancel());
+    blocks.forEach((node,index)=>{
+     node.hidden=targets[index].hidden;node.style.overflow='';
+     node.inert=false;node.removeAttribute('aria-hidden');
+    });
+    section.removeAttribute('data-transitioning');
+    settleTransition=null;
+   }
+   settleTransition=settle;
+   // A deliberate scroll gesture takes precedence over automatic anchoring.
+   for(const event of ['wheel','touchstart','pointerdown'])
+    window.addEventListener(event,()=>{followAnchor=false;},{passive:true,signal:controls.signal});
+   window.addEventListener('keydown',event=>{
+    if(['PageDown','PageUp','Home','End','ArrowDown','ArrowUp',' '].includes(event.key))followAnchor=false;
+   },{signal:controls.signal});
+   function tick(){align();frame=requestAnimationFrame(tick);}
+   align();frame=requestAnimationFrame(tick);
+   Promise.all(animations.map(animation=>animation.finished)).then(()=>{
+    if(settleTransition!==settle)return;
+    settle();align();
+   }).catch(()=>{/* A new selection replaces the interrupted animation. */});
   }
   function setRow(row, open) {
    row.toggleAttribute('data-active',open);
@@ -119,8 +172,14 @@
     suppressFocus=true;
     const trigger=previous.querySelector('.preview-toggle');
     trigger.focus({preventScroll:true});
-    const rect=trigger.getBoundingClientRect();
-    if(rect.top<0 || rect.bottom>innerHeight)trigger.scrollIntoView({block:'center',behavior:'instant'});
+    function revealTrigger() {
+     if(active || document.activeElement!==trigger)return;
+     if(section.hasAttribute('data-transitioning')){requestAnimationFrame(revealTrigger);return;}
+     const rect=trigger.getBoundingClientRect();
+     if(rect.top<0 || rect.bottom>innerHeight)
+      trigger.scrollIntoView({block:'center',behavior:reducedMotion.matches?'instant':'smooth'});
+    }
+    requestAnimationFrame(revealTrigger);
     suppressFocus=false;
    }
   }
@@ -153,6 +212,7 @@
   section.addEventListener('keydown',event=>{
    if(event.key==='Escape' && active){event.preventDefault();close(true);}
   });
+  reducedMotion.addEventListener('change',()=>{if(reducedMotion.matches)settleTransition?.();});
   // Selection persists while scrolling/reading. Explicit collapse restores overview.
  });
 })();

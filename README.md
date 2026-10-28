@@ -11,7 +11,10 @@ paper's own two figures and introduction below its title. Selecting another
 paper closes the previous selection. Selection persists while reading/scrolling;
 collapse buttons or Escape restore the overview. Titles remain navigation links.
 All panels participate in normal document flow. Scroll compensation preserves the
-selected title's screen position when earlier content folds. No JavaScript means
+selected title's screen position when earlier content folds. Height and opacity
+transition over 320 ms with gentle ease-out; interrupted transitions retarget from
+their current size. Reduced-motion users get immediate changes; deliberate scroll
+gestures override automatic anchoring. No JavaScript means
 static overview figures and original paper navigation remain available.
 
 The source mapping is `data/research_visuals.json`; bilingual captions and credits
@@ -93,3 +96,5 @@ It covers five widths, both languages/themes, all nine mappings, hover, keyboard
 touch, no-JavaScript reading, title anchoring, collapse restoration, and axe scans. A 720×450
 viewport approximates 200% scaling of 1440×900; native browser zoom, real mobile
 devices, Safari, and screen readers still require human device testing.
+
+Transition frame checks: `node scripts/check_transitions.cjs` (writes `tmp/v34-smooth/logs/transition_frames.json`).
