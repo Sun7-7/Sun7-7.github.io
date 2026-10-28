@@ -76,4 +76,3 @@ async function shot(p,name,state){const file=name+'.png';await p.screenshot({pat
  fs.writeFileSync(out+'/logs/v34_interactions.json',JSON.stringify({checks,scenes,axeResults,errors},null,2));
  console.log(JSON.stringify({interactionChecks:checks.filter(x=>x.slug).length,portraitChecks:checks.filter(x=>x.type==='portrait').length,scenes:scenes.length,axeScans:axeResults.length,errors}));
 })().catch(e=>{fs.writeFileSync(out+'/logs/v34_failure.json',JSON.stringify({message:e.message,stack:e.stack,checks,scenes,errors},null,2));console.error(e);process.exit(1);});
-
