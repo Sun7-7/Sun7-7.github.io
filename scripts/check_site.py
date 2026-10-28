@@ -94,7 +94,7 @@ def main():
         # The review packet is also a runnable source snapshot without .git.
         tracked=[]
     all_files={ROOT/name for name in tracked if (ROOT/name).is_file()}
-    all_files.update(p for p in ROOT.rglob('*') if p.is_file() and not {'.git','tmp','node_modules','test-results'}.intersection(p.relative_to(ROOT).parts))
+    all_files.update(p for p in ROOT.rglob('*') if p.is_file() and not {'.git','tmp','node_modules','test-results','__pycache__'}.intersection(p.relative_to(ROOT).parts))
     # Category patterns only; do not embed actual private strings in this checker.
     rules={'phone_number':r'(?<![\w\d])(?:\+86[- ]?)?1[3-9]\d{9}(?!\d)',
            'private_email_domain':r'[\w.+-]+@(?:qq\.com|163\.com|126\.com|gmail\.com)',
