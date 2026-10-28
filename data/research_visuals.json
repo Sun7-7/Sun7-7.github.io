@@ -5,28 +5,26 @@
       "gallery": [
         {
           "slug": "mte-ste-continuous-temporal-signal-classification",
-          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png"
+          "figureRef": "mte-ste-continuous-temporal-signal-classification#framework"
         },
         {
           "slug": "mpo-surrogate-function-snn",
-          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png"
+          "figureRef": "mpo-surrogate-function-snn#framework"
         }
       ],
       "previews": [
         {
           "slug": "mte-ste-continuous-temporal-signal-classification",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
-            "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-main-results.png"
+          "figureRefs": [
+            "mte-ste-continuous-temporal-signal-classification#framework",
+            "mte-ste-continuous-temporal-signal-classification#main-results"
           ]
         },
         {
           "slug": "mpo-surrogate-function-snn",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png",
-            "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png"
+          "figureRefs": [
+            "mpo-surrogate-function-snn#surrogate-mismatch",
+            "mpo-surrogate-function-snn#framework"
           ]
         }
       ]
@@ -36,36 +34,33 @@
       "gallery": [
         {
           "slug": "spiking-som-radar-deinterleaving",
-          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png"
+          "figureRef": "spiking-som-radar-deinterleaving#framework"
         },
         {
           "slug": "sgte-snn-radar-emitter-denoising-recognition",
-          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png"
+          "figureRef": "sgte-snn-radar-emitter-denoising-recognition#framework"
         }
       ],
       "previews": [
         {
           "slug": "spiking-som-radar-deinterleaving",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png",
-            "assets/images/paper-figures/spiking-som-radar-deinterleaving-bmu-energy.png"
+          "figureRefs": [
+            "spiking-som-radar-deinterleaving#framework",
+            "spiking-som-radar-deinterleaving#bmu-energy"
           ]
         },
         {
           "slug": "sgte-snn-radar-emitter-denoising-recognition",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png",
-            "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-denoising-table.png"
+          "figureRefs": [
+            "sgte-snn-radar-emitter-denoising-recognition#framework",
+            "sgte-snn-radar-emitter-denoising-recognition#denoising-table"
           ]
         },
         {
           "slug": "adaptive-clustering-radar-signal-processing",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-architecture.png",
-            "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-multi-scenario.png"
+          "figureRefs": [
+            "adaptive-clustering-radar-signal-processing#architecture",
+            "adaptive-clustering-radar-signal-processing#multi-scenario"
           ]
         }
       ]
@@ -75,44 +70,40 @@
       "gallery": [
         {
           "slug": "high-k-trench-gan-hemt",
-          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png"
+          "figureRef": "high-k-trench-gan-hemt#device-structure"
         },
         {
           "slug": "high-k-trench-gan-hemt",
-          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png"
+          "figureRef": "high-k-trench-gan-hemt#dynamic-resistance"
         }
       ],
       "previews": [
         {
           "slug": "high-k-trench-gan-hemt",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
-            "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png"
+          "figureRefs": [
+            "high-k-trench-gan-hemt#device-structure",
+            "high-k-trench-gan-hemt#dynamic-resistance"
           ]
         },
         {
           "slug": "ml-ldmos-bv-optimization",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/ml-ldmos-bv-optimization-ml-flow-device.png",
-            "assets/images/paper-figures/ml-ldmos-bv-optimization-prediction-results.png"
+          "figureRefs": [
+            "ml-ldmos-bv-optimization#ml-flow-device",
+            "ml-ldmos-bv-optimization#prediction-results"
           ]
         },
         {
           "slug": "sipos-umofet-fom",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/sipos-umofet-fom-device-and-model.png",
-            "assets/images/paper-figures/sipos-umofet-fom-gpr-model.png"
+          "figureRefs": [
+            "sipos-umofet-fom#device-and-model",
+            "sipos-umofet-fom#gpr-model"
           ]
         },
         {
           "slug": "variable-k-ldmos",
-          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
-          "figures": [
-            "assets/images/paper-figures/variable-k-ldmos-device-structure.png",
-            "assets/images/paper-figures/variable-k-ldmos-efield-mechanism.png"
+          "figureRefs": [
+            "variable-k-ldmos#device-structure",
+            "variable-k-ldmos#efield-mechanism"
           ]
         }
       ]

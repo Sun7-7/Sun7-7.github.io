@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "required": [
+    "oneLine",
+    "coreClaim",
+    "problem",
+    "method",
+    "whyItMatters",
+    "discussion",
+    "evidence",
+    "visuals",
+    "pipeline",
+    "highlights",
+    "slug",
+    "en"
+  ],
+  "properties": {
+    "oneLine": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coreClaim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "problem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "whyItMatters": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discussion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "visuals": {
+      "type": "array"
+    },
+    "pipeline": {
+      "type": "array"
+    },
+    "highlights": {
+      "type": "array"
+    },
+    "en": {
+      "type": "object",
+      "required": [
+        "oneLine",
+        "coreClaim",
+        "problem",
+        "method",
+        "whyItMatters",
+        "discussion",
+        "evidence",
+        "visuals",
+        "pipeline",
+        "highlights"
+      ],
+      "properties": {
+        "oneLine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coreClaim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "problem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whyItMatters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "discussion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array"
+        },
+        "visuals": {
+          "type": "array"
+        },
+        "pipeline": {
+          "type": "array"
+        },
+        "highlights": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bilingual paper brief"
+}

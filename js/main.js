@@ -111,7 +111,7 @@
    stage.setAttribute('aria-busy','true');
    status.textContent=english?'Loading figures…':'正在加载图解…';
    await Promise.all([...fragment.querySelectorAll('img')].map(async img=>{
-    img.loading='eager';try{await img.decode();}catch{img.alt+=(english?' (unavailable; use original figure link)':'（暂不可用，请使用原图入口）');}
+    img.loading='eager';const probe=new Image();probe.src=new URL(img.getAttribute('src'),document.baseURI).href;try{await probe.decode();}catch{img.alt+=(english?' (unavailable; use original figure link)':'（暂不可用，请使用原图入口）');}
    }));
    if(token!==request)return;
    const next=document.createElement('div');next.className='stage-layer';next.append(fragment);
@@ -120,7 +120,7 @@
    status.textContent=locked?(english?'Pinned preview':'已固定预览'):row?(english?'Paper preview':'论文预览'):(english?'Area overview':'方向概览');
    if(!reduced.matches)next.animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
   }
-  function choose(){if(desktop.matches)render(locked||focused||hovered||(hold?rows.find(row=>row.dataset.previewSlug===presented):null));}
+  function choose(){if(content.contains(document.activeElement))return;if(desktop.matches)render(locked||hovered||focused||(hold?rows.find(row=>row.dataset.previewSlug===presented):null));}
   rows.forEach(row=>{
    const pin=row.querySelector('.pin-preview'),read=row.querySelector('.preview-toggle');
    pin.hidden=false;read.hidden=false;
@@ -146,13 +146,14 @@
    });
    row.addEventListener('pointerenter',()=>row.querySelector('template[data-stage-template]').content.querySelectorAll('img').forEach(img=>{const warm=new Image();warm.src=img.src;}),{once:true});
   });
+  stage.addEventListener('focusin',()=>{cancel();hold=true;++request;stage.removeAttribute('aria-busy');});
   stage.addEventListener('pointerenter',()=>{cancel();hold=true;});
   stage.addEventListener('pointerleave',()=>{hold=false;timer=setTimeout(choose,150);});
   stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement)){hold=false;choose();}},0));
   function reset(){cancel();locked=null;hovered=null;focused=null;hold=false;render(null);}
   stage.querySelector('.reset-preview').hidden=false;
   stage.querySelector('.reset-preview').addEventListener('click',reset);
-  browser.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();reset();}});
+  browser.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();if(stage.contains(document.activeElement))stage.querySelector('.reset-preview').focus({preventScroll:true});reset();}});
   desktop.addEventListener('change',reset);
   reduced.addEventListener('change',()=>{if(reduced.matches)content.getAnimations({subtree:true}).forEach(animation=>animation.finish());});
  });

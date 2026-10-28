@@ -1,0 +1,93 @@
+[
+  {
+    "id": "learning",
+    "names": [
+      "脉冲学习与时序计算",
+      "Spiking Learning & Temporal Computing"
+    ],
+    "short": [
+      "研究脉冲网络的训练与时间表示，通过替代梯度、多尺度编码和稀疏计算，理解有限时间窗内的学习与推理。",
+      "Learning and temporal representations in spiking networks, from surrogate gradients to multi-scale encoding and sparse inference."
+    ],
+    "question": [
+      "围绕连续信号的有限时间窗学习，我研究脉冲表示与训练动力学两个互补问题：输入端如何保留时间结构，训练端如何使替代梯度适应神经元活动。",
+      "My work on short-horizon learning in continuous signals addresses two complementary questions: preserving temporal structure at the input and aligning surrogate gradients with neural activity during training."
+    ],
+    "method": [
+      "ICML 的 MTE×STE 通过多尺度输入与稀疏变换编码组织时间信息；AAAI 的 MPO 从膜电位分布出发调节替代梯度。前者关注信号表示，后者关注梯度优化，各自通过论文中的匹配实验与分析展开验证。",
+      "MTE×STE, presented at ICML, combines multi-scale input streams with sparse transform encoding. MPO, presented at AAAI, adapts surrogate gradients to membrane-potential distributions. They address representation and gradient optimization respectively, with separate experimental analyses."
+    ],
+    "papers": [
+      "mte-ste-continuous-temporal-signal-classification",
+      "mpo-surrogate-function-snn"
+    ],
+    "figure": "mte-ste-continuous-temporal-signal-classification"
+  },
+  {
+    "id": "signals",
+    "names": [
+      "雷达与智能信号处理",
+      "Radar & Intelligent Signal Processing"
+    ],
+    "short": [
+      "面向混合脉冲流与复杂时序信号，研究雷达分选、去交织和识别，结合无监督学习、相似性结构与事件驱动表示。",
+      "Radar sorting, deinterleaving, and recognition in mixed pulse streams, using unsupervised learning, similarity structure, and event-driven representations."
+    ],
+    "question": [
+      "面向多源混合雷达脉冲流，我研究未知标签下的去交织、噪声环境中的编码与识别，以及跨场景的簇关系判断，以不同学习机制处理脉冲结构和标签不足的问题。",
+      "My radar research studies deinterleaving without labels, encoding and recognition under noise, and cluster decisions across scenarios, using distinct learning mechanisms to recover pulse structure with limited supervision."
+    ],
+    "method": [
+      "Spiking-SOM 将竞争学习和拓扑组织迁移到脉冲域；SGTE 将参考相似性编码为时间事件；IEEE SPL 工作以自适应聚类和相似性学习修正簇关系。相关应用还包括遥感图像分类和多模态传感。",
+      "Spiking-SOM moves competitive learning and topological organization into the spike domain. SGTE encodes reference similarity as temporal events. The IEEE SPL study combines adaptive clustering with similarity learning for cluster decisions. Related applications include remote sensing and multimodal sensing."
+    ],
+    "papers": [
+      "spiking-som-radar-deinterleaving",
+      "sgte-snn-radar-emitter-denoising-recognition",
+      "adaptive-clustering-radar-signal-processing"
+    ],
+    "figure": "spiking-som-radar-deinterleaving",
+    "related": [
+      "dual-model-snn-remote-sensing",
+      "hsaf-net-fruit-quality-assessment"
+    ]
+  },
+  {
+    "id": "device",
+    "names": [
+      "半导体器件与神经形态硬件",
+      "Semiconductor Devices & Neuromorphic Hardware"
+    ],
+    "short": [
+      "结合器件物理、TCAD 与数据建模研究功率器件设计；同时关注神经形态器件模型、神经元阵列与跨层设计问题。",
+      "Power-device design through device physics, TCAD, and data-driven models, alongside interests in neuromorphic device models, neuron arrays, and cross-layer design."
+    ],
+    "question": [
+      "我从器件结构、电场分布与模型精度之间的联系出发，研究功率半导体器件设计与建模；同时关注器件行为如何为神经形态模型和跨层约束提供物理依据。",
+      "I investigate power-device design and modeling through the relationships among geometry, electric fields, and model fidelity. A separate interest concerns how device behavior informs neuromorphic models and cross-layer constraints."
+    ],
+    "method": [
+      "已发表工作包括功率器件的结构设计、电场调控与机器学习辅助建模。神经形态器件与跨层设计属于另一研究层次，关注器件模型、神经元阵列建模及算法与硬件约束的联系。",
+      "Published studies address power-device structures, field management, and ML-assisted modeling. Neuromorphic devices and cross-layer design form a distinct research scope involving device models, neuron-array modeling, and connections between algorithms and hardware constraints."
+    ],
+    "papers": [
+      "high-k-trench-gan-hemt",
+      "ml-ldmos-bv-optimization",
+      "sipos-umofet-fom",
+      "variable-k-ldmos"
+    ],
+    "figure": "sipos-umofet-fom",
+    "scopes": [
+      {
+        "title": "Semiconductor Device Design & Modeling",
+        "zh": "已发表的 APL、IEEE TED 与 Micromachines 工作围绕介电沟槽、电场调控与数据驱动建模展开，结合论文中的 TCAD 分析、代理预测与器件实验，考察结构参数如何影响电学表现。",
+        "en": "Published studies in APL, IEEE TED, and Micromachines address dielectric trenches, field management, and data-driven models, using the TCAD analyses, surrogate predictions, and device experiments reported in each paper."
+      },
+      {
+        "title": "Neuromorphic Devices & Cross-layer Design",
+        "zh": "这一独立研究兴趣关注器件模型、神经元动力学和神经元阵列建模，以及算法与硬件约束之间的联系。",
+        "en": "This separate research interest concerns device models, neuron dynamics, neuron-array modeling, and the relationship between algorithmic and hardware constraints."
+      }
+    ]
+  }
+]

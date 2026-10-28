@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "baseline": "775611fad908048f91877481fb125b52ff689f79",
+  "records": {
+    "high-k-trench-gan-hemt": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Zhiwei",
+          "family": "Hou"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Guohao",
+          "family": "Yu"
+        },
+        {
+          "given": "Bingliang",
+          "family": "Zhang"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        },
+        {
+          "given": "Licheng",
+          "family": "Jiao"
+        },
+        {
+          "given": "Yintang",
+          "family": "Yang"
+        }
+      ],
+      "legacy_urls": [
+        "papers/high-k-trench-gan-hemt.html",
+        "en/papers/high-k-trench-gan-hemt.html"
+      ]
+    },
+    "mte-ste-continuous-temporal-signal-classification": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Yulei",
+          "family": "Huang"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        }
+      ],
+      "legacy_urls": [
+        "papers/mte-ste-continuous-temporal-signal-classification.html",
+        "en/papers/mte-ste-continuous-temporal-signal-classification.html"
+      ]
+    },
+    "hsaf-net-fruit-quality-assessment": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Weibin",
+          "family": "Tang"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Yunfan",
+          "family": "Guo"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        }
+      ],
+      "legacy_urls": [
+        "papers/hsaf-net-fruit-quality-assessment.html",
+        "en/papers/hsaf-net-fruit-quality-assessment.html"
+      ]
+    },
+    "sgte-snn-radar-emitter-denoising-recognition": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Xiaoning",
+          "family": "Wang"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Shiqing",
+          "family": "Yang"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        }
+      ],
+      "legacy_urls": [
+        "papers/sgte-snn-radar-emitter-denoising-recognition.html",
+        "en/papers/sgte-snn-radar-emitter-denoising-recognition.html"
+      ]
+    },
+    "spiking-som-radar-deinterleaving": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Shumo",
+          "family": "Yang"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Shiqing",
+          "family": "Yang"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        }
+      ],
+      "legacy_urls": [
+        "papers/spiking-som-radar-deinterleaving.html",
+        "en/papers/spiking-som-radar-deinterleaving.html"
+      ]
+    },
+    "mpo-surrogate-function-snn": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Kaige",
+          "family": "Geng"
+        },
+        {
+          "given": "Ziyi",
+          "family": "Zhang"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        }
+      ],
+      "legacy_urls": [
+        "papers/mpo-surrogate-function-snn.html",
+        "en/papers/mpo-surrogate-function-snn.html"
+      ]
+    },
+    "dual-model-snn-remote-sensing": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Ju",
+          "family": "Liu"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        },
+        {
+          "given": "Hao",
+          "family": "Zhu"
+        },
+        {
+          "given": "Lei",
+          "family": "Guo"
+        },
+        {
+          "given": "Yifan",
+          "family": "Ge"
+        },
+        {
+          "given": "Yulong",
+          "family": "Wang"
+        },
+        {
+          "given": "Licheng",
+          "family": "Jiao"
+        }
+      ],
+      "legacy_urls": [
+        "papers/dual-model-snn-remote-sensing.html",
+        "en/papers/dual-model-snn-remote-sensing.html"
+      ]
+    },
+    "adaptive-clustering-radar-signal-processing": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Yulei",
+          "family": "Huang"
+        },
+        {
+          "given": "Yifan",
+          "family": "Ge"
+        },
+        {
+          "given": "Yunlong",
+          "family": "Wang"
+        }
+      ],
+      "legacy_urls": [
+        "papers/adaptive-clustering-radar-signal-processing.html",
+        "en/papers/adaptive-clustering-radar-signal-processing.html"
+      ]
+    },
+    "ml-ldmos-bv-optimization": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Qiaowei",
+          "family": "Peng"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        },
+        {
+          "given": "Licheng",
+          "family": "Jiao"
+        },
+        {
+          "given": "Yintang",
+          "family": "Yang"
+        }
+      ],
+      "legacy_urls": [
+        "papers/ml-ldmos-bv-optimization.html",
+        "en/papers/ml-ldmos-bv-optimization.html"
+      ]
+    },
+    "sipos-umofet-fom": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Chuanfeng",
+          "family": "Ma"
+        },
+        {
+          "given": "Biao",
+          "family": "Hou"
+        },
+        {
+          "given": "Licheng",
+          "family": "Jiao"
+        }
+      ],
+      "legacy_urls": [
+        "papers/sipos-umofet-fom.html",
+        "en/papers/sipos-umofet-fom.html"
+      ]
+    },
+    "variable-k-ldmos": {
+      "state": "content_reviewed",
+      "metadata_verified": true,
+      "content_reviewed": true,
+      "rights_reviewed": false,
+      "publishable": false,
+      "bibliography_publishable": true,
+      "review_basis": "Previously audited metadata and existing source-linked brief; V3.5 editorial review only.",
+      "author_order": [
+        {
+          "given": "Zhen",
+          "family": "Cao"
+        },
+        {
+          "given": "Qi",
+          "family": "Sun"
+        },
+        {
+          "given": "Hongwei",
+          "family": "Zhang"
+        },
+        {
+          "given": "Qian",
+          "family": "Wang"
+        },
+        {
+          "given": "Chuanfeng",
+          "family": "Ma"
+        },
+        {
+          "given": "Licheng",
+          "family": "Jiao"
+        }
+      ],
+      "legacy_urls": [
+        "papers/variable-k-ldmos.html",
+        "en/papers/variable-k-ldmos.html"
+      ]
+    }
+  }
+}

@@ -5,7 +5,7 @@
     "coreClaim": "漏侧介电边界工程能够重新分配高场区；TCAD 与同片器件实验共同支持耐压提升和动态电阻退化减轻。",
     "problem": "GaN-on-Si HEMT 在漏侧存在电场拥挤，限制击穿电压，并可能加剧场辅助俘获与动态导通电阻退化。",
     "method": "在漏侧制作 PZT 填充沟槽，以位移场边界条件解释电场调控。二维 TCAD 将相对介电常数从 3.9 扫至 500，再结合共工艺常规器件与沟槽器件的静态及动态电学测量检验设计。",
-    "whyItMatters": "该工作扩展了主页中的功率器件研究：从器件性能建模进入介电边界设计、实物制备与高压动态测量，连接物理解释和器件验证。",
+    "whyItMatters": "通过器件结构、场分布分析和同片电学测量，将介电边界设计与高压器件的静态、动态表现联系起来。",
     "pipeline": [
       {
         "label": "Drain-side trench",
@@ -78,7 +78,7 @@
       "coreClaim": "Drain-side dielectric-boundary engineering reshapes the high-field region; TCAD and co-fabricated device measurements support enhanced breakdown and reduced dynamic resistance degradation.",
       "problem": "Drain-side field crowding limits breakdown in GaN-on-Si HEMTs and can aggravate field-assisted trapping and dynamic ON-resistance degradation.",
       "method": "A PZT-filled trench is fabricated near the drain. Displacement-field boundary conditions guide the interpretation, while 2D TCAD sweeps relative permittivity from 3.9 to 500. Static and dynamic measurements compare co-fabricated conventional and trench devices.",
-      "whyItMatters": "The work extends the device research line from performance modeling to dielectric-boundary design, fabrication, and high-voltage dynamic measurements.",
+      "whyItMatters": "The study relates dielectric-boundary design to static and dynamic high-voltage behavior through device structures, field analysis, and electrical measurements on co-processed devices.",
       "pipeline": [
         {
           "label": "Drain-side trench",
@@ -154,7 +154,7 @@
     "coreClaim": "内部光电压响应与外部 RGB 外观具有互补性，模态专用编码器与动态注意力融合可提高受控条件下的梨果品质评估表现。",
     "problem": "单靠 RGB 外观难以判断糖度与内部损伤；近红外序列和图像的表示形式又不同，固定拼接或平均难以适应样本间的模态差异。",
     "method": "HSAF-Net 以 LSNN 提取近红外光电压序列的内部特征，以双头 TH-YOLOv8 分别处理整体外观与局部缺陷。HMA 先对齐异构特征，再结合模态内注意力、双向跨模态交互和样本级门控完成分级。",
-    "whyItMatters": "将类脑时间序列建模扩展到农业传感场景，并把内部品质感知、表面缺陷定位和边缘端推理连接成完整检测流程。",
+    "whyItMatters": "在论文的受控梨果实验中，近红外序列与 RGB 图像提供互补信息，模态专用编码和融合连接内部品质评估与表面缺陷检测。",
     "pipeline": [
       {
         "label": "Synchronized sensing",
@@ -227,7 +227,7 @@
       "coreClaim": "Internal photovoltage responses and RGB appearance provide complementary evidence; modality-specific encoders and adaptive fusion improve pear assessment under controlled conditions.",
       "problem": "RGB appearance alone cannot establish sweetness or internal damage. Photovoltage sequences and images also require different representations, making static fusion restrictive.",
       "method": "HSAF-Net uses LSNN for internal sequence features and two-head TH-YOLOv8 for global appearance and local defects. HMA aligns heterogeneous features and combines intra-modal attention, bidirectional cross-modal interaction, and sample-wise gating.",
-      "whyItMatters": "The work extends neuromorphic temporal modeling to agricultural sensing and connects internal assessment, defect localization, and edge inference in one inspection pipeline.",
+      "whyItMatters": "In the reported controlled pear experiments, NIR sequences and RGB images provide complementary information, linking internal quality assessment and surface-defect detection through modality-specific encoding and fusion.",
       "pipeline": [
         {
           "label": "Synchronized sensing",
@@ -452,7 +452,7 @@
     "coreClaim": "相似性分布比单个脉冲特征更能表达真实脉冲与噪声脉冲之间的结构差异。",
     "problem": "高密度多源雷达环境中，PDW 序列常被噪声和干扰污染，单脉冲特征在时频域高度重叠，传统阈值或规则方法难以兼顾鲁棒性、实时性与边缘部署。",
     "method": "SGTE 将 pulse-to-reference similarity 离散为直方图向量，并通过概率编码或可学习嵌入生成脉冲时序；理论上利用真实脉冲与噪声脉冲相似性分布的差异保持可分性，再由 SNN 完成去噪与识别。",
-    "whyItMatters": "这项工作把雷达信号处理中的相似性结构转化为 SNN 擅长处理的时间事件序列，为边缘端低功耗雷达智能提供了更自然的输入形式。",
+    "whyItMatters": "将脉冲与参考样本的关系组织为时间事件表示，使相似性结构能够用于脉冲网络的去噪与识别任务。",
     "pipeline": [
       {
         "label": "PDW sequence",
@@ -505,7 +505,7 @@
       "coreClaim": "Similarity distributions capture structural differences between genuine and noisy pulses better than isolated pulse features.",
       "problem": "In dense multi-source radar environments, PDW sequences are corrupted by noise and interference. Single-pulse features overlap in time-frequency domains, making threshold or rule-based methods fragile under real-time and edge constraints.",
       "method": "SGTE discretizes pulse-to-reference similarities into histogram representations and generates spike trains through probabilistic coding or learnable embeddings. Theoretical analysis connects distributional separability to effective SNN discrimination.",
-      "whyItMatters": "The work transforms radar similarity structure into the temporal event representation that SNNs naturally process, offering an input pathway for low-power radar intelligence.",
+      "whyItMatters": "Encoding pulse-to-reference relations as temporal events makes similarity structure available to spiking networks for denoising and recognition.",
       "pipeline": [
         {
           "label": "PDW sequence",
@@ -601,7 +601,7 @@
     "coreClaim": "SOM 的拓扑保持能力可以与 SNN 的事件驱动稀疏计算结合，形成低功耗无监督去交织框架。",
     "problem": "复杂电磁环境下的雷达信号去交织需要在未知标签、高密度脉冲和边缘算力受限之间取得平衡，传统 SOM 又依赖连续域距离计算。",
     "method": "Spiking-SOM 用 LIF 神经元表示 SOM 节点，输入 PDW 被编码为稀疏脉冲张量，BMU 由神经元平均放电率选择；权重更新在脉冲域完成，并用 Robbins-Monro 条件讨论收敛与拓扑稳定性。",
-    "whyItMatters": "该方法让无监督雷达分选不再完全依赖密集浮点距离计算，更适合部署在 FPGA 或类脑硬件等边缘平台。",
+    "whyItMatters": "将自组织映射中的竞争与更新转为脉冲域操作，为分析无监督去交织中的事件驱动计算与稀疏更新提供方法依据。",
     "pipeline": [
       {
         "label": "Spike encoding",
@@ -654,7 +654,7 @@
       "coreClaim": "SOM topology preservation can be combined with event-driven sparse SNN computation to support low-power unsupervised deinterleaving.",
       "problem": "Radar deinterleaving must handle unknown labels, dense pulses, and limited edge computation, while conventional SOMs rely on continuous-domain distance computation.",
       "method": "Spiking-SOM represents SOM units with LIF neurons, encodes PDW inputs as sparse spike tensors, selects BMUs by average firing rate, and updates weights in the spike domain with convergence analysis based on Robbins-Monro conditions.",
-      "whyItMatters": "The method reduces reliance on dense floating-point distance computation and is more compatible with FPGA or neuromorphic edge platforms.",
+      "whyItMatters": "Moving competition and updates into the spike domain provides a method for studying event-driven computation and sparse learning in unsupervised deinterleaving.",
       "pipeline": [
         {
           "label": "Spike encoding",
@@ -1197,7 +1197,7 @@
     "coreClaim": "复杂功率器件结构的参数搜索可以由 TCAD 数据和机器学习代理模型显著加速。",
     "problem": "多浮空埋层 LDMOS 参数耦合强、结构复杂，传统物理推导与手工扫描难以高效探索最优击穿电压设计空间。",
     "method": "研究先用 TCAD 生成结构参数与 BV 数据集，再训练 CNN 预测模型；随后把预测模型作为遗传算法适应度评估器，自适应搜索最优结构参数，并用 TCAD 回验。",
-    "whyItMatters": "该路线展示了器件物理与 AI 优化结合的范式：用仿真数据建立代理模型，再把搜索成本从大量 TCAD 仿真转移到快速预测。",
+    "whyItMatters": "用 TCAD 数据建立代理预测模型，并以仿真回验约束遗传搜索，将参数探索与器件验证连接起来。",
     "pipeline": [
       {
         "label": "Parameter space",
@@ -1251,7 +1251,7 @@
       "coreClaim": "Parameter search for complex power device structures can be accelerated by TCAD data and ML surrogate models.",
       "problem": "MFBL LDMOS has strongly coupled parameters and complex structures, making traditional derivation or manual sweeps inefficient for BV optimization.",
       "method": "The work generates a TCAD dataset of structural parameters and BV, trains a CNN predictor, uses it as the fitness evaluator in a genetic algorithm, and validates optimized structures with TCAD.",
-      "whyItMatters": "It demonstrates a device-physics + AI optimization workflow: train a surrogate with simulation data and shift search cost from TCAD sweeps to fast prediction.",
+      "whyItMatters": "A surrogate trained on TCAD data supports genetic search, while simulation checks connect parameter exploration with device verification.",
       "pipeline": [
         {
           "label": "Parameter space",
@@ -1348,7 +1348,7 @@
     "coreClaim": "物理解析模型和高斯过程回归可以共同刻画 BV-RON,sp 折中，并保留可解释的器件参数关系。",
     "problem": "超结 U-MOSFET 的 BV-RON,sp 折中受电场调制、charge coupling 和结构参数共同影响，单纯解析模型难以兼顾可解释性和预测精度。",
     "method": "论文先基于 Poisson 方程构建物理解析表达，再使用 Gaussian Process Regression 预测 FOM = BV²/RON,sp 并优化超参数，最后结合 TCAD 验证结构参数和性能边界。",
-    "whyItMatters": "相比纯黑箱建模，这类 physics-informed ML 更适合器件研究，因为它同时给出性能预测和结构参数解释。",
+    "whyItMatters": "将物理解析关系与 GPR 预测结合，为考察结构参数和 BV–导通电阻折中提供建模路径。",
     "pipeline": [
       {
         "label": "Device physics",
@@ -1401,7 +1401,7 @@
       "coreClaim": "Analytical physics and GPR can jointly model BV-RON,sp trade-offs while preserving interpretable device-parameter relationships.",
       "problem": "The BV-RON,sp trade-off in SJ U-MOSFETs is influenced by electric-field modulation, charge coupling, and structural parameters; pure analytical models struggle to balance interpretability and accuracy.",
       "method": "The paper builds analytical expressions from Poisson's equation, uses GPR to predict FOM = BV²/RON,sp and tune parameters, and validates trends with TCAD.",
-      "whyItMatters": "Physics-informed ML is useful for device research because it provides both performance prediction and interpretable parameter relationships.",
+      "whyItMatters": "Combining analytical relationships with GPR predictions provides a modeling route for examining structural parameters and the breakdown-voltage/on-resistance trade-off.",
       "pipeline": [
         {
           "label": "Device physics",

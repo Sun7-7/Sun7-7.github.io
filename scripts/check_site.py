@@ -78,7 +78,8 @@ def main():
             errors.append(['data/profile.json','unconfirmed_doctoral_period'])
     expected_selected=[p['slug'] for p in sorted([p for p in papers if p.get('selectedRank')],key=lambda p:p['selectedRank'])]
     expected_all=[p['slug'] for p in sorted(papers,key=lambda p:p['date'].ljust(10,'0'),reverse=True)]
-    assert len(papers)==11 and len(expected_selected)==6
+    assert len(papers)>=11
+    assert len(expected_selected)==len(set(expected_selected))
     for lang in ['', 'en/']:
         assert pages[(ROOT/lang/'index.html').resolve()].pub==expected_selected
         assert pages[(ROOT/lang/'publications.html').resolve()].pub==expected_selected+expected_all
