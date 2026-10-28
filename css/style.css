@@ -381,3 +381,38 @@ html:not(.js) .publication-filters { display: none; }
 .publication-label { white-space: nowrap; }
 
 #research.home-section > .section-heading h2 { font-size: 25px; font-weight: 500; }
+
+/* Research previews reserve a separate reading column; narrow/touch views expand inline. */
+.research-figure-pair { grid-template-columns: 1.15fr 1fr; gap: 28px; }
+.research-figure-pair .research-figure { max-width: none; min-width: 0; }
+.research-figure-pair img { height: 290px; object-fit: contain; }
+.preview-hint { font-size: 13px; color: var(--muted); margin: 8px 0 20px; }
+.research-browser { position: relative; min-height: 510px; }
+.research-browser .research-references { width: 54%; margin: 0; }
+.research-browser .research-paper { max-width: none; padding: 18px 0; }
+.research-paper-title { display: block; color: var(--ink); line-height: 1.55; margin: 7px 0; }
+.research-paper[data-active] .research-paper-copy { border-left: 2px solid var(--accent); padding-left: 12px; }
+.preview-toggle { font: inherit; font-size: 13px; color: var(--accent); border: 1px solid var(--line); background: var(--bg); padding: 7px 12px; min-height: 40px; cursor: pointer; margin-top: 6px; }
+.paper-preview { position: absolute; left: 58%; width: 42%; top: 0; padding: 18px; border: 1px solid var(--line); background: var(--bg); max-height: min(650px,75vh); overflow: auto; z-index: 2; }
+.paper-preview img { display: block; margin: 12px 0; width: 100%; height: min(290px,34vh); object-fit: contain; background: white; border: 1px solid var(--line); padding: 8px; }
+.paper-preview h4 { font-size: 16px; margin: 10px 0 6px; }
+.paper-preview p { font-size: 13px; margin: 8px 0; }
+.paper-preview .venue { margin: 0; }
+.research-browser .paper-preview span { display: inline; font-size: inherit; margin: 0; }
+.paper-preview .preview-original { font-size: 14px; display: inline-block; padding: 8px 0; }
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+ .research-browser { min-height: 0; }
+ .research-browser .research-references { width: 100%; }
+ .paper-preview { position: static; width: 100%; margin-top: 16px; max-height: none; }
+ .paper-preview img { height: auto; max-height: 420px; }
+}
+@media (max-width: 700px) {
+ .research-figure-pair { grid-template-columns: 1fr; }
+ .research-figure-pair img { height: auto; max-height: 360px; }
+ .paper-preview { padding: 12px; }
+}
+@media print {
+ .preview-toggle, .preview-hint, .paper-preview { display: none !important; }
+ .research-browser { min-height: 0; }
+ .research-browser .research-references { width: 100%; }
+}

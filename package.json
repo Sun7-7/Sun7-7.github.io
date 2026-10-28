@@ -5,7 +5,7 @@
     "playwright": "^1.62.1"
   },
   "name": "qisun-academic-homepage",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "private": true,
   "description": "Static bilingual academic homepage; Node packages are QA-only.",
   "engines": {
@@ -14,6 +14,7 @@
   "scripts": {
     "check:browser": "node scripts/verify_browser.cjs",
     "check:lighthouse": "node scripts/run_lighthouse.mjs",
-    "check:editorial": "node scripts/check_editorial.cjs"
+    "check:editorial": "node scripts/check_editorial.cjs",
+    "check:research": "node scripts/check_research.cjs"
   }
 }

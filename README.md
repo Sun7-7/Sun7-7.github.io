@@ -1,9 +1,16 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
-V3.3 is a focused revision of V3.2 (`964f364d0b930ebe22e56b5e906864bdf30f81cd`)
-on `redesign/academic-homepage-v3-1` (PR #1). The original production baseline
-is `001a1dff3b45b99949da3454f7b3d828ec13782c`. The owner has authorized publication
-after revision and verification. This is a static GitHub Pages site.
+V3.4 is a Research portfolio candidate based on released main
+`f9e1f1213040b42d05257a44f4df77c77a9a7d8f`, on
+`codex/research-portfolio-v34`. This candidate is not deployed. The V3.4 handoff
+requires review before any merge or publication.
+
+Research uses six static figures and nine same-paper previews. The source mapping
+is `data/research_visuals.json`; bilingual captions and source credits are reused
+from the unchanged publication data. Desktop previews reserve a separate column;
+narrow or touch views expand inline. Escape, outside click, and preview buttons
+close the panel. The two supplied optimized portraits replace V3.3 portraits
+without retouching; a content hash versions image URLs and social metadata.
 
 ## Build and preview
 
@@ -62,17 +69,21 @@ results. A local Lighthouse result is not a measurement of the production site.
 
 ## Review and release
 
-Review the candidate and its public-content audit before merging. The Pages source is `main`. The owner explicitly authorized the V3.3 release
-after revision and verification. Preserve source credits and record unresolved
-article-specific rights questions; do not infer new third-party permission.
+V3.4 is a candidate for review. Do not merge or deploy without new owner approval.
+All 11 bibliographic records, scientific descriptions, and 33 research figures
+remain unchanged. Existing non-OA figure rights require article-specific review;
+source attribution and previous website use do not establish permission.
 
-V3.2 groups homepage work by research theme, presents the complete publication
-record as a year-grouped bibliography, and separates the compact public CV from
-web briefs. Google Scholar uses the exact profile URL supplied by the owner;
-no citation counts or profile statistics are imported. Non-OA figure reuse
-permissions remain a publishing gate; source attribution is not permission.
+Additional Research interaction checks (Edge, installed locally):
 
-V3.3 distinguishes the official ICML conference interval from PMLR citation
-publication metadata. A first-online date is left unset when not independently
-stated. Research/About terminology and the research statement are maintained
-in the shared renderer.
+```powershell
+python -m http.server 8094 --bind 127.0.0.1
+# In another terminal:
+npm run check:research
+```
+
+The Research checker captures actual local browser scenes and logs in `tmp/v34`.
+It covers five widths, both languages/themes, all nine mappings, hover, keyboard,
+touch, no-JavaScript reading, image failure, portraits, and axe scans. A 720×450
+viewport approximates 200% scaling of 1440×900; native browser zoom, real mobile
+devices, Safari, and screen readers still require human device testing.

@@ -1,5 +1,6 @@
 """Dependency-free bilingual editorial renderer; invoked by build_site.py."""
 from __future__ import annotations
+import hashlib
 import html
 import json
 import posixpath
@@ -15,6 +16,8 @@ DETAILS={p['slug']:p for p in load('data/publication_details.json')}
 BY_SLUG={p['slug']:p for p in PAPERS}
 SELECTED=sorted((p for p in PAPERS if p.get('selectedRank')),key=lambda p:p['selectedRank'])
 GENERATED=[]
+VISUALS={s['id']:s for s in load('data/research_visuals.json')['sections']}
+PORTRAIT_VERSION=hashlib.sha256((ROOT/'assets/images/portraits/portrait_hero_4x5.webp').read_bytes()).hexdigest()[:12]
 
 UI={
  'zh':dict(home='首页',research='研究',publications='论文',about='关于',cv='学术 CV',notes='研究笔记',menu='菜单',dark='深色',skip='跳转到正文',all='全部',conference='会议',journal='期刊',learning='学习机制',signals='信号处理',device='器件',selected='代表性论文',allPapers='全部论文',brief='论文导读',question='研究问题',method='方法',evidence='证据',conclusion='结论与边界',route='技术路线',source='图源',citation='引用',empty='暂无符合条件的论文。',print='打印 / 保存 PDF'),
@@ -56,7 +59,8 @@ def image(src,alt,path,lazy=True,extra=''):
  data=(ROOT/src).read_bytes()
  width,height=struct.unpack('>II',data[16:24]) if src.endswith('.png') else ((720,900) if 'hero' in src else (680,1020))
  loading=' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"'
- return f'<img src="{esc(rel(path,src))}" alt="{esc(alt)}" width="{width}" height="{height}"{loading} {extra}>'
+ url=rel(path,src)+('?v='+PORTRAIT_VERSION if '/portraits/' in src else '')
+ return f'<img src="{esc(url)}" alt="{esc(alt)}" width="{width}" height="{height}"{loading} {extra}>'
 
 def venue(pub):
  label=pub['venue'] if str(pub['year']) in pub['venue'] else pub['venue']+' · '+str(pub['year'])
@@ -90,10 +94,10 @@ def footer(path,lang):
 def document(path,lang,page,title,description,body,profile=False):
  base=CONFIG['site']['url'];canonical=base+'/'+path;zh=path.removeprefix('en/');en='en/'+zh
  schema={'@context':'https://schema.org','@type':'ProfilePage' if profile else 'WebPage','url':canonical,'name':title,'inLanguage':'zh-CN' if lang=='zh' else 'en'}
- if profile:schema['mainEntity']={'@type':'Person','name':'Qi Sun','alternateName':'孙琦','url':base+'/en/index.html','image':base+'/assets/images/portraits/portrait_hero_4x5.webp','jobTitle':PROFILE['stage_en'],'affiliation':{'@type':'CollegeOrUniversity','name':'Xidian University'},'email':'mailto:'+PROFILE['email'],'sameAs':[p['url'] for p in PROFILE['academicProfiles']]}
+ if profile:schema['mainEntity']={'@type':'Person','name':'Qi Sun','alternateName':'孙琦','url':base+'/en/index.html','image':base+'/assets/images/portraits/portrait_hero_4x5.webp?v='+PORTRAIT_VERSION,'jobTitle':PROFILE['stage_en'],'affiliation':{'@type':'CollegeOrUniversity','name':'Xidian University'},'email':'mailto:'+PROFILE['email'],'sameAs':[p['url'] for p in PROFILE['academicProfiles']]}
  structured=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
  output=f'''<!DOCTYPE html>
-<html lang="{'zh-CN' if lang=='zh' else 'en'}" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"><link rel="alternate" hreflang="en" href="{base}/{en}"><link rel="alternate" hreflang="x-default" href="{base}/{en}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp"><meta property="og:image:alt" content="Qi Sun professional portrait"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp"><meta name="color-scheme" content="light dark"><link rel="icon" href="{esc(rel(path,'assets/favicon.svg'))}" type="image/svg+xml"><script src="{esc(rel(path,'js/theme-init.js'))}"></script><link rel="stylesheet" href="{esc(rel(path,'css/style.css'))}"><script type="application/ld+json">{structured}</script></head><body data-page="{page}" data-lang="{lang}">{header(path,lang,page)}<main id="main" class="container" tabindex="-1">{body}</main>{footer(path,lang)}<script src="{esc(rel(path,'js/main.js'))}" defer></script></body></html>'''
+<html lang="{'zh-CN' if lang=='zh' else 'en'}" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"><link rel="alternate" hreflang="en" href="{base}/{en}"><link rel="alternate" hreflang="x-default" href="{base}/{en}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta property="og:image:alt" content="Qi Sun professional portrait"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta name="color-scheme" content="light dark"><link rel="icon" href="{esc(rel(path,'assets/favicon.svg'))}" type="image/svg+xml"><script src="{esc(rel(path,'js/theme-init.js'))}"></script><link rel="stylesheet" href="{esc(rel(path,'css/style.css'))}"><script type="application/ld+json">{structured}</script></head><body data-page="{page}" data-lang="{lang}">{header(path,lang,page)}<main id="main" class="container" tabindex="-1">{body}</main>{footer(path,lang)}<script src="{esc(rel(path,'js/main.js'))}" defer></script></body></html>'''
  (ROOT/path).parent.mkdir(parents=True,exist_ok=True);(ROOT/path).write_text(output+'\n',encoding='utf-8');GENERATED.append(path)
 
 def intro(eyebrow,title,description=''):
@@ -175,6 +179,12 @@ def home(lang):
  body=f'''<section class="hero" aria-labelledby="home-name"><div class="hero-copy"><p class="eyebrow">{esc(institution)}</p><h1 id="home-name">{name}</h1><p class="identity">{esc(PROFILE['stage_zh' if lang=='zh' else 'stage_en'])}</p><p class="hero-description">{esc(description)}</p><div class="hero-links"><a class="button" href="cv.html">{u['cv']}</a><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}</div></div>{image('assets/images/portraits/portrait_hero_4x5.webp',t(lang,'孙琦的职业照','Professional portrait of Qi Sun'),path,False,'class="hero-portrait"')}</section><section id="research" class="home-section" aria-labelledby="areas-title"><div class="section-heading"><h2 id="areas-title">{t(lang,'研究方向','Research Areas')}</h2><a href="research.html">{t(lang,'研究陈述','Research statement')} <span aria-hidden="true">↗</span></a></div>{area_cards(lang,path)}</section><section id="selected-publications" class="home-section" aria-labelledby="selected-title"><span id="featured-publications" class="anchor-alias"></span><div class="section-heading"><h2 id="selected-title">{u['selected']}</h2><a href="publications.html">{t(lang,'完整发表目录','Complete publication record')} <span aria-hidden="true">↗</span></a></div>{selected_groups(lang,path)}</section>'''
  document(path,lang,'home',t(lang,'孙琦 | 脉冲学习、信号处理与半导体器件','Qi Sun | Spiking Learning, Signal Processing & Semiconductor Devices'),CONFIG['site']['description'][lang],body,True)
 
+def research_preview(mapping,lang,path):
+ slug=mapping['slug'];pub=BY_SLUG[slug]
+ v=next(v for v in detail(slug,lang)['visuals'] if v['src']==mapping['src'])
+ panel='preview-'+slug;src=esc(rel(path,v['src']))
+ return f'''<li class="research-paper" data-preview-slug="{slug}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><button class="preview-toggle" type="button" hidden aria-expanded="false" aria-controls="{panel}">{t(lang,'预览图片','Preview figure')}</button></div><div class="paper-preview" id="{panel}" hidden role="region" aria-label="{esc(t(lang,'论文图预览：','Figure preview: ')+pub['title'])}">{venue(pub)}{image(v['src'],v['title'],path)}<h4>{esc(v['title'])}</h4><p>{esc(v['caption'])}</p><a class="preview-original" href="{src}" target="_blank" rel="noopener noreferrer">{t(lang,'查看原图','View full-size figure')} ↗</a>{figure_credit(pub,lang)}<p class="preview-error" hidden>{t(lang,'图片暂时无法加载；可通过论文标题查看导读。','The figure could not load. Follow the paper title to read the brief.')}</p></div></li>'''
+
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
  body=intro('Research',u['research'],t(lang,'我研究脉冲网络如何表示和学习连续时间信息，并将这些机制用于雷达脉冲流等信号任务；在器件方向，关注结构、电场与电学特性之间的联系，以及神经形态器件的建模与设计。','I study how spiking networks represent and learn continuous temporal information, with applications to radar pulse streams and related signal tasks. My device research addresses the relationship between structure, electric fields, and electrical behavior, alongside interests in neuromorphic device modeling and design.'))
@@ -183,12 +193,14 @@ def research(lang):
   statement=f'<p>{esc(atext(a,"question",lang))}</p>'
   if a['id']=='device':
    statement+=f'''<div class="device-scopes"><h3>Semiconductor Device Design & Modeling</h3><p>{t(lang,'已发表的 APL、IEEE TED 与 Micromachines 工作研究功率器件的结构设计、电场调控和机器学习辅助建模，结合 TCAD 分析与论文中报告的器件验证，考察结构、模型与电学表现之间的关系。','Published work in APL, IEEE TED, and Micromachines studies power-device structures, field management, and ML-assisted modeling, relating device geometry and model predictions to TCAD analyses and the device evaluations reported in those papers.')}</p><h3>Neuromorphic Devices & Cross-layer Design</h3><p>{t(lang,'神经形态器件与跨层设计是另一条正在探索的方向。我关注器件行为与神经元动力学的对应关系，以及器件模型、神经元阵列建模和算法约束之间的联系。','Neuromorphic devices and cross-layer design form a separate, ongoing direction. I am interested in connections between device behavior and neuron dynamics, and in how device models, neuron-array modeling, and algorithmic constraints inform design.')}</p></div>'''
-   figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG['high-k-trench-gan-hemt'],index,lang,path) for index in [0,2])+'</div>'
+
   else:
    statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
-   figures=research_figure(BY_SLUG[a['figure']],0,lang,path)
-  refs=''.join(f'<li><a href="papers/{slug}.html">{esc(BY_SLUG[slug]["title"])}</a><span>{venue(BY_SLUG[slug])}</span></li>' for slug in a['papers'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><ul class="research-references">{refs}</ul></section>'
+
+  mapping=VISUALS[a['id']]
+  figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==x['src']),lang,path) for x in mapping['gallery'])+'</div>'
+  refs=''.join(research_preview(x,lang,path) for x in mapping['previews'])
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{t(lang,"悬停或聚焦论文，查看对应图；也可使用预览按钮。","Hover or focus a paper to see its figure, or use the preview button.")}</p><div class="research-browser" data-preview-state="idle"><ul class="research-references">{refs}</ul></div></section>'
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):

@@ -1,0 +1,94 @@
+{
+  "sections": [
+    {
+      "id": "learning",
+      "gallery": [
+        {
+          "slug": "mte-ste-continuous-temporal-signal-classification",
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png"
+        },
+        {
+          "slug": "mpo-surrogate-function-snn",
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "mte-ste-continuous-temporal-signal-classification",
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "mpo-surrogate-function-snn",
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        }
+      ]
+    },
+    {
+      "id": "signals",
+      "gallery": [
+        {
+          "slug": "spiking-som-radar-deinterleaving",
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png"
+        },
+        {
+          "slug": "sgte-snn-radar-emitter-denoising-recognition",
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "spiking-som-radar-deinterleaving",
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "sgte-snn-radar-emitter-denoising-recognition",
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "adaptive-clustering-radar-signal-processing",
+          "src": "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-architecture.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        }
+      ]
+    },
+    {
+      "id": "device",
+      "gallery": [
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png"
+        },
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "ml-ldmos-bv-optimization",
+          "src": "assets/images/paper-figures/ml-ldmos-bv-optimization-ml-flow-device.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "sipos-umofet-fom",
+          "src": "assets/images/paper-figures/sipos-umofet-fom-device-and-model.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        },
+        {
+          "slug": "variable-k-ldmos",
+          "src": "assets/images/paper-figures/variable-k-ldmos-device-structure.png",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission"
+        }
+      ]
+    }
+  ]
+}

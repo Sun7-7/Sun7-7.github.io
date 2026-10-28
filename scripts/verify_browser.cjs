@@ -40,7 +40,7 @@ async function state(page){return page.evaluate(()=>({width:innerWidth,scrollWid
     assert.equal(await page.locator('.publication-summary').count(),0);
    }
    if(file==='research'){
-    assert.equal(await page.locator('.full-figure-link').count(),4);
+    assert.equal(await page.locator('.full-figure-link').count(),6);
     assert((await page.locator('#device img').first().getAttribute('src')).includes('high-k-trench-gan-hemt'));
     assert.deepEqual(await page.locator('.small-heading').allTextContents(),Array(3).fill(lang==='zh'?'已发表论文':'Published Papers'));
    }
