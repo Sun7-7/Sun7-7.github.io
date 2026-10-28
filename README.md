@@ -1,8 +1,8 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
 V3.5 candidate on `codex/v35-research-ux-content-pipeline`, based on released V3.4
-main `775611fad908048f91877481fb125b52ff689f79`. This round is not approved for
-production deployment. The existing static Python/GitHub Pages architecture and
+main `775611fad908048f91877481fb125b52ff689f79`. The owner approved this exact existing-site snapshot for production on 2026-10-29.
+The recorded approval expires on any source/artifact change. The existing static Python/GitHub Pages architecture and
 all 44 bilingual URLs remain in place.
 
 Research now separates stable whole-row hover/focus previews, optional pinning,
@@ -28,8 +28,9 @@ for candidate builds and semantic validation. QA-only tools require Node.js
 
 See [the data contract and draft/import instructions](docs/PUBLICATION_WORKFLOW.md).
 Draft creation cannot publish. Pending image rights remain explicitly recorded;
-`python scripts/build_site.py --release` blocks incomplete publication/rights
-reviews. Owner consent to release is separate from third-party image permission.
+`python scripts/build_site.py --release` blocks incomplete reviews, except for the
+exact owner-approved existing-site snapshot recorded in data/release_authorization.json.
+Pending rights are retained; this is not new third-party permission. Owner consent to release is separate from third-party image permission.
 No raw job-search document, original portrait PNG, unpublished project material,
 or source paper PDF belongs in the public repository.
 

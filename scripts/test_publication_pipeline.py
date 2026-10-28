@@ -80,9 +80,14 @@ def main():
             if relative.endswith(('publications.html','sitemap.xml')):assert slug in (sandbox/relative).read_text(encoding='utf-8')
         report['existing_migration']={'slug':slug,'stages':stages,'publication_count':11,'duplicate_slugs':0,'bilingual_details':True,'bibtex':True,'sitemap':True,'features':draft['features'],'figure_rights_scope':'No images in this simulated imported record; pending images never marked verified.','result':result,'build_stdout':built.stdout}
     assert real_before==snapshot(ROOT),'Real data changed during simulation'
-    release=validate(ROOT,release=True);assert release['errors'];report['release_gate']={'blocked':True,'reasons':release['errors']}
+    release=validate(ROOT,release=True)
+    if release.get('owner_approved_snapshot'):
+        assert not release['errors']
+        report['release_gate']={'owner_approved_existing_snapshot':True,'pending_rights_retained':len(release['warnings'])}
+    else:
+        assert release['errors'];report['release_gate']={'blocked':True,'reasons':release['errors']}
     report['real_publications_unchanged_by_tests']=True
     write(out/'pipeline_tests.json',report)
-    print(json.dumps({'schemas':report['schema_checks'],'negative_cases':len(report['negative_checks']),'existing_migration':'passed','real_data_unchanged':True,'release_gate':'blocked as expected'}))
+    print(json.dumps({'schemas':report['schema_checks'],'negative_cases':len(report['negative_checks']),'existing_migration':'passed','real_data_unchanged':True,'release_gate':report['release_gate']}))
 
 if __name__=='__main__':main()

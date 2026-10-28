@@ -9,6 +9,28 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATES = ['draft', 'metadata_verified', 'content_reviewed', 'rights_reviewed', 'publishable']
 CONTENT = ['oneLine', 'coreClaim', 'problem', 'method', 'whyItMatters', 'discussion']
+SNAPSHOT_EXCLUDES = {'.git', 'node_modules', 'tmp', '__pycache__', 'test-results'}
+AUTHORIZATION_FILE = 'data/release_authorization.json'
+
+def snapshot_hashes(root):
+    """Lock owner approval to one complete source/artifact snapshot, not future edits."""
+    result={}
+    for path in sorted(Path(root).rglob('*')):
+        name=path.relative_to(root).as_posix()
+        if not path.is_file() or name==AUTHORIZATION_FILE or SNAPSHOT_EXCLUDES.intersection(path.relative_to(root).parts):continue
+        raw=path.read_bytes()
+        if path.suffix.lower() not in ['.png','.webp','.jpg','.jpeg','.gif','.pdf','.woff','.woff2']:
+            raw=raw.replace(b'\r\n',b'\n')
+        result[name]=hashlib.sha256(raw).hexdigest()
+    return result
+
+def snapshot_approval(root):
+    try:
+        approval=read(Path(root),AUTHORIZATION_FILE)
+        valid=(approval.get('status')=='owner_approved_existing_site_snapshot'
+               and approval.get('approved_files')==snapshot_hashes(root))
+        return valid
+    except (OSError,ValueError):return False
 
 def read(root, name):
     return json.loads((root / name).read_text(encoding='utf-8'))
@@ -19,6 +41,7 @@ def canonical(value):
 def validate(root=ROOT, release=False, check_output=False):
     root = Path(root)
     errors, warnings = [], []
+    approved_snapshot=snapshot_approval(root) if release else False
     def require(ok, field):
         if not ok: errors.append(field)
     try:
@@ -90,7 +113,7 @@ def validate(root=ROOT, release=False, check_output=False):
         require(rec.get('legacy_urls')==expected_urls,prefix+'permanent URLs changed')
         if check_output:
             for url in expected_urls:require((root/url).is_file(),prefix+'missing output '+url)
-        if release and not rec.get('publishable'):errors.append(prefix+'release review not approved')
+        if release and not rec.get('publishable') and not approved_snapshot:errors.append(prefix+'release review not approved')
     require(len(ranks)==len(set(ranks)), 'Duplicate selectedRank')
     for f in figures:
         slug=f.get('publication_slug');prefix=f.get('id','unknown')+': '
@@ -106,7 +129,8 @@ def validate(root=ROOT, release=False, check_output=False):
             if rights.get('status')=='verified':require(bool(rights.get('evidence')),prefix+'verified rights without evidence')
             if rights.get('status')!='verified':
                 warnings.append(prefix+'figure rights '+str(rights.get('status')))
-                if release or slug not in baseline['publications']:errors.append(prefix+'image release gate blocked')
+                approved_legacy=(approved_snapshot and rights.get('status')=='pending' and src in baseline['images'] and slug in baseline['publications'])
+                if (release and not approved_legacy) or slug not in baseline['publications']:errors.append(prefix+'image release gate blocked')
         except (IndexError,KeyError,TypeError):errors.append(prefix+'invalid visual index')
     for src,sha in baseline['images'].items():
         require((root/src).is_file() and hashlib.sha256((root/src).read_bytes()).hexdigest()==sha,'Baseline scientific pixels changed: '+src)
@@ -122,7 +146,7 @@ def validate(root=ROOT, release=False, check_output=False):
         for x in section['previews']:
             require(1<=len(x.get('figureRefs',[]))<=2,'Preview must use one or two figures')
             for ref in x.get('figureRefs',[]):require(ref in fs and fs[ref]['publication_slug']==x['slug'],'Preview owner/ref mismatch: '+ref)
-    return {'publication_records':len(papers),'figure_records':len(figures),'mode':'release' if release else 'candidate','errors':errors,'warnings':warnings}
+    return {'publication_records':len(papers),'figure_records':len(figures),'mode':'release' if release else 'candidate','owner_approved_snapshot':approved_snapshot,'errors':errors,'warnings':warnings}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)

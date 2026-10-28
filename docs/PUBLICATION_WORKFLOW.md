@@ -56,7 +56,7 @@ The build regenerates both detail URLs, complete/year-grouped lists, BibTeX and 
 python scripts/build_site.py --release
 ```
 
-Candidate builds preserve already-public baseline images for review while recording unresolved rights. The release command deliberately fails until review/rights records are complete. V3.5 does **not** assert new permission for V3.4 images; original CC BY/author/publisher credits remain intact. A pending status means article-specific review is incomplete in this workflow, not a finding that reuse is unlawful.
+Candidate builds preserve already-public baseline images for review while recording unresolved rights. The release command fails until review/rights records are complete, or a specific owner-approved existing-site snapshot matches its complete source/artifact hash manifest. On 2026-10-29 the owner explicitly requested publication of the existing V3.5 snapshot. This exception is limited to baseline image bytes and the approved snapshot; it does not clear pending rights, admit new images, or authorize later edits. V3.5 does **not** assert new permission for V3.4 images; original CC BY/author/publisher credits remain intact. A pending status means article-specific review is incomplete in this workflow, not a finding that reuse is unlawful.
 
 Passing the command does not deploy or approve a GitHub merge. Human review, a privacy scan, and explicit owner authorization are still separate. No automation modifies GitHub branch protection or bypasses Pages.
 

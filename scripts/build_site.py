@@ -14,3 +14,9 @@ if __name__ == '__main__':
         print(json.dumps(result,ensure_ascii=False,indent=2))
         raise SystemExit(1)
     main()
+    if args.release:
+        result=validate(release=True,check_output=True)
+        if result['errors']:
+            import json
+            print(json.dumps(result,ensure_ascii=False,indent=2))
+            raise SystemExit(1)
