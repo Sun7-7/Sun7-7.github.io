@@ -179,13 +179,14 @@ def home(lang):
  body=f'''<section class="hero" aria-labelledby="home-name"><div class="hero-copy"><p class="eyebrow">{esc(institution)}</p><h1 id="home-name">{name}</h1><p class="identity">{esc(PROFILE['stage_zh' if lang=='zh' else 'stage_en'])}</p><p class="hero-description">{esc(description)}</p><div class="hero-links"><a class="button" href="cv.html">{u['cv']}</a><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}</div></div>{image('assets/images/portraits/portrait_hero_4x5.webp',t(lang,'孙琦的职业照','Professional portrait of Qi Sun'),path,False,'class="hero-portrait"')}</section><section id="research" class="home-section" aria-labelledby="areas-title"><div class="section-heading"><h2 id="areas-title">{t(lang,'研究方向','Research Areas')}</h2><a href="research.html">{t(lang,'研究陈述','Research statement')} <span aria-hidden="true">↗</span></a></div>{area_cards(lang,path)}</section><section id="selected-publications" class="home-section" aria-labelledby="selected-title"><span id="featured-publications" class="anchor-alias"></span><div class="section-heading"><h2 id="selected-title">{u['selected']}</h2><a href="publications.html">{t(lang,'完整发表目录','Complete publication record')} <span aria-hidden="true">↗</span></a></div>{selected_groups(lang,path)}</section>'''
  document(path,lang,'home',t(lang,'孙琦 | 脉冲学习、信号处理与半导体器件','Qi Sun | Spiking Learning, Signal Processing & Semiconductor Devices'),CONFIG['site']['description'][lang],body,True)
 
+def preview_figures(slug,srcs,lang,path):
+ pub=BY_SLUG[slug];visuals=detail(slug,lang)['visuals']
+ return ''.join(research_figure(pub,next(i for i,v in enumerate(visuals) if v['src']==src),lang,path) for src in srcs)
+
 def research_preview(mapping,lang,path):
  slug=mapping['slug'];pub=BY_SLUG[slug];d=detail(slug,lang)
- panel='preview-'+slug
- indices=[next(i for i,v in enumerate(d['visuals']) if v['src']==src) for src in mapping['figures']]
- figures=''.join(research_figure(pub,i,lang,path) for i in indices)
- return f'''<li class="research-paper" data-preview-slug="{slug}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><button class="preview-toggle" type="button" hidden aria-expanded="false" aria-controls="{panel}" data-open-label="{t(lang,'展开图文','Explore figures')}" data-close-label="{t(lang,'收起图文','Collapse figures')}">{t(lang,'展开图文','Explore figures')}</button></div><div class="paper-preview" id="{panel}" hidden role="region" aria-label="{esc(t(lang,'论文图文：','Paper figures: ')+pub['title'])}"><p class="preview-summary">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div><p class="preview-error" hidden>{t(lang,'部分图片暂时无法加载，可通过原图入口或论文标题继续阅读。','Some figures could not load. Use the original figure links or paper title to continue reading.')}</p><button class="preview-close" type="button">{t(lang,'收起图文，恢复方向概览','Close figures and restore overview')}</button></div></li>'''
-
+ figures=preview_figures(slug,mapping['figures'],lang,path)
+ return f'''<li class="research-paper" data-preview-slug="{slug}" data-paper-title="{esc(pub['title'])}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><p class="research-authors">{authors(pub)}.</p><p class="research-summary">{esc(d['oneLine'])}</p><div class="research-actions"><button class="pin-preview" type="button" hidden aria-pressed="false">{t(lang,'固定预览','Pin preview')}</button><button class="preview-toggle" type="button" hidden aria-haspopup="dialog" aria-controls="paper-reader">{t(lang,'阅读图解','Read illustrated brief')}</button></div></div><template data-stage-template="{slug}"><div class="stage-figures">{figures}</div></template><template data-reader-template="{slug}"><p class="lead">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div>{links(pub,lang,path)}</template></li>'''
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
@@ -200,9 +201,13 @@ def research(lang):
    statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
 
   mapping=VISUALS[a['id']]
-  figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==x['src']),lang,path) for x in mapping['gallery'])+'</div>'
+  figures='<div class="stage-figures">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==x['src']),lang,path) for x in mapping['gallery'])+'</div>'
   refs=''.join(research_preview(x,lang,path) for x in mapping['previews'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{t(lang,"悬停或聚焦论文，在标题下展开该篇双图介绍；收起后恢复方向概览。","Hover or focus a paper to unfold its two figures below the title. Collapse to restore the overview.")}</p><div class="research-browser" data-preview-state="idle"><ul class="research-references">{refs}</ul></div></section>'
+  hint=t(lang,'悬停或聚焦整条论文可切换右侧预览；点击阅读图解查看大图。','Hover or focus a paper row to preview; choose Read illustrated brief for larger figures.')
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div><h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{hint}</p><div class="research-browser" data-preview-state="overview"><ul class="research-references">{refs}</ul><aside class="preview-stage" aria-labelledby="stage-title-{a["id"]}"><div class="stage-heading"><h4 id="stage-title-{a["id"]}">{t(lang,"图解预览","Figure preview")}</h4><button class="reset-preview" hidden type="button">{t(lang,"恢复概览","Reset overview")}</button></div><p class="stage-status" role="status">{t(lang,"方向概览","Area overview")}</p><div class="stage-content" data-stage-slug="overview">{figures}</div><template data-stage-template="overview">{figures}</template></aside></div></section>'
+
+ body+=f'<dialog id="paper-reader" aria-labelledby="reader-title"><header class="reader-header"><h2 id="reader-title">{t(lang,"论文图解","Illustrated paper brief")}</h2><button class="dialog-close" type="button" autofocus>{t(lang,"关闭","Close")}</button></header><div class="reader-content"></div></dialog>'
+
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):
