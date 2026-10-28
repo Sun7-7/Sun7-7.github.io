@@ -1,0 +1,121 @@
+{
+  "sections": [
+    {
+      "id": "learning",
+      "gallery": [
+        {
+          "slug": "mte-ste-continuous-temporal-signal-classification",
+          "src": "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png"
+        },
+        {
+          "slug": "mpo-surrogate-function-snn",
+          "src": "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "mte-ste-continuous-temporal-signal-classification",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-framework.png",
+            "assets/images/paper-figures/mte-ste-continuous-temporal-signal-classification-main-results.png"
+          ]
+        },
+        {
+          "slug": "mpo-surrogate-function-snn",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/mpo-surrogate-function-snn-surrogate-mismatch.png",
+            "assets/images/paper-figures/mpo-surrogate-function-snn-framework.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "signals",
+      "gallery": [
+        {
+          "slug": "spiking-som-radar-deinterleaving",
+          "src": "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png"
+        },
+        {
+          "slug": "sgte-snn-radar-emitter-denoising-recognition",
+          "src": "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "spiking-som-radar-deinterleaving",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/spiking-som-radar-deinterleaving-framework.png",
+            "assets/images/paper-figures/spiking-som-radar-deinterleaving-bmu-energy.png"
+          ]
+        },
+        {
+          "slug": "sgte-snn-radar-emitter-denoising-recognition",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-framework.png",
+            "assets/images/paper-figures/sgte-snn-radar-emitter-denoising-recognition-denoising-table.png"
+          ]
+        },
+        {
+          "slug": "adaptive-clustering-radar-signal-processing",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-architecture.png",
+            "assets/images/paper-figures/adaptive-clustering-radar-signal-processing-multi-scenario.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "device",
+      "gallery": [
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png"
+        },
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "src": "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png"
+        }
+      ],
+      "previews": [
+        {
+          "slug": "high-k-trench-gan-hemt",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/high-k-trench-gan-hemt-device-structure.png",
+            "assets/images/paper-figures/high-k-trench-gan-hemt-dynamic-resistance.png"
+          ]
+        },
+        {
+          "slug": "ml-ldmos-bv-optimization",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/ml-ldmos-bv-optimization-ml-flow-device.png",
+            "assets/images/paper-figures/ml-ldmos-bv-optimization-prediction-results.png"
+          ]
+        },
+        {
+          "slug": "sipos-umofet-fom",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/sipos-umofet-fom-device-and-model.png",
+            "assets/images/paper-figures/sipos-umofet-fom-gpr-model.png"
+          ]
+        },
+        {
+          "slug": "variable-k-ldmos",
+          "rights_status": "reverify publisher permission/author rights; existing file does not itself confer re-use permission",
+          "figures": [
+            "assets/images/paper-figures/variable-k-ldmos-device-structure.png",
+            "assets/images/paper-figures/variable-k-ldmos-efield-mechanism.png"
+          ]
+        }
+      ]
+    }
+  ]
+}
