@@ -360,7 +360,7 @@
     "id": "dual-model-snn-remote-sensing#dual-distillation",
     "publication_slug": "dual-model-snn-remote-sensing",
     "visual_index": 0,
-    "role": "result",
+    "role": "framework",
     "sourceFigureNo": {
       "zh": null,
       "en": null
@@ -377,7 +377,7 @@
     "id": "dual-model-snn-remote-sensing#training-overview",
     "publication_slug": "dual-model-snn-remote-sensing",
     "visual_index": 1,
-    "role": "result",
+    "role": "framework",
     "sourceFigureNo": {
       "zh": null,
       "en": null

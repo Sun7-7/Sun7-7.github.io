@@ -26,6 +26,13 @@
             "mpo-surrogate-function-snn#surrogate-mismatch",
             "mpo-surrogate-function-snn#framework"
           ]
+        },
+        {
+          "slug": "dual-model-snn-remote-sensing",
+          "figureRefs": [
+            "dual-model-snn-remote-sensing#dual-distillation",
+            "dual-model-snn-remote-sensing#training-overview"
+          ]
         }
       ]
     },

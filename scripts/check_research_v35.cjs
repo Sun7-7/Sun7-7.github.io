@@ -23,7 +23,7 @@ async function engine(name,type){
   const page=await context.newPage();page.on('pageerror',e=>errors.push({name,width,lang,theme,error:e.message}));
   await page.goto(`${BASE}/${lang==='en'?'en/':''}research.html`,{waitUntil:'networkidle'});await ready(page);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
-  assert.equal(await page.locator('.research-paper').count(),9);
+  assert.equal(await page.locator('.research-paper').count(),mapping.reduce((n,s)=>n+s.previews.length,0));
   if([1440,390,320].includes(width)&&name==='edge')await shot(page,`research_${name}_${lang}_${width}_${theme}_overview`,'overview');
   for(const section of mapping){
    const area=page.locator('#'+section.id),stage=area.locator('.stage-content');
@@ -58,7 +58,7 @@ async function engine(name,type){
   if([1440,390].includes(width))await scan(page,{name,width,lang,theme,state:'default'});
   await context.close();
  }
- for(const lang of ['zh','en']){const p=await browser.newPage({javaScriptEnabled:false,viewport:{width:320,height:700}});await p.goto(`${BASE}/${lang==='en'?'en/':''}research.html`);assert.equal(await p.locator('.research-paper-title:visible').count(),9);assert.equal(await p.locator('.preview-stage img:visible').count(),6);assert.equal(await p.locator('.preview-toggle:visible').count(),0);await p.close();}
+ for(const lang of ['zh','en']){const p=await browser.newPage({javaScriptEnabled:false,viewport:{width:320,height:700}});await p.goto(`${BASE}/${lang==='en'?'en/':''}research.html`);assert.equal(await p.locator('.research-paper-title:visible').count(),mapping.reduce((n,s)=>n+s.previews.length,0));assert.equal(await p.locator('.preview-stage img:visible').count(),6);assert.equal(await p.locator('.preview-toggle:visible').count(),0);await p.close();}
  }finally{await browser.close();}
 }
 (async()=>{

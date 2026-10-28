@@ -10,16 +10,17 @@
       "Learning and temporal representations in spiking networks, from surrogate gradients to multi-scale encoding and sparse inference."
     ],
     "question": [
-      "围绕连续信号的有限时间窗学习，我研究脉冲表示与训练动力学两个互补问题：输入端如何保留时间结构，训练端如何使替代梯度适应神经元活动。",
-      "My work on short-horizon learning in continuous signals addresses two complementary questions: preserving temporal structure at the input and aligning surrogate gradients with neural activity during training."
+      "围绕有限时间窗中的脉冲学习，我研究时间表示、训练动力学与低延迟学习：如何组织输入信息、调整替代梯度，并通过不同时间步模型之间的知识传递保留判别信息。",
+      "My work on short-horizon spiking learning addresses temporal representations, training dynamics, and low-latency learning: organizing inputs, adapting surrogate gradients, and transferring knowledge between models with different time horizons."
     ],
     "method": [
-      "ICML 的 MTE×STE 通过多尺度输入与稀疏变换编码组织时间信息；AAAI 的 MPO 从膜电位分布出发调节替代梯度。前者关注信号表示，后者关注梯度优化，各自通过论文中的匹配实验与分析展开验证。",
-      "MTE×STE, presented at ICML, combines multi-scale input streams with sparse transform encoding. MPO, presented at AAAI, adapts surrogate gradients to membrane-potential distributions. They address representation and gradient optimization respectively, with separate experimental analyses."
+      "ICML 的 MTE×STE 结合多尺度输入与稀疏变换编码；AAAI 的 MPO 根据膜电位分布调整替代梯度；Neurocomputing 的双模型互蒸馏通过长短时间步协同训练研究低延迟推理。三项工作分别从编码、梯度优化和训练机制展开。",
+      "MTE×STE at ICML combines multi-scale inputs with sparse transform encoding. MPO at AAAI adapts surrogate gradients to membrane-potential distributions. The Neurocomputing study uses mutual distillation between long- and short-step models for low-latency inference. These studies address encoding, gradient optimization, and training mechanisms respectively."
     ],
     "papers": [
       "mte-ste-continuous-temporal-signal-classification",
-      "mpo-surrogate-function-snn"
+      "mpo-surrogate-function-snn",
+      "dual-model-snn-remote-sensing"
     ],
     "figure": "mte-ste-continuous-temporal-signal-classification"
   },
@@ -38,8 +39,8 @@
       "My radar research studies deinterleaving without labels, encoding and recognition under noise, and cluster decisions across scenarios, using distinct learning mechanisms to recover pulse structure with limited supervision."
     ],
     "method": [
-      "Spiking-SOM 将竞争学习和拓扑组织迁移到脉冲域；SGTE 将参考相似性编码为时间事件；IEEE SPL 工作以自适应聚类和相似性学习修正簇关系。相关应用还包括遥感图像分类和多模态传感。",
-      "Spiking-SOM moves competitive learning and topological organization into the spike domain. SGTE encodes reference similarity as temporal events. The IEEE SPL study combines adaptive clustering with similarity learning for cluster decisions. Related applications include remote sensing and multimodal sensing."
+      "Spiking-SOM 将竞争学习和拓扑组织迁移到脉冲域；SGTE 将参考相似性编码为时间事件；IEEE SPL 工作以自适应聚类和相似性学习修正簇关系。相关应用还包括多模态传感。",
+      "Spiking-SOM moves competitive learning and topological organization into the spike domain. SGTE encodes reference similarity as temporal events. The IEEE SPL study combines adaptive clustering with similarity learning for cluster decisions. Related applications include multimodal sensing."
     ],
     "papers": [
       "spiking-som-radar-deinterleaving",
@@ -48,7 +49,6 @@
     ],
     "figure": "spiking-som-radar-deinterleaving",
     "related": [
-      "dual-model-snn-remote-sensing",
       "hsaf-net-fruit-quality-assessment"
     ]
   },

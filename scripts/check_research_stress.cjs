@@ -37,7 +37,7 @@ const OUT='tmp/v35',BASE='http://127.0.0.1:8095';
  await page.emulateMedia({reducedMotion:'reduce'});await learn.locator('.research-paper').first().hover();await selected('learning','mte-ste-continuous-temporal-signal-classification');assert.equal(await page.evaluate(()=>document.getAnimations().length),0);report.reducedMotion=true;
  // 200% layout equivalent; this is not a claim about native browser menu zoom.
  await page.setViewportSize({width:720,height:450});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),720);report.zoom='720x450 CSS viewport, 200% layout equivalent; native menu zoom untested';
- await page.locator('#learning .research-paper-title').first().click();await page.waitForURL('**/papers/*.html');await page.goBack();assert.equal(await page.locator('.research-paper').count(),9);report.historyBack=true;await page.close();
+ await page.locator('#learning .research-paper-title').first().click();await page.waitForURL('**/papers/*.html');await page.goBack();assert.equal(await page.locator('.research-paper').count(),10);report.historyBack=true;await page.close();
  // Slow out-of-order image completion must not overwrite the newest selection.
  page=await browser.newPage({viewport:{width:1440,height:900}});
  await page.route('**/*main-results.png',async route=>{await new Promise(r=>setTimeout(r,900));await route.continue();});
