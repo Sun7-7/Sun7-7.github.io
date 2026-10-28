@@ -5,12 +5,18 @@ V3.4 is a Research portfolio candidate based on released main
 `codex/research-portfolio-v34`. This candidate is not deployed. The V3.4 handoff
 requires review before any merge or publication.
 
-Research uses six static figures and nine same-paper previews. The source mapping
-is `data/research_visuals.json`; bilingual captions and source credits are reused
-from the unchanged publication data. Desktop previews reserve a separate column;
-narrow or touch views expand inline. Escape, outside click, and preview buttons
-close the panel. The two supplied optimized portraits replace V3.3 portraits
-without retouching; a content hash versions image URLs and social metadata.
+Research defaults to six overview figures across three directions. Hover/focus a
+paper or use its button to collapse that direction's overview and unfold the
+paper's own two figures and introduction below its title. Selecting another
+paper closes the previous selection. Selection persists while reading/scrolling;
+collapse buttons or Escape restore the overview. Titles remain navigation links.
+All panels participate in normal document flow. Scroll compensation preserves the
+selected title's screen position when earlier content folds. No JavaScript means
+static overview figures and original paper navigation remain available.
+
+The source mapping is `data/research_visuals.json`; bilingual captions and credits
+reuse unchanged publication data. Supplied optimized portraits remain unchanged
+from the initial V3.4 candidate. No scientific figure pixels are modified.
 
 ## Build and preview
 
@@ -82,8 +88,8 @@ python -m http.server 8094 --bind 127.0.0.1
 npm run check:research
 ```
 
-The Research checker captures actual local browser scenes and logs in `tmp/v34`.
+The Research checker captures actual local browser scenes and logs in `tmp/v34-inline`.
 It covers five widths, both languages/themes, all nine mappings, hover, keyboard,
-touch, no-JavaScript reading, image failure, portraits, and axe scans. A 720×450
+touch, no-JavaScript reading, title anchoring, collapse restoration, and axe scans. A 720×450
 viewport approximates 200% scaling of 1440×900; native browser zoom, real mobile
 devices, Safari, and screen readers still require human device testing.

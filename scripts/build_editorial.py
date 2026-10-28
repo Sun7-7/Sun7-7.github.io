@@ -180,10 +180,12 @@ def home(lang):
  document(path,lang,'home',t(lang,'孙琦 | 脉冲学习、信号处理与半导体器件','Qi Sun | Spiking Learning, Signal Processing & Semiconductor Devices'),CONFIG['site']['description'][lang],body,True)
 
 def research_preview(mapping,lang,path):
- slug=mapping['slug'];pub=BY_SLUG[slug]
- v=next(v for v in detail(slug,lang)['visuals'] if v['src']==mapping['src'])
- panel='preview-'+slug;src=esc(rel(path,v['src']))
- return f'''<li class="research-paper" data-preview-slug="{slug}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><button class="preview-toggle" type="button" hidden aria-expanded="false" aria-controls="{panel}">{t(lang,'预览图片','Preview figure')}</button></div><div class="paper-preview" id="{panel}" hidden role="region" aria-label="{esc(t(lang,'论文图预览：','Figure preview: ')+pub['title'])}">{venue(pub)}{image(v['src'],v['title'],path)}<h4>{esc(v['title'])}</h4><p>{esc(v['caption'])}</p><a class="preview-original" href="{src}" target="_blank" rel="noopener noreferrer">{t(lang,'查看原图','View full-size figure')} ↗</a>{figure_credit(pub,lang)}<p class="preview-error" hidden>{t(lang,'图片暂时无法加载；可通过论文标题查看导读。','The figure could not load. Follow the paper title to read the brief.')}</p></div></li>'''
+ slug=mapping['slug'];pub=BY_SLUG[slug];d=detail(slug,lang)
+ panel='preview-'+slug
+ indices=[next(i for i,v in enumerate(d['visuals']) if v['src']==src) for src in mapping['figures']]
+ figures=''.join(research_figure(pub,i,lang,path) for i in indices)
+ return f'''<li class="research-paper" data-preview-slug="{slug}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" href="papers/{slug}.html">{esc(pub['title'])}</a><button class="preview-toggle" type="button" hidden aria-expanded="false" aria-controls="{panel}" data-open-label="{t(lang,'展开图文','Explore figures')}" data-close-label="{t(lang,'收起图文','Collapse figures')}">{t(lang,'展开图文','Explore figures')}</button></div><div class="paper-preview" id="{panel}" hidden role="region" aria-label="{esc(t(lang,'论文图文：','Paper figures: ')+pub['title'])}"><p class="preview-summary">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div><p class="preview-error" hidden>{t(lang,'部分图片暂时无法加载，可通过原图入口或论文标题继续阅读。','Some figures could not load. Use the original figure links or paper title to continue reading.')}</p><button class="preview-close" type="button">{t(lang,'收起图文，恢复方向概览','Close figures and restore overview')}</button></div></li>'''
+
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
@@ -200,7 +202,7 @@ def research(lang):
   mapping=VISUALS[a['id']]
   figures='<div class="research-figure-pair">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==x['src']),lang,path) for x in mapping['gallery'])+'</div>'
   refs=''.join(research_preview(x,lang,path) for x in mapping['previews'])
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{t(lang,"悬停或聚焦论文，查看对应图；也可使用预览按钮。","Hover or focus a paper to see its figure, or use the preview button.")}</p><div class="research-browser" data-preview-state="idle"><ul class="research-references">{refs}</ul></div></section>'
+  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2>{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div>{figures}<h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{t(lang,"悬停或聚焦论文，在标题下展开该篇双图介绍；收起后恢复方向概览。","Hover or focus a paper to unfold its two figures below the title. Collapse to restore the overview.")}</p><div class="research-browser" data-preview-state="idle"><ul class="research-references">{refs}</ul></div></section>'
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 
 def publications(lang):

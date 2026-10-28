@@ -83,69 +83,76 @@
   }
 })();
 
-/* Same-paper Research figure previews. No modal, focus trap, or navigation interception. */
+/* In-flow Research accordion: default overview or a paper's two figures. */
 (() => {
  'use strict';
- const desktop = matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
+ const hover = matchMedia('(hover: hover) and (pointer: fine)');
  document.querySelectorAll('.research-browser').forEach(browser => {
+  const section = browser.closest('.research-theme');
+  const overview = section.querySelector(':scope > .research-figure-pair');
   const rows = [...browser.querySelectorAll('.research-paper')];
   let active = null, timer, suppressFocus = false;
   function cancel() { clearTimeout(timer); }
-  function position() {
-   if (!active || !desktop.matches) return;
-   const box = browser.getBoundingClientRect(), row = active.getBoundingClientRect();
-   const panel = active.querySelector('.paper-preview');
-   const top = Math.max(12, Math.min(row.top, innerHeight - panel.offsetHeight - 12));
-   panel.style.top = `${top - box.top}px`;
+  // Preserve the selected title's screen position as content above it folds.
+  function mutateAt(row, change) {
+   const anchor = row.querySelector('.research-paper-title');
+   const before = anchor.getBoundingClientRect().top;
+   change();
+   const delta = anchor.getBoundingClientRect().top - before;
+   if (Math.abs(delta) > 1) window.scrollBy({top:delta,behavior:'instant'});
+  }
+  function setRow(row, open) {
+   row.toggleAttribute('data-active',open);
+   row.querySelector('.paper-preview').hidden = !open;
+   const button=row.querySelector('.preview-toggle');
+   button.setAttribute('aria-expanded',String(open));
+   button.textContent=open?button.dataset.closeLabel:button.dataset.openLabel;
   }
   function close(restore = false) {
-   cancel(); const previous = active; active = null; browser.dataset.previewState = 'idle';
-   rows.forEach(row => {
-    row.removeAttribute('data-active'); row.querySelector('.paper-preview').hidden = true;
-    row.querySelector('button').setAttribute('aria-expanded','false');
+   cancel(); if(!active)return;
+   const previous=active;
+   mutateAt(previous,()=>{
+    setRow(previous,false); overview.hidden=false; active=null;
+    browser.dataset.previewState='idle';
    });
-   if (restore && previous) {
-    suppressFocus = true;
-    previous.querySelector(desktop.matches ? '.research-paper-title' : 'button').focus({preventScroll:true});
-    suppressFocus = false;
+   if(restore){
+    suppressFocus=true;
+    const trigger=previous.querySelector('.preview-toggle');
+    trigger.focus({preventScroll:true});
+    const rect=trigger.getBoundingClientRect();
+    if(rect.top<0 || rect.bottom>innerHeight)trigger.scrollIntoView({block:'center',behavior:'instant'});
+    suppressFocus=false;
    }
   }
-  function show(row, state) {
-   cancel(); close(); active = row; row.dataset.active = 'true'; browser.dataset.previewState = state;
-   row.querySelector('.paper-preview').hidden = false;
-   row.querySelector('button').setAttribute('aria-expanded','true');
-   position();
+  function show(row,state) {
+   cancel(); if(active===row)return;
+   mutateAt(row,()=>{
+    if(active)setRow(active,false);
+    overview.hidden=true; active=row;setRow(row,true);
+    browser.dataset.previewState=state;
+   });
   }
-  function delayedClose() {
-   cancel(); timer = setTimeout(() => {
-    if (active && !active.contains(document.activeElement) && !active.matches(':hover')) close();
-   }, 180);
-  }
-  rows.forEach(row => {
-   const button = row.querySelector('button'), panel = row.querySelector('.paper-preview');
-   button.hidden = false;
-   row.addEventListener('mouseenter', () => {
-    if (!desktop.matches || active === row) return;
-    cancel(); timer = setTimeout(() => show(row,'hover-preview'),100);
+  rows.forEach(row=>{
+   const title=row.querySelector('.research-paper-title');
+   const button=row.querySelector('.preview-toggle');
+   const panel=row.querySelector('.paper-preview');
+   button.hidden=false;
+   title.addEventListener('mouseenter',()=>{
+    if(!hover.matches)return;
+    cancel();timer=setTimeout(()=>show(row,'hover-expanded'),120);
    });
-   row.addEventListener('mouseleave', () => { if (desktop.matches) delayedClose(); });
-   panel.addEventListener('mouseenter',cancel);
-   panel.addEventListener('mouseleave', () => { if(desktop.matches) delayedClose(); });
-   row.addEventListener('focusin', e => {
-    if (!suppressFocus && desktop.matches && !panel.contains(e.target) && e.target !== button) show(row,'focus-preview');
-   });
-   row.addEventListener('focusout', () => {
-    setTimeout(() => { if(active===row && !row.contains(document.activeElement) && !row.matches(':hover')) close(); },0);
-   });
+   title.addEventListener('mouseleave',cancel);
+   title.addEventListener('focus',()=>{if(!suppressFocus)show(row,'focus-expanded');});
    button.addEventListener('pointerdown',cancel);
-   button.addEventListener('click', () => active===row ? close() : show(row,desktop.matches?'focus-preview':'touch-expanded'));
-   panel.querySelector('img').addEventListener('load',position);
-   panel.querySelector('img').addEventListener('error', () => {panel.querySelector('.preview-error').hidden=false;});
+   button.addEventListener('click',()=>active===row?close():show(row,'button-expanded'));
+   panel.querySelector('.preview-close').addEventListener('click',()=>close(true));
+   panel.querySelectorAll('img').forEach(image=>image.addEventListener('error',()=>{
+    panel.querySelector('.preview-error').hidden=false;
+   }));
   });
-  browser.addEventListener('keydown', e => {if(e.key==='Escape' && active){e.preventDefault();close(true);}});
-  document.addEventListener('pointerdown', e => {if(!browser.contains(e.target))close();});
-  desktop.addEventListener('change',() => close());
-  window.addEventListener('resize',position,{passive:true});
-  window.addEventListener('scroll',position,{passive:true});
+  section.addEventListener('keydown',event=>{
+   if(event.key==='Escape' && active){event.preventDefault();close(true);}
+  });
+  // Selection persists while scrolling/reading. Explicit collapse restores overview.
  });
 })();
