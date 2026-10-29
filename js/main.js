@@ -88,12 +88,13 @@
   'use strict';
   const journeys = [...document.querySelectorAll('.focus-journey')];
   if (!journeys.length) return;
-  const desktop = matchMedia('(min-width: 1100px) and (min-height: 750px) and (hover: hover) and (pointer: fine)');
+  const desktop = matchMedia('(min-width: 1100px) and (min-height: 850px) and (hover: hover) and (pointer: fine)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const english = document.body.dataset.lang === 'en';
   const viewer = document.getElementById('figure-viewer');
   const records = [];
-  let frame = 0, lastScroll = -Infinity, returnFocus = null;
+  let frame = 0, lastScroll = -Infinity, returnFocus = null, areaTarget = null, areaTimer;
+  document.addEventListener('researchareanavigate',event=>{areaTarget=event.detail.id;clearTimeout(areaTimer);for(const r of records){clearTimeout(r.timer);clearTimeout(r.settle);r.intent=null;r.hover=null;r.focus=null;}areaTimer=setTimeout(()=>{areaTarget=null;schedule();},1800);});
   const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
   const behavior = () => reduced.matches ? 'auto' : 'smooth';
 
@@ -103,9 +104,14 @@
       frame = 0;
       for (const r of records) {
         if (r.journey.dataset.mode !== 'scroll') continue;
+        if(areaTarget && r.journey.closest('section').id!==areaTarget)continue;
+        const bounds=r.journey.getBoundingClientRect();if(bounds.bottom<0||bounds.top>innerHeight)continue;
         const travel = r.journey.offsetHeight - r.stage.offsetHeight;
-        const top = r.journey.getBoundingClientRect().top - 24;
-        r.scrollIndex = clamp(Math.round(-top / Math.max(1, travel) * (r.cards.length - 1)), 0, r.cards.length - 1);
+        const top = r.journey.getBoundingClientRect().top - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--area-nav-height'))||0) - 16;
+        const position = clamp(-top / Math.max(1, travel) * (r.cards.length - 1), 0, r.cards.length - 1);
+        // A small dead band prevents a trackpad from flipping at a row boundary.
+        if (position > r.scrollIndex + .58 || position < r.scrollIndex - .58)
+          r.scrollIndex = clamp(Math.round(position), 0, r.cards.length - 1);
         if (r.intent !== null) continue;
         // Never remove a keyboard user's focused control, including a modal opener.
         if (viewer.open || r.cards.some(card => card.querySelector('.paper-body').contains(document.activeElement))) continue;
@@ -119,11 +125,22 @@
     const cards = [...deck.querySelectorAll('.focus-paper')];
     const r = {journey, stage, deck, cards, current: -2, scrollIndex: 0, hover: null, focus: null, intent: null, timer: 0, settle: 0};
     records.push(r);
+    const panelAnimations = new Map();
+    r.layout = index => {
+      if (journey.dataset.mode !== 'scroll') { deck.style.gridTemplateRows = ''; return; }
+      // Use the same interpolable unit for every row; fr -> px is discrete.
+      const available = deck.clientHeight - (cards.length - 1) * parseFloat(getComputedStyle(deck).rowGap);
+      const closed = 78;
+      deck.style.gridTemplateRows = cards.map((_, i) => `${i === index ? Math.max(closed, available - closed * (cards.length - 1)) : closed}px`).join(' ');
+    };
     r.draw = (index, announce = false) => {
       if (index === r.current) return;
-      const old = r.current; r.current = index;
+      const old = r.current;
+      const heights = cards.map(card => card.querySelector('.paper-body').getBoundingClientRect().height);
+      panelAnimations.forEach(animation => animation.cancel()); panelAnimations.clear();
+      r.current = index;
       journey.dataset.activeIndex = String(index);
-      deck.style.gridTemplateRows = cards.map((_, i) => i === index ? 'minmax(0, 1fr)' : '68px').join(' ');
+      r.layout(index);
       cards.forEach((card, i) => {
         const active = i === index, panel = card.querySelector('.paper-body');
         card.classList.toggle('is-active', active);
@@ -131,6 +148,15 @@
         card.querySelector('.paper-indicator').textContent = active ? '−' : '+';
         panel.setAttribute('aria-hidden', String(!active)); panel.inert = !active;
         if (active) panel.querySelectorAll('img').forEach(img => {img.loading = 'eager';});
+        if (journey.dataset.mode === 'manual' && old !== -2 && !reduced.matches) {
+          const target = active ? panel.getBoundingClientRect().height : 0;
+          if (Math.abs(heights[i] - target) > 1) {
+            const animation = panel.animate([{height:`${heights[i]}px`},{height:`${target}px`}],
+              {duration:440,easing:'cubic-bezier(.25,.8,.25,1)'});
+            panelAnimations.set(panel, animation);
+            animation.onfinish = () => panelAnimations.delete(panel);
+          }
+        }
       });
       journey.querySelector('.focus-count').textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
       if (announce) journey.querySelector('.focus-status').textContent = (english ? 'Selected: ' : '已选中：') + (index < 0 ? (english ? 'All collapsed' : '全部收起') : cards[index].querySelector('.paper-short').textContent);
@@ -139,9 +165,10 @@
     function clearPreview() { clearTimeout(r.timer); r.hover = null; r.pendingHover = null; }
     r.configure = () => {
       clearPreview(); r.focus = null; r.intent = null; clearTimeout(r.settle);
+      panelAnimations.forEach(animation => animation.cancel()); panelAnimations.clear();
       journey.dataset.mode = desktop.matches ? 'scroll' : 'manual';
       journey.style.setProperty('--journey-travel', `${Math.round((cards.length - 1) * Math.min(540, innerHeight * .6))}px`);
-      r.draw(Math.max(0, r.current)); schedule();
+      r.draw(Math.max(0, r.current)); r.layout(r.current); schedule();
     };
     function activate(index) {
       clearPreview(); r.focus = null;
@@ -153,7 +180,7 @@
       }
       r.intent = index; r.draw(index, true);
       const travel = journey.offsetHeight - stage.offsetHeight;
-      const start = journey.getBoundingClientRect().top + scrollY - 24;
+      const start = journey.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--area-nav-height'))||0) - 16;
       // One native navigation action. No wheel cancellation or scrolling compensation.
       window.scrollTo({top: start + travel * index / Math.max(1, cards.length - 1), behavior:behavior()});
       clearTimeout(r.settle);
@@ -170,11 +197,15 @@
         r.pendingHover = null;
         if (performance.now() - lastScroll < 220 || r.intent !== null || r.cards.some(c => c.querySelector('.paper-body').contains(document.activeElement))) return;
         r.hover = index; r.draw(index);
-      }, 120);
+      }, 90);
     });
     // Layout animation may move a card away from a stationary pointer. Only an
     // actual pointer move chooses another row; leaving the deck restores position.
-    deck.addEventListener('pointerleave', () => {clearPreview(); r.pendingHover = null; schedule();});
+    let leaveTimer;
+    deck.addEventListener('pointerenter', () => clearTimeout(leaveTimer));
+    deck.addEventListener('pointerleave', () => {clearTimeout(r.timer); r.pendingHover = null;
+      leaveTimer = setTimeout(() => {clearPreview(); schedule();}, 160);
+    });
     cards.forEach((card, index) => {
       const trigger = card.querySelector('.paper-trigger');
       trigger.addEventListener('click', () => activate(index));
@@ -204,6 +235,7 @@
     schedule();
   }, {passive:true});
   addEventListener('wheel', () => {
+    areaTarget=null;clearTimeout(areaTimer);
     if (!viewer.open && document.activeElement.matches('.figure-select')) document.activeElement.blur();
     for (const r of records) {r.intent = null; clearTimeout(r.settle);}
   }, {passive:true});
@@ -223,24 +255,42 @@
  document.querySelectorAll('.focus-figures').forEach(stage=>{
   const tiles=[...stage.querySelectorAll('.focus-figure')];
   const fallback=Math.max(0,tiles.findIndex(t=>t.dataset.figureRef===stage.dataset.defaultPrimary));
-  let pinned=null,preview=null,timer;
+  let pinned=null,preview=null,pending=null,timer,primaryIndex=null;
+  const captionAnimations=new Map();
   stage.dataset.mediaEnhanced='true';
   const reset=stage.querySelector('.reset-figure');reset.hidden=false;
   function draw(index,announce=false){
+   const previous=primaryIndex;primaryIndex=index;
+   const captions=tiles.map(tile=>tile.querySelector('figcaption'));
+   const heights=captions.map(caption=>caption.getBoundingClientRect().height);
+   if(previous!==index){captionAnimations.forEach(animation=>animation.cancel());captionAnimations.clear();}
    stage.dataset.primaryIndex=String(index);stage.dataset.mediaState=pinned!==null?'pinned':preview!==null?'preview':'default';
    // CSS arithmetic cannot interpolate a variable with a fr suffix. Compute
    // numeric track values from the validated data instead.
    const style=getComputedStyle(stage),primary=Number(style.getPropertyValue('--primary-weight'))||2.4,secondary=Number(style.getPropertyValue('--secondary-weight'))||1;
    stage.style.setProperty('--media-tracks',tiles.map((_,i)=>`minmax(0,${i===index?primary:secondary}fr)`).join(' '));
    tiles.forEach((tile,i)=>{tile.classList.toggle('is-primary',i===index);tile.querySelector('.figure-select').setAttribute('aria-pressed',String(i===index));});
+   if(previous!==null&&previous!==index&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    captions.forEach((caption,i)=>{
+     // Measure at the final column width so wrapping cannot snap at the end.
+     if(innerWidth>700){
+      const gap=parseFloat(style.columnGap)||0,total=tiles.reduce((n,_,k)=>n+(k===index?primary:secondary),0);
+      caption.style.width=((stage.clientWidth-gap*(tiles.length-1))*(i===index?primary:secondary)/total)+'px';
+     }
+     const target=caption.getBoundingClientRect().height;caption.style.width='';
+     if(Math.abs(target-heights[i])<1)return;
+     const animation=caption.animate([{height:`${heights[i]}px`},{height:`${target}px`}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
+     captionAnimations.set(caption,animation);animation.onfinish=()=>captionAnimations.delete(caption);
+    });
+   }
    if(announce)stage.querySelector('.media-status').textContent=(english?'Figure focus: ':'主图：')+tiles[index].querySelector('h4').textContent;
   }
-  function restore(){clearTimeout(timer);preview=null;draw(pinned??fallback);}
+  function restore(){clearTimeout(timer);pending=null;preview=null;draw(pinned??fallback);}
   stage.addEventListener('pointermove',event=>{
    if(!hover.matches||event.pointerType==='touch'||event.buttons)return;
    const tile=event.target.closest('.focus-figure');if(!tile){restore();return;}
-   const index=tiles.indexOf(tile);if(preview===index)return;
-   clearTimeout(timer);timer=setTimeout(()=>{preview=index;draw(index);},100);
+   const index=tiles.indexOf(tile);if(preview===index||pending===index)return;
+   clearTimeout(timer);pending=index;timer=setTimeout(()=>{pending=null;preview=index;draw(index);},100);
   });
   stage.addEventListener('pointerleave',restore);
   stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement))restore();},0));
@@ -248,19 +298,19 @@
    const button=tile.querySelector('.figure-select');
    // Pointer focus happens before mouseup; changing geometry there can move
    // the target away and swallow its click. Keyboard focus may preview safely.
-   button.addEventListener('pointerdown',()=>clearTimeout(timer));
+   button.addEventListener('pointerdown',()=>{clearTimeout(timer);pending=null;});
    button.addEventListener('focus',()=>{if(button.matches(':focus-visible')){preview=index;draw(index);}});
-   button.addEventListener('click',()=>{clearTimeout(timer);pinned=index;preview=null;draw(index,true);});
+   button.addEventListener('click',()=>{clearTimeout(timer);pinned=index;preview=null;pending=null;draw(index,true);});
    button.addEventListener('keydown',event=>{
     if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key))return;
     event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?tiles.length-1:(index+(event.key==='ArrowLeft'||event.key==='ArrowUp'?-1:1)+tiles.length)%tiles.length;
     tiles[next].querySelector('.figure-select').focus({preventScroll:true});
    });
   });
-  function resetFocus(){pinned=null;preview=null;clearTimeout(timer);draw(fallback,true);}
+  function resetFocus(){pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback,true);}
   reset.addEventListener('click',resetFocus);
   stage.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('figure-viewer').open){event.preventDefault();resetFocus();}});
-  stage.closest('.focus-journey').addEventListener('researchfocuschange',()=>{pinned=null;preview=null;clearTimeout(timer);draw(fallback);});
+  stage.closest('.focus-journey').addEventListener('researchfocuschange',()=>{pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback);});
   draw(fallback);
  });
 })();
@@ -290,4 +340,38 @@
     viewer.querySelector('.viewer-image').replaceChildren();
     returnFocus?.focus({preventScroll:true});
   });
+})();
+/* V3.8: a semantic area directory; scrollspy never navigates or resets figures. */
+(()=>{
+ const nav=document.querySelector('.area-navigator');if(!nav)return;
+ const sections=[...document.querySelectorAll('.research-theme')],explorer=document.querySelector('.area-explorer');
+ const links=[...document.querySelectorAll('[data-area-link]')],progress=nav.querySelector('.area-progress span');let frame=0,current='';
+ function update(){frame=0;const offset=nav.getBoundingClientRect().height+16,threshold=offset+Math.min(64,innerHeight*.2);let active=sections[0];
+  for(const section of sections){if(section.getBoundingClientRect().top<=threshold)active=section;}
+  if(current!==active.id){current=active.id;document.body.dataset.activeArea=current;
+   links.filter(a=>!a.classList.contains('area-bridge')).forEach(a=>{if(a.dataset.areaLink===current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+   nav.querySelector('.area-position').textContent=String(sections.indexOf(active)+1).padStart(2,'0')+' / '+String(sections.length).padStart(2,'0');
+  }
+  const rect=active.getBoundingClientRect(),fraction=Math.max(0,Math.min(1,(offset-rect.top)/Math.max(1,rect.height-innerHeight+offset)));
+  progress.style.transform=`scaleX(${(sections.indexOf(active)+fraction)/sections.length})`;
+  nav.classList.toggle('is-stuck',explorer.getBoundingClientRect().bottom<=0);
+ }
+ function schedule(){if(!frame)frame=requestAnimationFrame(update);}
+ function measure(){document.documentElement.style.scrollPaddingTop='0px';document.documentElement.style.setProperty('--area-nav-height',nav.getBoundingClientRect().height+'px');schedule();}
+ links.forEach(link=>link.addEventListener('click',event=>{
+  if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  const target=sections.find(s=>s.id===link.dataset.areaLink);if(!target)return;
+  event.preventDefault();if(location.hash!=='#'+target.id)history.pushState(null,'','#'+target.id);
+  // A single native navigation; the outer paper controller observes position.
+  document.dispatchEvent(new CustomEvent('researchareanavigate',{detail:{id:target.id}}));
+  document.activeElement?.blur();target.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  target.querySelector('h2').setAttribute('tabindex','-1');target.querySelector('h2').focus({preventScroll:true});schedule();
+ }));
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure,{passive:true});
+ addEventListener('popstate',()=>{const s=sections.find(s=>'#'+s.id===location.hash);if(s)s.scrollIntoView({block:'start',behavior:'auto'});schedule();});
+ function restoreHash(){const target=sections.find(s=>'#'+s.id===location.hash);if(target)requestAnimationFrame(()=>{target.scrollIntoView({block:'start',behavior:'auto'});schedule();});}
+ addEventListener('hashchange',restoreHash);addEventListener('pageshow',restoreHash);
+ new ResizeObserver(measure).observe(nav);measure();
+ // Font/layout initialization may precede native hash restoration.
+ if(location.hash){const target=sections.find(s=>'#'+s.id===location.hash);if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'auto'}));}
 })();

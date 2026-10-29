@@ -5,7 +5,7 @@
     "playwright": "^1.62.1"
   },
   "name": "qisun-academic-homepage",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "private": true,
   "description": "Static bilingual academic homepage; Node packages are QA-only.",
   "engines": {
@@ -15,7 +15,7 @@
     "check:browser": "node scripts/verify_browser.cjs",
     "check:lighthouse": "node scripts/run_lighthouse.mjs",
     "check:editorial": "node scripts/check_editorial.cjs",
-    "check:research": "node scripts/check_site_v37.cjs",
+    "check:research": "node scripts/check_site_v38.cjs",
     "check:pipeline": "python scripts/test_publication_pipeline.py",
     "check:ux-benchmark": "node scripts/benchmark_research.cjs",
     "check:research:v36": "node scripts/check_research_v36.cjs",
@@ -24,6 +24,7 @@
     "check:viewer:v36": "node scripts/check_research_viewer_v36.cjs",
     "check:lighthouse:v36": "node scripts/run_lighthouse_v36.mjs",
     "check:media:v37": "node scripts/check_media_v37.cjs",
-    "check:contract:v37": "python scripts/test_v37_contract.py"
+    "check:contract:v37": "python scripts/test_v37_contract.py",
+    "check:area:v38": "node scripts/check_area_v38.cjs"
   }
 }
