@@ -100,6 +100,9 @@ def validate(root=ROOT, release=False, check_output=False):
             require(pub['publisher_citation_publication_date']==date and bool(pub.get('date_provenance')),prefix+'citation date provenance mismatch')
         if pub.get('selectedRank') is not None:ranks.append(pub['selectedRank'])
         d=ds.get(slug,{})
+        for field in ['shortTitle','oneLineContribution']:
+            values=[d.get(field+'_'+language) for language in ['zh','en']]
+            require(all(v is None for v in values) or all(isinstance(v,str) and v.strip() and len(v)<=(120 if field=='shortTitle' else 400) for v in values),prefix+'invalid or unpaired bilingual '+field)
         for lang,obj in [('zh',d),('en',d.get('en',{}))]:
             require(all(isinstance(obj.get(k),str) and obj[k].strip() for k in CONTENT),prefix+lang+' incomplete content')
             for k in ['evidence','highlights','pipeline','visuals']:require(isinstance(obj.get(k),list),prefix+lang+' missing array '+k)
@@ -139,12 +142,16 @@ def validate(root=ROOT, release=False, check_output=False):
     for area in areas:
         section=next((s for s in mappings if s['id']==area['id']),{})
         require(set(area['papers'])=={p['slug'] for p in section.get('previews',[])},'Area paper/preview sets differ')
+        require(area['papers']==[p['slug'] for p in section.get('previews',[])],'Area paper/preview order differs')
+        require(len(area['papers'])==len(set(area['papers'])),'Duplicate area paper')
+        require(all(pubs.get(slug,{}).get('area')==area['id'] for slug in area['papers']),'Research/publication area differs')
         require(all(slug in pubs for slug in area.get('related',[])),'Unknown related publication')
     for section in mappings:
         for x in section['gallery']:
             require(x.get('figureRef') in fs and fs[x['figureRef']]['publication_slug']==x['slug'],'Overview owner/ref mismatch')
         for x in section['previews']:
             require(1<=len(x.get('figureRefs',[]))<=2,'Preview must use one or two figures')
+            require(len(x.get('figureRefs',[]))==len(set(x.get('figureRefs',[]))),'Duplicate preview figure reference')
             for ref in x.get('figureRefs',[]):require(ref in fs and fs[ref]['publication_slug']==x['slug'],'Preview owner/ref mismatch: '+ref)
     return {'publication_records':len(papers),'figure_records':len(figures),'mode':'release' if release else 'candidate','owner_approved_snapshot':approved_snapshot,'errors':errors,'warnings':warnings}
 

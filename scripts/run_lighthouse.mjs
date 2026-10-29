@@ -8,8 +8,9 @@ fs.mkdirSync(out,{recursive:true});
 const BASE=process.env.TEST_BASE_URL || 'http://127.0.0.1:8091';
 const chrome=await launch({...(process.env.CHROME_PATH ? {chromePath:process.env.CHROME_PATH} : {}),chromeFlags:['--headless=new','--disable-gpu','--no-first-run']});
 const summary=[];
+const pages=(process.env.LIGHTHOUSE_PAGES||'index,publications,research').split(',');
 try {
- for(const mode of ['desktop','mobile'])for(const page of ['index','publications']){
+ for(const mode of ['desktop','mobile'])for(const page of pages){
   const url=`${BASE}/${page}.html`;
   const result=await lighthouse(url,{port:chrome.port,logLevel:'error',output:'json',onlyCategories:['performance','accessibility','best-practices','seo']},mode==='desktop'?desktop:undefined);
   fs.writeFileSync(path.join(out,`lighthouse_${page}_${mode}.json`),result.report);

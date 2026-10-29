@@ -83,78 +83,153 @@
   }
 })();
 
-/* Stable Research preview; only an explicit action opens the illustrated reader. */
+/* V3.6: position-driven focus, fixed desktop deck, native document scrolling. */
 (() => {
- 'use strict';
- const desktop=matchMedia('(min-width: 960px) and (hover: hover) and (pointer: fine)');
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- const english=document.body.dataset.lang==='en';
- const dialog=document.getElementById('paper-reader');
- let returnFocus=null;
- dialog?.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
- dialog?.addEventListener('close',()=>{dialog.querySelector('.reader-content').replaceChildren();returnFocus?.focus({preventScroll:true});});
- document.querySelectorAll('.research-browser').forEach(browser=>{
-  const rows=[...browser.querySelectorAll('.research-paper')];
-  const stage=browser.querySelector('.preview-stage'),content=stage.querySelector('.stage-content');
-  const status=stage.querySelector('.stage-status');
-  let locked=null,hovered=null,focused=null,hold=false,timer,request=0,presented='overview';
-  function cancel(){clearTimeout(timer);}
-  async function render(row){
-   const slug=row?.dataset.previewSlug||'overview';
-   const token=++request;
-   rows.forEach(item=>{item.toggleAttribute('data-active',item===row);item.querySelector('.pin-preview').setAttribute('aria-pressed',String(item===locked));});
-   browser.dataset.previewState=locked?'locked':row?'preview':'overview';
-   status.textContent=locked?(english?'Pinned preview':'已固定预览'):row?(english?'Paper preview':'论文预览'):(english?'Area overview':'方向概览');
-   if(slug===presented){stage.removeAttribute('aria-busy');return;}
-   const template=browser.querySelector(`template[data-stage-template="${slug}"]`);
-   const fragment=template.content.cloneNode(true);
-   stage.setAttribute('aria-busy','true');
-   status.textContent=english?'Loading figures…':'正在加载图解…';
-   await Promise.all([...fragment.querySelectorAll('img')].map(async img=>{
-    img.loading='eager';const probe=new Image();probe.src=new URL(img.getAttribute('src'),document.baseURI).href;try{await probe.decode();}catch{img.alt+=(english?' (unavailable; use original figure link)':'（暂不可用，请使用原图入口）');}
-   }));
-   if(token!==request)return;
-   const next=document.createElement('div');next.className='stage-layer';next.append(fragment);
-   content.replaceChildren(next);content.dataset.stageSlug=slug;presented=slug;
-   stage.removeAttribute('aria-busy');
-   status.textContent=locked?(english?'Pinned preview':'已固定预览'):row?(english?'Paper preview':'论文预览'):(english?'Area overview':'方向概览');
-   if(!reduced.matches)next.animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
+  'use strict';
+  const journeys = [...document.querySelectorAll('.focus-journey')];
+  if (!journeys.length) return;
+  const desktop = matchMedia('(min-width: 960px) and (min-height: 700px) and (hover: hover) and (pointer: fine)');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const english = document.body.dataset.lang === 'en';
+  const viewer = document.getElementById('figure-viewer');
+  const records = [];
+  let frame = 0, lastScroll = -Infinity, returnFocus = null;
+  const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
+  const behavior = () => reduced.matches ? 'auto' : 'smooth';
+
+  function schedule() {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      for (const r of records) {
+        if (r.journey.dataset.mode !== 'scroll') continue;
+        const travel = r.journey.offsetHeight - r.stage.offsetHeight;
+        const top = r.journey.getBoundingClientRect().top - 24;
+        r.scrollIndex = clamp(Math.round(-top / Math.max(1, travel) * (r.cards.length - 1)), 0, r.cards.length - 1);
+        if (r.intent !== null) continue;
+        // Never remove a keyboard user's focused control, including a modal opener.
+        if (viewer.open || r.cards.some(card => card.querySelector('.paper-body').contains(document.activeElement))) continue;
+        r.draw(r.hover ?? r.focus ?? r.scrollIndex);
+      }
+    });
   }
-  function choose(){if(content.contains(document.activeElement))return;if(desktop.matches)render(locked||hovered||focused||(hold?rows.find(row=>row.dataset.previewSlug===presented):null));}
-  rows.forEach(row=>{
-   const pin=row.querySelector('.pin-preview'),read=row.querySelector('.preview-toggle');
-   pin.hidden=false;read.hidden=false;
-   row.addEventListener('pointerenter',()=>{
-    if(!desktop.matches || locked)return;
-    cancel();hovered=row;
-    timer=setTimeout(choose,presented==='overview'?120:0);
-   });
-   row.addEventListener('pointerleave',()=>{if(!desktop.matches)return;cancel();if(hovered===row)hovered=null;timer=setTimeout(choose,150);});
-   row.addEventListener('focusin',()=>{if(desktop.matches){cancel();focused=row;choose();}});
-   row.addEventListener('focusout',()=>{setTimeout(()=>{
-    if(row.contains(document.activeElement))return;
-    if(focused===row)focused=null;
-    hold=stage.contains(document.activeElement);choose();
-   },0);});
-   pin.addEventListener('click',()=>{cancel();locked=locked===row?null:row;choose();});
-   read.addEventListener('click',()=>{
-    returnFocus=read;
-    dialog.querySelector('#reader-title').textContent=row.dataset.paperTitle;
-    dialog.querySelector('.reader-content').replaceChildren(row.querySelector('template[data-reader-template]').content.cloneNode(true));
-    dialog.querySelectorAll('img').forEach(img=>{img.loading='eager';});
-    dialog.showModal();
-   });
-   row.addEventListener('pointerenter',()=>row.querySelector('template[data-stage-template]').content.querySelectorAll('img').forEach(img=>{const warm=new Image();warm.src=img.src;}),{once:true});
+
+  for (const journey of journeys) {
+    const stage = journey.querySelector('.focus-stage'), deck = journey.querySelector('.focus-deck');
+    const cards = [...deck.querySelectorAll('.focus-paper')];
+    const r = {journey, stage, deck, cards, current: -2, scrollIndex: 0, hover: null, focus: null, intent: null, timer: 0, settle: 0};
+    records.push(r);
+    r.draw = (index, announce = false) => {
+      if (index === r.current) return;
+      const old = r.current; r.current = index;
+      journey.dataset.activeIndex = String(index);
+      deck.style.gridTemplateRows = cards.map((_, i) => i === index ? 'minmax(0, 1fr)' : '68px').join(' ');
+      cards.forEach((card, i) => {
+        const active = i === index, panel = card.querySelector('.paper-body');
+        card.classList.toggle('is-active', active);
+        card.querySelector('.paper-trigger').setAttribute('aria-expanded', String(active));
+        card.querySelector('.paper-indicator').textContent = active ? '−' : '+';
+        panel.setAttribute('aria-hidden', String(!active)); panel.inert = !active;
+        if (active) panel.querySelectorAll('img').forEach(img => {img.loading = 'eager';});
+      });
+      journey.querySelector('.focus-count').textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      if (announce) journey.querySelector('.focus-status').textContent = (english ? 'Selected: ' : '已选中：') + (index < 0 ? (english ? 'All collapsed' : '全部收起') : cards[index].querySelector('.paper-short').textContent);
+      journey.dispatchEvent(new CustomEvent('researchfocuschange', {bubbles:true, detail:{from:old, to:index, cause:r.hover !== null ? 'hover' : r.intent !== null ? 'activate' : r.focus !== null ? 'focus' : 'position'}}));
+    };
+    function clearPreview() { clearTimeout(r.timer); r.hover = null; r.pendingHover = null; }
+    r.configure = () => {
+      clearPreview(); r.focus = null; r.intent = null; clearTimeout(r.settle);
+      journey.dataset.mode = desktop.matches ? 'scroll' : 'manual';
+      journey.style.setProperty('--journey-travel', `${Math.round((cards.length - 1) * Math.min(540, innerHeight * .6))}px`);
+      r.draw(Math.max(0, r.current)); schedule();
+    };
+    function activate(index) {
+      clearPreview(); r.focus = null;
+      if (journey.dataset.mode !== 'scroll') {
+        r.draw(r.current === index ? -1 : index, true);
+        const trigger = cards[index].querySelector('.paper-trigger');
+        if (trigger.getBoundingClientRect().top < 0) trigger.scrollIntoView({block:'start', behavior:behavior()});
+        return;
+      }
+      r.intent = index; r.draw(index, true);
+      const travel = journey.offsetHeight - stage.offsetHeight;
+      const start = journey.getBoundingClientRect().top + scrollY - 24;
+      // One native navigation action. No wheel cancellation or scrolling compensation.
+      window.scrollTo({top: start + travel * index / Math.max(1, cards.length - 1), behavior:behavior()});
+      clearTimeout(r.settle);
+      r.settle = setTimeout(() => {r.intent = null; schedule();}, reduced.matches ? 0 : 900);
+    }
+    deck.addEventListener('pointermove', event => {
+      if (journey.dataset.mode !== 'scroll' || event.pointerType === 'touch' || performance.now() - lastScroll < 220 || viewer.open) return;
+      const card = event.target.closest('.focus-paper');
+      if (!card) {clearPreview(); schedule(); return;}
+      const index = cards.indexOf(card);
+      if (r.hover === index || r.pendingHover === index) return;
+      clearTimeout(r.timer); r.pendingHover = index;
+      r.timer = setTimeout(() => {
+        r.pendingHover = null;
+        if (performance.now() - lastScroll < 220 || r.intent !== null || r.cards.some(c => c.querySelector('.paper-body').contains(document.activeElement))) return;
+        r.hover = index; r.draw(index);
+      }, 120);
+    });
+    // Layout animation may move a card away from a stationary pointer. Only an
+    // actual pointer move chooses another row; leaving the deck restores position.
+    deck.addEventListener('pointerleave', () => {clearPreview(); r.pendingHover = null; schedule();});
+    cards.forEach((card, index) => {
+      const trigger = card.querySelector('.paper-trigger');
+      trigger.addEventListener('click', () => activate(index));
+      trigger.addEventListener('keydown', event => {
+        if (!['ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : clamp(index + (event.key === 'ArrowDown' ? 1 : -1), 0, cards.length - 1);
+        cards[next].querySelector('.paper-trigger').focus({preventScroll:true});
+        if (journey.dataset.mode === 'scroll') activate(next); else r.draw(next, true);
+      });
+      trigger.addEventListener('focus', () => {
+        if (journey.dataset.mode === 'scroll' && trigger.matches(':focus-visible')) {clearPreview(); r.focus = index; r.draw(index, true);}
+      });
+      card.addEventListener('focusout', () => setTimeout(() => {
+        if (!deck.contains(document.activeElement)) {r.focus = null; schedule();}
+      }, 0));
+      card.querySelectorAll('img').forEach(img => img.addEventListener('error', () => {
+        img.alt += english ? ' (unavailable; open original figure)' : '（暂不可用，可打开原图）';
+        img.closest('.focus-figure').dataset.imageError = 'true';
+      }, {once:true}));
+    });
+    r.configure();
+  }
+  addEventListener('scroll', () => {
+    lastScroll = performance.now();
+    for (const r of records) {clearTimeout(r.timer); r.pendingHover = null; r.hover = null; r.focus = null;}
+    schedule();
+  }, {passive:true});
+  addEventListener('wheel', () => {
+    for (const r of records) {r.intent = null; clearTimeout(r.settle);}
+  }, {passive:true});
+  addEventListener('resize', () => {for (const r of records) r.configure();}, {passive:true});
+  desktop.addEventListener('change', () => {for (const r of records) r.configure();});
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) document.getAnimations().forEach(animation => animation.finish());
   });
-  stage.addEventListener('focusin',()=>{cancel();hold=true;++request;stage.removeAttribute('aria-busy');});
-  stage.addEventListener('pointerenter',()=>{cancel();hold=true;});
-  stage.addEventListener('pointerleave',()=>{hold=false;timer=setTimeout(choose,150);});
-  stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement)){hold=false;choose();}},0));
-  function reset(){cancel();locked=null;hovered=null;focused=null;hold=false;render(null);}
-  stage.querySelector('.reset-preview').hidden=false;
-  stage.querySelector('.reset-preview').addEventListener('click',reset);
-  browser.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();if(stage.contains(document.activeElement))stage.querySelector('.reset-preview').focus({preventScroll:true});reset();}});
-  desktop.addEventListener('change',reset);
-  reduced.addEventListener('change',()=>{if(reduced.matches)content.getAnimations({subtree:true}).forEach(animation=>animation.finish());});
- });
+  // Native dialog provides focus containment and Escape across supported engines.
+  document.querySelectorAll('.figure-zoom').forEach(link => link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof viewer.showModal !== 'function') return;
+    event.preventDefault(); returnFocus = link;
+    const figure = link.closest('figure'), img = link.querySelector('img').cloneNode(); img.loading = 'eager';
+    viewer.querySelector('#figure-viewer-title').textContent = figure.querySelector('h4').textContent;
+    viewer.querySelector('.viewer-image').replaceChildren(img);
+    const original = document.createElement('a'); original.href = link.href; original.target = '_blank'; original.rel = 'noopener noreferrer'; original.textContent = english ? 'Open original figure ↗' : '打开原图 ↗';
+    const caption = document.createElement('div');
+    caption.append(...[...figure.querySelector('figcaption').childNodes].map(node => node.cloneNode(true)));
+    const heading = document.createElement('h3'); heading.textContent = caption.querySelector('h4').textContent;
+    caption.querySelector('h4').replaceWith(heading);
+    viewer.querySelector('.viewer-caption').replaceChildren(caption, original);
+    viewer.showModal();
+  }));
+  viewer.querySelector('.dialog-close').addEventListener('click', () => viewer.close());
+  viewer.addEventListener('close', () => {
+    viewer.querySelector('.viewer-image').replaceChildren();
+    returnFocus?.focus({preventScroll:true});
+  });
+  schedule();
 })();

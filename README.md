@@ -1,61 +1,71 @@
 # Qi Sun — Academic Homepage + Research Portfolio
 
-V3.5 candidate on `codex/v35-research-ux-content-pipeline`, based on released V3.4
-main `775611fad908048f91877481fb125b52ff689f79`. The owner approved this exact existing-site snapshot for production on 2026-10-29.
-The recorded approval expires on any source/artifact change. The existing static Python/GitHub Pages architecture and
-all 44 bilingual URLs remain in place.
+V3.6 **candidate**, branch `codex/v36-research-focus-accordion`, based on released
+main `40f94e5c0020fb87e9cb63be4274f8f2c49cc27e`. This iteration is not approved for
+merge or production deployment. The V3.5 owner approval applies only to its old
+exact snapshot and does not authorize this source.
 
-Research now separates stable whole-row hover/focus previews, optional pinning,
-and an explicit native-dialog illustrated reader. Preview changes affect only
-opacity/4px translation over 180 ms; they never change document height or call
-window scrolling APIs. Touch and narrow layouts use the explicit reader button.
-Without JavaScript the original paper links and static overview figures remain.
-Reduced-motion disables the preview animation. The current professional portraits
-and all scientific image pixels are unchanged.
+Research uses a position-driven focus accordion: natural document scrolling
+advances the open paper; a 120ms whole-row hover temporarily previews another
+paper; leaving the deck or continuing scrolling restores the position state.
+The fixed desktop deck changes internal row sizes without changing document
+height. Clicking a heading or using arrow/Home/End keys performs one native
+smooth navigation. Mobile, touch and short windows use a non-sticky accordion.
+
+Expanded cards retain the full publication title, contribution, authors, source
+links and real figures. The native figure viewer supports Escape and focus
+return. Without JavaScript, all ten Research paper bodies and twenty figures
+remain visible in the actual HTML. Reduced-motion removes transitions. All
+existing scientific evidence, publication metadata, image bytes and 44 bilingual
+URLs remain intact.
 
 ## Build and preview
 
 ```powershell
 python scripts/build_site.py
-python -m http.server 8095 --bind 127.0.0.1
+python -m http.server 8096 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8095/research.html . Python 3.10+ standard library is enough
-for candidate builds and semantic validation. QA-only tools require Node.js
-22.19+ and jsonschema (requirements-qa.txt).
+Open http://127.0.0.1:8096/research.html . Candidate build and semantic validation
+use Python 3.10+ standard library. Browser QA needs Node.js 22.19+ and optional
+Python schema QA uses requirements-qa.txt.
 
-## Content and publication workflow
+## Content maintenance
 
-See [the data contract and draft/import instructions](docs/PUBLICATION_WORKFLOW.md).
-Draft creation cannot publish. Pending image rights remain explicitly recorded;
-`python scripts/build_site.py --release` blocks incomplete reviews, except for the
-exact owner-approved existing-site snapshot recorded in data/release_authorization.json.
-Pending rights are retained; this is not new third-party permission. Owner consent to release is separate from third-party image permission.
-No raw job-search document, original portrait PNG, unpublished project material,
-or source paper PDF belongs in the public repository.
+See [V3.6 Chinese maintenance guide](docs/V36_RESEARCH_MAINTENANCE.md) and the
+[original import workflow](docs/PUBLICATION_WORKFLOW.md). New bilingual short
+headings and contributions are optional paired fields in publication_details;
+Research order and explicit figure ownership remain data-driven. The blank
+V3.6 new-paper example is inert and never becomes a fabricated publication.
 
-## Checks
+Unreviewed new records and images remain blocked. Existing 33 image-rights
+records remain pending, with no invented third-party permission. Raw source
+PDFs, job-search documents and unpublished projects do not belong in this repo.
+`python scripts/build_site.py --release` must reject this unapproved candidate.
+
+## Current checks
 
 ```powershell
-python scripts/validate_publications.py --check-output --report tmp/review/publications.json
-python scripts/check_site.py --report-dir tmp/review
-python scripts/check_wording.py --report-dir tmp/review
+python scripts/validate_publications.py --check-output --report tmp/v36/logs/validation.json
+python scripts/check_research_data.py
+python scripts/check_site.py --report-dir tmp/v36
+python scripts/check_wording.py --report-dir tmp/v36
 python -m pip install -r requirements-qa.txt
 python scripts/test_publication_pipeline.py
+python scripts/test_release_authorization.py
 npm ci
-npx playwright install firefox webkit ffmpeg
-$env:TEST_BASE_URL = 'http://127.0.0.1:8095'
-$env:REVIEW_PACKET_DIR = 'tmp/v35'
-npm run check:browser
-npm run check:research
-node scripts/check_research_stress.cjs
-node scripts/benchmark_research.cjs v35 http://127.0.0.1:8095
+# Install browser QA engines if absent; Edge is used for the primary matrix.
+npx playwright install webkit ffmpeg
+$env:TEST_BASE_URL = 'http://127.0.0.1:8096'
+$env:REVIEW_PACKET_DIR = 'tmp/v36'
+npm run check:research:v36
+node scripts/record_research_v36.cjs
+node scripts/check_research_viewer_v36.cjs
+node scripts/run_lighthouse_v36.mjs
 ```
 
-The benchmark records actual browser video, frame intervals, long tasks and raw
-Chromium traces. These are headless desktop/viewport tests, not physical-device
-measurements, energy measurements or a Lighthouse score. Browser-engine launch
-failures and axe incomplete results must remain visible in the report. WebKit
-on Windows is not a claim of testing Safari/iOS. A 720×450 CSS viewport is only
-a layout equivalent for 200% zoom; native menu zoom and real screen readers still
-need manual testing. Old release test results must not be reported as new runs.
+Earlier Research/benchmark scripts target the V3.4/V3.5 DOM and remain historical
+reproduction tools; their old pass counts are not V3.6 results. Tests preserve
+raw axe incomplete results and browser-engine availability. Viewport/touch
+emulation is not physical-device testing; WebKit on Windows is not real Safari.
+The 720×450 zoom check is a layout equivalent, not native browser menu zoom.

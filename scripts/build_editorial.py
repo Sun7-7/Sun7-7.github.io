@@ -173,10 +173,15 @@ def preview_figures(slug,srcs,lang,path):
  pub=BY_SLUG[slug];visuals=detail(slug,lang)['visuals']
  return ''.join(research_figure(pub,next(i for i,v in enumerate(visuals) if v['src']==src),lang,path) for src in srcs)
 
-def research_preview(mapping,lang,path):
- slug=mapping['slug'];pub=BY_SLUG[slug];d=detail(slug,lang)
- figures=preview_figures(slug,[figure_src(ref) for ref in mapping['figureRefs']],lang,path)
- return f'''<li class="research-paper" data-preview-slug="{slug}" data-paper-title="{esc(pub['title'])}"><div class="research-paper-copy">{venue(pub)}<a class="research-paper-title" tabindex="0" href="papers/{slug}.html">{esc(pub['title'])}</a><p class="research-authors">{authors(pub)}.</p><p class="research-summary">{esc(d['oneLine'])}</p><div class="research-actions"><button class="pin-preview" type="button" hidden aria-pressed="false">{t(lang,'固定预览','Pin preview')}</button><button class="preview-toggle" type="button" hidden aria-haspopup="dialog" aria-controls="paper-reader">{t(lang,'阅读图解','Read illustrated brief')}</button></div></div><template data-stage-template="{slug}"><div class="stage-figures">{figures}</div></template><template data-reader-template="{slug}"><p class="lead">{esc(d['oneLine'])}</p><div class="research-figure-pair">{figures}</div>{links(pub,lang,path)}</template></li>'''
+def research_card(mapping,index,lang,path):
+ slug=mapping['slug'];pub=BY_SLUG[slug];d=detail(slug,lang);raw=DETAILS[slug]
+ short=raw.get('shortTitle_'+lang,pub['title'])
+ contribution=raw.get('oneLineContribution_'+lang,d['oneLine'])
+ figures=[]
+ for ref in mapping['figureRefs']:
+  f=FIGURES[ref];v=d['visuals'][f['visual_index']];src=esc(rel(path,v['src']))
+  figures.append(f'''<figure class="focus-figure" data-figure-ref="{esc(ref)}"><a class="figure-zoom" href="{src}" target="_blank" rel="noopener noreferrer" aria-label="{esc(t(lang,'放大科研图：','Enlarge figure: ')+v['title'])}">{image(v['src'],v['title'],path)}<span>{t(lang,'放大','Enlarge')} ↗</span></a><figcaption><h4>{esc(v['title'])}</h4><p>{esc(v['caption'])}</p>{figure_credit(pub,lang)}</figcaption></figure>''')
+ return f'''<article class="focus-paper" data-publication="{slug}" data-paper-index="{index}"><h3 class="focus-paper-heading"><button class="paper-trigger" type="button" id="trigger-{slug}" aria-expanded="true" aria-controls="panel-{slug}"><span class="paper-index">P{index+1:02}</span><span class="paper-head-text">{venue(pub)}<span class="paper-short">{esc(short)}</span></span><span class="paper-indicator" aria-hidden="true">−</span></button></h3><div class="paper-body" id="panel-{slug}" role="region" aria-labelledby="trigger-{slug}"><div class="paper-detail"><div class="paper-copy"><p class="eyebrow">{t(lang,'研究贡献','Research contribution')}</p><p class="focus-contribution">{esc(contribution)}</p><p class="full-paper-title" lang="en">{esc(pub['title'])}</p><p class="research-authors">{authors(pub)}.</p>{links(pub,lang,path)}</div><div class="focus-figures">{''.join(figures)}</div></div></div></article>'''
 
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
@@ -189,13 +194,12 @@ def research(lang):
   else:statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
 
   mapping=VISUALS[a['id']]
-  figures='<div class="stage-figures">'+''.join(research_figure(BY_SLUG[x['slug']],next(j for j,v in enumerate(detail(x['slug'],lang)['visuals']) if v['src']==figure_src(x['figureRef'])),lang,path) for x in mapping['gallery'])+'</div>'
-  refs=''.join(research_preview(x,lang,path) for x in mapping['previews'])
-  hint=t(lang,'悬停或聚焦整条论文可切换右侧预览；点击阅读图解查看大图。','Hover or focus a paper row to preview; choose Read illustrated brief for larger figures.')
+  refs=''.join(research_card(x,j,lang,path) for j,x in enumerate(mapping['previews']))
+  hint=t(lang,'滚动浏览论文；悬停整行临时预览，点击标题定位。窄屏与触屏点击展开。','Scroll to explore; hover a row to preview, or select a heading to navigate. Tap to expand on smaller and touch screens.')
   related=('<p class="related-work">'+t(lang,'相关应用：','Related applications: ')+ ' · '.join(f'<a href="papers/{slug}.html">{esc(BY_SLUG[slug]["venue"])} · {BY_SLUG[slug]["year"]}</a>' for slug in a.get('related',[]))+'</p>') if a.get('related') else ''
-  body+=f'<section id="{a["id"]}" class="research-theme"><div class="theme-heading"><span class="section-number">0{i}</span><h2 id="theme-title-{a["id"]}">{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div><h3 class="small-heading">{t(lang,"已发表论文","Published Papers")}</h3><p class="preview-hint">{hint}</p><div class="research-browser" data-preview-state="overview"><ul class="research-references">{refs}</ul><aside class="preview-stage" aria-labelledby="theme-title-{a["id"]} stage-title-{a["id"]}"><div class="stage-heading"><h4 id="stage-title-{a["id"]}">{t(lang,"图解预览","Figure preview")}</h4><button class="reset-preview" hidden type="button">{t(lang,"恢复概览","Reset overview")}</button></div><p class="stage-status" role="status">{t(lang,"方向概览","Area overview")}</p><div class="stage-content" data-stage-slug="overview">{figures}</div><template data-stage-template="overview">{figures}</template></aside></div>{related}</section>'
+  body+=f'<section id="{a["id"]}" class="research-theme" aria-labelledby="theme-title-{a["id"]}"><div class="theme-heading"><span class="section-number">0{i}</span><h2 id="theme-title-{a["id"]}">{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div><p class="focus-hint">{hint}</p><div class="focus-journey" data-count="{len(mapping["previews"])}"><div class="focus-stage"><div class="focus-toolbar"><span>{t(lang,"已发表论文","Published Papers")}</span><span class="focus-count" aria-hidden="true">01 / {len(mapping["previews"]):02}</span></div><div class="focus-deck">{refs}</div><p class="focus-status" role="status" aria-live="polite"></p></div></div>{related}</section>'
 
- body+=f'<dialog id="paper-reader" aria-labelledby="reader-title"><header class="reader-header"><h2 id="reader-title">{t(lang,"论文图解","Illustrated paper brief")}</h2><button class="dialog-close" type="button" autofocus>{t(lang,"关闭","Close")}</button></header><div class="reader-content"></div></dialog>'
+ body+=f'<dialog id="figure-viewer" aria-labelledby="figure-viewer-title"><header class="reader-header"><h2 id="figure-viewer-title">{t(lang,"科研图","Research figure")}</h2><button class="dialog-close" type="button" autofocus>{t(lang,"关闭","Close")}</button></header><div class="viewer-image"></div><div class="viewer-caption"></div></dialog>'
 
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
 

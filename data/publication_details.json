@@ -146,7 +146,11 @@
           "insight": "Assess high-voltage stress degradation alongside comparable static conduction."
         }
       ]
-    }
+    },
+    "shortTitle_zh": "高介电沟槽 GaN HEMT 电场调控",
+    "shortTitle_en": "High-k trench field engineering in GaN HEMTs",
+    "oneLineContribution_zh": "在 GaN-on-Si HEMT 漏侧引入 PZT 高介电常数沟槽，通过介电边界调控缓解电场拥挤，提高代表器件的耐压并改善动态导通电阻表现。",
+    "oneLineContribution_en": "A drain-side PZT high-k trench redistributes electric fields in GaN-on-Si HEMTs, improving voltage handling and dynamic ON-resistance in representative devices."
   },
   {
     "slug": "hsaf-net-fruit-quality-assessment",
@@ -295,7 +299,11 @@
           "insight": "HMA reports 95.0% accuracy versus 90.4% for averaging and 91.2% for concatenation."
         }
       ]
-    }
+    },
+    "shortTitle_zh": "多模态融合与水果品质评估",
+    "shortTitle_en": "Multimodal fusion for fruit quality assessment",
+    "oneLineContribution_zh": "让 SNN 读取近红外光电压序列、ANN 检测表面缺陷，再用异构模态注意力融合内外部品质证据，完成梨果无损分级。",
+    "oneLineContribution_en": "An SNN reads NIR photovoltage sequences, an ANN detects surface defects, and heterogeneous modality attention combines internal and external evidence for nondestructive pear grading."
   },
   {
     "slug": "mte-ste-continuous-temporal-signal-classification",
@@ -444,7 +452,11 @@
           "insight": "MTE can increase activity; assess STE together with transform overhead."
         }
       ]
-    }
+    },
+    "shortTitle_zh": "多尺度时间编码与稀疏变换",
+    "shortTitle_en": "Multi-scale temporal & sparse transform encoding",
+    "oneLineContribution_zh": "以多尺度时间编码补充短时间窗中的有效信息，再用稀疏变换编码压缩冗余放电，改善连续一维信号分类的精度与脉冲活动率。",
+    "oneLineContribution_en": "Multi-scale temporal encoding enriches short-horizon evidence, while sparse transform encoding controls redundant firing for continuous 1D signal classification."
   },
   {
     "slug": "sgte-snn-radar-emitter-denoising-recognition",
@@ -593,7 +605,11 @@
         "caption": "该图表展示参考集大小、直方图 bins 等编码参数对识别性能的影响。",
         "insight": "消融分析把“相似性编码如何影响最终识别”这一点讲清楚，避免只停留在端到端指标。"
       }
-    ]
+    ],
+    "shortTitle_zh": "相似性引导的时间编码与雷达识别",
+    "shortTitle_en": "Similarity-guided temporal encoding for radar recognition",
+    "oneLineContribution_zh": "将雷达脉冲与参考样本的相似性转化为结构化脉冲时序输入，在噪声干扰下同时服务去噪与辐射源识别。",
+    "oneLineContribution_en": "SGTE converts pulse-to-reference similarities into structured temporal spike inputs for joint radar pulse denoising and emitter recognition."
   },
   {
     "slug": "spiking-som-radar-deinterleaving",
@@ -742,7 +758,11 @@
         "caption": "图中通过 BMU 响应和能量分布展示不同簇在脉冲域的竞争关系。",
         "insight": "它解释了模型为什么可以用放电活动完成雷达脉冲序列的自组织分离。"
       }
-    ]
+    ],
+    "shortTitle_zh": "脉冲自组织映射与雷达去交织",
+    "shortTitle_en": "Spiking self-organizing maps for radar deinterleaving",
+    "oneLineContribution_zh": "把自组织映射的无监督聚类过程放进脉冲域，用 BMU 放电率完成雷达脉冲序列去交织。",
+    "oneLineContribution_en": "Spiking-SOM moves self-organizing-map clustering into the spike domain and uses BMU firing rates for unsupervised radar pulse deinterleaving."
   },
   {
     "slug": "mpo-surrogate-function-snn",
@@ -891,7 +911,11 @@
         "caption": "结果图展示不同设置下的训练曲线、超参数敏感性和膜电位分布变化。",
         "insight": "验证重点不是单一精度提升，而是训练过程是否更稳定、对宽度选择是否更不敏感。"
       }
-    ]
+    ],
+    "shortTitle_zh": "膜电位分布驱动的替代梯度优化",
+    "shortTitle_en": "Membrane-potential-guided surrogate optimization",
+    "oneLineContribution_zh": "根据膜电位分布动态调节替代梯度函数，让 SNN 训练中的梯度传播更稳定、更高效。",
+    "oneLineContribution_en": "MPO dynamically adjusts surrogate gradients according to membrane potential distributions for more stable and efficient SNN training."
   },
   {
     "slug": "adaptive-clustering-radar-signal-processing",
@@ -1040,7 +1064,11 @@
         "caption": "消融图表说明伪标签策略、相似性学习模块等组件对最终分选指标的贡献。",
         "insight": "这部分帮助读者判断改进来自哪一环，而不是来自整体模型规模。"
       }
-    ]
+    ],
+    "shortTitle_zh": "相似性学习与多场景自适应聚类",
+    "shortTitle_en": "Similarity learning for adaptive radar clustering",
+    "oneLineContribution_zh": "用自适应聚类生成伪标签，再用相似性学习判断簇间关系，提升复杂场景雷达信号分选鲁棒性。",
+    "oneLineContribution_en": "ACSL combines adaptive clustering for pseudo-label generation with similarity learning to improve radar signal sorting in complex scenes."
   },
   {
     "slug": "dual-model-snn-remote-sensing",
@@ -1189,7 +1217,11 @@
         "caption": "表格汇总多个遥感数据集上的方法、网络结构、时间步和准确率。",
         "insight": "重点展示短时间步推理下的精度保持能力，以及和已有 SNN 方法的差异。"
       }
-    ]
+    ],
+    "shortTitle_zh": "双模型互蒸馏与遥感图像分类",
+    "shortTitle_en": "Mutual distillation for spiking remote sensing",
+    "oneLineContribution_zh": "用长短时间步双模型互蒸馏缓解 SNN 降低推理时间步时的精度损失。",
+    "oneLineContribution_en": "A long-short step dual-model mutual distillation framework reduces accuracy loss when SNN inference timesteps are shortened."
   },
   {
     "slug": "ml-ldmos-bv-optimization",
@@ -1340,7 +1372,11 @@
         "caption": "图表展示遗传算法搜索结构参数时的收敛趋势和优化结果。",
         "insight": "CNN 代理模型负责快速预测，GA 负责探索设计空间，两者共同降低 TCAD 试错成本。"
       }
-    ]
+    ],
+    "shortTitle_zh": "机器学习辅助 LDMOS 击穿电压优化",
+    "shortTitle_en": "ML-assisted LDMOS breakdown optimization",
+    "oneLineContribution_zh": "将 CNN 预测模型与遗传算法结合，用 TCAD 数据驱动多浮空埋层 LDMOS 的击穿电压优化。",
+    "oneLineContribution_en": "This work combines a CNN surrogate and genetic algorithm to optimize breakdown voltage for MFBL LDMOS using TCAD data."
   },
   {
     "slug": "sipos-umofet-fom",
@@ -1489,7 +1525,11 @@
         "caption": "拟合图展示预测 FOM 与仿真或计算结果之间的一致性。",
         "insight": "这部分是判断模型能否用于器件快速筛选的关键证据。"
       }
-    ]
+    ],
+    "shortTitle_zh": "SIPOS U-MOSFET 品质因子建模",
+    "shortTitle_en": "Figure-of-merit modeling for SIPOS U-MOSFETs",
+    "oneLineContribution_zh": "面向 SIPOS 调制漂移区 U-MOSFET，建立结合物理解析与 GPR 的 FOM 预测模型。",
+    "oneLineContribution_en": "A physics-informed FOM model for SIPOS-modulated U-MOSFET combines analytical device modeling with Gaussian process regression."
   },
   {
     "slug": "variable-k-ldmos",
@@ -1638,6 +1678,10 @@
         "caption": "结果图表总结结构参数变化对击穿电压、电场分布和器件性能的影响。",
         "insight": "这部分帮助读者看到结构优化如何在击穿、电阻和热特性之间寻找平衡。"
       }
-    ]
+    ],
+    "shortTitle_zh": "变介电沟槽超结 LDMOS 的 TCAD 研究",
+    "shortTitle_en": "Variable-k trench superjunction LDMOS: a TCAD study",
+    "oneLineContribution_zh": "提出 variable-K 高介电常数沟槽调制 SJ-LDMOS 体电场，提高击穿电压并保持导通和散热特性。",
+    "oneLineContribution_en": "A variable-K dielectric trench modulates the bulk electric field of SJ-LDMOS to improve breakdown voltage while maintaining conduction and thermal behavior."
   }
 ]

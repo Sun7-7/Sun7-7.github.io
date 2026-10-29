@@ -103,6 +103,26 @@
           "type": "array"
         }
       }
+    },
+    "shortTitle_zh": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "shortTitle_en": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "oneLineContribution_zh": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "oneLineContribution_en": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",

@@ -22,7 +22,11 @@
   "detail": {
     "slug": "",
     "zh_note": "Fill existing brief fields manually from the paper; never synthesize experimental results.",
-    "en": {}
+    "en": {},
+    "shortTitle_zh": "",
+    "shortTitle_en": "",
+    "oneLineContribution_zh": "",
+    "oneLineContribution_en": ""
   },
   "review": {
     "state": "draft",
