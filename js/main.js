@@ -88,12 +88,13 @@
   'use strict';
   const journeys = [...document.querySelectorAll('.focus-journey')];
   if (!journeys.length) return;
-  const desktop = matchMedia('(min-width: 1100px) and (min-height: 750px) and (hover: hover) and (pointer: fine)');
+  const desktop = matchMedia('(min-width: 1100px) and (min-height: 850px) and (hover: hover) and (pointer: fine)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const english = document.body.dataset.lang === 'en';
   const viewer = document.getElementById('figure-viewer');
   const records = [];
-  let frame = 0, lastScroll = -Infinity, returnFocus = null;
+  let frame = 0, lastScroll = -Infinity, returnFocus = null, areaTarget = null, areaTimer;
+  document.addEventListener('researchareanavigate',event=>{areaTarget=event.detail.id;clearTimeout(areaTimer);for(const r of records){clearTimeout(r.timer);clearTimeout(r.settle);r.intent=null;r.hover=null;r.focus=null;}areaTimer=setTimeout(()=>{areaTarget=null;schedule();},1800);});
   const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
   const behavior = () => reduced.matches ? 'auto' : 'smooth';
 
@@ -103,8 +104,10 @@
       frame = 0;
       for (const r of records) {
         if (r.journey.dataset.mode !== 'scroll') continue;
+        if(areaTarget && r.journey.closest('section').id!==areaTarget)continue;
+        const bounds=r.journey.getBoundingClientRect();if(bounds.bottom<0||bounds.top>innerHeight)continue;
         const travel = r.journey.offsetHeight - r.stage.offsetHeight;
-        const top = r.journey.getBoundingClientRect().top - 24;
+        const top = r.journey.getBoundingClientRect().top - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--area-nav-height'))||0) - 16;
         r.scrollIndex = clamp(Math.round(-top / Math.max(1, travel) * (r.cards.length - 1)), 0, r.cards.length - 1);
         if (r.intent !== null) continue;
         // Never remove a keyboard user's focused control, including a modal opener.
@@ -153,7 +156,7 @@
       }
       r.intent = index; r.draw(index, true);
       const travel = journey.offsetHeight - stage.offsetHeight;
-      const start = journey.getBoundingClientRect().top + scrollY - 24;
+      const start = journey.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--area-nav-height'))||0) - 16;
       // One native navigation action. No wheel cancellation or scrolling compensation.
       window.scrollTo({top: start + travel * index / Math.max(1, cards.length - 1), behavior:behavior()});
       clearTimeout(r.settle);
@@ -204,6 +207,7 @@
     schedule();
   }, {passive:true});
   addEventListener('wheel', () => {
+    areaTarget=null;clearTimeout(areaTimer);
     if (!viewer.open && document.activeElement.matches('.figure-select')) document.activeElement.blur();
     for (const r of records) {r.intent = null; clearTimeout(r.settle);}
   }, {passive:true});
@@ -290,4 +294,38 @@
     viewer.querySelector('.viewer-image').replaceChildren();
     returnFocus?.focus({preventScroll:true});
   });
+})();
+/* V3.8: a semantic area directory; scrollspy never navigates or resets figures. */
+(()=>{
+ const nav=document.querySelector('.area-navigator');if(!nav)return;
+ const sections=[...document.querySelectorAll('.research-theme')],explorer=document.querySelector('.area-explorer');
+ const links=[...document.querySelectorAll('[data-area-link]')],progress=nav.querySelector('.area-progress span');let frame=0,current='';
+ function update(){frame=0;const offset=nav.getBoundingClientRect().height+16,threshold=offset+Math.min(64,innerHeight*.2);let active=sections[0];
+  for(const section of sections){if(section.getBoundingClientRect().top<=threshold)active=section;}
+  if(current!==active.id){current=active.id;document.body.dataset.activeArea=current;
+   links.filter(a=>!a.classList.contains('area-bridge')).forEach(a=>{if(a.dataset.areaLink===current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+   nav.querySelector('.area-position').textContent=String(sections.indexOf(active)+1).padStart(2,'0')+' / '+String(sections.length).padStart(2,'0');
+  }
+  const rect=active.getBoundingClientRect(),fraction=Math.max(0,Math.min(1,(offset-rect.top)/Math.max(1,rect.height-innerHeight+offset)));
+  progress.style.transform=`scaleX(${(sections.indexOf(active)+fraction)/sections.length})`;
+  nav.classList.toggle('is-stuck',explorer.getBoundingClientRect().bottom<=0);
+ }
+ function schedule(){if(!frame)frame=requestAnimationFrame(update);}
+ function measure(){document.documentElement.style.scrollPaddingTop='0px';document.documentElement.style.setProperty('--area-nav-height',nav.getBoundingClientRect().height+'px');schedule();}
+ links.forEach(link=>link.addEventListener('click',event=>{
+  if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  const target=sections.find(s=>s.id===link.dataset.areaLink);if(!target)return;
+  event.preventDefault();if(location.hash!=='#'+target.id)history.pushState(null,'','#'+target.id);
+  // A single native navigation; the outer paper controller observes position.
+  document.dispatchEvent(new CustomEvent('researchareanavigate',{detail:{id:target.id}}));
+  document.activeElement?.blur();target.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  target.querySelector('h2').setAttribute('tabindex','-1');target.querySelector('h2').focus({preventScroll:true});schedule();
+ }));
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure,{passive:true});
+ addEventListener('popstate',()=>{const s=sections.find(s=>'#'+s.id===location.hash);if(s)s.scrollIntoView({block:'start',behavior:'auto'});schedule();});
+ function restoreHash(){const target=sections.find(s=>'#'+s.id===location.hash);if(target)requestAnimationFrame(()=>{target.scrollIntoView({block:'start',behavior:'auto'});schedule();});}
+ addEventListener('hashchange',restoreHash);addEventListener('pageshow',restoreHash);
+ new ResizeObserver(measure).observe(nav);measure();
+ // Font/layout initialization may precede native hash restoration.
+ if(location.hash){const target=sections.find(s=>'#'+s.id===location.hash);if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'auto'}));}
 })();

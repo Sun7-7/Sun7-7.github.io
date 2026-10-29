@@ -1,55 +1,27 @@
-# V3.7 Academic Editorial + Research Portfolio
+# V3.8 Research Area Navigator — candidate
 
-This version continues the V3.6 candidate bb41318c7ae6c814de5fce6a0aad83aa02f5ce85,
-with remote main 40f94e5c0020fb87e9cb63be4274f8f2c49cc27e verified before work.
-The owner explicitly authorized this iteration to be deployed on 2026-10-29.
-Deployment status and final main SHA belong in the release receipt, not inferred
-from source availability. No third-party rights have been newly inferred.
+Based on published main e7ef739de5e4b7736d0851ad31bae1511e25bb2b.
+This round is a review candidate only: do not merge or deploy without new owner authorization.
 
-Research retains position-driven paper focus and adds local primary/secondary
-figure focus: hover/focus is temporary, click/tap pins, reset restores the
-role/aspect-based default. The image control focuses; separate Enlarge and
-Original controls open the viewer or raw asset. All images preserve their ratio.
-Other pages use lighter background/focus treatments, explicit shared viewers,
-reading navigation and native controls. They do not copy Research's accordion.
+Semantic whole-card area links, a compact sticky directory, position-based
+scrollspy and next-area bridges are generated from research_areas and the
+publication mappings. Counts are computed, not hard-coded. Existing paper and
+figure focus, permanent URLs, scientific data and image pixels are preserved.
 
-## Build / preview
+Build with `python scripts/build_site.py`; preview with
+`python -m http.server 8098 --bind 127.0.0.1`.
 
-```powershell
-python scripts/build_site.py
-python -m http.server 8097 --bind 127.0.0.1
-```
+QA: `node scripts/check_area_v38.cjs`, `node scripts/check_site_v38.cjs`,
+`python scripts/test_v38_contract.py`, `python scripts/check_site.py --report-dir tmp/v38`.
+V3.8 synthetic import checks that the Learning count changes to four in a
+throwaway environment, while production keeps eleven real papers.
 
-No framework or runtime dependencies were added. Complete English titles,
-publication author order, sources, original images and scientific evidence are
-preserved. JS-disabled and print layouts show all content. Mobile / shorter
-windows use native document flow; reduced motion disables transitions.
+Navigation only changes hash for explicit clicks; scrollspy never navigates.
+No wheel hijacking or compensating scroll loop. Native hash links work without
+JS. Device scope explanations use native details. Small windows use normal
+paper flow. Existing image rights remain pending; the previous version's exact
+release authorization does not cover this candidate.
 
-## Data / QA
-
-See docs/V37_MAINTENANCE.md. Metadata remains in publications; focusBrief is
-an exact excerpt with an evidenceRef into the reviewed bilingual detail record.
-Figure descriptions point to caption/insight fields; dimensions are read from
-the original PNG. Research mappings declare the default figure and track weights.
-
-```powershell
-python scripts/validate_publications.py --check-output
-python scripts/test_publication_pipeline.py
-python scripts/test_v37_contract.py
-python scripts/check_site.py --report-dir tmp/v37
-npm ci
-node scripts/check_site_v37.cjs
-node scripts/check_media_v37.cjs
-node scripts/record_v37.cjs
-$env:TEST_BASE_URL='http://127.0.0.1:8097'
-$env:REVIEW_PACKET_DIR='tmp/v37'
-node scripts/run_lighthouse_v36.mjs
-```
-
-New synthetic paper/figure tests operate only in a disposable directory;
-production retains eleven real publications. Existing 33 image-rights entries
-remain pending. Exact owner snapshot approval is separate from copyright status.
-Actual browser captures and raw reports are delivered under the primary
-project's deliverables/website/V3.7 directory, excluded from public Git content.
-Native menu zoom, physical devices and screen readers require manual checks;
-viewport equivalents and Playwright WebKit do not certify those environments.
+Deliverables: the primary project's deliverables/website/V3.8 directory.
+Physical devices, real screen readers, native menu zoom and real Safari are not
+certified by viewport and Playwright tests.

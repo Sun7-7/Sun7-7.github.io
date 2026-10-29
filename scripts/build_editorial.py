@@ -192,21 +192,35 @@ def research_card(mapping,index,lang,path):
  primary=mapping.get('layout',{}).get('defaultPrimary',mapping['figureRefs'][0])
  return f'''<article class="focus-paper" data-publication="{slug}" data-paper-index="{index}"><h3 class="focus-paper-heading"><button class="paper-trigger" type="button" id="trigger-{slug}" aria-expanded="true" aria-controls="panel-{slug}"><span class="paper-index">P{index+1:02}</span><span class="paper-head-text">{venue(pub)}<span class="paper-short">{esc(short)}</span></span><span class="paper-indicator" aria-hidden="true">−</span></button></h3><div class="paper-body" id="panel-{slug}" role="region" aria-labelledby="trigger-{slug}"><div class="paper-detail"><div class="paper-copy">{summary}<p class="full-paper-title" lang="en">{esc(pub['title'])}</p><p class="research-authors">{authors(pub)}.</p>{links(pub,lang,path)}</div><div class="focus-figures" data-default-primary="{esc(primary)}" style="--primary-weight:{mapping.get('layout',{}).get('primaryWeight',2.4)};--secondary-weight:{mapping.get('layout',{}).get('secondaryWeight',1)}">{''.join(figures)}<button type="button" class="reset-figure" hidden>{t(lang,'恢复默认主图','Reset figure focus')}</button><span class="media-status" role="status"></span></div></div></div></article>'''
 
+def area_bridge(area,lang,back=False):
+ count=len(VISUALS[area['id']]['previews'])
+ label=t(lang,'返回第一研究方向' if back else '继续：下一研究方向','Back to the first research area' if back else 'Continue to the next research area')
+ return f'<a class="area-bridge" href="#{area["id"]}" data-area-link="{area["id"]}"><span><small>{label} · {count} {t(lang,"篇论文","papers")}</small><strong>{esc(atext(area,"names",lang))}</strong><span>{esc(atext(area,"short",lang))}</span></span><b aria-hidden="true">{"↑" if back else "→"}</b></a>'
+
 def research(lang):
  path=route(lang,'research.html');u=UI[lang]
- body=intro('Research',u['research'],t(lang,'我研究脉冲网络如何表示和学习连续时间信息，并将这些机制用于雷达脉冲流等信号任务；在器件方向，关注结构、电场与电学特性之间的联系，以及神经形态器件的建模与设计。','I study how spiking networks represent and learn continuous temporal information, with applications to radar pulse streams and related signal tasks. My device research addresses the relationship between structure, electric fields, and electrical behavior, alongside interests in neuromorphic device modeling and design.'))
- body+='<nav class="section-index" aria-label="'+t(lang,'研究方向目录','Research themes')+'">'+''.join(f'<a href="#{a["id"]}">0{i} / {u[a["id"]]}</a>' for i,a in enumerate(AREAS,1))+'</nav>'
+ body=intro('Research',u['research'],t(lang,'通过已发表论文与原始科研图，浏览脉冲学习、雷达信号处理和半导体器件研究。','Explore published work and original figures in spiking learning, radar signal processing, and semiconductor devices.'))
+ body+='<nav class="area-explorer" aria-label="'+t(lang,'按研究方向浏览','Explore research areas')+'">'
+ for i,a in enumerate(AREAS,1):
+  count=len(VISUALS[a['id']]['previews'])
+  body+=f'<a class="area-card" href="#{a["id"]}" data-area-link="{a["id"]}"><span class="area-number">{i:02} / {a["id"].upper()}</span><strong>{esc(atext(a,"names",lang))}</strong><span class="area-description">{esc(atext(a,"short",lang))}</span><span class="area-count">{t(lang,str(count)+" 篇论文",str(count)+" publications")}</span></a>'
+ body+='</nav><nav class="area-navigator" aria-label="'+t(lang,'研究方向快速导航','Research area navigation')+'"><div class="area-nav-links">'
+ for i,a in enumerate(AREAS,1):
+  count=len(VISUALS[a['id']]['previews'])
+  body+=f'<a href="#{a["id"]}" data-area-link="{a["id"]}" title="{esc(atext(a,"names",lang))} · {count}"><span>{i:02}</span> {u[a["id"]]} <small>· {count}</small></a>'
+ body+='<span class="area-position" aria-hidden="true"></span></div><div class="area-progress" aria-hidden="true"><span></span></div></nav>'
+
  for i,a in enumerate(AREAS,1):
   statement=f'<p>{esc(atext(a,"question",lang))}</p>'
   if a.get('scopes'):
-   statement+='<div class="device-scopes">'+''.join(f'<h3>{esc(scope["title"])}</h3><p>{esc(scope[lang])}</p>' for scope in a['scopes'])+'</div>'
+   statement+='<div class="device-scopes">'+''.join(f'<details class="device-scope"><summary>{esc(scope["title"])}</summary><p>{esc(scope[lang])}</p></details>' for scope in a['scopes'])+'</div>'
   else:statement+='<p>'+esc(atext(a,'method',lang))+'</p>'
 
   mapping=VISUALS[a['id']]
   refs=''.join(research_card(x,j,lang,path) for j,x in enumerate(mapping['previews']))
   hint=t(lang,'滚动浏览论文；悬停整行临时预览，点击标题定位。窄屏与触屏点击展开。','Scroll to explore; hover a row to preview, or select a heading to navigate. Tap to expand on smaller and touch screens.')
   related=('<p class="related-work">'+t(lang,'相关应用：','Related applications: ')+ ' · '.join(f'<a href="papers/{slug}.html">{esc(BY_SLUG[slug]["venue"])} · {BY_SLUG[slug]["year"]}</a>' for slug in a.get('related',[]))+'</p>') if a.get('related') else ''
-  body+=f'<section id="{a["id"]}" class="research-theme" aria-labelledby="theme-title-{a["id"]}"><div class="theme-heading"><span class="section-number">0{i}</span><h2 id="theme-title-{a["id"]}">{esc(atext(a,"names",lang))}</h2></div><div class="research-statement prose">{statement}</div><p class="focus-hint">{hint}</p><div class="focus-journey" data-count="{len(mapping["previews"])}"><div class="focus-stage"><div class="focus-toolbar"><span>{t(lang,"已发表论文","Published Papers")}</span><span class="focus-count" aria-hidden="true">01 / {len(mapping["previews"]):02}</span></div><div class="focus-deck">{refs}</div><p class="focus-status" role="status" aria-live="polite"></p></div></div>{related}</section>'
+  body+=f'<section id="{a["id"]}" class="research-theme" aria-labelledby="theme-title-{a["id"]}"><div class="theme-heading"><span class="section-number">{i:02} / {len(AREAS):02}</span><h2 id="theme-title-{a["id"]}">{esc(atext(a,"names",lang))}</h2></div><p class="area-publication-count">{t(lang,str(len(mapping["previews"]))+" 篇已发表论文",str(len(mapping["previews"]))+" published papers")}</p><div class="research-statement prose">{statement}</div><p class="focus-hint">{hint}</p><div class="focus-journey" data-count="{len(mapping["previews"])}"><div class="focus-stage"><div class="focus-toolbar"><span>{t(lang,"已发表论文","Published Papers")}</span><span class="focus-count" aria-hidden="true">01 / {len(mapping["previews"]):02}</span></div><div class="focus-deck">{refs}</div><p class="focus-status" role="status" aria-live="polite"></p></div></div>{related}{area_bridge(AREAS[i] if i<len(AREAS) else AREAS[0],lang,i==len(AREAS))}</section>'
 
 
  document(path,lang,'research',t(lang,'研究 | 孙琦','Research | Qi Sun'),CONFIG['site']['description'][lang],body)
