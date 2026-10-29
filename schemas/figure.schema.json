@@ -52,6 +52,108 @@
           "type": "array"
         }
       }
+    },
+    "naturalSize": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "readability": {
+      "enum": [
+        "wide",
+        "balanced",
+        "portrait"
+      ]
+    },
+    "explanation": {
+      "type": "object",
+      "required": [
+        "zh",
+        "en"
+      ],
+      "properties": {
+        "zh": {
+          "type": "object",
+          "required": [
+            "information",
+            "relationship",
+            "sourceUrl"
+          ],
+          "properties": {
+            "information": {
+              "type": "object",
+              "required": [
+                "field"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "pattern": "^visuals\\.[0-9]+\\.(caption|insight)$"
+                }
+              }
+            },
+            "relationship": {
+              "type": "object",
+              "required": [
+                "field"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "pattern": "^visuals\\.[0-9]+\\.(caption|insight)$"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "type": "object",
+          "required": [
+            "information",
+            "relationship",
+            "sourceUrl"
+          ],
+          "properties": {
+            "information": {
+              "type": "object",
+              "required": [
+                "field"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "pattern": "^visuals\\.[0-9]+\\.(caption|insight)$"
+                }
+              }
+            },
+            "relationship": {
+              "type": "object",
+              "required": [
+                "field"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "pattern": "^visuals\\.[0-9]+\\.(caption|insight)$"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

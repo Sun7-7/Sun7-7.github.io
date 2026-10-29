@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATES = ['draft', 'metadata_verified', 'content_reviewed', 'rights_reviewed', 'publishable']
 CONTENT = ['oneLine', 'coreClaim', 'problem', 'method', 'whyItMatters', 'discussion']
-SNAPSHOT_EXCLUDES = {'.git', 'node_modules', 'tmp', '__pycache__', 'test-results'}
+SNAPSHOT_EXCLUDES = {'.git', 'node_modules', 'tmp', '__pycache__', 'test-results', 'deliverables', 'worktrees'}
 AUTHORIZATION_FILE = 'data/release_authorization.json'
 
 def snapshot_hashes(root):
@@ -44,6 +44,10 @@ def validate(root=ROOT, release=False, check_output=False):
     approved_snapshot=snapshot_approval(root) if release else False
     def require(ok, field):
         if not ok: errors.append(field)
+    def resolve_field(obj,path):
+        for key in path.split('.'):
+            obj=obj[int(key)] if isinstance(obj,list) else obj[key]
+        return obj
     try:
         papers = read(root, 'data/publications.json')
         details = read(root, 'data/publication_details.json')
@@ -100,6 +104,17 @@ def validate(root=ROOT, release=False, check_output=False):
             require(pub['publisher_citation_publication_date']==date and bool(pub.get('date_provenance')),prefix+'citation date provenance mismatch')
         if pub.get('selectedRank') is not None:ranks.append(pub['selectedRank'])
         d=ds.get(slug,{})
+        if d.get('focusBrief') is not None:
+            require(set(d['focusBrief'])=={'zh','en'},prefix+'focusBrief languages differ')
+            for language,record in [('zh',d),('en',d.get('en',{}))]:
+                summary=d['focusBrief'].get(language,{})
+                require(set(summary)=={'problem','method','boundary'},prefix+'focusBrief fields differ')
+                for key,item in summary.items():
+                    try:
+                        source=resolve_field(record,item['evidenceRef']['field'])
+                        require(isinstance(item.get('text'),str) and bool(item['text'].strip()) and item['text'] in source,prefix+'unsupported focusBrief excerpt '+language+'/'+key)
+                        require(item['evidenceRef']['sourceUrl'] in pub['metadataSources']+[x['url'] for x in pub['links']],prefix+'unknown focusBrief source')
+                    except (KeyError,IndexError,TypeError,ValueError):require(False,prefix+'invalid focusBrief ref')
         for field in ['shortTitle','oneLineContribution']:
             values=[d.get(field+'_'+language) for language in ['zh','en']]
             require(all(v is None for v in values) or all(isinstance(v,str) and v.strip() and len(v)<=(120 if field=='shortTitle' else 400) for v in values),prefix+'invalid or unpaired bilingual '+field)
@@ -123,6 +138,21 @@ def validate(root=ROOT, release=False, check_output=False):
         require(slug in ds,prefix+'unknown owner')
         try:
             v=ds[slug]['visuals'][f['visual_index']];src=v['src'];fp=(root/src).resolve()
+            if f.get('naturalSize'):
+                import struct
+                size=struct.unpack('>II',fp.read_bytes()[16:24])
+                require(f['naturalSize']==dict(zip(['width','height'],size)),prefix+'natural dimensions differ')
+                require(f.get('readability') in ['wide','balanced','portrait'],prefix+'invalid readability')
+            if f.get('explanation'):
+                require(set(f['explanation'])=={'zh','en'},prefix+'figure explanation languages differ')
+                for language,record in [('zh',ds[slug]),('en',ds[slug]['en'])]:
+                    explanation=f['explanation'].get(language,{})
+                    for key in ['information','relationship']:
+                        expected=f'visuals.{f["visual_index"]}.'+('caption' if key=='information' else 'insight')
+                        require(explanation.get(key,{}).get('field')==expected,prefix+'explanation owner/index differs')
+                        try:require(bool(resolve_field(record,explanation[key]['field'])),prefix+'empty explanation ref')
+                        except (KeyError,IndexError,TypeError,ValueError):require(False,prefix+'invalid explanation ref')
+                    require(explanation.get('sourceUrl')==f['sourceUrl'],prefix+'explanation source differs')
             require(fp.is_relative_to((root/'assets/images/paper-figures').resolve()) and fp.is_file(),prefix+'invalid figure path')
             require(f['id']==slug+'#'+Path(src).stem.removeprefix(slug+'-'),prefix+'semantic figure ID/index mismatch')
             require(f.get('role') in ['framework','result','table','device'],prefix+'invalid role')
@@ -134,7 +164,7 @@ def validate(root=ROOT, release=False, check_output=False):
                 warnings.append(prefix+'figure rights '+str(rights.get('status')))
                 approved_legacy=(approved_snapshot and rights.get('status')=='pending' and src in baseline['images'] and slug in baseline['publications'])
                 if (release and not approved_legacy) or slug not in baseline['publications']:errors.append(prefix+'image release gate blocked')
-        except (IndexError,KeyError,TypeError):errors.append(prefix+'invalid visual index')
+        except (IndexError,KeyError,TypeError,OSError):errors.append(prefix+'invalid visual index or missing asset')
     for src,sha in baseline['images'].items():
         require((root/src).is_file() and hashlib.sha256((root/src).read_bytes()).hexdigest()==sha,'Baseline scientific pixels changed: '+src)
     areas=read(root,'data/research_areas.json')
@@ -150,7 +180,11 @@ def validate(root=ROOT, release=False, check_output=False):
         for x in section['gallery']:
             require(x.get('figureRef') in fs and fs[x['figureRef']]['publication_slug']==x['slug'],'Overview owner/ref mismatch')
         for x in section['previews']:
-            require(1<=len(x.get('figureRefs',[]))<=2,'Preview must use one or two figures')
+            if x.get('layout'):
+                layout=x['layout']
+                require(layout.get('defaultPrimary') in x.get('figureRefs',[]),'Default figure owner/ref mismatch')
+                require(all(isinstance(layout.get(k),(int,float)) and 0.5<=layout[k]<=4 for k in ['primaryWeight','secondaryWeight']),'Invalid media weights')
+            require(1<=len(x.get('figureRefs',[]))<=3,'Preview must use one to three figures')
             require(len(x.get('figureRefs',[]))==len(set(x.get('figureRefs',[]))),'Duplicate preview figure reference')
             for ref in x.get('figureRefs',[]):require(ref in fs and fs[ref]['publication_slug']==x['slug'],'Preview owner/ref mismatch: '+ref)
     return {'publication_records':len(papers),'figure_records':len(figures),'mode':'release' if release else 'candidate','owner_approved_snapshot':approved_snapshot,'errors':errors,'warnings':warnings}

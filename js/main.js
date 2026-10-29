@@ -88,7 +88,7 @@
   'use strict';
   const journeys = [...document.querySelectorAll('.focus-journey')];
   if (!journeys.length) return;
-  const desktop = matchMedia('(min-width: 960px) and (min-height: 700px) and (hover: hover) and (pointer: fine)');
+  const desktop = matchMedia('(min-width: 1100px) and (min-height: 750px) and (hover: hover) and (pointer: fine)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const english = document.body.dataset.lang === 'en';
   const viewer = document.getElementById('figure-viewer');
@@ -204,6 +204,7 @@
     schedule();
   }, {passive:true});
   addEventListener('wheel', () => {
+    if (!viewer.open && document.activeElement.matches('.figure-select')) document.activeElement.blur();
     for (const r of records) {r.intent = null; clearTimeout(r.settle);}
   }, {passive:true});
   addEventListener('resize', () => {for (const r of records) r.configure();}, {passive:true});
@@ -211,18 +212,76 @@
   reduced.addEventListener('change', () => {
     if (reduced.matches) document.getAnimations().forEach(animation => animation.finish());
   });
+
+  schedule();
+})();
+
+/* Inner figure focus never calls the outer controller or a scroll API. */
+(() => {
+ const english=document.body.dataset.lang==='en';
+ const hover=matchMedia('(hover:hover) and (pointer:fine)');
+ document.querySelectorAll('.focus-figures').forEach(stage=>{
+  const tiles=[...stage.querySelectorAll('.focus-figure')];
+  const fallback=Math.max(0,tiles.findIndex(t=>t.dataset.figureRef===stage.dataset.defaultPrimary));
+  let pinned=null,preview=null,timer;
+  stage.dataset.mediaEnhanced='true';
+  const reset=stage.querySelector('.reset-figure');reset.hidden=false;
+  function draw(index,announce=false){
+   stage.dataset.primaryIndex=String(index);stage.dataset.mediaState=pinned!==null?'pinned':preview!==null?'preview':'default';
+   // CSS arithmetic cannot interpolate a variable with a fr suffix. Compute
+   // numeric track values from the validated data instead.
+   const style=getComputedStyle(stage),primary=Number(style.getPropertyValue('--primary-weight'))||2.4,secondary=Number(style.getPropertyValue('--secondary-weight'))||1;
+   stage.style.setProperty('--media-tracks',tiles.map((_,i)=>`minmax(0,${i===index?primary:secondary}fr)`).join(' '));
+   tiles.forEach((tile,i)=>{tile.classList.toggle('is-primary',i===index);tile.querySelector('.figure-select').setAttribute('aria-pressed',String(i===index));});
+   if(announce)stage.querySelector('.media-status').textContent=(english?'Figure focus: ':'主图：')+tiles[index].querySelector('h4').textContent;
+  }
+  function restore(){clearTimeout(timer);preview=null;draw(pinned??fallback);}
+  stage.addEventListener('pointermove',event=>{
+   if(!hover.matches||event.pointerType==='touch'||event.buttons)return;
+   const tile=event.target.closest('.focus-figure');if(!tile){restore();return;}
+   const index=tiles.indexOf(tile);if(preview===index)return;
+   clearTimeout(timer);timer=setTimeout(()=>{preview=index;draw(index);},100);
+  });
+  stage.addEventListener('pointerleave',restore);
+  stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement))restore();},0));
+  tiles.forEach((tile,index)=>{
+   const button=tile.querySelector('.figure-select');
+   // Pointer focus happens before mouseup; changing geometry there can move
+   // the target away and swallow its click. Keyboard focus may preview safely.
+   button.addEventListener('pointerdown',()=>clearTimeout(timer));
+   button.addEventListener('focus',()=>{if(button.matches(':focus-visible')){preview=index;draw(index);}});
+   button.addEventListener('click',()=>{clearTimeout(timer);pinned=index;preview=null;draw(index,true);});
+   button.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key))return;
+    event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?tiles.length-1:(index+(event.key==='ArrowLeft'||event.key==='ArrowUp'?-1:1)+tiles.length)%tiles.length;
+    tiles[next].querySelector('.figure-select').focus({preventScroll:true});
+   });
+  });
+  function resetFocus(){pinned=null;preview=null;clearTimeout(timer);draw(fallback,true);}
+  reset.addEventListener('click',resetFocus);
+  stage.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('figure-viewer').open){event.preventDefault();resetFocus();}});
+  stage.closest('.focus-journey').addEventListener('researchfocuschange',()=>{pinned=null;preview=null;clearTimeout(timer);draw(fallback);});
+  draw(fallback);
+ });
+})();
+
+/* One explicit image viewer across Research, paper briefs and Home. */
+(() => {
+ const viewer=document.getElementById('figure-viewer'); if(!viewer)return;
+ const english=document.body.dataset.lang==='en'; let returnFocus=null;
   // Native dialog provides focus containment and Escape across supported engines.
-  document.querySelectorAll('.figure-zoom').forEach(link => link.addEventListener('click', event => {
+  document.querySelectorAll('.figure-zoom, .media-open').forEach(link => link.addEventListener('click', event => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof viewer.showModal !== 'function') return;
     event.preventDefault(); returnFocus = link;
-    const figure = link.closest('figure'), img = link.querySelector('img').cloneNode(); img.loading = 'eager';
-    viewer.querySelector('#figure-viewer-title').textContent = figure.querySelector('h4').textContent;
+    const figure = link.closest('figure'); const originalImg = figure?.querySelector('img') || link.previousElementSibling?.querySelector('img');
+    const img = originalImg ? originalImg.cloneNode() : new Image(); img.src = link.href; img.loading = 'eager'; if (!img.alt) img.alt = link.dataset.mediaTitle || (english ? 'Research figure' : '科研图');
+    viewer.querySelector('#figure-viewer-title').textContent = figure?.querySelector('h3,h4')?.textContent || link.dataset.mediaTitle || img.alt;
     viewer.querySelector('.viewer-image').replaceChildren(img);
     const original = document.createElement('a'); original.href = link.href; original.target = '_blank'; original.rel = 'noopener noreferrer'; original.textContent = english ? 'Open original figure ↗' : '打开原图 ↗';
     const caption = document.createElement('div');
-    caption.append(...[...figure.querySelector('figcaption').childNodes].map(node => node.cloneNode(true)));
-    const heading = document.createElement('h3'); heading.textContent = caption.querySelector('h4').textContent;
-    caption.querySelector('h4').replaceWith(heading);
+    if (figure?.querySelector('figcaption')) caption.append(...[...figure.querySelector('figcaption').childNodes].map(node => node.cloneNode(true)));
+    const oldHeading = caption.querySelector('h3,h4'); if (oldHeading) { const heading = document.createElement('h3'); heading.textContent = oldHeading.textContent; oldHeading.replaceWith(heading); }
+    caption.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
     viewer.querySelector('.viewer-caption').replaceChildren(caption, original);
     viewer.showModal();
   }));
@@ -231,5 +290,4 @@
     viewer.querySelector('.viewer-image').replaceChildren();
     returnFocus?.focus({preventScroll:true});
   });
-  schedule();
 })();

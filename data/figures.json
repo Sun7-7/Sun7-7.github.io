@@ -14,6 +14,31 @@
       "evidence": [],
       "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1545,
+      "height": 393
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      }
     }
   },
   {
@@ -31,6 +56,31 @@
       "evidence": [],
       "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 756,
+      "height": 312
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      }
     }
   },
   {
@@ -48,6 +98,31 @@
       "evidence": [],
       "inherited_credit": "Author-supplied accepted-manuscript figures. Source: Applied Physics Letters 129, 173502 (2026), AIP Publishing.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 759,
+      "height": 312
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1063/5.0345413"
+      }
     }
   },
   {
@@ -65,6 +140,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1572,
+      "height": 522
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      }
     }
   },
   {
@@ -82,6 +182,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1581,
+      "height": 456
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      }
     }
   },
   {
@@ -99,6 +224,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. CC BY 4.0. Source: Electronics.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1203,
+      "height": 255
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/electronics15163613"
+      }
     }
   },
   {
@@ -116,6 +266,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1476,
+      "height": 531
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      }
     }
   },
   {
@@ -133,6 +308,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1482,
+      "height": 930
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      }
     }
   },
   {
@@ -150,6 +350,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 the authors. Source: ICML 2026, PMLR 306.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 726,
+      "height": 396
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
+      }
     }
   },
   {
@@ -167,6 +392,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1152,
+      "height": 396
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      }
     }
   },
   {
@@ -184,6 +434,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1224,
+      "height": 840
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      }
     }
   },
   {
@@ -201,6 +476,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1224,
+      "height": 336
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
+      }
     }
   },
   {
@@ -218,6 +518,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 624,
+      "height": 372
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      }
     }
   },
   {
@@ -235,6 +560,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1248,
+      "height": 780
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      }
     }
   },
   {
@@ -252,6 +602,31 @@
       "evidence": [],
       "inherited_credit": "© 2026 IEEE. Source: ICASSP 2026.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1236,
+      "height": 312
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
+      }
     }
   },
   {
@@ -269,6 +644,31 @@
       "evidence": [],
       "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 612,
+      "height": 540
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      }
     }
   },
   {
@@ -286,6 +686,31 @@
       "evidence": [],
       "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1248,
+      "height": 708
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      }
     }
   },
   {
@@ -303,6 +728,31 @@
       "evidence": [],
       "inherited_credit": "Source: Proceedings of the AAAI Conference on Artificial Intelligence 40(30), 25718–25726 (2026).",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1248,
+      "height": 624
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
+      }
     }
   },
   {
@@ -320,6 +770,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1128,
+      "height": 360
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      }
     }
   },
   {
@@ -337,6 +812,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1116,
+      "height": 456
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      }
     }
   },
   {
@@ -354,6 +854,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Signal Processing Letters 32, 1840–1844.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 612,
+      "height": 336
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
+      }
     }
   },
   {
@@ -371,6 +896,31 @@
       "evidence": [],
       "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1140,
+      "height": 636
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      }
     }
   },
   {
@@ -388,6 +938,31 @@
       "evidence": [],
       "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1176,
+      "height": 504
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      }
     }
   },
   {
@@ -405,6 +980,31 @@
       "evidence": [],
       "inherited_credit": "Source: Neurocomputing, 2025. Figures from the author’s existing publication archive.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1044,
+      "height": 924
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
+      }
     }
   },
   {
@@ -422,6 +1022,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 1272,
+      "height": 684
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      }
     }
   },
   {
@@ -439,6 +1064,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 624,
+      "height": 600
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      }
     }
   },
   {
@@ -456,6 +1106,31 @@
       "evidence": [],
       "inherited_credit": "© 2025 IEEE. Source: IEEE Transactions on Electron Devices.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 636,
+      "height": 720
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
+      }
     }
   },
   {
@@ -473,6 +1148,31 @@
       "evidence": [],
       "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 972,
+      "height": 576
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      }
     }
   },
   {
@@ -490,6 +1190,31 @@
       "evidence": [],
       "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 816,
+      "height": 636
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      }
     }
   },
   {
@@ -507,6 +1232,31 @@
       "evidence": [],
       "inherited_credit": "© 2024 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 972,
+      "height": 492
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi15030411"
+      }
     }
   },
   {
@@ -524,6 +1274,31 @@
       "evidence": [],
       "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 900,
+      "height": 312
+    },
+    "readability": "wide",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.0.caption"
+        },
+        "relationship": {
+          "field": "visuals.0.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      }
     }
   },
   {
@@ -541,6 +1316,31 @@
       "evidence": [],
       "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 960,
+      "height": 804
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.1.caption"
+        },
+        "relationship": {
+          "field": "visuals.1.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      }
     }
   },
   {
@@ -558,6 +1358,31 @@
       "evidence": [],
       "inherited_credit": "© 2022 the authors. CC BY 4.0. Source: Micromachines.",
       "policy": "Baseline pixels retained for review; no new permission inferred. Release with images requires verified evidence."
+    },
+    "naturalSize": {
+      "width": 972,
+      "height": 672
+    },
+    "readability": "balanced",
+    "explanation": {
+      "zh": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      },
+      "en": {
+        "information": {
+          "field": "visuals.2.caption"
+        },
+        "relationship": {
+          "field": "visuals.2.insight"
+        },
+        "sourceUrl": "https://doi.org/10.3390/mi13060843"
+      }
     }
   }
 ]

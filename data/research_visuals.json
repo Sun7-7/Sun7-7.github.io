@@ -18,21 +18,39 @@
           "figureRefs": [
             "mte-ste-continuous-temporal-signal-classification#framework",
             "mte-ste-continuous-temporal-signal-classification#main-results"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "mte-ste-continuous-temporal-signal-classification#framework",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "mpo-surrogate-function-snn",
           "figureRefs": [
             "mpo-surrogate-function-snn#surrogate-mismatch",
             "mpo-surrogate-function-snn#framework"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "mpo-surrogate-function-snn#framework",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "dual-model-snn-remote-sensing",
           "figureRefs": [
             "dual-model-snn-remote-sensing#dual-distillation",
             "dual-model-snn-remote-sensing#training-overview"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "dual-model-snn-remote-sensing#training-overview",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         }
       ]
     },
@@ -54,21 +72,39 @@
           "figureRefs": [
             "spiking-som-radar-deinterleaving#framework",
             "spiking-som-radar-deinterleaving#bmu-energy"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "spiking-som-radar-deinterleaving#framework",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "sgte-snn-radar-emitter-denoising-recognition",
           "figureRefs": [
             "sgte-snn-radar-emitter-denoising-recognition#framework",
             "sgte-snn-radar-emitter-denoising-recognition#denoising-table"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "sgte-snn-radar-emitter-denoising-recognition#framework",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "adaptive-clustering-radar-signal-processing",
           "figureRefs": [
             "adaptive-clustering-radar-signal-processing#architecture",
             "adaptive-clustering-radar-signal-processing#multi-scenario"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "adaptive-clustering-radar-signal-processing#architecture",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         }
       ]
     },
@@ -90,28 +126,52 @@
           "figureRefs": [
             "high-k-trench-gan-hemt#device-structure",
             "high-k-trench-gan-hemt#dynamic-resistance"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "high-k-trench-gan-hemt#device-structure",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "ml-ldmos-bv-optimization",
           "figureRefs": [
             "ml-ldmos-bv-optimization#ml-flow-device",
             "ml-ldmos-bv-optimization#prediction-results"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "ml-ldmos-bv-optimization#ml-flow-device",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "sipos-umofet-fom",
           "figureRefs": [
             "sipos-umofet-fom#device-and-model",
             "sipos-umofet-fom#gpr-model"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "sipos-umofet-fom#device-and-model",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         },
         {
           "slug": "variable-k-ldmos",
           "figureRefs": [
             "variable-k-ldmos#device-structure",
             "variable-k-ldmos#efield-mechanism"
-          ]
+          ],
+          "layout": {
+            "defaultPrimary": "variable-k-ldmos#device-structure",
+            "primaryWeight": 2.4,
+            "secondaryWeight": 1,
+            "basis": "Semantic role followed by natural aspect ratio; original pixels and image ratio retained."
+          }
         }
       ]
     }
