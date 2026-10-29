@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "publication": {
+    "slug": "",
+    "title": "",
+    "authors": [],
+    "year": null,
+    "kind": null,
+    "area": null,
+    "date": null,
+    "datePrecision": null,
+    "dateBasis": "",
+    "venue": "",
+    "publication": "",
+    "publisher": "",
+    "pages": "",
+    "links": [],
+    "metadataSources": [],
+    "citationKey": "",
+    "selectedRank": null
+  },
+  "detail": {
+    "slug": "",
+    "oneLine": "",
+    "coreClaim": "",
+    "problem": "",
+    "method": "",
+    "whyItMatters": "",
+    "discussion": "",
+    "pipeline": [],
+    "evidence": [],
+    "visuals": [],
+    "highlights": [],
+    "keywords": [],
+    "en": {
+      "oneLine": "",
+      "coreClaim": "",
+      "problem": "",
+      "method": "",
+      "whyItMatters": "",
+      "discussion": "",
+      "pipeline": [],
+      "evidence": [],
+      "visuals": [],
+      "highlights": [],
+      "keywords": []
+    },
+    "shortTitle_zh": "",
+    "shortTitle_en": "",
+    "oneLineContribution_zh": "",
+    "oneLineContribution_en": ""
+  },
+  "review": {
+    "state": "draft",
+    "metadata_verified": false,
+    "content_reviewed": false,
+    "rights_reviewed": false,
+    "publishable": false,
+    "author_order": [],
+    "evidence": []
+  },
+  "features": {
+    "selectedRank": null,
+    "researchArea": null,
+    "figureRefs": [],
+    "highlight": {
+      "zh": "",
+      "en": ""
+    }
+  },
+  "figures": [],
+  "provenance": []
+}

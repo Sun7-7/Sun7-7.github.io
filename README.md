@@ -1,61 +1,55 @@
-# Qi Sun — Academic Homepage + Research Portfolio
+# V3.7 Academic Editorial + Research Portfolio
 
-V3.5 candidate on `codex/v35-research-ux-content-pipeline`, based on released V3.4
-main `775611fad908048f91877481fb125b52ff689f79`. The owner approved this exact existing-site snapshot for production on 2026-10-29.
-The recorded approval expires on any source/artifact change. The existing static Python/GitHub Pages architecture and
-all 44 bilingual URLs remain in place.
+This version continues the V3.6 candidate bb41318c7ae6c814de5fce6a0aad83aa02f5ce85,
+with remote main 40f94e5c0020fb87e9cb63be4274f8f2c49cc27e verified before work.
+The owner explicitly authorized this iteration to be deployed on 2026-10-29.
+Deployment status and final main SHA belong in the release receipt, not inferred
+from source availability. No third-party rights have been newly inferred.
 
-Research now separates stable whole-row hover/focus previews, optional pinning,
-and an explicit native-dialog illustrated reader. Preview changes affect only
-opacity/4px translation over 180 ms; they never change document height or call
-window scrolling APIs. Touch and narrow layouts use the explicit reader button.
-Without JavaScript the original paper links and static overview figures remain.
-Reduced-motion disables the preview animation. The current professional portraits
-and all scientific image pixels are unchanged.
+Research retains position-driven paper focus and adds local primary/secondary
+figure focus: hover/focus is temporary, click/tap pins, reset restores the
+role/aspect-based default. The image control focuses; separate Enlarge and
+Original controls open the viewer or raw asset. All images preserve their ratio.
+Other pages use lighter background/focus treatments, explicit shared viewers,
+reading navigation and native controls. They do not copy Research's accordion.
 
-## Build and preview
+## Build / preview
 
 ```powershell
 python scripts/build_site.py
-python -m http.server 8095 --bind 127.0.0.1
+python -m http.server 8097 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8095/research.html . Python 3.10+ standard library is enough
-for candidate builds and semantic validation. QA-only tools require Node.js
-22.19+ and jsonschema (requirements-qa.txt).
+No framework or runtime dependencies were added. Complete English titles,
+publication author order, sources, original images and scientific evidence are
+preserved. JS-disabled and print layouts show all content. Mobile / shorter
+windows use native document flow; reduced motion disables transitions.
 
-## Content and publication workflow
+## Data / QA
 
-See [the data contract and draft/import instructions](docs/PUBLICATION_WORKFLOW.md).
-Draft creation cannot publish. Pending image rights remain explicitly recorded;
-`python scripts/build_site.py --release` blocks incomplete reviews, except for the
-exact owner-approved existing-site snapshot recorded in data/release_authorization.json.
-Pending rights are retained; this is not new third-party permission. Owner consent to release is separate from third-party image permission.
-No raw job-search document, original portrait PNG, unpublished project material,
-or source paper PDF belongs in the public repository.
-
-## Checks
+See docs/V37_MAINTENANCE.md. Metadata remains in publications; focusBrief is
+an exact excerpt with an evidenceRef into the reviewed bilingual detail record.
+Figure descriptions point to caption/insight fields; dimensions are read from
+the original PNG. Research mappings declare the default figure and track weights.
 
 ```powershell
-python scripts/validate_publications.py --check-output --report tmp/review/publications.json
-python scripts/check_site.py --report-dir tmp/review
-python scripts/check_wording.py --report-dir tmp/review
-python -m pip install -r requirements-qa.txt
+python scripts/validate_publications.py --check-output
 python scripts/test_publication_pipeline.py
+python scripts/test_v37_contract.py
+python scripts/check_site.py --report-dir tmp/v37
 npm ci
-npx playwright install firefox webkit ffmpeg
-$env:TEST_BASE_URL = 'http://127.0.0.1:8095'
-$env:REVIEW_PACKET_DIR = 'tmp/v35'
-npm run check:browser
-npm run check:research
-node scripts/check_research_stress.cjs
-node scripts/benchmark_research.cjs v35 http://127.0.0.1:8095
+node scripts/check_site_v37.cjs
+node scripts/check_media_v37.cjs
+node scripts/record_v37.cjs
+$env:TEST_BASE_URL='http://127.0.0.1:8097'
+$env:REVIEW_PACKET_DIR='tmp/v37'
+node scripts/run_lighthouse_v36.mjs
 ```
 
-The benchmark records actual browser video, frame intervals, long tasks and raw
-Chromium traces. These are headless desktop/viewport tests, not physical-device
-measurements, energy measurements or a Lighthouse score. Browser-engine launch
-failures and axe incomplete results must remain visible in the report. WebKit
-on Windows is not a claim of testing Safari/iOS. A 720×450 CSS viewport is only
-a layout equivalent for 200% zoom; native menu zoom and real screen readers still
-need manual testing. Old release test results must not be reported as new runs.
+New synthetic paper/figure tests operate only in a disposable directory;
+production retains eleven real publications. Existing 33 image-rights entries
+remain pending. Exact owner snapshot approval is separate from copyright status.
+Actual browser captures and raw reports are delivered under the primary
+project's deliverables/website/V3.7 directory, excluded from public Git content.
+Native menu zoom, physical devices and screen readers require manual checks;
+viewport equivalents and Playwright WebKit do not certify those environments.
