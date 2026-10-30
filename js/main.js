@@ -255,22 +255,25 @@
  document.querySelectorAll('.focus-figures').forEach(stage=>{
   const tiles=[...stage.querySelectorAll('.focus-figure')];
   const fallback=Math.max(0,tiles.findIndex(t=>t.dataset.figureRef===stage.dataset.defaultPrimary));
-  let pinned=null,preview=null,pending=null,timer,primaryIndex=null;
+  let pinned=null,preview=null,pending=null,timer,primaryIndex=null,settlingUntil=0,lastX=null,lastY=null,leaveTimer;
+  const layout=tiles.some(t=>t.dataset.layoutHint==='stack')?'stack':'split';
+  const reducedMedia=matchMedia('(prefers-reduced-motion:reduce)');
   const captionAnimations=new Map();
   stage.dataset.mediaEnhanced='true';
   const reset=stage.querySelector('.reset-figure');reset.hidden=false;
   function draw(index,announce=false){
    const previous=primaryIndex;primaryIndex=index;
+   if(previous!==null&&previous!==index)settlingUntil=performance.now()+(reducedMedia.matches?0:660);
    const captions=tiles.map(tile=>tile.querySelector('figcaption'));
    const heights=captions.map(caption=>caption.getBoundingClientRect().height);
    if(previous!==index){captionAnimations.forEach(animation=>animation.cancel());captionAnimations.clear();}
-   stage.dataset.layout=tiles[index].dataset.layoutHint||'split';
+   stage.dataset.layout=layout;
    stage.dataset.primaryIndex=String(index);stage.dataset.mediaState=pinned!==null?'pinned':preview!==null?'preview':'default';
    // CSS arithmetic cannot interpolate a variable with a fr suffix. Compute
    // numeric track values from the validated data instead.
-   const style=getComputedStyle(stage),primary=Number(style.getPropertyValue('--primary-weight'))||2.4,secondary=Number(style.getPropertyValue('--secondary-weight'))||1;
+   const style=getComputedStyle(stage),primary=layout==='stack'?3.6:(Number(style.getPropertyValue('--primary-weight'))||2.4),secondary=Number(style.getPropertyValue('--secondary-weight'))||1;
    stage.style.setProperty('--media-tracks',tiles.map((_,i)=>`minmax(0,${i===index?primary:secondary}fr)`).join(' '));
-   tiles.forEach((tile,i)=>{tile.style.gridRow=stage.dataset.layout==='stack'?(i===index?'1':'2'):'';tile.classList.toggle('is-primary',i===index);tile.querySelector('.figure-select').setAttribute('aria-pressed',String(i===index));});
+   tiles.forEach((tile,i)=>{tile.style.gridRow=layout==='stack'?String(i+1):'';tile.classList.toggle('is-primary',i===index);tile.querySelector('.figure-select').setAttribute('aria-pressed',String(i===index));});
    if(previous!==null&&previous!==index&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
     captions.forEach((caption,i)=>{
      // Measure at the final column width so wrapping cannot snap at the end.
@@ -280,7 +283,7 @@
      }
      const target=caption.getBoundingClientRect().height;caption.style.width='';
      if(Math.abs(target-heights[i])<1)return;
-     const animation=caption.animate([{height:`${heights[i]}px`},{height:`${target}px`}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
+     const animation=caption.animate([{height:`${heights[i]}px`},{height:`${target}px`}],{duration:640,easing:'cubic-bezier(.4,0,.2,1)'});
      captionAnimations.set(caption,animation);animation.onfinish=()=>captionAnimations.delete(caption);
     });
    }
@@ -289,11 +292,16 @@
   function restore(){clearTimeout(timer);pending=null;preview=null;draw(pinned??fallback);}
   stage.addEventListener('pointermove',event=>{
    if(!hover.matches||event.pointerType==='touch'||event.buttons)return;
-   const tile=event.target.closest('.focus-figure');if(!tile){restore();return;}
+   const moved=lastX===null||Math.hypot(event.clientX-lastX,event.clientY-lastY)>4;
+   if(!moved)return;lastX=event.clientX;lastY=event.clientY;
+   if(performance.now()<settlingUntil)return;
+   const tile=event.target.closest('.focus-figure');if(!tile)return;
    const index=tiles.indexOf(tile);if(preview===index||pending===index)return;
-   clearTimeout(timer);pending=index;timer=setTimeout(()=>{pending=null;preview=index;draw(index);},100);
+   clearTimeout(timer);pending=index;timer=setTimeout(()=>{pending=null;preview=index;draw(index);},240);
   });
-  stage.addEventListener('pointerleave',restore);
+  stage.addEventListener('pointerenter',()=>clearTimeout(leaveTimer));
+  stage.addEventListener('pointerleave',()=>{clearTimeout(timer);pending=null;lastX=null;lastY=null;leaveTimer=setTimeout(restore,220);});
+  reducedMedia.addEventListener('change',()=>{if(reducedMedia.matches){captionAnimations.forEach(a=>a.finish());settlingUntil=0;}});
   stage.addEventListener('focusout',()=>setTimeout(()=>{if(!stage.contains(document.activeElement))restore();},0));
   tiles.forEach((tile,index)=>{
    const button=tile.querySelector('.figure-select');
@@ -308,10 +316,10 @@
     tiles[next].querySelector('.figure-select').focus({preventScroll:true});
    });
   });
-  function resetFocus(){pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback,true);}
+  function resetFocus(){clearTimeout(leaveTimer);pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback,true);}
   reset.addEventListener('click',resetFocus);
   stage.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('figure-viewer').open){event.preventDefault();resetFocus();}});
-  stage.closest('.focus-journey').addEventListener('researchfocuschange',()=>{pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback);});
+  stage.closest('.focus-journey').addEventListener('researchfocuschange',()=>{clearTimeout(leaveTimer);pinned=null;preview=null;pending=null;clearTimeout(timer);draw(fallback);});
   draw(fallback);
  });
 })();
