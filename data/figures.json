@@ -39,7 +39,8 @@
         },
         "sourceUrl": "https://doi.org/10.1063/5.0345413"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "high-k-trench-gan-hemt#field-redistribution",
@@ -81,7 +82,8 @@
         },
         "sourceUrl": "https://doi.org/10.1063/5.0345413"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "high-k-trench-gan-hemt#dynamic-resistance",
@@ -123,7 +125,8 @@
         },
         "sourceUrl": "https://doi.org/10.1063/5.0345413"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "hsaf-net-fruit-quality-assessment#framework",
@@ -165,7 +168,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/electronics15163613"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "hsaf-net-fruit-quality-assessment#performance-table",
@@ -207,7 +211,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/electronics15163613"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "hsaf-net-fruit-quality-assessment#fusion-ablation",
@@ -249,7 +254,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/electronics15163613"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "mte-ste-continuous-temporal-signal-classification#framework",
@@ -291,7 +297,8 @@
         },
         "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "mte-ste-continuous-temporal-signal-classification#main-results",
@@ -333,7 +340,8 @@
         },
         "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "mte-ste-continuous-temporal-signal-classification#component-ablation",
@@ -375,7 +383,8 @@
         },
         "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "sgte-snn-radar-emitter-denoising-recognition#framework",
@@ -417,7 +426,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "sgte-snn-radar-emitter-denoising-recognition#denoising-table",
@@ -459,7 +469,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "sgte-snn-radar-emitter-denoising-recognition#ablation-recognition",
@@ -501,7 +512,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "spiking-som-radar-deinterleaving#framework",
@@ -543,7 +555,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "spiking-som-radar-deinterleaving#performance-table",
@@ -585,7 +598,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "spiking-som-radar-deinterleaving#bmu-energy",
@@ -627,7 +641,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "mpo-surrogate-function-snn#surrogate-mismatch",
@@ -669,7 +684,8 @@
         },
         "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "mpo-surrogate-function-snn#framework",
@@ -711,7 +727,8 @@
         },
         "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "mpo-surrogate-function-snn#stability-robustness",
@@ -753,7 +770,8 @@
         },
         "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "adaptive-clustering-radar-signal-processing#architecture",
@@ -795,7 +813,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "adaptive-clustering-radar-signal-processing#multi-scenario",
@@ -837,7 +856,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "adaptive-clustering-radar-signal-processing#pseudo-label-ablation",
@@ -879,7 +899,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "dual-model-snn-remote-sensing#dual-distillation",
@@ -921,7 +942,8 @@
         },
         "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "dual-model-snn-remote-sensing#training-overview",
@@ -963,7 +985,8 @@
         },
         "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "dual-model-snn-remote-sensing#performance-table",
@@ -1005,7 +1028,8 @@
         },
         "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "ml-ldmos-bv-optimization#ml-flow-device",
@@ -1047,7 +1071,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "ml-ldmos-bv-optimization#prediction-results",
@@ -1089,7 +1114,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "ml-ldmos-bv-optimization#ga-optimization",
@@ -1131,7 +1157,8 @@
         },
         "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "sipos-umofet-fom#device-and-model",
@@ -1173,7 +1200,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi15030411"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "sipos-umofet-fom#gpr-model",
@@ -1215,7 +1243,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi15030411"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "sipos-umofet-fom#fom-fitting",
@@ -1257,7 +1286,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi15030411"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "variable-k-ldmos#device-structure",
@@ -1299,7 +1329,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi13060843"
       }
-    }
+    },
+    "layoutHint": "stack"
   },
   {
     "id": "variable-k-ldmos#efield-mechanism",
@@ -1341,7 +1372,8 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi13060843"
       }
-    }
+    },
+    "layoutHint": "split"
   },
   {
     "id": "variable-k-ldmos#bv-field-tradeoff",
@@ -1383,6 +1415,7 @@
         },
         "sourceUrl": "https://doi.org/10.3390/mi13060843"
       }
-    }
+    },
+    "layoutHint": "split"
   }
 ]

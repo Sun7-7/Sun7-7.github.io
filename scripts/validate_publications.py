@@ -108,8 +108,12 @@ def validate(root=ROOT, release=False, check_output=False):
             require(set(d['focusBrief'])=={'zh','en'},prefix+'focusBrief languages differ')
             for language,record in [('zh',d),('en',d.get('en',{}))]:
                 summary=d['focusBrief'].get(language,{})
-                require(set(summary)=={'problem','method','boundary'},prefix+'focusBrief fields differ')
+                require({'problem','method','boundary'}<=set(summary)<= {'problem','method','boundary','finding'},prefix+'focusBrief fields differ')
+                require(('finding' in summary)==('finding' in d['focusBrief'].get('en' if language=='zh' else 'zh',{})),prefix+'unpaired finding')
                 for key,item in summary.items():
+                    if key=='finding':
+                        require(item.get('kind') in ['qualitative','quantitative','theoretical'] and item.get('reviewStatus') in ['verified','needs_source_check'],prefix+'invalid finding status')
+                        require(bool(item.get('evidenceRef',{}).get('locator')),prefix+'finding locator missing')
                     try:
                         source=resolve_field(record,item['evidenceRef']['field'])
                         require(isinstance(item.get('text'),str) and bool(item['text'].strip()) and item['text'] in source,prefix+'unsupported focusBrief excerpt '+language+'/'+key)
@@ -134,6 +138,7 @@ def validate(root=ROOT, release=False, check_output=False):
         if release and not rec.get('publishable') and not approved_snapshot:errors.append(prefix+'release review not approved')
     require(len(ranks)==len(set(ranks)), 'Duplicate selectedRank')
     for f in figures:
+        require(f.get("layoutHint","split") in ["stack","split"],"Invalid figure layoutHint")
         slug=f.get('publication_slug');prefix=f.get('id','unknown')+': '
         require(slug in ds,prefix+'unknown owner')
         try:

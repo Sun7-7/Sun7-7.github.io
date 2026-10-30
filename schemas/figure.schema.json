@@ -154,6 +154,12 @@
           }
         }
       }
+    },
+    "layoutHint": {
+      "enum": [
+        "stack",
+        "split"
+      ]
     }
   }
 }
