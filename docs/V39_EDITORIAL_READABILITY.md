@@ -1,0 +1,11 @@
+# V3.9 candidate: editorial readability
+
+Research summaries reuse the existing single-source `coreClaim` through optional bilingual `focusBrief.finding` records. Each finding has a source field, URL, locator, kind and review status; the validator rejects unpaired languages and unsupported excerpts. Only the ICML qualitative finding was rechecked against the publisher abstract this round. Ten entries retain exact existing wording with `needs_source_check`; no suggested numerical highlight was promoted without original-source verification. Existing boundary text is retained, including legacy reading guidance that still needs editorial/source review.
+
+All 33 figures retain original owner, naturalSize, source and pending rights. Their non-scientific `layoutHint` derives from natural aspect ratio. Wide/portrait primaries use a full-width stage and secondary thumbnail strip; others retain split focus. `object-fit:contain` preserves scientific pixels. Long credits and the second interpretive sentence are retained in the full reader; stage source links and original figure captions remain visible. The desktop summary is independently keyboard-scrollable when necessary; this is a deliberate reading tradeoff within the fixed outer paper stage.
+
+Home A/B compares 1.5/.75/.75 with 1.35/.825/.825 and retains the latter to reduce wrapping in nonfocus columns. The Home controller reserves the largest reading state, so hover does not change total page height. The prototype is illustrative only and supplies no public scientific content.
+
+Build: `python scripts/build_site.py`. Contract checks: `python scripts/test_editorial_v39.py`. Browser matrix: start this checkout on 8098 and V3.8 baseline on 8099, then `node scripts/check_editorial_v39.cjs`. Browser checks require Playwright/Edge and axe from npm dev dependencies. Some older V3.8 tests intentionally assume old geometry/text and are not acceptance evidence for this new renderer.
+
+This is a candidate, not a deployment. Old release authorization must remain invalid. Physical devices, native Safari, screen readers, actual 400% native zoom, complete original-paper verification and image permission clearance remain outside completed verification.

@@ -176,6 +176,17 @@
             "sourceUrl": "https://doi.org/10.1063/5.0345413",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "漏侧介电边界工程能够重新分配高场区；TCAD 与同片器件实验共同支持耐压提升和动态电阻退化减轻。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1063/5.0345413",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -202,6 +213,17 @@
             "sourceUrl": "https://doi.org/10.1063/5.0345413",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Drain-side dielectric-boundary engineering reshapes the high-field region; TCAD and co-fabricated device measurements support enhanced breakdown and reduced dynamic resistance degradation.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1063/5.0345413",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -383,6 +405,17 @@
             "sourceUrl": "https://doi.org/10.3390/electronics15163613",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "内部光电压响应与外部 RGB 外观具有互补性，模态专用编码器与动态注意力融合可提高受控条件下的梨果品质评估表现。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/electronics15163613",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -409,6 +442,17 @@
             "sourceUrl": "https://doi.org/10.3390/electronics15163613",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Internal photovoltage responses and RGB appearance provide complementary evidence; modality-specific encoders and adaptive fusion improve pear assessment under controlled conditions.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/electronics15163613",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -590,6 +634,17 @@
             "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "在骨干和训练预算匹配的条件下，连续一维信号上的 ANN–SNN 平均精度差距较小；MTE 与 STE 的互补编码可进一步改善平均表现。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Abstract"
+          },
+          "reviewStatus": "verified"
         }
       },
       "en": {
@@ -616,6 +671,17 @@
             "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "With matched backbones and training budgets, the mean ANN–SNN accuracy gap is modest on continuous 1D signals; complementary MTE and STE encoding further improves average performance.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Abstract"
+          },
+          "reviewStatus": "verified"
         }
       }
     }
@@ -797,6 +863,17 @@
             "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "相似性分布比单个脉冲特征更能表达真实脉冲与噪声脉冲之间的结构差异。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -823,6 +900,17 @@
             "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Similarity distributions capture structural differences between genuine and noisy pulses better than isolated pulse features.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -1004,6 +1092,17 @@
             "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "SOM 的拓扑保持能力可以与 SNN 的事件驱动稀疏计算结合，形成低功耗无监督去交织框架。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -1030,6 +1129,17 @@
             "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "SOM topology preservation can be combined with event-driven sparse SNN computation to support low-power unsupervised deinterleaving.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -1211,6 +1321,17 @@
             "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "替代梯度函数的有效宽度应当和膜电位统计动态匹配，而不是使用固定的全局形状。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -1237,6 +1358,17 @@
             "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "The effective width of surrogate gradients should match membrane potential statistics dynamically instead of being fixed globally.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -1418,6 +1550,17 @@
             "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "雷达信号分选可以先用聚类形成弱标签，再用相似性网络修正簇级关系，从而降低标注依赖。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -1444,6 +1587,17 @@
             "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Radar signal sorting can use clustering to form weak labels and a similarity network to refine cluster-level relationships.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -1625,6 +1779,17 @@
             "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "低延迟 SNN 不应孤立训练，短时间步模型可以通过长时间步模型的知识迁移保持信息表达。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -1651,6 +1816,17 @@
             "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Low-latency SNNs should not be trained in isolation; short-step models can preserve information through knowledge transfer from long-step models.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -1834,6 +2010,17 @@
             "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "复杂功率器件结构的参数搜索可以由 TCAD 数据和机器学习代理模型显著加速。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -1860,6 +2047,17 @@
             "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Parameter search for complex power device structures can be accelerated by TCAD data and ML surrogate models.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.1109/ted.2024.3517578",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -2041,6 +2239,17 @@
             "sourceUrl": "https://doi.org/10.3390/mi15030411",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "物理解析模型和高斯过程回归可以共同刻画 BV-RON,sp 折中，并保留可解释的器件参数关系。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/mi15030411",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -2067,6 +2276,17 @@
             "sourceUrl": "https://doi.org/10.3390/mi15030411",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Analytical physics and GPR can jointly model BV-RON,sp trade-offs while preserving interpretable device-parameter relationships.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/mi15030411",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }
@@ -2248,6 +2468,17 @@
             "sourceUrl": "https://doi.org/10.3390/mi13060843",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "沿沟槽深度改变介电常数可以重新塑造 SJ-LDMOS 纵向体电场，从而提高 BV。",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/mi13060843",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       },
       "en": {
@@ -2274,6 +2505,17 @@
             "sourceUrl": "https://doi.org/10.3390/mi13060843",
             "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred."
           }
+        },
+        "finding": {
+          "text": "Varying dielectric permittivity along trench depth reshapes the vertical bulk electric field and improves BV.",
+          "kind": "qualitative",
+          "evidenceRef": {
+            "field": "coreClaim",
+            "sourceUrl": "https://doi.org/10.3390/mi13060843",
+            "basis": "Existing source-reviewed bilingual brief; exact excerpt, no new result inferred.",
+            "locator": "Existing V3.8 coreClaim; original locator needs checking"
+          },
+          "reviewStatus": "needs_source_check"
         }
       }
     }

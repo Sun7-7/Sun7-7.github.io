@@ -203,6 +203,42 @@
                   ]
                 }
               }
+            },
+            "finding": {
+              "type": "object",
+              "required": [
+                "text",
+                "evidenceRef",
+                "kind",
+                "reviewStatus"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidenceRef": {
+                  "type": "object",
+                  "required": [
+                    "field",
+                    "sourceUrl",
+                    "basis"
+                  ]
+                },
+                "kind": {
+                  "enum": [
+                    "qualitative",
+                    "quantitative",
+                    "theoretical"
+                  ]
+                },
+                "reviewStatus": {
+                  "enum": [
+                    "verified",
+                    "needs_source_check"
+                  ]
+                }
+              }
             }
           }
         },
@@ -274,6 +310,42 @@
                     "field",
                     "sourceUrl",
                     "basis"
+                  ]
+                }
+              }
+            },
+            "finding": {
+              "type": "object",
+              "required": [
+                "text",
+                "evidenceRef",
+                "kind",
+                "reviewStatus"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidenceRef": {
+                  "type": "object",
+                  "required": [
+                    "field",
+                    "sourceUrl",
+                    "basis"
+                  ]
+                },
+                "kind": {
+                  "enum": [
+                    "qualitative",
+                    "quantitative",
+                    "theoretical"
+                  ]
+                },
+                "reviewStatus": {
+                  "enum": [
+                    "verified",
+                    "needs_source_check"
                   ]
                 }
               }
