@@ -1,0 +1,3 @@
+html[data-theme="light"] { color-scheme: light; --main-color: #252b28; --body-bg-color: #eeeee8; --toolbar-bg-color: #f8f8f3; }
+html[data-theme="dark"] { color-scheme: dark; --main-color: #e5ece6; --body-bg-color: #252b28; --toolbar-bg-color: #202723; }
+#editorModeButtons, #secondaryOpenFile, #openFile, #secondaryPrint, #printButton { display: none !important; }

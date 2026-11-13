@@ -56,6 +56,24 @@
     },
     "provenance": {
       "type": "array"
+    },
+    "reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "story": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "pdfSource": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
     }
   }
 }

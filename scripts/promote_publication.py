@@ -36,6 +36,12 @@ def promote(draft_path,root=ROOT):
             areas=load('data/research_areas.json');next(a for a in areas if a['id']==features['researchArea'])['papers'].append(slug);save('data/research_areas.json',areas)
         if pub['selectedRank'] is not None:
             editorial=load('data/publication_editorial.json');editorial[slug]={**features['highlight'],'sources':pub['metadataSources']};save('data/publication_editorial.json',editorial)
+        for key, filename in [('story','paper_stories.json'),('pdfSource','pdf_sources.json')]:
+            record=draft.get('reading',{}).get(key)
+            if record is not None:
+                if record.get('slug')!=slug:raise ValueError('Reading record slug mismatch')
+                name='data/'+filename
+                save(name,load(name)+[record])
         result=validate(test)
         if result['errors']:raise ValueError('; '.join(result['errors']))
         backups={name:(root/name).read_bytes() for name in changed}

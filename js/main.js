@@ -92,6 +92,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const english = document.body.dataset.lang === 'en';
   const viewer = document.getElementById('figure-viewer');
+  const readingOpen = () => document.documentElement.classList.contains('paper-reading-open');
   const records = [];
   let frame = 0, lastScroll = -Infinity, returnFocus = null, areaTarget = null, areaTimer;
   document.addEventListener('researchareanavigate',event=>{areaTarget=event.detail.id;clearTimeout(areaTimer);for(const r of records){clearTimeout(r.timer);clearTimeout(r.settle);r.intent=null;r.hover=null;r.focus=null;}areaTimer=setTimeout(()=>{areaTarget=null;schedule();},1800);});
@@ -114,7 +115,7 @@
           r.scrollIndex = clamp(Math.round(position), 0, r.cards.length - 1);
         if (r.intent !== null) continue;
         // Never remove a keyboard user's focused control, including a modal opener.
-        if (viewer.open || r.cards.some(card => card.querySelector('.paper-body').contains(document.activeElement))) continue;
+        if (readingOpen() || viewer.open || r.cards.some(card => card.querySelector('.paper-body').contains(document.activeElement))) continue;
         r.draw(r.hover ?? r.focus ?? r.scrollIndex);
       }
     });
@@ -187,7 +188,7 @@
       r.settle = setTimeout(() => {r.intent = null; schedule();}, reduced.matches ? 0 : 900);
     }
     deck.addEventListener('pointermove', event => {
-      if (journey.dataset.mode !== 'scroll' || event.pointerType === 'touch' || performance.now() - lastScroll < 220 || viewer.open) return;
+      if (journey.dataset.mode !== 'scroll' || event.pointerType === 'touch' || performance.now() - lastScroll < 220 || viewer.open || readingOpen()) return;
       const card = event.target.closest('.focus-paper');
       if (!card) {clearPreview(); schedule(); return;}
       const index = cards.indexOf(card);
@@ -195,7 +196,7 @@
       clearTimeout(r.timer); r.pendingHover = index;
       r.timer = setTimeout(() => {
         r.pendingHover = null;
-        if (performance.now() - lastScroll < 220 || r.intent !== null || r.cards.some(c => c.querySelector('.paper-body').contains(document.activeElement))) return;
+        if (readingOpen() || performance.now() - lastScroll < 220 || r.intent !== null || r.cards.some(c => c.querySelector('.paper-body').contains(document.activeElement))) return;
         r.hover = index; r.draw(index);
       }, 90);
     });
@@ -220,7 +221,7 @@
         if (journey.dataset.mode === 'scroll' && trigger.matches(':focus-visible')) {clearPreview(); r.focus = index; r.draw(index, true);}
       });
       card.addEventListener('focusout', () => setTimeout(() => {
-        if (!deck.contains(document.activeElement)) {r.focus = null; schedule();}
+        if (!deck.contains(document.activeElement)) {if (!readingOpen()) {r.focus = null; schedule();}}
       }, 0));
       card.querySelectorAll('img').forEach(img => img.addEventListener('error', () => {
         img.alt += english ? ' (unavailable; open original figure)' : '（暂不可用，可打开原图）';
@@ -236,7 +237,7 @@
   }, {passive:true});
   addEventListener('wheel', () => {
     areaTarget=null;clearTimeout(areaTimer);
-    if (!viewer.open && document.activeElement.matches('.figure-select')) document.activeElement.blur();
+    if (!readingOpen() && !viewer.open && document.activeElement.matches('.figure-select')) document.activeElement.blur();
     for (const r of records) {r.intent = null; clearTimeout(r.settle);}
   }, {passive:true});
   addEventListener('resize', () => {for (const r of records) r.configure();}, {passive:true});
@@ -257,6 +258,7 @@
   const fallback=Math.max(0,tiles.findIndex(t=>t.dataset.figureRef===stage.dataset.defaultPrimary));
   let pinned=null,preview=null,pending=null,timer,primaryIndex=null,settlingUntil=0,lastX=null,lastY=null,leaveTimer;
   const layout=tiles.some(t=>t.dataset.layoutHint==='stack')?'stack':'split';
+  const readingOpen = () => document.documentElement.classList.contains('paper-reading-open');
   const reducedMedia=matchMedia('(prefers-reduced-motion:reduce)');
   const captionAnimations=new Map();
   stage.dataset.mediaEnhanced='true';
@@ -289,15 +291,15 @@
    }
    if(announce)stage.querySelector('.media-status').textContent=(english?'Figure focus: ':'主图：')+tiles[index].querySelector('h4').textContent;
   }
-  function restore(){clearTimeout(timer);pending=null;preview=null;draw(pinned??fallback);}
+  function restore(){clearTimeout(timer);pending=null;if(readingOpen())return;preview=null;draw(pinned??fallback);}
   stage.addEventListener('pointermove',event=>{
-   if(!hover.matches||event.pointerType==='touch'||event.buttons)return;
+   if(readingOpen()||!hover.matches||event.pointerType==='touch'||event.buttons)return;
    const moved=lastX===null||Math.hypot(event.clientX-lastX,event.clientY-lastY)>4;
    if(!moved)return;lastX=event.clientX;lastY=event.clientY;
    if(performance.now()<settlingUntil)return;
    const tile=event.target.closest('.focus-figure');if(!tile)return;
    const index=tiles.indexOf(tile);if(preview===index||pending===index)return;
-   clearTimeout(timer);pending=index;timer=setTimeout(()=>{pending=null;preview=index;draw(index);},240);
+   clearTimeout(timer);pending=index;timer=setTimeout(()=>{pending=null;if(!readingOpen()){preview=index;draw(index);}},240);
   });
   stage.addEventListener('pointerenter',()=>clearTimeout(leaveTimer));
   stage.addEventListener('pointerleave',()=>{clearTimeout(timer);pending=null;lastX=null;lastY=null;leaveTimer=setTimeout(restore,220);});
@@ -329,7 +331,9 @@
  const viewer=document.getElementById('figure-viewer'); if(!viewer)return;
  const english=document.body.dataset.lang==='en'; let returnFocus=null;
   // Native dialog provides focus containment and Escape across supported engines.
-  document.querySelectorAll('.figure-zoom, .media-open').forEach(link => link.addEventListener('click', event => {
+  document.addEventListener('click', event => {
+    const link = event.target.closest('.figure-zoom, .media-open, .story-figure');
+    if (!link) return;
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof viewer.showModal !== 'function') return;
     event.preventDefault(); returnFocus = link;
     const figure = link.closest('figure'); const originalImg = figure?.querySelector('img') || link.previousElementSibling?.querySelector('img');
@@ -343,7 +347,7 @@
     caption.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
     viewer.querySelector('.viewer-caption').replaceChildren(caption, original);
     viewer.showModal();
-  }));
+  });
   viewer.querySelector('.dialog-close').addEventListener('click', () => viewer.close());
   viewer.addEventListener('close', () => {
     viewer.querySelector('.viewer-image').replaceChildren();

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QiSun PDF Source Registry Record",
+  "type": "object",
+  "required": [
+    "slug",
+    "sourcePageUrl",
+    "pdfUrl",
+    "hostedPath",
+    "sourceKind",
+    "accessMode",
+    "reuseStatus",
+    "licenseEvidence"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "minLength": 3
+    },
+    "sourcePageUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pdfUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hostedPath": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sourceKind": {
+      "type": "string",
+      "enum": [
+        "publisher",
+        "author_manuscript",
+        "open_repository",
+        "none"
+      ]
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "same_origin",
+        "cors_remote",
+        "external_only",
+        "unknown"
+      ]
+    },
+    "reuseStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "permission_verified",
+        "not_permitted",
+        "not_applicable"
+      ]
+    },
+    "licenseEvidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pageAnchors": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1
+      }
+    }
+  },
+  "additionalProperties": false
+}

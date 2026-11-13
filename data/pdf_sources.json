@@ -1,0 +1,126 @@
+[
+  {
+    "slug": "high-k-trench-gan-hemt",
+    "sourcePageUrl": "https://doi.org/10.1063/5.0345413",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "mte-ste-continuous-temporal-signal-classification",
+    "sourcePageUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+    "pdfUrl": "https://raw.githubusercontent.com/mlresearch/v306/main/assets/sun26k/sun26k.pdf",
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "cors_remote",
+    "reuseStatus": "not_applicable",
+    "licenseEvidence": [
+      "https://proceedings.mlr.press/v306/sun26k.html",
+      "Official PMLR PDF delivery, no redistribution by this site"
+    ],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "hsaf-net-fruit-quality-assessment",
+    "sourcePageUrl": "https://doi.org/10.3390/electronics15163613",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "sourcePageUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "spiking-som-radar-deinterleaving",
+    "sourcePageUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "mpo-surrogate-function-snn",
+    "sourcePageUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "dual-model-snn-remote-sensing",
+    "sourcePageUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "adaptive-clustering-radar-signal-processing",
+    "sourcePageUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "ml-ldmos-bv-optimization",
+    "sourcePageUrl": "https://doi.org/10.1109/ted.2024.3517578",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "sipos-umofet-fom",
+    "sourcePageUrl": "https://doi.org/10.3390/mi15030411",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  },
+  {
+    "slug": "variable-k-ldmos",
+    "sourcePageUrl": "https://doi.org/10.3390/mi13060843",
+    "pdfUrl": null,
+    "hostedPath": null,
+    "sourceKind": "publisher",
+    "accessMode": "external_only",
+    "reuseStatus": "pending",
+    "licenseEvidence": [],
+    "pageAnchors": {}
+  }
+]
