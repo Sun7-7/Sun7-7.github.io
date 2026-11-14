@@ -1,0 +1,373 @@
+[
+  {
+    "slug": "high-k-trench-gan-hemt",
+    "template": "device",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "figures",
+      "significance",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "high-k-trench-gan-hemt#device-structure",
+      "high-k-trench-gan-hemt#field-redistribution"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "source_checked",
+      "checkedAt": "2026-11-14",
+      "sourceLocations": [
+        {
+          "label": "Author-supplied accepted manuscript",
+          "url": "https://doi.org/10.1063/5.0345413",
+          "location": "Abstract; Figures 1–5; breakdown comparison at L_GD = 9 µm"
+        }
+      ]
+    },
+    "copy": {
+      "zh": {
+        "evidence": "接收稿摘要与图 3(b) 报告，在栅漏间距 9 µm 时，代表性 PZT 沟槽器件的击穿电压为 1405 V，同片常规器件为 783 V。TCAD 扫描用于分析漏侧高场区的再分布。",
+        "scope": "电压比较针对接收稿报告的代表性器件。介电常数扫描使用二维静电模型，动态导通电阻的结果应结合其应力电压和提取延迟解读。"
+      },
+      "en": {
+        "evidence": "The accepted manuscript reports a breakdown voltage of 1405 V for a representative PZT-trench HEMT and 783 V for a co-fabricated conventional device at a gate-to-drain spacing of 9 µm (abstract and Fig. 3(b)). The TCAD sweep examines redistribution of the drain-side high field.",
+        "scope": "The voltage comparison concerns the representative devices reported in the accepted manuscript. The permittivity sweep uses a two-dimensional electrostatic model. Interpret dynamic on-resistance with the stated stress voltage and extraction delay."
+      }
+    }
+  },
+  {
+    "slug": "mte-ste-continuous-temporal-signal-classification",
+    "template": "method",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "mte-ste-continuous-temporal-signal-classification#framework",
+      "mte-ste-continuous-temporal-signal-classification#main-results"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "source_checked",
+      "checkedAt": "2026-11-14",
+      "sourceLocations": [
+        {
+          "label": "PMLR Version of Record",
+          "url": "https://proceedings.mlr.press/v306/sun26k.html",
+          "location": "Abstract; Sections 3–5; Tables 1 and 4; Figure 2"
+        }
+      ]
+    },
+    "copy": {
+      "zh": {
+        "evidence": "在骨干与训练预算匹配的协议下，十项连续一维信号任务的比较表明，MTE 与 STE 结合可改善标准 SNN 的整体分类表现。表 1 同时列出 ANN、基础 SNN 和组合方法，可按骨干与数据集对照。",
+        "scope": "表 4 的突触操作量、脉冲活动率与换算能耗用于比较算法开销。论文未测量芯片功耗或实际运行延迟。"
+      },
+      "en": {
+        "evidence": "Across ten continuous 1D signal benchmarks with matched backbones and training budgets, combining MTE with STE improves overall classification performance over standard SNNs. Table 1 reports the ANN, base SNN and combined method by backbone and dataset.",
+        "scope": "Table 4 uses synaptic operations, spike activity and converted energy to compare algorithmic cost. The paper does not measure chip power or wall-clock latency."
+      }
+    }
+  },
+  {
+    "slug": "hsaf-net-fruit-quality-assessment",
+    "template": "experiment",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "hsaf-net-fruit-quality-assessment#framework",
+      "hsaf-net-fruit-quality-assessment#performance-table"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.3390/electronics15163613",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sgte-snn-radar-emitter-denoising-recognition",
+    "template": "method",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "sgte-snn-radar-emitter-denoising-recognition#framework",
+      "sgte-snn-radar-emitter-denoising-recognition#denoising-table"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.1109/icassp55912.2026.11464155",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "spiking-som-radar-deinterleaving",
+    "template": "theory",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "scope",
+      "figures",
+      "significance",
+      "references"
+    ],
+    "figureRefs": [
+      "spiking-som-radar-deinterleaving#framework",
+      "spiking-som-radar-deinterleaving#performance-table"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "source_checked",
+      "checkedAt": "2026-11-14",
+      "sourceLocations": [
+        {
+          "label": "Author archive; conference record",
+          "url": "https://doi.org/10.1109/icassp55912.2026.11464997",
+          "location": "Sections 2.2–2.3, 3; Figure 1; Eq. 10"
+        }
+      ]
+    },
+    "copy": {
+      "zh": {
+        "evidence": "第 2.3 节分析获胜单元的响应：对固定稀疏输入，更新后的匹配响应不减。学习率满足式（10）的 Robbins–Monro 条件时，论文给出权重收敛结论。",
+        "scope": "收敛分析适用于文中定义的更新规则和学习率条件。信号分选表现另由第 3 节的任务实验评估。"
+      },
+      "en": {
+        "evidence": "Section 2.3 analyzes the winning unit: for a fixed sparse input, its matching response does not decrease after the update. The paper establishes weight convergence under the Robbins–Monro learning-rate conditions in Eq. (10).",
+        "scope": "The convergence analysis applies to the stated update rule and learning-rate conditions. The deinterleaving experiments in Section 3 evaluate task performance separately."
+      }
+    }
+  },
+  {
+    "slug": "mpo-surrogate-function-snn",
+    "template": "method",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "mpo-surrogate-function-snn#surrogate-mismatch",
+      "mpo-surrogate-function-snn#framework"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.1609/aaai.v40i30.39769",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "dual-model-snn-remote-sensing",
+    "template": "experiment",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "dual-model-snn-remote-sensing#dual-distillation",
+      "dual-model-snn-remote-sensing#training-overview"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.1016/j.neucom.2025.130721",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "adaptive-clustering-radar-signal-processing",
+    "template": "experiment",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "significance",
+      "figures",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "adaptive-clustering-radar-signal-processing#architecture",
+      "adaptive-clustering-radar-signal-processing#multi-scenario"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.1109/lsp.2025.3556782",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ml-ldmos-bv-optimization",
+    "template": "device",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "figures",
+      "significance",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "ml-ldmos-bv-optimization#ml-flow-device",
+      "ml-ldmos-bv-optimization#prediction-results"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.1109/ted.2024.3517578",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sipos-umofet-fom",
+    "template": "device",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "figures",
+      "significance",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "sipos-umofet-fom#device-and-model",
+      "sipos-umofet-fom#gpr-model"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.3390/mi15030411",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "variable-k-ldmos",
+    "template": "device",
+    "sectionOrder": [
+      "question",
+      "method",
+      "evidence",
+      "figures",
+      "significance",
+      "scope",
+      "references"
+    ],
+    "figureRefs": [
+      "variable-k-ldmos#device-structure",
+      "variable-k-ldmos#efield-mechanism"
+    ],
+    "evidenceRefs": [
+      "focusBrief.finding"
+    ],
+    "copyReview": {
+      "status": "draft",
+      "checkedAt": null,
+      "sourceLocations": [
+        {
+          "label": "Existing bilingual brief",
+          "url": "https://doi.org/10.3390/mi13060843",
+          "location": "Original claim location pending"
+        }
+      ]
+    }
+  }
+]

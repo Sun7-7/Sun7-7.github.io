@@ -1,0 +1,4 @@
+Mozilla PDF.js 6.5.438, Apache-2.0.
+Upstream: https://github.com/mozilla/pdf.js/releases/tag/v6.5.438
+Distribution SHA256: fcbe9ba21d9911843e3502adc178a7f549a524a4055f887bedc942e5490c6ba1
+Local modifications: viewer HTML integration and editorial skin, PDF scripts/editing disabled, sample PDF omitted. Viewer fingerprint/history storage is disabled.

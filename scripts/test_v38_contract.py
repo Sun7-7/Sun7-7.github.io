@@ -34,9 +34,9 @@ def main():
   figure={'id':slug+'#fixture','publication_slug':slug,'visual_index':0,'role':'framework','sourceUrl':'https://example.com/test-only-v37','rights':{'status':'verified','evidence':['Generated exclusively by this test; no third-party content.']},'naturalSize':{'width':160,'height':90},'readability':'wide'}
   draft={'publication':pub,'detail':detail,'figures':[figure],'features':{'selectedRank':None,'researchArea':'learning','figureRefs':[figure['id']]},'review':{'state':'publishable','metadata_verified':True,'content_reviewed':True,'rights_reviewed':True,'publishable':True,'author_order':pub['authors'],'evidence':['TEST ONLY simulated review stages; not a real publication or author claim.']}}
   draft_path=Path(tmp)/'draft.json';write(draft_path,draft);promote(draft_path,sandbox)
-  built=subprocess.run([sys.executable,'-B','scripts/build_site.py'],cwd=sandbox,capture_output=True,text=True);assert built.returncode==0,built.stdout+built.stderr
+  built=subprocess.run([sys.executable,'-B','scripts/build_site.py'],cwd=sandbox,capture_output=True,text=True,encoding='utf-8');assert built.returncode==0,built.stdout+built.stderr
   assert len(read(sandbox/'data/publications.json'))==12
-  outputs=['research.html','en/research.html','publications.html','en/publications.html','papers/'+slug+'.html','en/papers/'+slug+'.html','assets/citations/'+slug+'.bib','sitemap.xml']
+  outputs=['research.html','en/research.html','publications.html','en/publications.html','papers/'+slug+'.html','en/papers/'+slug+'.html','assets/citations/'+slug+'.bib','stories/'+slug+'.html','en/stories/'+slug+'.html','sitemap.xml']
   for name in outputs:assert slug in (sandbox/name).read_text(encoding='utf-8'),name
   assert '<span class="area-count">4 publications</span>' in (sandbox/'en/research.html').read_text(encoding='utf-8').split('data-area-link="learning"',1)[1].split('</a>',1)[0]
   report['area_count_updates_to_four']=True

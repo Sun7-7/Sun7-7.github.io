@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QiSun Paper Story Extension",
+  "description": "One optional visual/story layer per paper. Scientific source of truth remains in publications and publication_details.",
+  "type": "object",
+  "required": [
+    "slug",
+    "template",
+    "sectionOrder",
+    "figureRefs",
+    "copyReview"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "minLength": 3
+    },
+    "template": {
+      "type": "string",
+      "enum": [
+        "method",
+        "theory",
+        "experiment",
+        "device",
+        "basic"
+      ]
+    },
+    "shortTitle": {
+      "type": "object",
+      "required": [
+        "zh",
+        "en"
+      ],
+      "properties": {
+        "zh": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sectionOrder": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "question",
+          "method",
+          "evidence",
+          "significance",
+          "figures",
+          "scope",
+          "references"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 2
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "figureRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "copyReview": {
+      "type": "object",
+      "required": [
+        "status",
+        "sourceLocations"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "source_checked",
+            "author_approved"
+          ]
+        },
+        "checkedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceLocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "label",
+              "url",
+              "location"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "copy": {
+      "type": "object",
+      "required": [
+        "zh",
+        "en"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "zh": {
+          "type": "object",
+          "required": [
+            "evidence",
+            "scope"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "en": {
+          "type": "object",
+          "required": [
+            "evidence",
+            "scope"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -35,7 +35,7 @@ class Page(HTMLParser):
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--report-dir',required=True);args=ap.parse_args()
     out=Path(args.report_dir);out.mkdir(parents=True,exist_ok=True)
-    paths=sorted(p for p in ROOT.rglob('*.html') if not {'tmp','.git','node_modules','deliverables','worktrees'}.intersection(p.relative_to(ROOT).parts))
+    paths=sorted(p for p in ROOT.rglob('*.html') if not {'tmp','.git','node_modules','deliverables','worktrees','vendor'}.intersection(p.relative_to(ROOT).parts))
     pages={}
     for p in paths:
         page=Page();page.feed(p.read_text(encoding='utf-8'));pages[p.resolve()]=page
@@ -104,6 +104,8 @@ def main():
     findings=[];manifest=[]
     for p in sorted(all_files):
         name=p.relative_to(ROOT).as_posix();manifest.append(dict(path=name,bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
+        # The pinned upstream distribution is checked separately for build provenance.
+        if name.startswith('vendor/pdfjs/') and p.name not in ['reading-config.js','reading-skin.css']:continue
         if p.suffix.lower() in ['.html','.json','.js','.cjs','.mjs','.css','.svg','.xml','.txt','.md','.sh','.ps1','.bib','.py']:
             content=p.read_text(encoding='utf-8-sig',errors='replace')
             if name=='scripts/check_site.py':continue

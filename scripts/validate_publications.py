@@ -192,6 +192,8 @@ def validate(root=ROOT, release=False, check_output=False):
             require(1<=len(x.get('figureRefs',[]))<=3,'Preview must use one to three figures')
             require(len(x.get('figureRefs',[]))==len(set(x.get('figureRefs',[]))),'Duplicate preview figure reference')
             for ref in x.get('figureRefs',[]):require(ref in fs and fs[ref]['publication_slug']==x['slug'],'Preview owner/ref mismatch: '+ref)
+    from validate_reading import validate_reading
+    errors.extend(validate_reading(root, pubs, ds, fs, baseline['publications']))
     return {'publication_records':len(papers),'figure_records':len(figures),'mode':'release' if release else 'candidate','owner_approved_snapshot':approved_snapshot,'errors':errors,'warnings':warnings}
 
 def main():

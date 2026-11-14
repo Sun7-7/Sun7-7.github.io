@@ -44,7 +44,7 @@ def make_draft(doi=None,url=None,title=None,slug=None,existing=None):
     blank={key:'' for key in ['oneLine','coreClaim','problem','method','whyItMatters','discussion']}
     blank.update({key:[] for key in ['evidence','highlights','pipeline','visuals','keywords']})
     detail=detail or {'slug':pub['slug'],**blank,'en':dict(blank)}
-    return {'schema_version':1,'publication':pub,'detail':detail,'review':{'state':'draft','metadata_verified':False,'content_reviewed':False,'rights_reviewed':False,'publishable':False,'author_order':pub['authors'],'evidence':[]},'features':{'selectedRank':None,'researchArea':None,'figureRefs':[],'highlight':{'zh':'','en':''}},'figures':[],'provenance':sources}
+    return {'schema_version':1,'publication':pub,'detail':detail,'review':{'state':'draft','metadata_verified':False,'content_reviewed':False,'rights_reviewed':False,'publishable':False,'author_order':pub['authors'],'evidence':[]},'features':{'selectedRank':None,'researchArea':None,'figureRefs':[],'highlight':{'zh':'','en':''}},'figures':[],'provenance':sources,'reading':{'story':None,'pdfSource':None}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--doi');p.add_argument('--url');p.add_argument('--title');p.add_argument('--slug');p.add_argument('--from-existing');p.add_argument('--draft',action='store_true',required=True)

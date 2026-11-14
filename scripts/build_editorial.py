@@ -36,6 +36,8 @@ def detail(slug,lang):
 
 AREAS=load('data/research_areas.json')
 EDITORIAL=load('data/publication_editorial.json')
+STORIES={d['slug']:d for d in load('data/paper_stories.json')}
+PDF_SOURCES={d['slug']:d for d in load('data/pdf_sources.json')}
 FIGURES={f['id']:f for f in load('data/figures.json')}
 
 def figure_src(ref):
@@ -63,11 +65,48 @@ def venue(pub):
  if pub.get('oral'):parts.append('Oral')
  return '<span class="venue">'+esc(' · '.join(parts))+'</span>'
 
-def links(pub,lang,path,brief=True):
+def reading_links(pub, lang, path, include_story=True):
+ slug=pub['slug']; source=PDF_SOURCES.get(slug, {})
+ official=source.get('sourcePageUrl',pub['links'][0]['url'])
+ pdf=source.get('pdfUrl') if source.get('accessMode')=='cors_remote' else None
+ if source.get('accessMode')=='same_origin':
+  pdf=rel(path,source['hostedPath'])
+ items=[]
+ if include_story:
+  story=rel(path,route(lang,'stories/'+slug+'.html'))
+  items.append(f'<a class="quick-read" data-story href="{esc(story)}">{t(lang,"研究导读","Quick Read")}</a>')
+ label=t(lang,'站内读 PDF','Read PDF') if pdf else t(lang,'原文阅读','Read original')
+ items.append(f'<a class="read-pdf" href="{esc(official)}" data-pdf="{esc(pdf or "")}" data-paper-title="{esc(DETAILS[slug].get("shortTitle_"+lang,pub["title"]))}" data-venue="{esc(pub["venue"])}">{label}</a>')
+ return ' '.join(items)
+
+
+def story(pub, lang):
+ slug=pub['slug'];path=route(lang,'stories/'+slug+'.html');d=detail(slug,lang)
+ config=STORIES.get(slug,{})
+ short=DETAILS[slug].get('shortTitle_'+lang,pub['title'])
+ order=config.get('sectionOrder',['question','method','evidence','significance','figures','scope','references'])
+ template=config.get('template','basic')
+ labels={'question':t(lang,'研究问题','Research question'),'method':t(lang,'核心方法','Core method'),'evidence':t(lang,'代表性发现','Main finding'),'significance':t(lang,'科学意义','Why it matters'),'figures':t(lang,'科研图','Figures'),'scope':t(lang,'适用条件','Scope and conditions'),'references':t(lang,'继续阅读','Continue reading')}
+ brief=DETAILS[slug].get('focusBrief',{}).get(lang,{})
+ copy=config.get("copy",{}).get(lang,{})
+ finding=brief.get('finding',{}).get('text',d['coreClaim'])
+ figures=[]
+ for ref in config.get('figureRefs',[ref for ref in FIGURES if FIGURES[ref]['publication_slug']==slug][:2]):
+  f=FIGURES[ref];v=d['visuals'][f['visual_index']];src=rel(path,v['src'])
+  figures.append(f'<figure><a href="{esc(src)}" class="story-figure" aria-label="{esc(t(lang,"查看大图","Enlarge figure")+": "+v["title"])}">{image(v["src"],v["title"],path)}</a><figcaption><h3>{esc(v["title"])}</h3><p>{esc(f.get("sourceFigureNo",{}).get(lang,t(lang,"原图","Original figure")))} · {esc(v["caption"])}</p><p>{esc(v["insight"])}</p>{figure_credit(pub,lang)}<p class="story-rights">{t(lang,"图像复用权待核验","Figure reuse rights pending") if f["rights"]["status"]=="pending" else t(lang,"查看图源与版权","Figure source and rights")}</p></figcaption></figure>')
+ pipeline=''.join(f'<li><strong>{esc(step["label"])}</strong><p>{esc(step["text"])}</p></li>' for step in d['pipeline'])
+ texts={'question':f'<p>{esc(d["problem"])}</p>','method':f'<p>{esc(d["method"])}</p><details><summary>{t(lang,"方法步骤","Method steps")}</summary><ol>{pipeline}</ol></details>','evidence':f'<p>{esc(copy.get("evidence",finding))}</p>','significance':f'<p>{esc(d["whyItMatters"])}</p>','figures':''.join(figures),'scope':f'<p>{esc(copy.get("scope",d["discussion"]))}</p>','references':links(pub,lang,path,include_reading=False)+reading_links(pub,lang,path,False)}
+ sections=''.join(f'<section class="story-section story-{key}"><h2>{labels[key]}</h2>{texts[key]}</section>' for key in order if texts[key])
+ body=f'<article class="paper-story" data-template="{template}"><header class="story-heading"><p class="eyebrow">{t(lang,"研究导读","Paper Story")} · {venue(pub)}</p><h1>{esc(short)}</h1><p class="story-full-title" lang="en">{esc(pub["title"])}</p><p class="authors">{authors(pub)}.</p><p class="story-record">{esc(publication_reference(pub))}</p><div class="story-actions">{reading_links(pub,lang,path,False)}</div></header><div class="story-body">{sections}</div></article>'
+ document(path,lang,'story',short+' | Qi Sun',d['oneLine'],body)
+
+
+def links(pub,lang,path,brief=True,include_reading=True):
  items=[]
  if brief:items.append(f'<a href="{esc(rel(path,route(lang,"papers/"+pub["slug"]+".html")))}">{UI[lang]["brief"]}</a>')
  items += [f'<a href="{esc(x["url"])}" target="_blank" rel="noopener noreferrer">{esc(x["label"])}</a>' for x in pub['links']]
  items.append(f'<a href="{esc(rel(path,"assets/citations/"+pub["slug"]+".bib"))}" download>BibTeX</a>')
+ if include_reading:items.append(reading_links(pub,lang,path))
  return '<div class="paper-links">'+'\n'.join(items)+'</div>'
 
 def row(pub,lang,path,selected=False):
@@ -86,13 +125,14 @@ def footer(path,lang):
  return f'''<footer class="site-footer"><div class="container footer-inner"><p>© 2026 {esc(display_name(lang))}<br>{esc(PROFILE['institution_zh' if lang=='zh' else 'institution_en'])}</p><div class="footer-links"><a href="mailto:{PROFILE['email']}">Email</a>{profile_links()}<a href="{esc(rel(path,route(lang,'blog.html')))}">{UI[lang]['notes']}</a></div></div></footer>'''
 
 def document(path,lang,page,title,description,body,profile=False):
+ reading_assets=f'<link rel="stylesheet" href="{esc(asset_url(path,'css/reading.css'))}"><script type="module" src="{esc(asset_url(path,'js/paper-reading.js'))}"></script>' if page in ['home','research','publications','story'] else ''
  body+=f'<dialog id="figure-viewer" aria-labelledby="figure-viewer-title"><header class="reader-header"><h2 id="figure-viewer-title">{t(lang,"科研图","Research figure")}</h2><button class="dialog-close" type="button" autofocus>{t(lang,"关闭","Close")}</button></header><div class="viewer-image"></div><div class="viewer-caption"></div></dialog>'
  base=CONFIG['site']['url'];canonical=base+'/'+path;zh=path.removeprefix('en/');en='en/'+zh
  schema={'@context':'https://schema.org','@type':'ProfilePage' if profile else 'WebPage','url':canonical,'name':title,'inLanguage':'zh-CN' if lang=='zh' else 'en'}
  if profile:schema['mainEntity']={'@type':'Person','name':'Qi Sun','alternateName':'孙琦','url':base+'/en/index.html','image':base+'/assets/images/portraits/portrait_hero_4x5.webp?v='+PORTRAIT_VERSION,'jobTitle':PROFILE['stage_en'],'affiliation':{'@type':'CollegeOrUniversity','name':'Xidian University'},'email':'mailto:'+PROFILE['email'],'sameAs':[p['url'] for p in PROFILE['academicProfiles']]}
  structured=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
  output=f'''<!DOCTYPE html>
-<html lang="{'zh-CN' if lang=='zh' else 'en'}" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"><link rel="alternate" hreflang="en" href="{base}/{en}"><link rel="alternate" hreflang="x-default" href="{base}/{en}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta property="og:image:alt" content="Qi Sun professional portrait"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta name="color-scheme" content="light dark"><link rel="icon" href="{esc(rel(path,'assets/favicon.svg'))}" type="image/svg+xml"><script src="{esc(rel(path,'js/theme-init.js'))}"></script><link rel="stylesheet" href="{esc(asset_url(path,'css/style.css'))}"><script type="application/ld+json">{structured}</script></head><body data-page="{page}" data-lang="{lang}">{header(path,lang,page)}<main id="main" class="container" tabindex="-1">{body}</main>{footer(path,lang)}<script src="{esc(asset_url(path,'js/main.js'))}" defer></script></body></html>'''
+<html lang="{'zh-CN' if lang=='zh' else 'en'}" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-CN" href="{base}/{zh}"><link rel="alternate" hreflang="en" href="{base}/{en}"><link rel="alternate" hreflang="x-default" href="{base}/{en}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta property="og:image:alt" content="Qi Sun professional portrait"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base}/assets/images/portraits/portrait_hero_4x5.webp?v={PORTRAIT_VERSION}"><meta name="color-scheme" content="light dark"><link rel="icon" href="{esc(rel(path,'assets/favicon.svg'))}" type="image/svg+xml"><script src="{esc(rel(path,'js/theme-init.js'))}"></script><link rel="stylesheet" href="{esc(asset_url(path,'css/style.css'))}">{reading_assets}<script type="application/ld+json">{structured}</script></head><body data-page="{page}" data-lang="{lang}">{header(path,lang,page)}<main id="main" class="container" tabindex="-1">{body}</main>{footer(path,lang)}<script src="{esc(asset_url(path,'js/main.js'))}" defer></script></body></html>'''
  (ROOT/path).parent.mkdir(parents=True,exist_ok=True);(ROOT/path).write_text(output+'\n',encoding='utf-8');GENERATED.append(path)
 
 def intro(eyebrow,title,description=''):
@@ -138,7 +178,7 @@ def bibliography_row(pub,lang,path,heading='h4'):
  if pub.get('oral'):extra.append('Oral')
  annotation=(' · '+' · '.join('<span class="publication-label">'+esc(x)+'</span>' for x in extra)) if extra else ''
  primary=pub['links'][0]
- return f'''<article class="bibliography-entry" data-publication="{pub['slug']}" data-kind="{pub['kind']}" data-area="{pub['area']}"><p class="authors">{authors(pub)}.</p><{heading}><a href="{esc(rel(path,route(lang,'papers/'+pub['slug']+'.html')))}">{esc(pub['title'])}</a></{heading}><p class="bibliography-record">{esc(publication_reference(pub))}{annotation}.</p><div class="bibliography-links"><a href="{esc(primary['url'])}" target="_blank" rel="noopener noreferrer">{esc(primary['label'])}</a><a href="{esc(rel(path,'assets/citations/'+pub['slug']+'.bib'))}" download>BibTeX</a></div></article>'''
+ return f'''<article class="bibliography-entry" data-publication="{pub['slug']}" data-kind="{pub['kind']}" data-area="{pub['area']}"><p class="authors">{authors(pub)}.</p><{heading}><a href="{esc(rel(path,route(lang,'papers/'+pub['slug']+'.html')))}">{esc(pub['title'])}</a></{heading}><p class="bibliography-record">{esc(publication_reference(pub))}{annotation}.</p><div class="bibliography-links"><a href="{esc(primary['url'])}" target="_blank" rel="noopener noreferrer">{esc(primary['label'])}</a><a href="{esc(rel(path,'assets/citations/'+pub['slug']+'.bib'))}" download>BibTeX</a>{reading_links(pub,lang,path) if not path.endswith("cv.html") else ""}</div></article>'''
 
 def bibliography_years(lang,path):
  groups=[]
@@ -152,7 +192,7 @@ def selected_groups(lang,path):
  for i,area in enumerate(AREAS,1):
   pubs=[p for p in SELECTED if p['area']==area['id']]
   v=detail(pubs[0]['slug'],lang)['visuals'][0]
-  items=''.join(f'<article class="home-work" data-publication="{p["slug"]}"><p class="publication-meta">{venue(p)}</p><h4><a href="{esc(rel(path,route(lang,"papers/"+p["slug"]+".html")))}">{esc(p["title"])}</a></h4><p class="work-highlight">{esc(EDITORIAL[p["slug"]][lang])}</p></article>' for p in pubs)
+  items=''.join(f'<article class="home-work" data-publication="{p["slug"]}"><p class="publication-meta">{venue(p)}</p><h4><a href="{esc(rel(path,route(lang,"papers/"+p["slug"]+".html")))}">{esc(p["title"])}</a></h4><p class="work-highlight">{esc(EDITORIAL[p["slug"]][lang])}</p><div class="story-actions">{reading_links(p,lang,path)}</div></article>' for p in pubs)
   groups.append(f'<section class="selected-domain" aria-labelledby="selected-{area["id"]}"><p class="section-number">0{i} / {area["id"].upper()}</p><h3 id="selected-{area["id"]}">{UI[lang][area["id"]]}</h3><a class="domain-figure" href="{esc(rel(path,route(lang,"papers/"+pubs[0]["slug"]+".html")))}">{image(v["src"],v["title"],path)}</a><a class="home-media-open media-open" href="{esc(rel(path,v["src"]))}" data-media-title="{esc(v["title"])}">{t(lang,"放大科研图","Enlarge figure")} ↗</a>{items}</section>')
  return '<div class="selected-domains">'+''.join(groups)+'</div>'
 
@@ -304,7 +344,8 @@ def main():
  (citations/'all-publications.bib').write_text('\n'.join(bibtex(p) for p in PAPERS),encoding='utf-8')
  for lang in ['zh','en']:
   home(lang);research(lang);publications(lang);about(lang);about(lang,True);notes(lang)
-  for p in PAPERS:paper(p,lang)
+  for p in PAPERS:
+   paper(p,lang);story(p,lang)
  base=CONFIG['site']['url'];entries=[]
  for path in GENERATED:
   if path.endswith('post.html'):continue
