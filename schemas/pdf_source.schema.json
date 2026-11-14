@@ -1,83 +1,78 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "QiSun PDF Source Registry Record",
   "type": "object",
+  "additionalProperties": false,
   "required": [
-    "slug",
-    "sourcePageUrl",
-    "pdfUrl",
-    "hostedPath",
-    "sourceKind",
-    "accessMode",
-    "reuseStatus",
-    "licenseEvidence"
+    "paperId",
+    "landingUrl",
+    "localPdfPath",
+    "remotePdfUrl",
+    "externalPdfUrl",
+    "version",
+    "licenseEvidence",
+    "reviewStatus",
+    "mayPublishLocal",
+    "sha256"
   ],
   "properties": {
-    "slug": {
+    "paperId": {
       "type": "string",
       "minLength": 3
     },
-    "sourcePageUrl": {
+    "landingUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "localPdfPath": {
       "type": [
         "string",
         "null"
       ]
     },
-    "pdfUrl": {
+    "remotePdfUrl": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "format": "uri"
     },
-    "hostedPath": {
+    "externalPdfUrl": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "format": "uri"
     },
-    "sourceKind": {
-      "type": "string",
+    "version": {
       "enum": [
-        "publisher",
-        "author_manuscript",
-        "open_repository",
-        "none"
-      ]
-    },
-    "accessMode": {
-      "type": "string",
-      "enum": [
-        "same_origin",
-        "cors_remote",
-        "external_only",
-        "unknown"
-      ]
-    },
-    "reuseStatus": {
-      "type": "string",
-      "enum": [
-        "pending",
-        "permission_verified",
-        "not_permitted",
-        "not_applicable"
+        "published",
+        "accepted_manuscript",
+        "preprint"
       ]
     },
     "licenseEvidence": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "format": "uri"
       }
     },
-    "pageAnchors": {
-      "type": "object",
-      "additionalProperties": {
-        "type": [
-          "integer",
-          "null"
-        ],
-        "minimum": 1
-      }
+    "reviewStatus": {
+      "enum": [
+        "local_verified",
+        "remote_verified",
+        "official_source_only"
+      ]
+    },
+    "mayPublishLocal": {
+      "type": "boolean"
+    },
+    "sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
     }
-  },
-  "additionalProperties": false
+  }
 }

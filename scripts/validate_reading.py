@@ -1,4 +1,5 @@
 """Validate the story and PDF registries against published records."""
+import hashlib
 import json
 from pathlib import PurePosixPath
 from urllib.parse import urlsplit
@@ -13,13 +14,14 @@ def validate_reading(root, publications, details, figures, baseline_slugs):
         try:
             rows = json.loads((root/'data'/filename).read_text(encoding='utf-8'))
             assert isinstance(rows, list) and all(isinstance(row, dict) for row in rows)
-            slugs = [row['slug'] for row in rows]
+            key = 'slug' if filename == 'paper_stories.json' else 'paperId'
+            slugs = [row[key] for row in rows]
             assert len(slugs) == len(set(slugs)) and set(baseline_slugs) <= set(slugs) <= set(publications)
         except (OSError, ValueError, TypeError, KeyError, AssertionError):
             errors.append(filename + ': invalid, duplicate, missing or unknown publication record')
             continue
         for row in rows:
-            slug = row['slug']
+            slug = row[key]
             try:
                 if filename == 'paper_stories.json':
                     assert row['template'] in TEMPLATES
@@ -35,22 +37,31 @@ def validate_reading(root, publications, details, figures, baseline_slugs):
                         assert set(row['copy']) == {'zh','en'}
                         assert all(set(text) == {'evidence','scope'} and all(isinstance(v, str) and v.strip() for v in text.values()) for text in row['copy'].values())
                 else:
-                    mode = row['accessMode']
-                    assert row['sourcePageUrl'] in {x['url'] for x in publications[slug]['links']}
-                    assert row['sourceKind'] in ('publisher','author_manuscript','open_repository','none')
-                    assert row['reuseStatus'] in ('pending','permission_verified','not_permitted','not_applicable')
-                    if mode == 'cors_remote':
-                        url = urlsplit(row['pdfUrl'])
-                        assert url.scheme == 'https' and url.netloc == 'raw.githubusercontent.com'
-                        assert url.path.startswith('/mlresearch/') and url.path.endswith('.pdf')
-                        assert '/main/assets/' in url.path and row['licenseEvidence'] and not row['hostedPath']
-                    elif mode == 'same_origin':
-                        path = PurePosixPath(row['hostedPath'])
-                        assert path.parts[0] == 'assets' and '..' not in path.parts and path.suffix == '.pdf'
-                        assert row['reuseStatus'] == 'permission_verified' and row['licenseEvidence'] and not row['pdfUrl']
-                        assert (root/path).is_file() and (root/path).read_bytes().startswith(b'%PDF-')
+                    landing = urlsplit(row['landingUrl'])
+                    assert landing.scheme == 'https' and landing.netloc in {'doi.org','proceedings.mlr.press','ojs.aaai.org','www.mdpi.com','pubs.aip.org'}
+                    assert row['landingUrl'] in {x['url'] for x in publications[slug]['links']}
+                    assert row['version'] in {'published','accepted_manuscript','preprint'}
+                    assert row['reviewStatus'] in {'local_verified','remote_verified','official_source_only'}
+                    assert isinstance(row['mayPublishLocal'],bool) and isinstance(row['licenseEvidence'],list)
+                    local, remote, external = row['localPdfPath'], row['remotePdfUrl'], row['externalPdfUrl']
+                    if local:
+                        assert local == 'assets/papers/'+slug+'.pdf'
+                        assert row['mayPublishLocal'] and row['reviewStatus']=='local_verified' and row['licenseEvidence']
+                        data = (root/local).read_bytes()
+                        assert data.startswith(b'%PDF-') and hashlib.sha256(data).hexdigest()==row['sha256']
                     else:
-                        assert mode in ('external_only','unknown') and row['hostedPath'] is None and row['pdfUrl'] is None
+                        assert not row['mayPublishLocal'] and row['sha256'] is None
+                    if remote:
+                        url = urlsplit(remote)
+                        assert url.scheme=='https' and url.path.endswith('.pdf') and not url.query
+                        assert ((url.netloc=='raw.githubusercontent.com' and url.path.startswith('/mlresearch/') and '/main/assets/' in url.path) or (url.netloc=='mdpi-res.com' and url.path.startswith('/d_attachment/')))
+                        assert row['licenseEvidence'] and row['reviewStatus'] in {'remote_verified','local_verified'}
+                    if external:
+                        url = urlsplit(external)
+                        assert url.scheme=='https' and url.netloc=='ojs.aaai.org' and url.path.startswith('/index.php/AAAI/article/download/') and not url.query
+                        assert row['licenseEvidence']
+                    if not local and not remote:
+                        assert row['reviewStatus']=='official_source_only'
             except (AssertionError, KeyError, TypeError, ValueError, AttributeError, IndexError, OSError):
                 errors.append(f'{filename}: invalid source, section or ownership for {slug}')
     return errors

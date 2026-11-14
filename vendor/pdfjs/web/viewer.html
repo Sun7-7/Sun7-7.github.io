@@ -26,7 +26,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="google" content="notranslate" />
     <title>PDF Reader</title>
-    <script src="reading-config.js"></script>
+    <script src="reading-config.js?v=4.1.1"></script>
     <link rel="stylesheet" href="reading-skin.css" />
 
   <meta
@@ -40,7 +40,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     <link rel="stylesheet" href="viewer.css" />
 
-  <script src="viewer.mjs" type="module"></script>
+  <script src="viewer.mjs?v=4.1.1" type="module"></script>
   </head>
 
   <body tabindex="0">
@@ -112,7 +112,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                         hidden="true"
                       >
                         <span data-l10n-id="pdfjs-views-manager-add-file-button-label"></span>
-                        <input id="viewsManagerAddFilePicker" type="file" accept="application/pdf,image/*" multiple />
+                        <input id="viewsManagerAddFilePicker" type="hidden" disabled />
                       </button>
                       <button
                         id="viewsManagerCurrentOutlineButton"
@@ -604,12 +604,10 @@ See https://github.com/adobe-type-tools/cmap-resources
                   </button>
                   <div id="secondaryToolbar" class="hidden doorHangerRight menu">
                     <div id="secondaryToolbarButtonContainer" class="menuContainer">
-                      <button id="secondaryOpenFile" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-open-file-button">
-                        <span data-l10n-id="pdfjs-open-file-button-label"></span>
-                      </button>
+
 
                       <div class="visibleMediumView">
-                        <button id="secondaryPrint" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-print-button">
+                        <button id="secondaryOpenFile" type="button" hidden disabled></button><button id="secondaryPrint" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-print-button">
                           <span data-l10n-id="pdfjs-print-button-label"></span>
                         </button>
 
@@ -1113,7 +1111,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                   <label id="addSignatureImageBrowse" for="addSignatureFilePicker" tabindex="0">
                     <a data-l10n-id="pdfjs-editor-add-signature-image-browse-link"></a>
                   </label>
-                  <input id="addSignatureFilePicker" type="file" />
+                  <input id="addSignatureFilePicker" type="hidden" disabled />
                 </div>
               </div>
               <div id="addSignatureControls">

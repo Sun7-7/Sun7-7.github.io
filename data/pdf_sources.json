@@ -1,126 +1,150 @@
 [
   {
-    "slug": "high-k-trench-gan-hemt",
-    "sourcePageUrl": "https://doi.org/10.1063/5.0345413",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
-    "licenseEvidence": [],
-    "pageAnchors": {}
-  },
-  {
-    "slug": "mte-ste-continuous-temporal-signal-classification",
-    "sourcePageUrl": "https://proceedings.mlr.press/v306/sun26k.html",
-    "pdfUrl": "https://raw.githubusercontent.com/mlresearch/v306/main/assets/sun26k/sun26k.pdf",
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "cors_remote",
-    "reuseStatus": "not_applicable",
+    "paperId": "high-k-trench-gan-hemt",
+    "landingUrl": "https://doi.org/10.1063/5.0345413",
+    "localPdfPath": "assets/papers/high-k-trench-gan-hemt.pdf",
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "accepted_manuscript",
     "licenseEvidence": [
-      "https://proceedings.mlr.press/v306/sun26k.html",
-      "Official PMLR PDF delivery, no redistribution by this site"
+      "https://publishing.aip.org/resources/researchers/rights-and-permissions/sharing-content-online/",
+      "https://doi.org/10.1063/5.0345413"
     ],
-    "pageAnchors": {}
+    "reviewStatus": "local_verified",
+    "mayPublishLocal": true,
+    "sha256": "9698bd98c6cdf40f5b5c82aa06cf9c4a812a38e8aed31cd851553cd748d51800"
   },
   {
-    "slug": "hsaf-net-fruit-quality-assessment",
-    "sourcePageUrl": "https://doi.org/10.3390/electronics15163613",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
-    "licenseEvidence": [],
-    "pageAnchors": {}
+    "paperId": "mte-ste-continuous-temporal-signal-classification",
+    "landingUrl": "https://proceedings.mlr.press/v306/sun26k.html",
+    "localPdfPath": null,
+    "remotePdfUrl": "https://raw.githubusercontent.com/mlresearch/v306/main/assets/sun26k/sun26k.pdf",
+    "externalPdfUrl": null,
+    "version": "published",
+    "licenseEvidence": [
+      "https://proceedings.mlr.press/v306/sun26k.html"
+    ],
+    "reviewStatus": "remote_verified",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "sgte-snn-radar-emitter-denoising-recognition",
-    "sourcePageUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
-    "licenseEvidence": [],
-    "pageAnchors": {}
+    "paperId": "hsaf-net-fruit-quality-assessment",
+    "landingUrl": "https://doi.org/10.3390/electronics15163613",
+    "localPdfPath": null,
+    "remotePdfUrl": "https://mdpi-res.com/d_attachment/electronics/electronics-15-03613/article_deploy/electronics-15-03613-v2.pdf",
+    "externalPdfUrl": null,
+    "version": "published",
+    "licenseEvidence": [
+      "https://www.mdpi.com/2079-9292/15/16/3613",
+      "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "reviewStatus": "remote_verified",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "spiking-som-radar-deinterleaving",
-    "sourcePageUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
+    "paperId": "sgte-snn-radar-emitter-denoising-recognition",
+    "landingUrl": "https://doi.org/10.1109/icassp55912.2026.11464155",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "published",
     "licenseEvidence": [],
-    "pageAnchors": {}
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "mpo-surrogate-function-snn",
-    "sourcePageUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
+    "paperId": "spiking-som-radar-deinterleaving",
+    "landingUrl": "https://doi.org/10.1109/icassp55912.2026.11464997",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "published",
     "licenseEvidence": [],
-    "pageAnchors": {}
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "dual-model-snn-remote-sensing",
-    "sourcePageUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
-    "licenseEvidence": [],
-    "pageAnchors": {}
+    "paperId": "mpo-surrogate-function-snn",
+    "landingUrl": "https://doi.org/10.1609/aaai.v40i30.39769",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": "https://ojs.aaai.org/index.php/AAAI/article/download/39769/43730",
+    "version": "published",
+    "licenseEvidence": [
+      "https://ojs.aaai.org/index.php/AAAI/article/view/39769"
+    ],
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "adaptive-clustering-radar-signal-processing",
-    "sourcePageUrl": "https://doi.org/10.1109/lsp.2025.3556782",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
+    "paperId": "dual-model-snn-remote-sensing",
+    "landingUrl": "https://doi.org/10.1016/j.neucom.2025.130721",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "published",
     "licenseEvidence": [],
-    "pageAnchors": {}
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "ml-ldmos-bv-optimization",
-    "sourcePageUrl": "https://doi.org/10.1109/ted.2024.3517578",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
+    "paperId": "adaptive-clustering-radar-signal-processing",
+    "landingUrl": "https://doi.org/10.1109/lsp.2025.3556782",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "published",
     "licenseEvidence": [],
-    "pageAnchors": {}
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "sipos-umofet-fom",
-    "sourcePageUrl": "https://doi.org/10.3390/mi15030411",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
+    "paperId": "ml-ldmos-bv-optimization",
+    "landingUrl": "https://doi.org/10.1109/ted.2024.3517578",
+    "localPdfPath": null,
+    "remotePdfUrl": null,
+    "externalPdfUrl": null,
+    "version": "published",
     "licenseEvidence": [],
-    "pageAnchors": {}
+    "reviewStatus": "official_source_only",
+    "mayPublishLocal": false,
+    "sha256": null
   },
   {
-    "slug": "variable-k-ldmos",
-    "sourcePageUrl": "https://doi.org/10.3390/mi13060843",
-    "pdfUrl": null,
-    "hostedPath": null,
-    "sourceKind": "publisher",
-    "accessMode": "external_only",
-    "reuseStatus": "pending",
-    "licenseEvidence": [],
-    "pageAnchors": {}
+    "paperId": "sipos-umofet-fom",
+    "landingUrl": "https://doi.org/10.3390/mi15030411",
+    "localPdfPath": null,
+    "remotePdfUrl": "https://mdpi-res.com/d_attachment/micromachines/micromachines-15-00411/article_deploy/micromachines-15-00411.pdf",
+    "externalPdfUrl": null,
+    "version": "published",
+    "licenseEvidence": [
+      "https://www.mdpi.com/2072-666X/15/3/411",
+      "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "reviewStatus": "remote_verified",
+    "mayPublishLocal": false,
+    "sha256": null
+  },
+  {
+    "paperId": "variable-k-ldmos",
+    "landingUrl": "https://doi.org/10.3390/mi13060843",
+    "localPdfPath": null,
+    "remotePdfUrl": "https://mdpi-res.com/d_attachment/micromachines/micromachines-13-00843/article_deploy/micromachines-13-00843.pdf",
+    "externalPdfUrl": null,
+    "version": "published",
+    "licenseEvidence": [
+      "https://www.mdpi.com/2072-666X/13/6/843",
+      "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "reviewStatus": "remote_verified",
+    "mayPublishLocal": false,
+    "sha256": null
   }
 ]

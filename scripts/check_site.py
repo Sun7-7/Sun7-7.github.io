@@ -101,6 +101,7 @@ def main():
            'private_resume_filename':r'(?:求职|个人简历|resume).*\.(?:pdf|docx?)',
            'unconfirmed_doctoral_start':r'(?:Ph\.?D\.?|博士)[^\n<]{0,60}(?:19|20)\d{2}[-./](?:0[1-9]|1[0-2])',
            'disallowed_public_section':r'<h[1-6][^>]*>\s*(?:Projects|Teaching|Academic Service|Leadership|Competition|科研项目|教学经历|学生工作|竞赛)\s*</h[1-6]>'}
+    approved_pdfs={x["localPdfPath"]:x["sha256"] for x in json.loads((ROOT/"data/pdf_sources.json").read_text(encoding="utf-8")) if x["mayPublishLocal"] and x["reviewStatus"]=="local_verified"}
     findings=[];manifest=[]
     for p in sorted(all_files):
         name=p.relative_to(ROOT).as_posix();manifest.append(dict(path=name,bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
@@ -112,6 +113,8 @@ def main():
             for category,pattern in rules.items():
                 for match in re.finditer(pattern,content,re.I):
                     findings.append(dict(file=name,category=category,line=content[:match.start()].count('\n')+1))
+        elif name in approved_pdfs and p.suffix.lower()=='.pdf' and hashlib.sha256(p.read_bytes()).hexdigest()==approved_pdfs[name]:
+            continue
         elif p.suffix.lower() in ['.doc','.docx','.pdf','.map']:
             findings.append(dict(file=name,category='binary_document_requires_review',line=0))
     (out/'logs/public_content_scan.json').write_text(json.dumps(dict(files_scanned=len(manifest),rules=list(rules),findings=findings,matched_text_logged=False),indent=2),encoding='utf-8')

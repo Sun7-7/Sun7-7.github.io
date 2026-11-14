@@ -19378,43 +19378,6 @@ const PDFViewerApplication = {
     file = params.get("file") ?? AppOptions.get("defaultUrl");
     file = URL.parse(file)?.href ?? file.replaceAll("#", "%23");
     validateFileURL(file);
-    const fileInput = this._openFileInput = document.createElement("input");
-    fileInput.id = "fileInput";
-    fileInput.hidden = true;
-    fileInput.type = "file";
-    fileInput.value = null;
-    document.body.append(fileInput);
-    fileInput.addEventListener("change", function (evt) {
-      const {
-        files
-      } = evt.target;
-      if (!files?.length) {
-        return;
-      }
-      eventBus.dispatch("fileinputchange", {
-        source: this,
-        fileInput: evt.target
-      });
-    });
-    appConfig.mainContainer.addEventListener("dragover", function (evt) {
-      for (const item of evt.dataTransfer.items) {
-        if (item.type === "application/pdf") {
-          evt.dataTransfer.dropEffect = evt.dataTransfer.effectAllowed === "copy" ? "copy" : "move";
-          stopEvent(evt);
-          return;
-        }
-      }
-    });
-    appConfig.mainContainer.addEventListener("drop", function (evt) {
-      if (evt.dataTransfer.files?.[0].type !== "application/pdf") {
-        return;
-      }
-      stopEvent(evt);
-      eventBus.dispatch("fileinputchange", {
-        source: this,
-        fileInput: evt.dataTransfer
-      });
-    });
     if (!AppOptions.get("supportsDocumentFonts")) {
       AppOptions.set("disableFontFace", true);
       this.l10n.get("pdfjs-web-fonts-disabled").then(msg => {
@@ -20351,8 +20314,6 @@ const PDFViewerApplication = {
     eventBus.on("findfromurlhash", onFindFromUrlHash.bind(this), opts);
     eventBus.on("updatefindmatchescount", onUpdateFindMatchesCount.bind(this), opts);
     eventBus.on("updatefindcontrolstate", onUpdateFindControlState.bind(this), opts);
-    eventBus.on("fileinputchange", onFileInputChange.bind(this), opts);
-    eventBus.on("openfile", onOpenFile.bind(this), opts);
     eventBus.on("pagesedited", this.onPagesEdited.bind(this), opts);
     eventBus.on("saveextractedpages", this.onSavePages.bind(this), opts);
     eventBus.on("saveandload", this.onSaveAndLoad.bind(this), opts);

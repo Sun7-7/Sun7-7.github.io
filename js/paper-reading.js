@@ -53,7 +53,7 @@ async function openStory(link) {
     if (!article) throw Error('Missing story');
     if (controller.signal.aborted || !element.open) return;
     article.querySelectorAll('[href],[src]').forEach(item => {
-      for (const attr of ['href', 'src', 'data-pdf']) {
+      for (const attr of ['href', 'src']) {
         if (item.getAttribute(attr)) item.setAttribute(attr, new URL(item.getAttribute(attr), link.href).href);
       }
     });
@@ -68,8 +68,28 @@ async function openStory(link) {
 }
 
 const byteLimit = 64 * 1024 * 1024;
-const pdfOrigin = 'https://raw.githubusercontent.com';
-const supportedRemote = url => url.origin === pdfOrigin && /^\/mlresearch\/v\d+\/main\/assets\//.test(url.pathname);
+const allowedOfficialHosts = new Set(['doi.org', 'proceedings.mlr.press', 'ojs.aaai.org', 'www.mdpi.com', 'pubs.aip.org']);
+function officialURL(value) {
+  const url = new URL(value);
+  if (url.protocol !== 'https:' || url.username || url.password || !allowedOfficialHosts.has(url.host)) throw Error('source');
+  return url.href;
+}
+function paperURL(value) {
+  const url = new URL(value, root);
+  const local = url.origin === root.origin && url.pathname.startsWith(new URL('assets/papers/',root).pathname);
+  const pmlr = url.origin === 'https://raw.githubusercontent.com' && /^\/mlresearch\/v\d+\/main\/assets\//.test(url.pathname);
+  const mdpi = url.origin === 'https://mdpi-res.com' && url.pathname.startsWith('/d_attachment/');
+  if (!(local || pmlr || mdpi) || !url.pathname.endsWith('.pdf') || url.username || url.password) throw Error('source');
+  return url;
+}
+let registryRequest;
+function registry() {
+  registryRequest ??= fetch(new URL('data/pdf_sources.json',root), {credentials:'same-origin'})
+    .then(response => { if (!response.ok) throw Error('network'); return response.json(); })
+    .then(rows => new Map(rows.map(row => [row.paperId,row])))
+    .catch(() => { registryRequest=undefined; throw Error('network'); });
+  return registryRequest;
+}
 const errors = {
   missing: tr('原文文件不存在（404）。', 'The PDF was not found (404).'),
   permission: tr('来源需要登录或拒绝访问。', 'The source requires sign-in or denied access.'),
@@ -78,16 +98,11 @@ const errors = {
   timeout: tr('加载超时。', 'Loading timed out.'),
   worker: tr('PDF.js 渲染组件未能启动。', 'The PDF.js rendering components could not start.'),
   size: tr('文件超过站内阅读器的 64 MB 上限。', 'This file exceeds the reader’s 64 MB limit.'),
-  source: tr('此论文通过正式来源提供原文。你也可以打开本地 PDF。', 'Read this paper at its official source, or open a local PDF.'),
+  source: tr('此论文的原文由出版方提供，请从正式来源继续阅读。', 'Continue reading at the official source.'),
 };
 
 async function bytesFor(input, signal) {
-  if (input instanceof File) {
-    if (input.size > byteLimit) throw Error('size');
-    return new Uint8Array(await input.arrayBuffer());
-  }
-  const url = new URL(input, location.href);
-  if (url.origin !== location.origin && !supportedRemote(url)) throw Error('source');
+  const url = paperURL(input);
   let response;
   try {
     response = await fetch(url, {signal, credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer'});
@@ -97,7 +112,8 @@ async function bytesFor(input, signal) {
   if (response.status === 404) throw Error('missing');
   if ([401, 403].includes(response.status)) throw Error('permission');
   if (!response.ok) throw Error('network');
-  if (response.headers.get('content-type')?.includes('text/html')) throw Error('format');
+  const mime = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
+  if (!['application/pdf','application/octet-stream'].includes(mime)) throw Error('format');
   if (Number(response.headers.get('content-length')) > byteLimit) throw Error('size');
   const reader = response.body.getReader();
   const chunks = [];
@@ -127,13 +143,14 @@ function openReader(link) {
   const title = link.dataset.paperTitle || tr('PDF 阅读器', 'PDF reader');
   const element = dialog('pdf-dialog', title, link);
   activeReader = element;
+  if (activeStory) element.querySelector('.reading-bar button').textContent = tr('返回导读','Back to story');
   const header = element.querySelector('.reading-bar');
-  const heading = header.querySelector('h2');
   const controls = node('div', '', {class: 'reading-tools'});
-  const fileLabel = node('label', tr('打开本地 PDF（仅此设备）', 'Open local PDF (on this device)'));
-  const file = node('input', '', {type: 'file', accept: '.pdf,application/pdf'});
-  fileLabel.append(file);
-  controls.append(node('span', link.dataset.venue || ''), node('a', tr('正式来源 ↗', 'Official source ↗'), {href: link.href, target: '_blank', rel: 'noopener noreferrer'}), fileLabel);
+  const source = node('a', tr('访问原文 ↗', 'Official source ↗'), {href: officialURL(link.dataset.official), target:'_blank', rel:'noopener noreferrer'});
+  controls.append(node('span', link.dataset.venue || ''), source);
+  if (link.dataset.doi && /^10\.\d+\/[a-z0-9.\-_/]+$/i.test(link.dataset.doi)) {
+    controls.append(node('a', 'DOI ↗', {href:'https://doi.org/'+link.dataset.doi,target:'_blank',rel:'noopener noreferrer'}));
+  }
   const mobile = node('div', '', {class:'reader-mobile-tools', hidden:''});
   for (const [label, action] of [
     [tr('上一页','Previous page'), viewer => viewer.previousPage()],
@@ -169,22 +186,39 @@ function openReader(link) {
 
   async function load(input) {
     dispose();
-    heading.textContent = input instanceof File ? tr('本地文件 · ', 'Local file · ') + input.name : title;
     const current = {controller: new AbortController()};
     job = current;
     current.timeout = setTimeout(() => fail(current.phase === 'viewer' ? 'worker' : 'timeout'), 20000);
     status.textContent = tr('正在加载 PDF…', 'Loading PDF…');
     status.dataset.state = 'loading';
     try {
-      const data = await bytesFor(input, current.controller.signal);
+      const entry = (await registry()).get(input);
       if (job !== current) return;
-      if (!new TextDecoder().decode(data.subarray(0, 1024)).includes('%PDF-')) throw Error('format');
+      if (entry?.externalPdfUrl) {
+        controls.append(node('a',tr('打开出版方 PDF ↗','Open publisher PDF ↗'),{href:officialURL(entry.externalPdfUrl),target:'_blank',rel:'noopener noreferrer'}));
+      }
+      const candidates = [entry?.mayPublishLocal ? entry.localPdfPath : null, entry?.remotePdfUrl].filter(Boolean);
+      if (!candidates.length) throw Error('source');
+      let data, selected;
+      for (const candidate of candidates) {
+        try {
+          data = await bytesFor(candidate,current.controller.signal);
+          if (!new TextDecoder().decode(data.subarray(0,1024)).includes('%PDF-')) throw Error('format');
+          selected=candidate;
+          break;
+        } catch (error) {
+          data=undefined;
+          if (current.controller.signal.aborted || candidate===candidates.at(-1)) throw error;
+        }
+      }
+      if (job !== current) return;
       current.phase = 'viewer';
       const url = new URL('vendor/pdfjs/web/viewer.html', root);
+      url.searchParams.set('v', '4.1.1');
       url.searchParams.set('lang', zh ? 'zh' : 'en');
       url.searchParams.set('theme', document.documentElement.dataset.theme);
       current.data = data;
-      current.name = input instanceof File ? input.name : new URL(input, location.href).pathname.split('/').pop();
+      current.name = paperURL(selected).pathname.split('/').pop();
       current.frame = node('iframe', '', {title: tr('PDF 正文和工具栏', 'PDF content and toolbar'), src: url.href});
       surface.replaceChildren(current.frame);
     } catch (error) {
@@ -195,10 +229,6 @@ function openReader(link) {
   async function onViewerMessage(event) {
     const current = job;
     if (!current?.frame || event.origin !== location.origin || event.source !== current.frame.contentWindow) return;
-    if (event.data?.type === 'qisun-viewer-open-local') {
-      file.click();
-      return;
-    }
     if (event.data?.type === 'qisun-viewer-escape') {
       element.close();
       return;
@@ -225,24 +255,19 @@ function openReader(link) {
     }
   }
   window.addEventListener('message', onViewerMessage);
-  file.addEventListener('change', () => {
-    const selected = file.files[0];
-    file.value = '';
-    if (selected) load(selected);
-  });
   element.addEventListener('close', () => {
     window.removeEventListener('message', onViewerMessage);
     dispose();
     activeReader = undefined;
   }, {once: true});
-  if (link.dataset.pdf) load(link.dataset.pdf);
-  else status.textContent = errors.source;
+  load(link.dataset.paperId);
 }
 
 document.addEventListener('click', event => {
-  const link = event.target.closest('a[data-story], a[data-pdf]');
+  const link = event.target.closest('a[data-story], a[data-paper-id]');
   if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
   event.preventDefault();
   if (link.hasAttribute('data-story')) openStory(link);
   else openReader(link);
 });
+
