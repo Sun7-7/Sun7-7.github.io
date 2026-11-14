@@ -19,6 +19,8 @@ def promote(draft_path,root=ROOT):
     if pub['selectedRank'] is not None and (not detail.get('visuals') or not all(features.get('highlight',{}).get(lang) for lang in ['zh','en'])):raise ValueError('Featured work requires a reviewed image and bilingual highlight')
     with tempfile.TemporaryDirectory(prefix='qisun-publication-review-') as tmp:
         test=Path(tmp);shutil.copytree(root/'data',test/'data');shutil.copytree(root/'assets/images/paper-figures',test/'assets/images/paper-figures')
+        if (root/'assets/papers').is_dir():
+            shutil.copytree(root/'assets/papers',test/'assets/papers')
         changed={}
         def load(name):return json.loads((test/name).read_text(encoding='utf-8'))
         def save(name,value):changed[name]=value;(test/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -39,7 +41,7 @@ def promote(draft_path,root=ROOT):
         for key, filename in [('story','paper_stories.json'),('pdfSource','pdf_sources.json')]:
             record=draft.get('reading',{}).get(key)
             if record is not None:
-                if record.get('slug')!=slug:raise ValueError('Reading record slug mismatch')
+                if record.get('paperId' if key=='pdfSource' else 'slug')!=slug:raise ValueError('Reading record slug mismatch')
                 name='data/'+filename
                 save(name,load(name)+[record])
         result=validate(test)

@@ -1,7 +1,7 @@
 /* Host integration for Mozilla PDF.js. Runs before the upstream viewer module. */
 const viewerUrl = new URL(location.href);
 for (const key of [...viewerUrl.searchParams.keys()]) {
-  if (key !== 'lang' && key !== 'theme') viewerUrl.searchParams.delete(key);
+  if (key !== 'lang' && key !== 'theme' && key !== 'v') viewerUrl.searchParams.delete(key);
 }
 history.replaceState(null, '', viewerUrl.pathname + viewerUrl.search);
 const readerParams = new URLSearchParams(location.search);
@@ -16,7 +16,7 @@ function configureReader(event) {
   options.setAll({
     defaultUrl: '', disablePreferences: true, disableHistory: true,
     localeProperties: {lang: readerLang}, viewerCssTheme: document.documentElement.dataset.theme === 'dark' ? 2 : 1,
-    enableScripting: false, annotationEditorMode: -1, enableSignatureEditor: false,
+    enableScripting: false, enableMerge: false, enableSplitMerge: false, annotationEditorMode: -1, enableSignatureEditor: false,
     enablePermissions: true, externalLinkTarget: 2,
   });
   window.PDFViewerApplication.initializedPromise.then(() => {
@@ -33,7 +33,7 @@ document.addEventListener('keydown', event => {
   parent.postMessage({type: 'qisun-viewer-escape'}, location.origin);
 }, {capture: true});
 
-// Keep file changes in the host dialog so its cancellation and labels stay in sync.
+// Prevent file drops from navigating away from the paper.
 for (const type of ['drop','dragover']) {
   document.addEventListener(type, event => {
     if (event.dataTransfer?.types.includes('Files')) {
@@ -46,6 +46,6 @@ document.addEventListener('keydown', event => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'o') {
     event.preventDefault();
     event.stopImmediatePropagation();
-    parent.postMessage({type: 'qisun-viewer-open-local'}, location.origin);
+
   }
 }, {capture: true});

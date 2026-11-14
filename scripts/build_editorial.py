@@ -37,7 +37,7 @@ def detail(slug,lang):
 AREAS=load('data/research_areas.json')
 EDITORIAL=load('data/publication_editorial.json')
 STORIES={d['slug']:d for d in load('data/paper_stories.json')}
-PDF_SOURCES={d['slug']:d for d in load('data/pdf_sources.json')}
+PDF_SOURCES={d['paperId']:d for d in load('data/pdf_sources.json')}
 FIGURES={f['id']:f for f in load('data/figures.json')}
 
 def figure_src(ref):
@@ -67,16 +67,15 @@ def venue(pub):
 
 def reading_links(pub, lang, path, include_story=True):
  slug=pub['slug']; source=PDF_SOURCES.get(slug, {})
- official=source.get('sourcePageUrl',pub['links'][0]['url'])
- pdf=source.get('pdfUrl') if source.get('accessMode')=='cors_remote' else None
- if source.get('accessMode')=='same_origin':
-  pdf=rel(path,source['hostedPath'])
+ official=source.get('landingUrl',pub['links'][0]['url'])
+ local=source.get('localPdfPath')
+ target=rel(path,local) if local else (source.get('remotePdfUrl') or source.get('externalPdfUrl') or official)
  items=[]
  if include_story:
   story=rel(path,route(lang,'stories/'+slug+'.html'))
   items.append(f'<a class="quick-read" data-story href="{esc(story)}">{t(lang,"研究导读","Quick Read")}</a>')
- label=t(lang,'站内读 PDF','Read PDF') if pdf else t(lang,'原文阅读','Read original')
- items.append(f'<a class="read-pdf" href="{esc(official)}" data-pdf="{esc(pdf or "")}" data-paper-title="{esc(DETAILS[slug].get("shortTitle_"+lang,pub["title"]))}" data-venue="{esc(pub["venue"])}">{label}</a>')
+ label=t(lang,'阅读 PDF','Read PDF')
+ items.append(f'<a class="read-pdf" href="{esc(target)}" data-paper-id="{esc(slug)}" data-official="{esc(official)}" data-doi="{esc(pub.get("doi") or "")}" data-paper-title="{esc(DETAILS[slug].get("shortTitle_"+lang,pub["title"]))}" data-venue="{esc(pub["venue"])}">{label}</a>')
  return ' '.join(items)
 
 
